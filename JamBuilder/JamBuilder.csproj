@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{578AA1DE-5F17-4CBF-BBA2-8CDD0010A159}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>JamBuilder</RootNamespace>
+    <AssemblyName>JamBuilder</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OpenTK">
+      <HintPath>..\..\_lib\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl">
+      <HintPath>..\..\_lib\OpenTK.GLControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="YAMLEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YAMLEditor.Designer.cs">
+      <DependentUpon>YAMLEditor.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="YAMLEditor.resx">
+      <DependentUpon>YAMLEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KSALVL\KSALVL.csproj">
+      <Project>{870dcd24-07ab-44dc-869c-bb5234540e7a}</Project>
+      <Name>KSALVL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\modifiers\2.png" />
+    <Content Include="Resources\modifiers\64.png" />
+    <Content Include="Resources\modifiers\8.png" />
+    <Content Include="Resources\tiles\0.png" />
+    <Content Include="Resources\tiles\1.png" />
+    <Content Include="Resources\tiles\10.png" />
+    <Content Include="Resources\tiles\11.png" />
+    <Content Include="Resources\tiles\12.png" />
+    <Content Include="Resources\tiles\13.png" />
+    <Content Include="Resources\tiles\14.png" />
+    <Content Include="Resources\tiles\15.png" />
+    <Content Include="Resources\tiles\16.png" />
+    <Content Include="Resources\tiles\17.png" />
+    <Content Include="Resources\tiles\18.png" />
+    <Content Include="Resources\tiles\19.png" />
+    <Content Include="Resources\tiles\2.png" />
+    <Content Include="Resources\tiles\20.png" />
+    <Content Include="Resources\tiles\21.png" />
+    <Content Include="Resources\tiles\22.png" />
+    <Content Include="Resources\tiles\23.png" />
+    <Content Include="Resources\tiles\24.png" />
+    <Content Include="Resources\tiles\25.png" />
+    <Content Include="Resources\tiles\26.png" />
+    <Content Include="Resources\tiles\27.png" />
+    <Content Include="Resources\tiles\28.png" />
+    <Content Include="Resources\tiles\29.png" />
+    <Content Include="Resources\tiles\3.png" />
+    <Content Include="Resources\tiles\30.png" />
+    <Content Include="Resources\tiles\31.png" />
+    <Content Include="Resources\tiles\32.png" />
+    <Content Include="Resources\tiles\33.png" />
+    <Content Include="Resources\tiles\34.png" />
+    <Content Include="Resources\tiles\35.png" />
+    <Content Include="Resources\tiles\36.png" />
+    <Content Include="Resources\tiles\37.png" />
+    <Content Include="Resources\tiles\38.png" />
+    <Content Include="Resources\tiles\39.png" />
+    <Content Include="Resources\tiles\4.png" />
+    <Content Include="Resources\tiles\40.png" />
+    <Content Include="Resources\tiles\41.png" />
+    <Content Include="Resources\tiles\42.png" />
+    <Content Include="Resources\tiles\43.png" />
+    <Content Include="Resources\tiles\44.png" />
+    <Content Include="Resources\tiles\45.png" />
+    <Content Include="Resources\tiles\46.png" />
+    <Content Include="Resources\tiles\47.png" />
+    <Content Include="Resources\tiles\48.png" />
+    <Content Include="Resources\tiles\49.png" />
+    <Content Include="Resources\tiles\5.png" />
+    <Content Include="Resources\tiles\50.png" />
+    <Content Include="Resources\tiles\51.png" />
+    <Content Include="Resources\tiles\6.png" />
+    <Content Include="Resources\tiles\7.png" />
+    <Content Include="Resources\tiles\8.png" />
+    <Content Include="Resources\tiles\9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Rendering\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

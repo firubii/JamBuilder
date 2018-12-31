@@ -32,8 +32,7 @@
             this.save = new System.Windows.Forms.Button();
             this.value = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.attributeList = new System.Windows.Forms.ComboBox();
-            this.addAttribute = new System.Windows.Forms.Button();
+            this.delAttribute = new System.Windows.Forms.Button();
             this.valueSelect = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -73,24 +72,16 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Value";
             // 
-            // attributeList
+            // delAttribute
             // 
-            this.attributeList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.attributeList.FormattingEnabled = true;
-            this.attributeList.Location = new System.Drawing.Point(13, 297);
-            this.attributeList.Name = "attributeList";
-            this.attributeList.Size = new System.Drawing.Size(171, 21);
-            this.attributeList.TabIndex = 4;
-            // 
-            // addAttribute
-            // 
-            this.addAttribute.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addAttribute.Location = new System.Drawing.Point(187, 296);
-            this.addAttribute.Name = "addAttribute";
-            this.addAttribute.Size = new System.Drawing.Size(23, 23);
-            this.addAttribute.TabIndex = 5;
-            this.addAttribute.Text = "+";
-            this.addAttribute.UseVisualStyleBackColor = true;
+            this.delAttribute.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.delAttribute.Location = new System.Drawing.Point(13, 296);
+            this.delAttribute.Name = "delAttribute";
+            this.delAttribute.Size = new System.Drawing.Size(23, 23);
+            this.delAttribute.TabIndex = 5;
+            this.delAttribute.Text = "-";
+            this.delAttribute.UseVisualStyleBackColor = true;
+            this.delAttribute.Click += new System.EventHandler(this.delAttribute_Click);
             // 
             // valueSelect
             // 
@@ -109,8 +100,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(430, 356);
             this.Controls.Add(this.valueSelect);
-            this.Controls.Add(this.addAttribute);
-            this.Controls.Add(this.attributeList);
+            this.Controls.Add(this.delAttribute);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.value);
             this.Controls.Add(this.save);
@@ -133,8 +123,7 @@
         private System.Windows.Forms.Button save;
         private System.Windows.Forms.TextBox value;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox attributeList;
-        private System.Windows.Forms.Button addAttribute;
+        private System.Windows.Forms.Button delAttribute;
         private System.Windows.Forms.ComboBox valueSelect;
     }
 }

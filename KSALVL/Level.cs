@@ -598,17 +598,17 @@ namespace KSALVL
                 {
                     case 1:
                         {
-                            yaml.Add(valtype + name, reader.ReadUInt32().ToString());
+                            yaml.Add("int " + name, reader.ReadUInt32().ToString());
                             break;
                         }
                     case 2:
                         {
-                            yaml.Add(valtype + name, reader.ReadSingle().ToString());
+                            yaml.Add("float " + name, reader.ReadSingle().ToString());
                             break;
                         }
                     case 3:
                         {
-                            yaml.Add(valtype + name, reader.ReadUInt32().ToString());
+                            yaml.Add("bool " + name, Convert.ToBoolean(reader.ReadSingle()).ToString());
                             break;
                         }
                     case 4:
@@ -616,7 +616,7 @@ namespace KSALVL
                             uint stringoffset = reader.ReadUInt32();
                             reader.BaseStream.Seek(stringoffset, SeekOrigin.Begin);
                             string stringval = Encoding.UTF8.GetString(reader.ReadBytes(reader.ReadInt32()));
-                            yaml.Add(valtype + name, stringval);
+                            yaml.Add("string " + name, stringval);
                             break;
                         }
                 }
@@ -645,7 +645,7 @@ namespace KSALVL
 
             foreach (KeyValuePair<string, string> pair in yaml)
             {
-                strings.Add(string.Join("", pair.Key.Skip(1)));
+                strings.Add(pair.Key.Replace(pair.Key.Split(' ')[0] + " ", ""));
                 stringOffsets.Add((uint)writer.BaseStream.Position);
                 writer.Write(0);
                 valuePointers.Add((uint)writer.BaseStream.Position);
@@ -653,28 +653,38 @@ namespace KSALVL
             }
             foreach (KeyValuePair<string, string> pair in yaml)
             {
-                uint valType = uint.Parse($"{pair.Key.ToCharArray()[0]}");
+                string valType = pair.Key.Split(' ')[0];
                 valueOffsets.Add((uint)writer.BaseStream.Position);
-                writer.Write(valType);
                 switch (valType)
                 {
-                    case 1:
+                    case "int":
                         {
+                            writer.Write(1);
                             writer.Write(uint.Parse(pair.Value));
                             break;
                         }
-                    case 2:
+                    case "float":
                         {
+                            writer.Write(2);
                             writer.Write(float.Parse(pair.Value));
                             break;
                         }
-                    case 3:
+                    case "bool":
                         {
-                            writer.Write(uint.Parse(pair.Value));
+                            writer.Write(3);
+                            if (pair.Value == "True")
+                            {
+                                writer.Write((uint)1);
+                            }
+                            else
+                            {
+                                writer.Write((uint)0);
+                            }
                             break;
                         }
-                    case 4:
+                    case "string":
                         {
+                            writer.Write(4);
                             strings.Add(pair.Value);
                             stringOffsets.Add((uint)writer.BaseStream.Position);
                             writer.Write(0);

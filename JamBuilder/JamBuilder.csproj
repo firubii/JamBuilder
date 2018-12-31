@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddObj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddObj.Designer.cs">
+      <DependentUpon>AddObj.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +72,9 @@
     <Compile Include="YAMLEditor.Designer.cs">
       <DependentUpon>YAMLEditor.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddObj.resx">
+      <DependentUpon>AddObj.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

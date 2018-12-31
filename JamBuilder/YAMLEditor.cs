@@ -18,131 +18,7 @@ namespace JamBuilder
 
         List<string> objectKind = new List<string>()
         {
-            "StartPortal",
-            "BGAltarCtrl",
-            "DimensionHole",
-            "AreaDollyCamera",
-            "RippleField",
-            "DoorAbility",
-            "MoveLandController",
-            "MoveLandPathNode",
-            "WorldCameraLock",
-            "FieldEffect",
-            "EnemyGenerator",
-            "Switch",
-            "AIPursuitCloseZone",
-            "ZoneSwitch",
-            "GuideBoard",
-            "GuideBoardAbilityIcon",
-            "Slate",
-            "ArrowBoard",
-            "FuseCannonMini",
-            "FuseGenerator",
-            "FusePathNode",
-            "MassWaddledeeFromFar",
-            "Block",
-            "BlockBreakWatcher",
-            "BlockRegenerateCtrl",
-            "Door",
-            "MassWaddledee",
-            "ChainStarter",
-            "AirFlow",
-            "StakeBattery",
-            "Shutter",
-            "Stake",
-            "ChainConnector",
-            "AIReaction",
-            "RoomGuarder",
-            "RoomGuarderPoint",
-            "RoomGuarderEnemyList",
-            "LockShutter",
-            "FriendActionPedestal",
-            "FriendBridgeTargetPoint",
-            "FriendBridgeControler",
-            "CannonBlow",
-            "FriendBridgePole",
-            "HangSwitch",
-            "ItemBox",
-            "AIForbidAttackZone",
-            "AbilitySeat",
-            "AreaBGMFadeOut",
-            "WaterFlow",
-            "FireBox",
-            "CutRope",
-            "AISearchIgnoreZone",
-            "StakeIce",
-            "FriendActionMove",
-            "BreakableLandCtrl",
-            "FriendActionFitWall",
-            "FriendActionGoal",
-            "WhiteBoard",
-            "RopeBomb",
-            "FuseDynamite",
-            "FuseWater",
-            "CutRopeStepHard",
-            "ItemRegenerateCtrl",
-            "FallenLeaves",
-            "CutChainBurning",
-            "BigMeteor",
-            "GiantRollingBlade",
-            "AreaLock",
-            "AreaLockThrough",
-            "TwinkleStarEndDemo",
-            "ExecutivesEndDemo",
-            "DoorGoal",
-            "SwitchBig",
-            "HelperGoItemHelperExclusive",
-            "PopFlower",
-            "GrassyPlace",
-            "AreaBGMChange",
-            "AIAttackPointForCook",
-            "MovingSawBody",
-            "MovingSawRail",
-            "MovingSawRailNode",
-            "AIAttackPoint",
-            "SwitchWindmill",
-            "OGenMarginExpander",
-            "GuideBoardFriendAction",
-            "HelperGoItemExcluder",
-            "FriendActionDead",
-            "HelperGoEnemyListHelperExclusive",
-            "BlockAIReactionZone",
-            "ResetAbilitySeat",
-            "SecretPath",
-            "EscapeEvent",
-            "GoldKirbyStatue",
-            "RockForMultiCannon",
-            "AreaRotationCamera",
-            "ArenaStepEnd",
-            "PonKonGimmick",
-            "ArenaRestStation",
-            "AICantGetItemZone",
-            "CreditManager",
-            "CreditItemCtrl",
-            "EndingDemo",
-            "StandLight",
-            "BgShaderParamChanger",
-            "FriendRodDemoLocator",
-            "MuseumFirstDemo",
-            "DreamRodGenLocator",
-            "ForbidRegenerateEnemy",
-            "KibidangoDemo",
-            "CorkPlug",
-            "FruitTree",
-            "AreaBlendCamera",
-            "FriendCopyFirstDemo",
-            "HelperGoPutItemOnNeedlessDoor",
-            "DoorMulti",
-            "CameraHeightLimitUnsetter",
-            "CutChainStep",
-            "ItemAIReactionZone",
-            "AIReactionPathNode",
-            "EscapeEventEnemyGenerator",
-            "TwinkleStarEscapeEvent",
-            "TwinkleStarBGMChanger",
-            "BigBomb",
-            "DarkHeart",
-            "LastCloseContest"
+            "AbilitySeat",            "AIAttackPoint",            "AIAttackPointForCook",            "AICantGetItemZone",            "AIForbidAttackZone",            "AIPursuitCloseZone",            "AIReaction",            "AIReactionPathNode",            "AirFlow",            "AISearchIgnoreZone",            "AreaBGMChange",            "AreaBGMFadeOut",            "AreaBlendCamera",            "AreaDollyCamera",            "AreaFlow",            "AreaLock",            "AreaLockThrough",            "AreaRotationCamera",            "ArenaRestStation",            "ArenaStepEnd",            "ArrowBoard",            "BGAltarCtrl",            "BgShaderParamChanger",            "BigBomb",            "BigBombRope",            "BigMeteor",            "Block",            "BlockAIReactionZone",            "BlockBreakWatcher",            "BlockRegenerateCtrl",            "BreakableLandCtrl",            "CameraHeightLimitUnsetter",            "CameraOffsetSetter",            "CannonBlow",            "CannonBlowTarget",            "ChainConnector",            "ChainStarter",            "CorkPlug",            "CreditItemCtrl",            "CreditManager",            "CutChain",            "CutChainBurning",            "CutChainDouble",            "CutChainStep",            "CutChainStepDouble",            "CutRope",            "CutRopeStepHard",            "DarkHeart",            "DimensionHole",            "Door",            "DoorAbility",            "DoorCommon",            "DoorGoal",            "DoorMulti",            "DreamRodGenLocator",            "EndingDemo",            "EnemyGenerateBox",            "EnemyGenerator",            "EscapeEvent",            "EscapeEventEnemyGenerator",            "ExecutivesEndDemo",            "FallenLeaves",            "FieldEffect",            "FireBox",            "ForbidRegenerateEnemy",            "FriendActionDead",            "FriendActionFitWall",            "FriendActionGoal",            "FriendActionMove",            "FriendActionPedestal",            "FriendBridgeControler",            "FriendBridgePole",            "FriendBridgeTargetPoint",            "FriendCopyFirstDemo",            "FriendRodDemoLocator",            "FruitTree",            "Fuse",            "FuseCannonMini",            "FuseCommon",            "FuseDynamite",            "FuseGenerator",            "FusePathNode",            "FuseWater",            "GiantRollingBlade",            "GoldKirbyStatue",            "GrassyPlace",            "GuideBoard",            "GuideBoardAbilityIcon",            "GuideBoardFriendAction",            "HangSwitch",            "HelperGoEnemyListHelperExclusive",            "HelperGoItemExcluder",            "HelperGoItemHelperExclusive",            "HelperGoPutItemOnNeedlessDoor",            "ItemAIReactionZone",            "ItemBox",            "ItemRegenerateCtrl",            "KibidangoDemo",            "KingdededeGimmick",            "KrackoWater",            "LastBattleField",            "LastBossVine",            "LastCloseContest",            "LockShutter",            "MassWaddledee",            "MassWaddledeeFromFar",            "MoveLandController",            "MoveLandPathNode",            "MovingSawBody",            "MovingSawRail",            "MovingSawRailNode",            "MuseumFirstDemo",            "OGenMarginExpander",            "PonKonGimmick",            "PopFlower",            "ResetAbilitySeat",            "RippleField",            "RockForMultiCannon",            "RoomGuarder",            "RoomGuarderEnemyList",            "RoomGuarderPoint",            "RopeBomb",            "RopeBombRope",            "SecretPath",            "Shutter",            "Slate",            "Stake",            "StakeBattery",            "StakeIce",            "StakeTwinklestar",            "StandLight",            "StartPortal",            "Switch",            "SwitchBig",            "SwitchWindmill",            "Template",            "TemplateUseState",            "TwinkleStarBGMChanger",            "TwinkleStarEndDemo",            "TwinkleStarEscapeEvent",            "WaterFlow",            "WhispywoodsAppleOriginal",            "WhiteBoard",            "WhiteBoardPointStarSet",            "Wire",            "WorldCameraLock",            "ZoneSwitch"
         };
         Dictionary<string, string[]> objectSubKind = new Dictionary<string, string[]>()
         {
@@ -193,48 +69,15 @@ namespace JamBuilder
             { "ItemAIReactionZone", new string[] { "Gather" } },
             { "DarkHeart", new string[] { "Break3", "Break2" } },
         };
-        List<string> guestItemKind = new List<string>()
-        {
-            "PointStarYellow",
-            "PointStarGreen",
-            "IllustPiece",
-            "FriendSpeed",
-            "PointStarRed",
-            "Food",
-            "FriendPower",
-            "AllUp",
-            "FriendDefense",
-            "GenkiDrink",
-            "PointStarBlue",
-            "InvincibleCandy",
-            "MTomato"
-        };
-        Dictionary<string, string[]> guestItemSubKind = new Dictionary<string, string[]>()
-        {
-            { "Food", new string[] { "SweetsDoughnut", "JunkRoastChicken", "DrinkBabyBottle", "VegetableCorn", "FruitMelon", "FruitWatermelon", "DrinkCoffee", "DinnerOmelet", "JunkTakoyaki", "DrinkMelonSoda", "SweetsIceCandy", "FruitCherry", "JunkHumburger", "DinnerOnigiri", "SweetsShortCake", "DrinkMilk", "DinnerMeat", "DinnerBread", "FruitOrange", "SweetsDaroachCake", "JunkHotdog", "SweetsPudding", "FruitBanana", "SweetsSoftCream", "SweetsMacaron" } }
-        };
         List<string> itemKind = new List<string>()
         {
-            "AdcHeart",
-            "PointStarGreen",
-
-            "IllustPiece",
-            "PointStarRed",
-            "PointStarBlue",
-            "Food",
-            "PointStarYellow",
-            "OneUp",
-            "DreamRod",
-            "MTomato",
-            "IllustPieceRare",
-            "GenkiDrink",
-            "InvincibleCandy"
+            "PointStarYellow",            "PointStarGreen",            "PointStarRed",            "PointStarBlue",            "OneUp",            "MTomato",            "Food",            "IllustPiece",            "IllustPieceRare",            "IllustPieceRareGray",            "InvincibleCandy",            "GenkiDrink",            "DreamRod",            "FriendPower",            "FriendDefense",            "FriendSpeed",            "AllUp",            "AdcHeart",            "AdcHeartGray",            "None",            "CopySource",            "AbilitySeatItem",            "ArtistPainterFood",            "CookFood",            "CherryMadeInArena",            "TomatoMadeInArena",            "IllustPieceNfp",            "FoodHQ"
         };
         Dictionary<string, string[]> itemSubKind = new Dictionary<string, string[]>()
         {
-            { "Food", new string[] { "FruitOrange", "FruitMelon", "DrinkMilk", "SweetsDoughnut", "SweetsSoftCream", "FruitWatermelon", "FruitCherry", "DinnerSushi", "SweetsMacaron", "LightFriedEgg", "DinnerOnigiri", "DrinkCoffee", "JunkRoastChicken", "FruitBanana", "SweetsDaroachCake", "DrinkMelonSoda", "SweetsPudding", "DrinkBabyBottle", "SweetsShortCake", "VegetableGreenPepper", "JunkTakoyaki", "SweetsSusieAppleSherbet", "DinnerMeat", "DinnerBread", "DinnerOmelet", "VegetableCorn", "JunkHotdog", "JunkHumburger", "SweetsIceCandy", "VegetablePumpkin", "VegetableCarrot" } }
+            { "Food", new string[] { "DinnerBread", "DinnerMeat", "DinnerOmelet", "DinnerOnigiri", "DinnerSandwich", "DinnerSushi", "DrinkMelonSoda", "DrinkMilk", "DrinkBabyBottle", "DrinkCoffee", "FruitBanana", "FruitCherry", "FruitWatermelon", "FruitOrange", "FruitMelon", "JunkHotdog", "JunkHumburger", "JunkTakoyaki", "JunkRoastChicken", "LightFriedEgg", "SweetsDoughnut", "SweetsPudding", "SweetsShortCake", "SweetsSoftCream", "SweetsIceCandy", "SweetsMacaron", "SweetsDaroachCake", "SweetsSusieAppleSherbet", "VegetableCarrot", "VegetablePumpkin", "VegetableTomato", "VegetableCorn", "VegetableGreenPepper" } }
         };
-        string[] itemVariation = { "Fixed", "Bound", "Fall", "FallNoCulling" };
+        string[] itemVariation = { "Fixed", "Fall", "FallNoCulling", "Bound", "AssistThrow", "ItemBoxAppear", "ItemBoxAppear2Left", "ItemBoxAppear2Right", "ItemBoxAppear3Left", "ItemBoxAppear3Center", "ItemBoxAppear3Right", "ItemBoxAppearHigh", "ItemBoxAppear2LeftHigh", "ItemBoxAppear2RightHigh", "ItemBoxAppear3LeftHigh", "ItemBoxAppear3CenterHigh", "ItemBoxAppear3RightHigh", "ItemBoxAppearFixed", "Resume", "ResumeAssistThrow", "EnemyDead", "FixedScrewRotationLand", "HeavySnowmanAppear", "GimmickDead", "PushIronPoleAppear", "RiseNoCulling", "RisePopWhenFullNoCulling", "RiseLowNoCulling", "Discard", "DiscardTwinkleStar", "FixedTwinkleStar", "FallSlowNoCulling", "FallVerySlowNoCulling", "FallLite", "FixedAbilitySeat", "InertiaWaft", "WhiteBoardBoundLeft", "WhiteBoardBoundCenter", "WhiteBoardBoundRight", "FromCookPot", "FromCookPotNoInstancing", "Credit" };
         List<string> bossKind = new List<string>()
         {
             "Whispywoods",
@@ -248,7 +91,8 @@ namespace JamBuilder
             "ExecutiveFire",
             "BKnight",
             "LastBoss",
-            "Giantironmom"
+            "Giantironmom",
+            "Marx"
         };
         Dictionary<string, string[]> bossVariation = new Dictionary<string, string[]>()
         {
@@ -387,6 +231,17 @@ namespace JamBuilder
             InitializeComponent();
         }
 
+        private void RefreshList()
+        {
+            yamlDataList.Items.Clear();
+            yamlDataList.BeginUpdate();
+            foreach(KeyValuePair<string, string> pair in obj)
+            {
+                yamlDataList.Items.Add(pair.Key);
+            }
+            yamlDataList.EndUpdate();
+        }
+
         private void YAMLEditor_Load(object sender, EventArgs e)
         {
             foreach (KeyValuePair<string, string> pair in obj)
@@ -397,108 +252,107 @@ namespace JamBuilder
 
         private void yamlDataList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            valueSelect.Items.Clear();
-            value.Text = obj[yamlDataList.SelectedItem.ToString()];
-            if (yamlDataList.SelectedItem.ToString() == "4kind")
+            if (yamlDataList.SelectedItem != null)
             {
-                valueSelect.Enabled = true;
-                switch (editorType)
+                valueSelect.Items.Clear();
+                value.Text = obj[yamlDataList.SelectedItem.ToString()];
+                if (yamlDataList.SelectedItem.ToString() == "string kind")
                 {
-                    case 0:
-                        {
-                            valueSelect.Items.AddRange(objectKind.ToArray());
-                            break;
-                        }
-                    case 1:
-                        {
-                            valueSelect.Items.AddRange(guestItemKind.ToArray());
-                            break;
-                        }
-                    case 2:
-                        {
-                            valueSelect.Items.AddRange(itemKind.ToArray());
-                            break;
-                        }
-                    case 3:
-                        {
-                            valueSelect.Items.AddRange(bossKind.ToArray());
-                            break;
-                        }
-                    case 4:
-                        {
-                            valueSelect.Items.AddRange(enemyKind.ToArray());
-                            break;
-                        }
+                    valueSelect.Enabled = true;
+                    switch (editorType)
+                    {
+                        case 0:
+                            {
+                                valueSelect.Items.AddRange(objectKind.ToArray());
+                                break;
+                            }
+                        case 1:
+                        case 2:
+                            {
+                                valueSelect.Items.AddRange(itemKind.ToArray());
+                                break;
+                            }
+                        case 3:
+                            {
+                                valueSelect.Items.AddRange(bossKind.ToArray());
+                                break;
+                            }
+                        case 4:
+                            {
+                                valueSelect.Items.AddRange(enemyKind.ToArray());
+                                break;
+                            }
+                    }
+                    valueSelect.Text = value.Text;
                 }
-                valueSelect.Text = value.Text;
-            }
-            else if (yamlDataList.SelectedItem.ToString() == "4subKind")
-            {
-                valueSelect.Enabled = true;
-                switch (editorType)
+                else if (yamlDataList.SelectedItem.ToString() == "string subKind")
                 {
-                    case 0:
-                        {
-                            if (objectSubKind.Keys.Contains(obj["4kind"]))
+                    valueSelect.Enabled = true;
+                    switch (editorType)
+                    {
+                        case 0:
                             {
-                                valueSelect.Items.AddRange(objectSubKind[obj["4kind"]]);
-                                valueSelect.Text = value.Text;
+                                if (objectSubKind.Keys.Contains(obj["string kind"]))
+                                {
+                                    valueSelect.Items.AddRange(objectSubKind[obj["string kind"]]);
+                                    valueSelect.Text = value.Text;
+                                }
+                                break;
                             }
-                            break;
-                        }
-                    case 1:
-                    case 2:
-                        {
-                            valueSelect.Items.AddRange(itemSubKind[obj["4kind"]]);
-                            valueSelect.Text = value.Text;
-                            break;
-                        }
+                        case 1:
+                        case 2:
+                            {
+                                valueSelect.Items.AddRange(itemSubKind[obj["string kind"]]);
+                                valueSelect.Text = value.Text;
+                                break;
+                            }
+                    }
                 }
-            }
-            else if (yamlDataList.SelectedItem.ToString() == "4variation")
-            {
-                valueSelect.Enabled = true;
-                switch (editorType)
+                else if (yamlDataList.SelectedItem.ToString() == "string variation")
                 {
-                    case 0:
-                        {
-                            if (objectVariation.Keys.Contains(obj["4kind"]))
+                    valueSelect.Enabled = true;
+                    switch (editorType)
+                    {
+                        case 0:
                             {
-                                valueSelect.Items.AddRange(objectVariation[obj["4kind"]]);
-                                valueSelect.Text = value.Text;
+                                if (objectVariation.Keys.Contains(obj["string kind"]))
+                                {
+                                    valueSelect.Items.AddRange(objectVariation[obj["string kind"]]);
+                                    valueSelect.Text = value.Text;
+                                }
+                                break;
                             }
-                            break;
-                        }
-                    case 1:
-                    case 2:
-                        {
-                            valueSelect.Items.AddRange(itemVariation);
-                            valueSelect.Text = value.Text;
-                            break;
-                        }
-                    case 3:
-                        {
-                            if (bossVariation.Keys.Contains(obj["4kind"]))
+                        case 1:
+                        case 2:
                             {
-                                valueSelect.Items.AddRange(bossVariation[obj["4kind"]]);
+                                valueSelect.Items.AddRange(itemVariation);
                                 valueSelect.Text = value.Text;
+                                break;
                             }
-                            break;
-                        }
-                    case 4:
-                        {
-                            if (enemyVariation.Keys.Contains(obj["4kind"]))
+                        case 3:
                             {
-                                valueSelect.Items.AddRange(enemyVariation[obj["4kind"]]);
-                                valueSelect.Text = value.Text;
+                                if (bossVariation.Keys.Contains(obj["string kind"]))
+                                {
+                                    valueSelect.Items.AddRange(bossVariation[obj["string kind"]]);
+                                    valueSelect.Text = value.Text;
+                                }
+                                break;
                             }
-                            break;
-                        }
+                        case 4:
+                            {
+                                if (enemyVariation.Keys.Contains(obj["string kind"]))
+                                {
+                                    valueSelect.Items.AddRange(enemyVariation[obj["string kind"]]);
+                                    valueSelect.Text = value.Text;
+                                }
+                                break;
+                            }
+                    }
                 }
-            }
-            else
-            {
-                valueSelect.Enabled = false;
+                else
+                {
+                    valueSelect.Enabled = false;
+                }
             }
         }
 
@@ -510,6 +364,15 @@ namespace JamBuilder
         private void save_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
+        }
+
+        private void delAttribute_Click(object sender, EventArgs e)
+        {
+            if (yamlDataList.SelectedItem != null)
+            {
+                obj.Remove(yamlDataList.SelectedItem.ToString());
+                RefreshList();
+            }
         }
     }
 }

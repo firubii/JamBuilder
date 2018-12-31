@@ -175,6 +175,7 @@
             this.delObj.TabIndex = 2;
             this.delObj.Text = "-";
             this.delObj.UseVisualStyleBackColor = true;
+            this.delObj.Click += new System.EventHandler(this.delObj_Click);
             // 
             // addObj
             // 
@@ -229,6 +230,7 @@
             this.delGuestItem.TabIndex = 6;
             this.delGuestItem.Text = "-";
             this.delGuestItem.UseVisualStyleBackColor = true;
+            this.delGuestItem.Click += new System.EventHandler(this.delGuestItem_Click);
             // 
             // addGuestItem
             // 
@@ -281,6 +283,7 @@
             this.delItem.TabIndex = 6;
             this.delItem.Text = "-";
             this.delItem.UseVisualStyleBackColor = true;
+            this.delItem.Click += new System.EventHandler(this.delItem_Click);
             // 
             // addItem
             // 
@@ -333,6 +336,7 @@
             this.delBoss.TabIndex = 6;
             this.delBoss.Text = "-";
             this.delBoss.UseVisualStyleBackColor = true;
+            this.delBoss.Click += new System.EventHandler(this.delBoss_Click);
             // 
             // addBoss
             // 
@@ -343,6 +347,7 @@
             this.addBoss.TabIndex = 5;
             this.addBoss.Text = "+";
             this.addBoss.UseVisualStyleBackColor = true;
+            this.addBoss.Click += new System.EventHandler(this.addBoss_Click);
             // 
             // bossList
             // 
@@ -385,6 +390,7 @@
             this.delEnemy.TabIndex = 6;
             this.delEnemy.Text = "-";
             this.delEnemy.UseVisualStyleBackColor = true;
+            this.delEnemy.Click += new System.EventHandler(this.delEnemy_Click);
             // 
             // addEnemy
             // 
@@ -395,6 +401,7 @@
             this.addEnemy.TabIndex = 5;
             this.addEnemy.Text = "+";
             this.addEnemy.UseVisualStyleBackColor = true;
+            this.addEnemy.Click += new System.EventHandler(this.addEnemy_Click);
             // 
             // enemyList
             // 

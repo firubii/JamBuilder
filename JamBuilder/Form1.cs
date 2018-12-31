@@ -24,6 +24,48 @@ namespace JamBuilder
             InitializeComponent();
         }
 
+        public void RefreshObjectLists()
+        {
+            objList.Items.Clear();
+            guestItemList.Items.Clear();
+            itemList.Items.Clear();
+            bossList.Items.Clear();
+            enemyList.Items.Clear();
+
+            objList.BeginUpdate();
+            guestItemList.BeginUpdate();
+            itemList.BeginUpdate();
+            bossList.BeginUpdate();
+            enemyList.BeginUpdate();
+
+            for (int i = 0; i < level.Objects.Count; i++)
+            {
+                objList.Items.Add(level.Objects[i]["string kind"]);
+            }
+            for (int i = 0; i < level.GuestStarItems.Count; i++)
+            {
+                guestItemList.Items.Add(level.GuestStarItems[i]["string kind"]);
+            }
+            for (int i = 0; i < level.Items.Count; i++)
+            {
+                itemList.Items.Add(level.Items[i]["string kind"]);
+            }
+            for (int i = 0; i < level.Bosses.Count; i++)
+            {
+                bossList.Items.Add(level.Bosses[i]["string kind"]);
+            }
+            for (int i = 0; i < level.Enemies.Count; i++)
+            {
+                enemyList.Items.Add(level.Enemies[i]["string kind"]);
+            }
+
+            objList.EndUpdate();
+            guestItemList.EndUpdate();
+            itemList.EndUpdate();
+            bossList.EndUpdate();
+            enemyList.EndUpdate();
+        }
+
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -44,26 +86,9 @@ namespace JamBuilder
                 this.Cursor = Cursors.WaitCursor;
                 this.Text = $"JamBuilder - Opening {filePath}...";
                 level = new Level(open.FileName);
-                for (int i = 0; i < level.Objects.Count; i++)
-                {
-                    objList.Items.Add(level.Objects[i]["4kind"]);
-                }
-                for (int i = 0; i < level.GuestStarItems.Count; i++)
-                {
-                    guestItemList.Items.Add(level.GuestStarItems[i]["4kind"]);
-                }
-                for (int i = 0; i < level.Items.Count; i++)
-                {
-                    itemList.Items.Add(level.Items[i]["4kind"]);
-                }
-                for (int i = 0; i < level.Bosses.Count; i++)
-                {
-                    bossList.Items.Add(level.Bosses[i]["4kind"]);
-                }
-                for (int i = 0; i < level.Enemies.Count; i++)
-                {
-                    enemyList.Items.Add(level.Enemies[i]["4kind"]);
-                }
+
+                RefreshObjectLists();
+
                 this.Text = $"JamBuilder - {filePath}";
                 this.Cursor = Cursors.Arrow;
                 this.Enabled = true;
@@ -82,6 +107,7 @@ namespace JamBuilder
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
                     level.Objects[objList.SelectedIndex] = editor.obj;
+                    RefreshObjectLists();
                 }
             }
         }
@@ -96,6 +122,7 @@ namespace JamBuilder
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
                     level.GuestStarItems[guestItemList.SelectedIndex] = editor.obj;
+                    RefreshObjectLists();
                 }
             }
         }
@@ -110,6 +137,7 @@ namespace JamBuilder
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
                     level.Items[itemList.SelectedIndex] = editor.obj;
+                    RefreshObjectLists();
                 }
             }
         }
@@ -124,6 +152,7 @@ namespace JamBuilder
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
                     level.Bosses[bossList.SelectedIndex] = editor.obj;
+                    RefreshObjectLists();
                 }
             }
         }
@@ -138,6 +167,7 @@ namespace JamBuilder
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
                     level.Enemies[enemyList.SelectedIndex] = editor.obj;
+                    RefreshObjectLists();
                 }
             }
         }
@@ -158,7 +188,35 @@ namespace JamBuilder
 
         private void addObj_Click(object sender, EventArgs e)
         {
-            
+            AddObj addObj = new AddObj();
+            addObj.editorType = 0;
+            if (addObj.ShowDialog() == DialogResult.OK)
+            {
+                level.Objects.Add(addObj.obj);
+                RefreshObjectLists();
+            }
+        }
+
+        private void addBoss_Click(object sender, EventArgs e)
+        {
+            AddObj addObj = new AddObj();
+            addObj.editorType = 3;
+            if (addObj.ShowDialog() == DialogResult.OK)
+            {
+                level.Bosses.Add(addObj.obj);
+                RefreshObjectLists();
+            }
+        }
+
+        private void addEnemy_Click(object sender, EventArgs e)
+        {
+            AddObj addObj = new AddObj();
+            addObj.editorType = 4;
+            if (addObj.ShowDialog() == DialogResult.OK)
+            {
+                level.Enemies.Add(addObj.obj);
+                RefreshObjectLists();
+            }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -188,6 +246,51 @@ namespace JamBuilder
             this.Text = $"JamBuilder - {filePath}";
             this.Cursor = Cursors.Arrow;
             this.Enabled = true;
+        }
+
+        private void delObj_Click(object sender, EventArgs e)
+        {
+            if (objList.SelectedItem != null)
+            {
+                level.Objects.RemoveAt(objList.SelectedIndex);
+                RefreshObjectLists();
+            }
+        }
+
+        private void delGuestItem_Click(object sender, EventArgs e)
+        {
+            if (guestItemList.SelectedItem != null)
+            {
+                level.GuestStarItems.RemoveAt(guestItemList.SelectedIndex);
+                RefreshObjectLists();
+            }
+        }
+
+        private void delItem_Click(object sender, EventArgs e)
+        {
+            if (itemList.SelectedItem != null)
+            {
+                level.Items.RemoveAt(itemList.SelectedIndex);
+                RefreshObjectLists();
+            }
+        }
+
+        private void delBoss_Click(object sender, EventArgs e)
+        {
+            if (bossList.SelectedItem != null)
+            {
+                level.Bosses.RemoveAt(bossList.SelectedIndex);
+                RefreshObjectLists();
+            }
+        }
+
+        private void delEnemy_Click(object sender, EventArgs e)
+        {
+            if (enemyList.SelectedItem != null)
+            {
+                level.Enemies.RemoveAt(enemyList.SelectedIndex);
+                RefreshObjectLists();
+            }
         }
     }
 }

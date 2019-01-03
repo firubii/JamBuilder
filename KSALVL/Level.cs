@@ -14,8 +14,7 @@ namespace KSALVL
         public uint Width;
         public string Background;
         public string Tileset;
-        public string Unk_String;
-        public byte[] Unk_Bytes;
+        public Stage StageData;
         public List<Block> TileBlock = new List<Block>();
         public List<Collision> TileCollision = new List<Collision>();
         public List<Decoration> BLandDecoration = new List<Decoration>();
@@ -123,12 +122,22 @@ namespace KSALVL
             }
 
             reader.BaseStream.Seek(0x2C, SeekOrigin.Begin);
-            reader.BaseStream.Seek(reader.ReadUInt32() + 0x8, SeekOrigin.Begin);
             reader.BaseStream.Seek(reader.ReadUInt32(), SeekOrigin.Begin);
-            Unk_String = Encoding.UTF8.GetString(reader.ReadBytes(reader.ReadInt32()));
-            reader.BaseStream.Seek(0x2C, SeekOrigin.Begin);
-            reader.BaseStream.Seek(reader.ReadUInt32() + 0xC, SeekOrigin.Begin);
-            Unk_Bytes = reader.ReadBytes(0x38);
+            StageData.Unk_1 = reader.ReadUInt32();
+            StageData.Unk_2 = reader.ReadUInt32();
+            uint pos = (uint)reader.BaseStream.Position;
+            reader.BaseStream.Seek(reader.ReadUInt32(), SeekOrigin.Begin);
+            StageData.Unk_String = Encoding.UTF8.GetString(reader.ReadBytes(reader.ReadInt32()));
+            reader.BaseStream.Seek(pos + 0x4, SeekOrigin.Begin);
+            StageData.Unk_3 = reader.ReadSingle();
+            StageData.Unk_4 = reader.ReadSingle();
+            StageData.Unk_5 = reader.ReadSingle();
+            StageData.Unk_6 = reader.ReadSingle();
+            StageData.Unk_7 = reader.ReadSingle();
+            StageData.Unk_8 = reader.ReadSingle();
+            StageData.Unk_9 = reader.ReadSingle();
+            StageData.Unk_10 = reader.ReadSingle();
+            StageData.Unk_11 = reader.ReadSingle();
 
             reader.BaseStream.Seek(0x30, SeekOrigin.Begin);
             reader.BaseStream.Seek(reader.ReadUInt32(), SeekOrigin.Begin);
@@ -379,10 +388,19 @@ namespace KSALVL
             writer.BaseStream.Seek(0x2C, SeekOrigin.Begin);
             writer.Write(pos);
             writer.BaseStream.Seek(0, SeekOrigin.End);
-            writer.Write(0);
-            writer.Write(1);
+            writer.Write(StageData.Unk_1);
+            writer.Write(StageData.Unk_2);
             uint unkStringOffset = (uint)writer.BaseStream.Position;
-            writer.Write(Unk_Bytes);
+            writer.Write(0);
+            writer.Write(StageData.Unk_3);
+            writer.Write(StageData.Unk_4);
+            writer.Write(StageData.Unk_5);
+            writer.Write(StageData.Unk_6);
+            writer.Write(StageData.Unk_7);
+            writer.Write(StageData.Unk_8);
+            writer.Write(StageData.Unk_9);
+            writer.Write(StageData.Unk_10);
+            writer.Write(StageData.Unk_11);
 
             pos = (uint)writer.BaseStream.Position;
             writer.BaseStream.Seek(0x30, SeekOrigin.Begin);
@@ -552,8 +570,8 @@ namespace KSALVL
             writer.BaseStream.Seek(unkStringOffset, SeekOrigin.Begin);
             writer.Write(pos);
             writer.BaseStream.Seek(0, SeekOrigin.End);
-            writer.Write(Unk_String.Length);
-            writer.Write(Encoding.UTF8.GetBytes(Unk_String));
+            writer.Write(StageData.Unk_String.Length);
+            writer.Write(Encoding.UTF8.GetBytes(StageData.Unk_String));
             while ((writer.BaseStream.Length).ToString("X").Last() != '0' && (writer.BaseStream.Length).ToString("X").Last() != '4' && (writer.BaseStream.Length).ToString("X").Last() != '8' && (writer.BaseStream.Length).ToString("X").Last() != 'C')
             {
                 writer.Write((byte)0);

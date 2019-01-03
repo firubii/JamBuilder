@@ -66,6 +66,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StageSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StageSettings.Designer.cs">
+      <DependentUpon>StageSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="YAMLEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +93,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="StageSettings.resx">
+      <DependentUpon>StageSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="YAMLEditor.resx">
       <DependentUpon>YAMLEditor.cs</DependentUpon>
     </EmbeddedResource>

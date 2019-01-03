@@ -61,6 +61,7 @@
             this.addEnemy = new System.Windows.Forms.Button();
             this.enemyList = new System.Windows.Forms.ListBox();
             this.glControl = new OpenTK.GLControl();
+            this.stageSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -74,7 +75,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.stageSettingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1037, 24);
@@ -424,6 +426,13 @@
             this.glControl.Load += new System.EventHandler(this.glControl_Load);
             this.glControl.Paint += new System.Windows.Forms.PaintEventHandler(this.glControl_Paint);
             // 
+            // stageSettingsToolStripMenuItem
+            // 
+            this.stageSettingsToolStripMenuItem.Name = "stageSettingsToolStripMenuItem";
+            this.stageSettingsToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
+            this.stageSettingsToolStripMenuItem.Text = "Stage Settings";
+            this.stageSettingsToolStripMenuItem.Click += new System.EventHandler(this.stageSettingsToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -486,6 +495,7 @@
         private System.Windows.Forms.Button addEnemy;
         private System.Windows.Forms.ListBox enemyList;
         private OpenTK.GLControl glControl;
+        private System.Windows.Forms.ToolStripMenuItem stageSettingsToolStripMenuItem;
     }
 }
 

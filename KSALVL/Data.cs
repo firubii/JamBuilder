@@ -26,4 +26,20 @@ namespace KSALVL
         public byte Unk_3;
         public byte Unk_4;
     }
+
+    public struct Stage
+    {
+        public uint Unk_1;
+        public uint Unk_2;
+        public string Unk_String;
+        public float Unk_3;
+        public float Unk_4;
+        public float Unk_5;
+        public float Unk_6;
+        public float Unk_7;
+        public float Unk_8;
+        public float Unk_9;
+        public float Unk_10;
+        public float Unk_11;
+    }
 }

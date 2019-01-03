@@ -314,5 +314,19 @@ namespace JamBuilder
                 RefreshObjectLists();
             }
         }
+
+        private void stageSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StageSettings settings = new StageSettings();
+            settings.stage = level.StageData;
+            settings.bg = level.Background;
+            settings.tileset = level.Tileset;
+            if (settings.ShowDialog() == DialogResult.OK)
+            {
+                level.StageData = settings.stage;
+                level.Background = settings.bg;
+                level.Tileset = settings.tileset;
+            }
+        }
     }
 }

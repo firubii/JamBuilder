@@ -33,6 +33,7 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stageSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.objTab = new System.Windows.Forms.TabPage();
@@ -61,7 +62,6 @@
             this.addEnemy = new System.Windows.Forms.Button();
             this.enemyList = new System.Windows.Forms.ListBox();
             this.glControl = new OpenTK.GLControl();
-            this.stageSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -119,6 +119,13 @@
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            // 
+            // stageSettingsToolStripMenuItem
+            // 
+            this.stageSettingsToolStripMenuItem.Name = "stageSettingsToolStripMenuItem";
+            this.stageSettingsToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
+            this.stageSettingsToolStripMenuItem.Text = "Stage Settings";
+            this.stageSettingsToolStripMenuItem.Click += new System.EventHandler(this.stageSettingsToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
@@ -197,6 +204,7 @@
             this.objList.Name = "objList";
             this.objList.Size = new System.Drawing.Size(265, 368);
             this.objList.TabIndex = 0;
+            this.objList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.objList_MouseDoubleClick);
             // 
             // guestStarItemTab
             // 
@@ -221,7 +229,7 @@
             this.editGuestItem.TabIndex = 7;
             this.editGuestItem.Text = "Edit";
             this.editGuestItem.UseVisualStyleBackColor = true;
-            this.editGuestItem.Click += new System.EventHandler(this.editItem_Click);
+            this.editGuestItem.Click += new System.EventHandler(this.editGuestItem_Click);
             // 
             // delGuestItem
             // 
@@ -252,6 +260,7 @@
             this.guestItemList.Name = "guestItemList";
             this.guestItemList.Size = new System.Drawing.Size(265, 368);
             this.guestItemList.TabIndex = 4;
+            this.guestItemList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.guestItemList_MouseDoubleClick);
             // 
             // itemTab
             // 
@@ -275,7 +284,7 @@
             this.editItem.TabIndex = 7;
             this.editItem.Text = "Edit";
             this.editItem.UseVisualStyleBackColor = true;
-            this.editItem.Click += new System.EventHandler(this.editSpecItem_Click);
+            this.editItem.Click += new System.EventHandler(this.editItem_Click);
             // 
             // delItem
             // 
@@ -306,6 +315,7 @@
             this.itemList.Name = "itemList";
             this.itemList.Size = new System.Drawing.Size(265, 368);
             this.itemList.TabIndex = 4;
+            this.itemList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.itemList_MouseDoubleClick);
             // 
             // bossTab
             // 
@@ -360,6 +370,7 @@
             this.bossList.Name = "bossList";
             this.bossList.Size = new System.Drawing.Size(265, 368);
             this.bossList.TabIndex = 4;
+            this.bossList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.bossList_MouseDoubleClick);
             // 
             // enemyTab
             // 
@@ -414,6 +425,7 @@
             this.enemyList.Name = "enemyList";
             this.enemyList.Size = new System.Drawing.Size(265, 368);
             this.enemyList.TabIndex = 4;
+            this.enemyList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.enemyList_MouseDoubleClick);
             // 
             // glControl
             // 
@@ -425,13 +437,6 @@
             this.glControl.VSync = false;
             this.glControl.Load += new System.EventHandler(this.glControl_Load);
             this.glControl.Paint += new System.Windows.Forms.PaintEventHandler(this.glControl_Paint);
-            // 
-            // stageSettingsToolStripMenuItem
-            // 
-            this.stageSettingsToolStripMenuItem.Name = "stageSettingsToolStripMenuItem";
-            this.stageSettingsToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
-            this.stageSettingsToolStripMenuItem.Text = "Stage Settings";
-            this.stageSettingsToolStripMenuItem.Click += new System.EventHandler(this.stageSettingsToolStripMenuItem_Click);
             // 
             // Form1
             // 

@@ -112,31 +112,31 @@ namespace JamBuilder
             }
         }
 
+        private void editGuestItem_Click(object sender, EventArgs e)
+        {
+            if (guestItemList.SelectedItem != null)
+            {
+                YAMLEditor editor = new YAMLEditor();
+                editor.obj = level.Items[guestItemList.SelectedIndex];
+                editor.editorType = 1;
+                if (editor.ShowDialog() == DialogResult.OK)
+                {
+                    level.Items[guestItemList.SelectedIndex] = editor.obj;
+                    RefreshObjectLists();
+                }
+            }
+        }
+
         private void editItem_Click(object sender, EventArgs e)
         {
             if (guestItemList.SelectedItem != null)
             {
                 YAMLEditor editor = new YAMLEditor();
                 editor.obj = level.GuestStarItems[guestItemList.SelectedIndex];
-                editor.editorType = 1;
-                if (editor.ShowDialog() == DialogResult.OK)
-                {
-                    level.GuestStarItems[guestItemList.SelectedIndex] = editor.obj;
-                    RefreshObjectLists();
-                }
-            }
-        }
-
-        private void editSpecItem_Click(object sender, EventArgs e)
-        {
-            if (itemList.SelectedItem != null)
-            {
-                YAMLEditor editor = new YAMLEditor();
-                editor.obj = level.Items[itemList.SelectedIndex];
                 editor.editorType = 2;
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
-                    level.Items[itemList.SelectedIndex] = editor.obj;
+                    level.GuestStarItems[itemList.SelectedIndex] = editor.obj;
                     RefreshObjectLists();
                 }
             }
@@ -390,6 +390,46 @@ namespace JamBuilder
                 level.StageData = settings.stage;
                 level.Background = settings.bg;
                 level.Tileset = settings.tileset;
+            }
+        }
+
+        private void objList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (objList.SelectedItem != null)
+            {
+                editObj_Click(this, new EventArgs());
+            }
+        }
+
+        private void guestItemList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (guestItemList.SelectedItem != null)
+            {
+                editGuestItem_Click(this, new EventArgs());
+            }
+        }
+
+        private void itemList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (itemList.SelectedItem != null)
+            {
+                editItem_Click(this, new EventArgs());
+            }
+        }
+
+        private void bossList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (bossList.SelectedItem != null)
+            {
+                editBoss_Click(this, new EventArgs());
+            }
+        }
+
+        private void enemyList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (enemyList.SelectedItem != null)
+            {
+                editEnemy_Click(this, new EventArgs());
             }
         }
     }

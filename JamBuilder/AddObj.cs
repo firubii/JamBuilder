@@ -188,6 +188,10 @@ namespace JamBuilder
                                 {
                                     value = "Boss";
                                 }
+                                else if (objs.BossList[objectDropDown.Text][i] == "string kind")
+                                {
+                                    value = objectDropDown.Text;
+                                }
                                 else if (objs.BossList[objectDropDown.Text][i] == "string level")
                                 {
                                     value = "Lvl1";

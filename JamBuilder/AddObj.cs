@@ -57,6 +57,10 @@ namespace JamBuilder
                         case "float":
                             {
                                 value = "0";
+                                if (objs.ObjectList[objectDropDown.Text][i] == "int x" || objs.ObjectList[objectDropDown.Text][i] == "int y")
+                                {
+                                    value = "0 | 0";
+                                }
                                 break;
                             }
                         case "bool":
@@ -92,6 +96,10 @@ namespace JamBuilder
                         case "float":
                             {
                                 value = "0";
+                                if (objs.ItemList[objectDropDown.Text][i] == "int x" || objs.ItemList[objectDropDown.Text][i] == "int y")
+                                {
+                                    value = "0 | 0";
+                                }
                                 break;
                             }
                         case "bool":
@@ -146,6 +154,10 @@ namespace JamBuilder
                         case "float":
                             {
                                 value = "0";
+                                if (objs.BossList[objectDropDown.Text][i] == "int x" || objs.BossList[objectDropDown.Text][i] == "int y")
+                                {
+                                    value = "0 | 0";
+                                }
                                 break;
                             }
                         case "bool":
@@ -203,6 +215,10 @@ namespace JamBuilder
                             case "float":
                                 {
                                     value = "0";
+                                    if (objs.EnemyList[objectDropDown.Text][i] == "int x" || objs.EnemyList[objectDropDown.Text][i] == "int y")
+                                    {
+                                        value = "0 | 0";
+                                    }
                                     break;
                                 }
                             case "bool":
@@ -254,6 +270,10 @@ namespace JamBuilder
                             case "float":
                                 {
                                     value = "0";
+                                    if (objs.MBossList[objectDropDown.Text][i] == "int x" || objs.MBossList[objectDropDown.Text][i] == "int y")
+                                    {
+                                        value = "0 | 0";
+                                    }
                                     break;
                                 }
                             case "bool":

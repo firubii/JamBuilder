@@ -598,7 +598,15 @@ namespace KSALVL
                 {
                     case 1:
                         {
-                            yaml.Add("int " + name, reader.ReadUInt32().ToString());
+                            uint val = reader.ReadUInt32();
+                            string strVal = val.ToString();
+                            if (name == "x" || name == "y")
+                            {
+                                int offset = int.Parse(val.ToString("X8").ToCharArray().Last().ToString(), System.Globalization.NumberStyles.HexNumber);
+                                uint coord = uint.Parse("0" + string.Join("", val.ToString("X8").ToCharArray().Take(7)), System.Globalization.NumberStyles.HexNumber);
+                                strVal = coord + " | " + offset;
+                            }
+                            yaml.Add("int " + name, strVal);
                             break;
                         }
                     case 2:
@@ -660,7 +668,22 @@ namespace KSALVL
                     case "int":
                         {
                             writer.Write(1);
-                            writer.Write(uint.Parse(pair.Value));
+
+                            uint val;
+
+                            if (pair.Key == "int x" || pair.Key == "int y")
+                            {
+                                string[] coords = pair.Value.Replace(" ", "").Split('|');
+                                uint offset = uint.Parse(coords[1]);
+                                uint coord = uint.Parse(coords[0]);
+                                val = uint.Parse(coord.ToString("X7") + offset.ToString("X1"), System.Globalization.NumberStyles.HexNumber);
+                            }
+                            else
+                            {
+                                val = uint.Parse(pair.Value);
+                            }
+
+                            writer.Write(val);
                             break;
                         }
                     case "float":

@@ -16,6 +16,8 @@ namespace JamBuilder
         public int editorType;
         public Dictionary<string, string> obj = new Dictionary<string, string>();
 
+        Objects objs = new Objects();
+
         public AddObj()
         {
             InitializeComponent();
@@ -25,18 +27,19 @@ namespace JamBuilder
         {
             if (editorType == 0)
             {
-                foreach (KeyValuePair<string, string[]> pair in new Objects().ObjectList)
-                {
-                    objectDropDown.Items.Add(pair.Key);
-                }
+                objectDropDown.Items.AddRange(objs.ObjectList.Keys.ToArray());
+            }
+            else if (editorType == 1 || editorType == 2)
+            {
+                objectDropDown.Items.AddRange(objs.ItemList.Keys.ToArray());
             }
             else if (editorType == 3)
             {
-
+                objectDropDown.Items.AddRange(objs.BossList.Keys.ToArray());
             }
             else if (editorType == 4)
             {
-                objectDropDown.Items.AddRange(new Objects().EnemyList.ToArray());
+                objectDropDown.Items.AddRange(new string[] { "Enemy", "MBoss" });
             }
         }
 
@@ -44,10 +47,10 @@ namespace JamBuilder
         {
             if (editorType == 0)
             {
-                for (int i = 0; i < new Objects().ObjectList[objectDropDown.Text].Length; i++)
+                for (int i = 0; i < objs.ObjectList[objectDropDown.Text].Length; i++)
                 {
                     string value = "";
-                    string valType = new Objects().ObjectList[objectDropDown.Text][i].Split(' ')[0];
+                    string valType = objs.ObjectList[objectDropDown.Text][i].Split(' ')[0];
                     switch (valType)
                     {
                         case "int":
@@ -61,59 +64,245 @@ namespace JamBuilder
                                 value = "False";
                                 break;
                             }
+                        case "string":
+                            {
+                                if (objs.ObjectList[objectDropDown.Text][i] == "string constraintMoveGroup")
+                                {
+                                    value = "-1";
+                                }
+                                else if (objs.ObjectList[objectDropDown.Text][i] == "string kind")
+                                {
+                                    value = objectDropDown.Text;
+                                }
+                                break;
+                            }
                     }
-                    if (new Objects().ObjectList[objectDropDown.Text][i] == "string kind")
+                    obj.Add(objs.ObjectList[objectDropDown.Text][i], value);
+                }
+            }
+            if (editorType == 1 || editorType == 2)
+            {
+                for (int i = 0; i < objs.ItemList[objectDropDown.Text].Length; i++)
+                {
+                    string value = "";
+                    string valType = objs.ItemList[objectDropDown.Text][i].Split(' ')[0];
+                    switch (valType)
                     {
-                        value = objectDropDown.Text;
+                        case "int":
+                        case "float":
+                            {
+                                value = "0";
+                                break;
+                            }
+                        case "bool":
+                            {
+                                value = "False";
+                                break;
+                            }
+                        case "string":
+                            {
+                                if (objs.ItemList[objectDropDown.Text][i] == "string constraintMoveGroup")
+                                {
+                                    value = "-1";
+                                }
+                                else if (objs.ItemList[objectDropDown.Text][i] == "string itemCategory")
+                                {
+                                    if (editorType == 1)
+                                    {
+                                        value = "HelperGoItem";
+                                    }
+                                    else if (editorType == 1)
+                                    {
+                                        value = "Item";
+                                    }
+                                }
+                                else if (objs.ItemList[objectDropDown.Text][i] == "string kind")
+                                {
+                                    value = objectDropDown.Text;
+                                }
+                                else if (objs.ItemList[objectDropDown.Text][i] == "string subKind")
+                                {
+                                    value = "FruitWatermelon";
+                                }
+                                else if (objs.ItemList[objectDropDown.Text][i] == "string variation")
+                                {
+                                    value = "Fixed";
+                                }
+                                break;
+                            }
                     }
-                    obj.Add(new Objects().ObjectList[objectDropDown.Text][i], value);
+                    obj.Add(objs.ItemList[objectDropDown.Text][i], value);
+                }
+            }
+            else if (editorType == 3)
+            {
+                for (int i = 0; i < objs.BossList[objectDropDown.Text].Length; i++)
+                {
+                    string value = "";
+                    string valType = objs.BossList[objectDropDown.Text][i].Split(' ')[0];
+                    switch (valType)
+                    {
+                        case "int":
+                        case "float":
+                            {
+                                value = "0";
+                                break;
+                            }
+                        case "bool":
+                            {
+                                value = "False";
+                                break;
+                            }
+                        case "string":
+                            {
+                                if (objs.BossList[objectDropDown.Text][i] == "string constraintMoveGroup")
+                                {
+                                    value = "-1";
+                                }
+                                else if (objs.BossList[objectDropDown.Text][i] == "string dirType")
+                                {
+                                    value = "Normal";
+                                }
+                                else if (objs.BossList[objectDropDown.Text][i] == "string enemyCategory")
+                                {
+                                    value = "Boss";
+                                }
+                                else if (objs.BossList[objectDropDown.Text][i] == "string level")
+                                {
+                                    value = "Lvl1";
+                                }
+                                else if (objs.BossList[objectDropDown.Text][i] == "string modelKind")
+                                {
+                                    value = "Normal";
+                                }
+                                else if (objs.BossList[objectDropDown.Text][i] == "string size")
+                                {
+                                    value = "Normal";
+                                }
+                                else if (objs.BossList[objectDropDown.Text][i] == "string variation")
+                                {
+                                    value = "Normal";
+                                }
+                                break;
+                            }
+                    }
+                    obj.Add(objs.BossList[objectDropDown.Text][i], value);
                 }
             }
             else if (editorType == 4)
             {
-                for (int i = 0; i < new Objects().EnemyData.Length; i++)
+                if (objectDropDown.Text == "Enemy")
                 {
-                    switch (new Objects().EnemyData[i])
+                    for (int i = 0; i < objs.EnemyList[objectDropDown.Text].Length; i++)
                     {
-                        case "int wuid":
-                        case "int x":
-                        case "int y":
-                        case "int group":
-                            {
-                                obj.Add(new Objects().EnemyData[i], "0");
-                                break;
-                            }
-                        case "string constraintMoveGroup":
-                            {
-                                obj.Add(new Objects().EnemyData[i], "0");
-                                break;
-                            }
-                        case "string dirType":
-                            {
-                                obj.Add(new Objects().EnemyData[i], "L");
-                                break;
-                            }
-                        case "string enemyCategory":
-                            {
-                                obj.Add(new Objects().EnemyData[i], "Enemy");
-                                break;
-                            }
-                        case "string kind":
-                            {
-                                obj.Add(new Objects().EnemyData[i], objectDropDown.Text);
-                                break;
-                            }
-                        case "string level":
-                            {
-                                obj.Add(new Objects().EnemyData[i], "Lvl1");
-                                break;
-                            }
-                        case "string size":
-                        case "string variation":
-                            {
-                                obj.Add(new Objects().EnemyData[i], "Normal");
-                                break;
-                            }
+                        string value = "";
+                        string valType = objs.EnemyList[objectDropDown.Text][i].Split(' ')[0];
+                        switch (valType)
+                        {
+                            case "int":
+                            case "float":
+                                {
+                                    value = "0";
+                                    break;
+                                }
+                            case "bool":
+                                {
+                                    value = "False";
+                                    break;
+                                }
+                            case "string":
+                                {
+                                    if (objs.EnemyList[objectDropDown.Text][i] == "string constraintMoveGroup")
+                                    {
+                                        value = "-1";
+                                    }
+                                    else if (objs.EnemyList[objectDropDown.Text][i] == "string dirType")
+                                    {
+                                        value = "Normal";
+                                    }
+                                    else if (objs.EnemyList[objectDropDown.Text][i] == "string enemyCategory")
+                                    {
+                                        value = "Enemy";
+                                    }
+                                    else if (objs.EnemyList[objectDropDown.Text][i] == "string level")
+                                    {
+                                        value = "Lvl1";
+                                    }
+                                    else if (objs.EnemyList[objectDropDown.Text][i] == "string size")
+                                    {
+                                        value = "Normal";
+                                    }
+                                    else if (objs.EnemyList[objectDropDown.Text][i] == "string variation")
+                                    {
+                                        value = "Normal";
+                                    }
+                                    break;
+                                }
+                        }
+                        obj.Add(objs.EnemyList[objectDropDown.Text][i], value);
+                    }
+                }
+                else if (objectDropDown.Text == "MBoss")
+                {
+                    for (int i = 0; i < objs.MBossList[objectDropDown.Text].Length; i++)
+                    {
+                        string value = "";
+                        string valType = objs.MBossList[objectDropDown.Text][i].Split(' ')[0];
+                        switch (valType)
+                        {
+                            case "int":
+                            case "float":
+                                {
+                                    value = "0";
+                                    break;
+                                }
+                            case "bool":
+                                {
+                                    value = "False";
+                                    break;
+                                }
+                            case "string":
+                                {
+                                    if (objs.MBossList[objectDropDown.Text][i] == "string constraintMoveGroup")
+                                    {
+                                        value = "-1";
+                                    }
+                                    else if (objs.MBossList[objectDropDown.Text][i] == "string dirType")
+                                    {
+                                        value = "Normal";
+                                    }
+                                    else if (objs.MBossList[objectDropDown.Text][i] == "string enemyCategory")
+                                    {
+                                        value = "MBoss";
+                                    }
+                                    else if (objs.MBossList[objectDropDown.Text][i] == "string kind")
+                                    {
+                                        value = "Bonkers";
+                                    }
+                                    else if (objs.MBossList[objectDropDown.Text][i] == "string level")
+                                    {
+                                        value = "Lvl1";
+                                    }
+                                    else if (objs.MBossList[objectDropDown.Text][i] == "string mapDBKind")
+                                    {
+                                        value = "Bonkers";
+                                    }
+                                    else if (objs.MBossList[objectDropDown.Text][i] == "string modelKind")
+                                    {
+                                        value = "Normal";
+                                    }
+                                    else if (objs.MBossList[objectDropDown.Text][i] == "string size")
+                                    {
+                                        value = "Normal";
+                                    }
+                                    else if (objs.MBossList[objectDropDown.Text][i] == "string variation")
+                                    {
+                                        value = "Normal";
+                                    }
+                                    break;
+                                }
+                        }
+                        obj.Add(objs.MBossList[objectDropDown.Text][i], value);
                     }
                 }
             }

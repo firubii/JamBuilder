@@ -93,6 +93,7 @@
             this.valueSelect.Size = new System.Drawing.Size(201, 21);
             this.valueSelect.Sorted = true;
             this.valueSelect.TabIndex = 6;
+            this.valueSelect.SelectedIndexChanged += new System.EventHandler(this.valueSelect_SelectedIndexChanged);
             // 
             // YAMLEditor
             // 

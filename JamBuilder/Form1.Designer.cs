@@ -241,6 +241,7 @@
             this.addGuestItem.TabIndex = 5;
             this.addGuestItem.Text = "+";
             this.addGuestItem.UseVisualStyleBackColor = true;
+            this.addGuestItem.Click += new System.EventHandler(this.addGuestItem_Click);
             // 
             // guestItemList
             // 
@@ -294,6 +295,7 @@
             this.addItem.TabIndex = 5;
             this.addItem.Text = "+";
             this.addItem.UseVisualStyleBackColor = true;
+            this.addItem.Click += new System.EventHandler(this.addItem_Click);
             // 
             // itemList
             // 

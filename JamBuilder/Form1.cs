@@ -197,6 +197,28 @@ namespace JamBuilder
             }
         }
 
+        private void addGuestItem_Click(object sender, EventArgs e)
+        {
+            AddObj addObj = new AddObj();
+            addObj.editorType = 1;
+            if (addObj.ShowDialog() == DialogResult.OK)
+            {
+                level.GuestStarItems.Add(addObj.obj);
+                RefreshObjectLists();
+            }
+        }
+
+        private void addItem_Click(object sender, EventArgs e)
+        {
+            AddObj addObj = new AddObj();
+            addObj.editorType = 2;
+            if (addObj.ShowDialog() == DialogResult.OK)
+            {
+                level.Items.Add(addObj.obj);
+                RefreshObjectLists();
+            }
+        }
+
         private void addBoss_Click(object sender, EventArgs e)
         {
             AddObj addObj = new AddObj();

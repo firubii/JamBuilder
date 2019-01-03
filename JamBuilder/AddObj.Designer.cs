@@ -58,7 +58,9 @@
             this.ClientSize = new System.Drawing.Size(280, 115);
             this.Controls.Add(this.save);
             this.Controls.Add(this.objectDropDown);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AddObj";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Object";
             this.Load += new System.EventHandler(this.AddObj_Load);
             this.ResumeLayout(false);

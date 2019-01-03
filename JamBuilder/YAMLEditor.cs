@@ -16,6 +16,8 @@ namespace JamBuilder
         public Dictionary<string, string> obj;
         public int editorType;
 
+        Objects objs = new Objects();
+
         List<string> objectKind = new List<string>()
         {
             "AbilitySeat",            "AIAttackPoint",            "AIAttackPointForCook",            "AICantGetItemZone",            "AIForbidAttackZone",            "AIPursuitCloseZone",            "AIReaction",            "AIReactionPathNode",            "AirFlow",            "AISearchIgnoreZone",            "AreaBGMChange",            "AreaBGMFadeOut",            "AreaBlendCamera",            "AreaDollyCamera",            "AreaFlow",            "AreaLock",            "AreaLockThrough",            "AreaRotationCamera",            "ArenaRestStation",            "ArenaStepEnd",            "ArrowBoard",            "BGAltarCtrl",            "BgShaderParamChanger",            "BigBomb",            "BigBombRope",            "BigMeteor",            "Block",            "BlockAIReactionZone",            "BlockBreakWatcher",            "BlockRegenerateCtrl",            "BreakableLandCtrl",            "CameraHeightLimitUnsetter",            "CameraOffsetSetter",            "CannonBlow",            "CannonBlowTarget",            "ChainConnector",            "ChainStarter",            "CorkPlug",            "CreditItemCtrl",            "CreditManager",            "CutChain",            "CutChainBurning",            "CutChainDouble",            "CutChainStep",            "CutChainStepDouble",            "CutRope",            "CutRopeStepHard",            "DarkHeart",            "DimensionHole",            "Door",            "DoorAbility",            "DoorCommon",            "DoorGoal",            "DoorMulti",            "DreamRodGenLocator",            "EndingDemo",            "EnemyGenerateBox",            "EnemyGenerator",            "EscapeEvent",            "EscapeEventEnemyGenerator",            "ExecutivesEndDemo",            "FallenLeaves",            "FieldEffect",            "FireBox",            "ForbidRegenerateEnemy",            "FriendActionDead",            "FriendActionFitWall",            "FriendActionGoal",            "FriendActionMove",            "FriendActionPedestal",            "FriendBridgeControler",            "FriendBridgePole",            "FriendBridgeTargetPoint",            "FriendCopyFirstDemo",            "FriendRodDemoLocator",            "FruitTree",            "Fuse",            "FuseCannonMini",            "FuseCommon",            "FuseDynamite",            "FuseGenerator",            "FusePathNode",            "FuseWater",            "GiantRollingBlade",            "GoldKirbyStatue",            "GrassyPlace",            "GuideBoard",            "GuideBoardAbilityIcon",            "GuideBoardFriendAction",            "HangSwitch",            "HelperGoEnemyListHelperExclusive",            "HelperGoItemExcluder",            "HelperGoItemHelperExclusive",            "HelperGoPutItemOnNeedlessDoor",            "ItemAIReactionZone",            "ItemBox",            "ItemRegenerateCtrl",            "KibidangoDemo",            "KingdededeGimmick",            "KrackoWater",            "LastBattleField",            "LastBossVine",            "LastCloseContest",            "LockShutter",            "MassWaddledee",            "MassWaddledeeFromFar",            "MoveLandController",            "MoveLandPathNode",            "MovingSawBody",            "MovingSawRail",            "MovingSawRailNode",            "MuseumFirstDemo",            "OGenMarginExpander",            "PonKonGimmick",            "PopFlower",            "ResetAbilitySeat",            "RippleField",            "RockForMultiCannon",            "RoomGuarder",            "RoomGuarderEnemyList",            "RoomGuarderPoint",            "RopeBomb",            "RopeBombRope",            "SecretPath",            "Shutter",            "Slate",            "Stake",            "StakeBattery",            "StakeIce",            "StakeTwinklestar",            "StandLight",            "StartPortal",            "Switch",            "SwitchBig",            "SwitchWindmill",            "Template",            "TemplateUseState",            "TwinkleStarBGMChanger",            "TwinkleStarEndDemo",            "TwinkleStarEscapeEvent",            "WaterFlow",            "WhispywoodsAppleOriginal",            "WhiteBoard",            "WhiteBoardPointStarSet",            "Wire",            "WorldCameraLock",            "ZoneSwitch"
@@ -78,22 +80,6 @@ namespace JamBuilder
             { "Food", new string[] { "DinnerBread", "DinnerMeat", "DinnerOmelet", "DinnerOnigiri", "DinnerSandwich", "DinnerSushi", "DrinkMelonSoda", "DrinkMilk", "DrinkBabyBottle", "DrinkCoffee", "FruitBanana", "FruitCherry", "FruitWatermelon", "FruitOrange", "FruitMelon", "JunkHotdog", "JunkHumburger", "JunkTakoyaki", "JunkRoastChicken", "LightFriedEgg", "SweetsDoughnut", "SweetsPudding", "SweetsShortCake", "SweetsSoftCream", "SweetsIceCandy", "SweetsMacaron", "SweetsDaroachCake", "SweetsSusieAppleSherbet", "VegetableCarrot", "VegetablePumpkin", "VegetableTomato", "VegetableCorn", "VegetableGreenPepper" } }
         };
         string[] itemVariation = { "Fixed", "Fall", "FallNoCulling", "Bound", "AssistThrow", "ItemBoxAppear", "ItemBoxAppear2Left", "ItemBoxAppear2Right", "ItemBoxAppear3Left", "ItemBoxAppear3Center", "ItemBoxAppear3Right", "ItemBoxAppearHigh", "ItemBoxAppear2LeftHigh", "ItemBoxAppear2RightHigh", "ItemBoxAppear3LeftHigh", "ItemBoxAppear3CenterHigh", "ItemBoxAppear3RightHigh", "ItemBoxAppearFixed", "Resume", "ResumeAssistThrow", "EnemyDead", "FixedScrewRotationLand", "HeavySnowmanAppear", "GimmickDead", "PushIronPoleAppear", "RiseNoCulling", "RisePopWhenFullNoCulling", "RiseLowNoCulling", "Discard", "DiscardTwinkleStar", "FixedTwinkleStar", "FallSlowNoCulling", "FallVerySlowNoCulling", "FallLite", "FixedAbilitySeat", "InertiaWaft", "WhiteBoardBoundLeft", "WhiteBoardBoundCenter", "WhiteBoardBoundRight", "FromCookPot", "FromCookPotNoInstancing", "Credit" };
-        List<string> bossKind = new List<string>()
-        {
-            "Whispywoods",
-            "Kracko",
-            "MetaKnight",
-            "Kingdedede",
-            "ExecutiveThunder",
-            "Hiness",
-            "PonKon",
-            "ExecutiveIce",
-            "ExecutiveFire",
-            "BKnight",
-            "LastBoss",
-            "Giantironmom",
-            "Marx"
-        };
         Dictionary<string, string[]> bossVariation = new Dictionary<string, string[]>()
         {
             { "Whispywoods", new string[] { "Normal", "NormalZenza", "Ex", "ExTwinkleStar", "Ultimate" } },
@@ -108,64 +94,6 @@ namespace JamBuilder
             { "Hiness", new string[] { "Normal", "PrayFar", "Ultimate", "UltimateDead" } },
             { "BKnight", new string[] { "Normal", "GalaDemo", "Ultimate", "UltimateGalaDemo" } },
             { "LastBoss", new string[] { "Normal", "Ex", "Ultimate" } }
-        };
-        List<string> enemyKind = new List<string>()
-        {
-            "Poppybrosjr",
-            "Waddledee",
-            "Brontoburt",
-            "Bouncy",
-            "Burningleo",
-            "Puppetdee",
-            "FloatSlime",
-            "Waddledoo",
-            "WaterEnemy",
-            "Kabu",
-            "ShieldEnemy",
-            "Dekabu",
-            "Broomhatter",
-            "Chip",
-            "Nruff",
-            "ChefKawasaki",
-            "Wonkey",
-            "Chilly",
-            "Sirkibble",
-            "Scarfy",
-            "Shotzo",
-            "Cappy",
-            "Gordo",
-            "Coner",
-            "Blipper",
-            "Glunk",
-            "Mamatee",
-            "Squishy",
-            "Gim",
-            "Nesp",
-            "Rocky",
-            "Bugzzy",
-            "StickEnemy",
-            "Beetlie",
-            "BioSpark",
-            "Noddy",
-            "Propeller",
-            "Bonkers",
-            "Como",
-            "Wester",
-            "Bomber",
-            "BigBouncy",
-            "Misterfrosty",
-            "Bladeknight",
-            "Gabon",
-            "Jaharbeliever",
-            "Knucklejoe",
-            "Grizzo",
-            "Birdon",
-            "Vivitia",
-            "Conce",
-            "TwoFace",
-            "MaskEnemy",
-            "FestivalEnemy",
-            "Walky"
         };
         Dictionary<string, string[]> enemyVariation = new Dictionary<string, string[]>()
         {
@@ -263,23 +191,30 @@ namespace JamBuilder
                     {
                         case 0:
                             {
-                                valueSelect.Items.AddRange(objectKind.ToArray());
+                                valueSelect.Items.AddRange(objs.ObjectList.Keys.ToArray());
                                 break;
                             }
                         case 1:
                         case 2:
                             {
-                                valueSelect.Items.AddRange(itemKind.ToArray());
+                                valueSelect.Items.AddRange(objs.ItemList.Keys.ToArray());
                                 break;
                             }
                         case 3:
                             {
-                                valueSelect.Items.AddRange(bossKind.ToArray());
+                                valueSelect.Items.AddRange(objs.BossList.Keys.ToArray());
                                 break;
                             }
                         case 4:
                             {
-                                valueSelect.Items.AddRange(enemyKind.ToArray());
+                                if (obj["string enemyCategory"] == "Enemy")
+                                {
+                                    valueSelect.Items.AddRange(objs.EnemyList.Keys.ToArray());
+                                }
+                                else if (obj["string enemyCategory"] == "MBoss")
+                                {
+                                    valueSelect.Items.AddRange(objs.MBossList.Keys.ToArray());
+                                }
                                 break;
                             }
                     }
@@ -349,6 +284,15 @@ namespace JamBuilder
                             }
                     }
                 }
+                else if (yamlDataList.SelectedItem.ToString() == "string enemyCategory")
+                {
+                    if (editorType == 4)
+                    {
+                        valueSelect.Enabled = true;
+                    }
+                    valueSelect.Items.AddRange(new string[] { "Enemy", "MBoss", "Boss" });
+                    valueSelect.Text = value.Text;
+                }
                 else
                 {
                     valueSelect.Enabled = false;
@@ -373,6 +317,11 @@ namespace JamBuilder
                 obj.Remove(yamlDataList.SelectedItem.ToString());
                 RefreshList();
             }
+        }
+
+        private void valueSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            value.Text = valueSelect.Text;
         }
     }
 }

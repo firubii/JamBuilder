@@ -30,20 +30,22 @@
         {
             this.objectDropDown = new System.Windows.Forms.ComboBox();
             this.save = new System.Windows.Forms.Button();
+            this.enemyDropDown = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // objectDropDown
             // 
             this.objectDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.objectDropDown.FormattingEnabled = true;
-            this.objectDropDown.Location = new System.Drawing.Point(12, 40);
+            this.objectDropDown.Location = new System.Drawing.Point(12, 12);
             this.objectDropDown.Name = "objectDropDown";
             this.objectDropDown.Size = new System.Drawing.Size(256, 21);
             this.objectDropDown.TabIndex = 0;
+            this.objectDropDown.SelectedIndexChanged += new System.EventHandler(this.objectDropDown_SelectedIndexChanged);
             // 
             // save
             // 
-            this.save.Location = new System.Drawing.Point(97, 67);
+            this.save.Location = new System.Drawing.Point(97, 68);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(75, 23);
             this.save.TabIndex = 1;
@@ -51,11 +53,22 @@
             this.save.UseVisualStyleBackColor = true;
             this.save.Click += new System.EventHandler(this.save_Click);
             // 
+            // enemyDropDown
+            // 
+            this.enemyDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.enemyDropDown.FormattingEnabled = true;
+            this.enemyDropDown.Location = new System.Drawing.Point(12, 39);
+            this.enemyDropDown.Name = "enemyDropDown";
+            this.enemyDropDown.Size = new System.Drawing.Size(256, 21);
+            this.enemyDropDown.TabIndex = 2;
+            this.enemyDropDown.Visible = false;
+            // 
             // AddObj
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(280, 115);
+            this.ClientSize = new System.Drawing.Size(280, 99);
+            this.Controls.Add(this.enemyDropDown);
             this.Controls.Add(this.save);
             this.Controls.Add(this.objectDropDown);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -71,5 +84,6 @@
 
         private System.Windows.Forms.ComboBox objectDropDown;
         private System.Windows.Forms.Button save;
+        private System.Windows.Forms.ComboBox enemyDropDown;
     }
 }

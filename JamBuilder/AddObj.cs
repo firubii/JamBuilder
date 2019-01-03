@@ -25,22 +25,31 @@ namespace JamBuilder
 
         private void AddObj_Load(object sender, EventArgs e)
         {
+            List<string> list = new List<string>();
             if (editorType == 0)
             {
-                objectDropDown.Items.AddRange(objs.ObjectList.Keys.ToArray());
+                list = objs.ObjectList.Keys.ToList();
+                list.Sort();
+                objectDropDown.Items.AddRange(list.ToArray());
             }
             else if (editorType == 1 || editorType == 2)
             {
-                objectDropDown.Items.AddRange(objs.ItemList.Keys.ToArray());
+                list = objs.ItemList.Keys.ToList();
+                list.Sort();
+                objectDropDown.Items.AddRange(list.ToArray());
             }
             else if (editorType == 3)
             {
-                objectDropDown.Items.AddRange(objs.BossList.Keys.ToArray());
+                list = objs.BossList.Keys.ToList();
+                list.Sort();
+                objectDropDown.Items.AddRange(list.ToArray());
             }
             else if (editorType == 4)
             {
                 objectDropDown.Items.AddRange(new string[] { "Enemy", "MBoss" });
+                enemyDropDown.Visible = true;
             }
+            objectDropDown.SelectedIndex = 0;
         }
 
         private void save_Click(object sender, EventArgs e)
@@ -205,17 +214,17 @@ namespace JamBuilder
             {
                 if (objectDropDown.Text == "Enemy")
                 {
-                    for (int i = 0; i < objs.EnemyList[objectDropDown.Text].Length; i++)
+                    for (int i = 0; i < objs.EnemyList[enemyDropDown.Text].Length; i++)
                     {
                         string value = "";
-                        string valType = objs.EnemyList[objectDropDown.Text][i].Split(' ')[0];
+                        string valType = objs.EnemyList[enemyDropDown.Text][i].Split(' ')[0];
                         switch (valType)
                         {
                             case "int":
                             case "float":
                                 {
                                     value = "0";
-                                    if (objs.EnemyList[objectDropDown.Text][i] == "int x" || objs.EnemyList[objectDropDown.Text][i] == "int y")
+                                    if (objs.EnemyList[enemyDropDown.Text][i] == "int x" || objs.EnemyList[enemyDropDown.Text][i] == "int y")
                                     {
                                         value = "0 | 0";
                                     }
@@ -228,27 +237,31 @@ namespace JamBuilder
                                 }
                             case "string":
                                 {
-                                    if (objs.EnemyList[objectDropDown.Text][i] == "string constraintMoveGroup")
+                                    if (objs.EnemyList[enemyDropDown.Text][i] == "string constraintMoveGroup")
                                     {
                                         value = "-1";
                                     }
-                                    else if (objs.EnemyList[objectDropDown.Text][i] == "string dirType")
+                                    else if (objs.EnemyList[enemyDropDown.Text][i] == "string dirType")
                                     {
                                         value = "Normal";
                                     }
-                                    else if (objs.EnemyList[objectDropDown.Text][i] == "string enemyCategory")
+                                    else if (objs.EnemyList[enemyDropDown.Text][i] == "string enemyCategory")
                                     {
                                         value = "Enemy";
                                     }
-                                    else if (objs.EnemyList[objectDropDown.Text][i] == "string level")
+                                    else if (objs.EnemyList[enemyDropDown.Text][i] == "string kind")
+                                    {
+                                        value = enemyDropDown.Text;
+                                    }
+                                    else if (objs.EnemyList[enemyDropDown.Text][i] == "string level")
                                     {
                                         value = "Lvl1";
                                     }
-                                    else if (objs.EnemyList[objectDropDown.Text][i] == "string size")
+                                    else if (objs.EnemyList[enemyDropDown.Text][i] == "string size")
                                     {
                                         value = "Normal";
                                     }
-                                    else if (objs.EnemyList[objectDropDown.Text][i] == "string variation")
+                                    else if (objs.EnemyList[enemyDropDown.Text][i] == "string variation")
                                     {
                                         value = "Normal";
                                     }
@@ -260,17 +273,17 @@ namespace JamBuilder
                 }
                 else if (objectDropDown.Text == "MBoss")
                 {
-                    for (int i = 0; i < objs.MBossList[objectDropDown.Text].Length; i++)
+                    for (int i = 0; i < objs.MBossList[enemyDropDown.Text].Length; i++)
                     {
                         string value = "";
-                        string valType = objs.MBossList[objectDropDown.Text][i].Split(' ')[0];
+                        string valType = objs.MBossList[enemyDropDown.Text][i].Split(' ')[0];
                         switch (valType)
                         {
                             case "int":
                             case "float":
                                 {
                                     value = "0";
-                                    if (objs.MBossList[objectDropDown.Text][i] == "int x" || objs.MBossList[objectDropDown.Text][i] == "int y")
+                                    if (objs.MBossList[enemyDropDown.Text][i] == "int x" || objs.MBossList[enemyDropDown.Text][i] == "int y")
                                     {
                                         value = "0 | 0";
                                     }
@@ -283,50 +296,70 @@ namespace JamBuilder
                                 }
                             case "string":
                                 {
-                                    if (objs.MBossList[objectDropDown.Text][i] == "string constraintMoveGroup")
+                                    if (objs.MBossList[enemyDropDown.Text][i] == "string constraintMoveGroup")
                                     {
                                         value = "-1";
                                     }
-                                    else if (objs.MBossList[objectDropDown.Text][i] == "string dirType")
+                                    else if (objs.MBossList[enemyDropDown.Text][i] == "string dirType")
                                     {
                                         value = "Normal";
                                     }
-                                    else if (objs.MBossList[objectDropDown.Text][i] == "string enemyCategory")
+                                    else if (objs.MBossList[enemyDropDown.Text][i] == "string enemyCategory")
                                     {
                                         value = "MBoss";
                                     }
-                                    else if (objs.MBossList[objectDropDown.Text][i] == "string kind")
+                                    else if (objs.MBossList[enemyDropDown.Text][i] == "string kind")
                                     {
-                                        value = "Bonkers";
+                                        value = enemyDropDown.Text;
                                     }
-                                    else if (objs.MBossList[objectDropDown.Text][i] == "string level")
+                                    else if (objs.MBossList[enemyDropDown.Text][i] == "string level")
                                     {
                                         value = "Lvl1";
                                     }
-                                    else if (objs.MBossList[objectDropDown.Text][i] == "string mapDBKind")
+                                    else if (objs.MBossList[enemyDropDown.Text][i] == "string mapDBKind")
                                     {
-                                        value = "Bonkers";
+                                        value = enemyDropDown.Text;
                                     }
-                                    else if (objs.MBossList[objectDropDown.Text][i] == "string modelKind")
-                                    {
-                                        value = "Normal";
-                                    }
-                                    else if (objs.MBossList[objectDropDown.Text][i] == "string size")
+                                    else if (objs.MBossList[enemyDropDown.Text][i] == "string modelKind")
                                     {
                                         value = "Normal";
                                     }
-                                    else if (objs.MBossList[objectDropDown.Text][i] == "string variation")
+                                    else if (objs.MBossList[enemyDropDown.Text][i] == "string size")
+                                    {
+                                        value = "Normal";
+                                    }
+                                    else if (objs.MBossList[enemyDropDown.Text][i] == "string variation")
                                     {
                                         value = "Normal";
                                     }
                                     break;
                                 }
                         }
-                        obj.Add(objs.MBossList[objectDropDown.Text][i], value);
+                        obj.Add(objs.MBossList[enemyDropDown.Text][i], value);
                     }
                 }
             }
             DialogResult = DialogResult.OK;
+        }
+
+        private void objectDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (editorType == 4)
+            {
+                enemyDropDown.Items.Clear();
+                if (objectDropDown.Text == "Enemy")
+                {
+                    List<string> list = objs.EnemyList.Keys.ToList();
+                    list.Sort();
+                    enemyDropDown.Items.AddRange(list.ToArray());
+                }
+                else if (objectDropDown.Text == "MBoss")
+                {
+                    List<string> list = objs.MBossList.Keys.ToList();
+                    list.Sort();
+                    enemyDropDown.Items.AddRange(list.ToArray());
+                }
+            }
         }
     }
 }

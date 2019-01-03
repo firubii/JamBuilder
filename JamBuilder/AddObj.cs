@@ -268,7 +268,7 @@ namespace JamBuilder
                                     break;
                                 }
                         }
-                        obj.Add(objs.EnemyList[objectDropDown.Text][i], value);
+                        obj.Add(objs.EnemyList[enemyDropDown.Text][i], value);
                     }
                 }
                 else if (objectDropDown.Text == "MBoss")

@@ -186,12 +186,72 @@ namespace JamBuilder
             glControl.SwapBuffers();
         }
 
+        public int GetUniqueWUID()
+        {
+            int wuid = 0;
+            Random random = new Random();
+            wuid = random.Next();
+
+            for (int i = 0; i < level.Objects.Count; i++)
+            {
+                if (int.Parse(level.Objects[i]["int wuid"]) == wuid)
+                {
+                    random = new Random();
+                    wuid = random.Next();
+                    i = -1;
+                }
+            }
+
+            for (int i = 0; i < level.GuestStarItems.Count; i++)
+            {
+                if (int.Parse(level.GuestStarItems[i]["int wuid"]) == wuid)
+                {
+                    random = new Random();
+                    wuid = random.Next();
+                    i = -1;
+                }
+            }
+
+            for (int i = 0; i < level.Items.Count; i++)
+            {
+                if (int.Parse(level.Items[i]["int wuid"]) == wuid)
+                {
+                    random = new Random();
+                    wuid = random.Next();
+                    i = -1;
+                }
+            }
+
+            for (int i = 0; i < level.Bosses.Count; i++)
+            {
+                if (int.Parse(level.Bosses[i]["int wuid"]) == wuid)
+                {
+                    random = new Random();
+                    wuid = random.Next();
+                    i = -1;
+                }
+            }
+
+            for (int i = 0; i < level.Enemies.Count; i++)
+            {
+                if (int.Parse(level.Enemies[i]["int wuid"]) == wuid)
+                {
+                    random = new Random();
+                    wuid = random.Next();
+                    i = -1;
+                }
+            }
+
+            return wuid;
+        }
+
         private void addObj_Click(object sender, EventArgs e)
         {
             AddObj addObj = new AddObj();
             addObj.editorType = 0;
             if (addObj.ShowDialog() == DialogResult.OK)
             {
+                addObj.obj["int wuid"] = GetUniqueWUID().ToString();
                 level.Objects.Add(addObj.obj);
                 RefreshObjectLists();
             }
@@ -203,6 +263,7 @@ namespace JamBuilder
             addObj.editorType = 1;
             if (addObj.ShowDialog() == DialogResult.OK)
             {
+                addObj.obj["int wuid"] = GetUniqueWUID().ToString();
                 level.GuestStarItems.Add(addObj.obj);
                 RefreshObjectLists();
             }
@@ -214,6 +275,7 @@ namespace JamBuilder
             addObj.editorType = 2;
             if (addObj.ShowDialog() == DialogResult.OK)
             {
+                addObj.obj["int wuid"] = GetUniqueWUID().ToString();
                 level.Items.Add(addObj.obj);
                 RefreshObjectLists();
             }
@@ -225,6 +287,7 @@ namespace JamBuilder
             addObj.editorType = 3;
             if (addObj.ShowDialog() == DialogResult.OK)
             {
+                addObj.obj["int wuid"] = GetUniqueWUID().ToString();
                 level.Bosses.Add(addObj.obj);
                 RefreshObjectLists();
             }
@@ -236,6 +299,7 @@ namespace JamBuilder
             addObj.editorType = 4;
             if (addObj.ShowDialog() == DialogResult.OK)
             {
+                addObj.obj["int wuid"] = GetUniqueWUID().ToString();
                 level.Enemies.Add(addObj.obj);
                 RefreshObjectLists();
             }

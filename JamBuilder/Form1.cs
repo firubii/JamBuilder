@@ -5,11 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using JamBuilder.Rendering;
 using KSALVL;
 
 namespace JamBuilder
@@ -19,9 +21,26 @@ namespace JamBuilder
         public Level level;
         public string filePath;
 
+        List<int> texIds = new List<int>();
+
+        Renderer renderer;
+        Texturing texturing;
+        Camera camera;
+
+        private System.Timers.Timer t;
+
+        bool moveCam = false;
+        int mouseX = 0;
+        int mouseY = 0;
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
         }
 
         public void RefreshObjectLists()
@@ -87,6 +106,7 @@ namespace JamBuilder
                 this.Text = $"JamBuilder - Opening {filePath}...";
                 level = new Level(open.FileName);
 
+                camera.pos = Vector2.Zero;
                 RefreshObjectLists();
 
                 this.Text = $"JamBuilder - {filePath}";
@@ -101,7 +121,7 @@ namespace JamBuilder
 
         private void editObj_Click(object sender, EventArgs e)
         {
-            if (objList.SelectedItem != null)
+            if (objList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
                 editor.obj = level.Objects[objList.SelectedIndex];
@@ -116,7 +136,7 @@ namespace JamBuilder
 
         private void editGuestItem_Click(object sender, EventArgs e)
         {
-            if (guestItemList.SelectedItem != null)
+            if (guestItemList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
                 editor.obj = level.Items[guestItemList.SelectedIndex];
@@ -131,7 +151,7 @@ namespace JamBuilder
 
         private void editItem_Click(object sender, EventArgs e)
         {
-            if (guestItemList.SelectedItem != null)
+            if (guestItemList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
                 editor.obj = level.GuestStarItems[guestItemList.SelectedIndex];
@@ -146,7 +166,7 @@ namespace JamBuilder
 
         private void editBoss_Click(object sender, EventArgs e)
         {
-            if (bossList.SelectedItem != null)
+            if (bossList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
                 editor.obj = level.Bosses[bossList.SelectedIndex];
@@ -161,7 +181,7 @@ namespace JamBuilder
 
         private void editEnemy_Click(object sender, EventArgs e)
         {
-            if (enemyList.SelectedItem != null)
+            if (enemyList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
                 editor.obj = level.Enemies[enemyList.SelectedIndex];
@@ -177,13 +197,49 @@ namespace JamBuilder
         private void glControl_Load(object sender, EventArgs e)
         {
             glControl.MakeCurrent();
+            GL.Enable(EnableCap.Texture2D);
             GL.ClearColor(Color.FromArgb(200, 200, 200));
+            renderer = new Renderer();
+            texturing = new Texturing();
+            camera = new Camera(new Vector2(0, 0), 1.0);
+            for (int i = 0; i < 52; i++)
+            {
+                texIds.Add(texturing.LoadTexture("Resources/tiles/" + i + ".png"));
+            }
+            t = new System.Timers.Timer(1000.0 / 60.0);
+            t.Elapsed += t_Elapsed;
+            t.Start();
+        }
+
+        private void t_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            glControl.Invalidate();
+            t.Start();
         }
 
         private void glControl_Paint(object sender, PaintEventArgs e)
         {
-            GL.Clear(ClearBufferMask.ColorBufferBit);
-            
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            GL.ClearColor(Color.FromArgb(200, 200, 200));
+
+            renderer.Begin(glControl.Width, glControl.Height);
+            camera.Transform();
+
+            if (level != null)
+            {
+                int y = 0;
+                int x = 0;
+                for (int i = 0; i < level.TileCollision.Count; i++)
+                {
+                    if (x >= level.Width)
+                    {
+                        y++;
+                        x = 0;
+                    }
+                    renderer.Draw(texIds[level.TileCollision[i].Shape], new Vector2(x*15f, -y*15f), new Vector2(1f, 1f));
+                    x++;
+                }
+            }
 
             glControl.SwapBuffers();
         }
@@ -249,79 +305,100 @@ namespace JamBuilder
 
         private void addObj_Click(object sender, EventArgs e)
         {
-            AddObj addObj = new AddObj();
-            addObj.editorType = 0;
-            if (addObj.ShowDialog() == DialogResult.OK)
+            if (level != null)
             {
-                addObj.obj["int wuid"] = GetUniqueWUID().ToString();
-                level.Objects.Add(addObj.obj);
-                RefreshObjectLists();
+                AddObj addObj = new AddObj();
+                addObj.editorType = 0;
+                if (addObj.ShowDialog() == DialogResult.OK)
+                {
+                    addObj.obj["int wuid"] = GetUniqueWUID().ToString();
+                    level.Objects.Add(addObj.obj);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void addGuestItem_Click(object sender, EventArgs e)
         {
-            AddObj addObj = new AddObj();
-            addObj.editorType = 1;
-            if (addObj.ShowDialog() == DialogResult.OK)
+            if (level != null)
             {
-                addObj.obj["int wuid"] = GetUniqueWUID().ToString();
-                level.GuestStarItems.Add(addObj.obj);
-                RefreshObjectLists();
+                AddObj addObj = new AddObj();
+                addObj.editorType = 1;
+                if (addObj.ShowDialog() == DialogResult.OK)
+                {
+                    addObj.obj["int wuid"] = GetUniqueWUID().ToString();
+                    level.GuestStarItems.Add(addObj.obj);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void addItem_Click(object sender, EventArgs e)
         {
-            AddObj addObj = new AddObj();
-            addObj.editorType = 2;
-            if (addObj.ShowDialog() == DialogResult.OK)
+            if (level != null)
             {
-                addObj.obj["int wuid"] = GetUniqueWUID().ToString();
-                level.Items.Add(addObj.obj);
-                RefreshObjectLists();
+                AddObj addObj = new AddObj();
+                addObj.editorType = 2;
+                if (addObj.ShowDialog() == DialogResult.OK)
+                {
+                    addObj.obj["int wuid"] = GetUniqueWUID().ToString();
+                    level.Items.Add(addObj.obj);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void addBoss_Click(object sender, EventArgs e)
         {
-            AddObj addObj = new AddObj();
-            addObj.editorType = 3;
-            if (addObj.ShowDialog() == DialogResult.OK)
+            if (level != null)
             {
-                addObj.obj["int wuid"] = GetUniqueWUID().ToString();
-                level.Bosses.Add(addObj.obj);
-                RefreshObjectLists();
+                AddObj addObj = new AddObj();
+                addObj.editorType = 3;
+                if (addObj.ShowDialog() == DialogResult.OK)
+                {
+                    addObj.obj["int wuid"] = GetUniqueWUID().ToString();
+                    level.Bosses.Add(addObj.obj);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void addEnemy_Click(object sender, EventArgs e)
         {
-            AddObj addObj = new AddObj();
-            addObj.editorType = 4;
-            if (addObj.ShowDialog() == DialogResult.OK)
+            if (level != null)
             {
-                addObj.obj["int wuid"] = GetUniqueWUID().ToString();
-                level.Enemies.Add(addObj.obj);
-                RefreshObjectLists();
+                AddObj addObj = new AddObj();
+                addObj.editorType = 4;
+                if (addObj.ShowDialog() == DialogResult.OK)
+                {
+                    addObj.obj["int wuid"] = GetUniqueWUID().ToString();
+                    level.Enemies.Add(addObj.obj);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Save();
+            if (level != null)
+            {
+                Save();
+            }
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog save = new SaveFileDialog();
-            save.Filter = "Kirby Star Allies Level Files|*.dat";
-            save.DefaultExt = ".dat";
-            save.Title = "Save Level File";
-            if (save.ShowDialog() == DialogResult.OK)
+            if (level != null)
             {
-                filePath = save.FileName;
-                Save();
+                SaveFileDialog save = new SaveFileDialog();
+                save.Filter = "Kirby Star Allies Level Files|*.dat";
+                save.DefaultExt = ".dat";
+                save.Title = "Save Level File";
+                if (save.ShowDialog() == DialogResult.OK)
+                {
+                    filePath = save.FileName;
+                    Save();
+                }
             }
         }
 
@@ -338,46 +415,61 @@ namespace JamBuilder
 
         private void delObj_Click(object sender, EventArgs e)
         {
-            if (objList.SelectedItem != null)
+            if (level != null)
             {
-                level.Objects.RemoveAt(objList.SelectedIndex);
-                RefreshObjectLists();
+                if (objList.SelectedItem != null)
+                {
+                    level.Objects.RemoveAt(objList.SelectedIndex);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void delGuestItem_Click(object sender, EventArgs e)
         {
-            if (guestItemList.SelectedItem != null)
+            if (level != null)
             {
-                level.GuestStarItems.RemoveAt(guestItemList.SelectedIndex);
-                RefreshObjectLists();
+                if (guestItemList.SelectedItem != null)
+                {
+                    level.GuestStarItems.RemoveAt(guestItemList.SelectedIndex);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void delItem_Click(object sender, EventArgs e)
         {
-            if (itemList.SelectedItem != null)
+            if (level != null)
             {
-                level.Items.RemoveAt(itemList.SelectedIndex);
-                RefreshObjectLists();
+                if (itemList.SelectedItem != null)
+                {
+                    level.Items.RemoveAt(itemList.SelectedIndex);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void delBoss_Click(object sender, EventArgs e)
         {
-            if (bossList.SelectedItem != null)
+            if (level != null)
             {
-                level.Bosses.RemoveAt(bossList.SelectedIndex);
-                RefreshObjectLists();
+                if (bossList.SelectedItem != null)
+                {
+                    level.Bosses.RemoveAt(bossList.SelectedIndex);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void delEnemy_Click(object sender, EventArgs e)
         {
-            if (enemyList.SelectedItem != null)
+            if (level != null)
             {
-                level.Enemies.RemoveAt(enemyList.SelectedIndex);
-                RefreshObjectLists();
+                if (enemyList.SelectedItem != null)
+                {
+                    level.Enemies.RemoveAt(enemyList.SelectedIndex);
+                    RefreshObjectLists();
+                }
             }
         }
 
@@ -404,41 +496,114 @@ namespace JamBuilder
 
         private void objList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (objList.SelectedItem != null)
+            if (level != null)
             {
-                editObj_Click(this, new EventArgs());
+                if (objList.SelectedItem != null)
+                {
+                    editObj_Click(this, new EventArgs());
+                }
             }
         }
 
         private void guestItemList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (guestItemList.SelectedItem != null)
+            if (level != null)
             {
-                editGuestItem_Click(this, new EventArgs());
+                if (guestItemList.SelectedItem != null)
+                {
+                    editGuestItem_Click(this, new EventArgs());
+                }
             }
         }
 
         private void itemList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (itemList.SelectedItem != null)
+            if (level != null)
             {
-                editItem_Click(this, new EventArgs());
+                if (itemList.SelectedItem != null)
+                {
+                    editItem_Click(this, new EventArgs());
+                }
             }
         }
 
         private void bossList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (bossList.SelectedItem != null)
+            if (level != null)
             {
-                editBoss_Click(this, new EventArgs());
+                if (bossList.SelectedItem != null)
+                {
+                    editBoss_Click(this, new EventArgs());
+                }
             }
         }
 
         private void enemyList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (enemyList.SelectedItem != null)
+            if (level != null)
             {
-                editEnemy_Click(this, new EventArgs());
+                if (enemyList.SelectedItem != null)
+                {
+                    editEnemy_Click(this, new EventArgs());
+                }
+            }
+        }
+
+        private void glControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                moveCam = true;
+                mouseX = e.X;
+                mouseY = e.Y;
+            }
+        }
+
+        private void glControl_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (moveCam)
+            {
+                camera.pos.X += mouseX - e.X;
+                camera.pos.Y += mouseY - e.Y;
+                mouseX = e.X;
+                mouseY = e.Y;
+            }
+        }
+
+        private void glControl_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                moveCam = false;
+                mouseX = 0;
+                mouseY = 0;
+            }
+        }
+
+        private void glControl_MouseLeave(object sender, EventArgs e)
+        {
+            moveCam = false;
+            mouseX = 0;
+            mouseY = 0;
+        }
+
+        private void glControl_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                camera.zoom += SystemInformation.MouseWheelScrollLines / 2;
+                if (camera.zoom > 2.0)
+                {
+                    camera.zoom = 2.0;
+                }
+            }
+            else if (e.Delta < 0)
+            {
+                camera.zoom -= SystemInformation.MouseWheelScrollLines / 2;
+                if (camera.zoom < 0.5)
+                {
+                    camera.zoom = 0.5;
+                }
             }
         }
     }

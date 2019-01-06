@@ -730,17 +730,17 @@ namespace JamBuilder
 
         private void objList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            moveObj = 0;
-            int oX = int.Parse(level.Objects[objList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
-            int oY = int.Parse(level.Objects[objList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
-            int offX = int.Parse(level.Objects[objList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
-            int offY = int.Parse(level.Objects[objList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
-            xCoord.Value = oX;
-            xOffset.Value = offX;
-            yCoord.Value = oY;
-            yOffset.Value = offY;
             if (!a)
             {
+                moveObj = 0;
+                int oX = int.Parse(level.Objects[objList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
+                int oY = int.Parse(level.Objects[objList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
+                int offX = int.Parse(level.Objects[objList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
+                int offY = int.Parse(level.Objects[objList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+                xCoord.Value = oX;
+                xOffset.Value = offX;
+                yCoord.Value = oY;
+                yOffset.Value = offY;
                 a = true;
                 guestItemList.ClearSelected();
                 itemList.ClearSelected();
@@ -752,17 +752,17 @@ namespace JamBuilder
 
         private void guestItemList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            moveObj = 1;
-            int oX = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
-            int oY = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
-            int offX = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
-            int offY = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
-            xCoord.Value = oX;
-            xOffset.Value = offX;
-            yCoord.Value = oY;
-            yOffset.Value = offY;
             if (!a)
             {
+                moveObj = 1;
+                int oX = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
+                int oY = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
+                int offX = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
+                int offY = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+                xCoord.Value = oX;
+                xOffset.Value = offX;
+                yCoord.Value = oY;
+                yOffset.Value = offY;
                 a = true;
                 objList.ClearSelected();
                 itemList.ClearSelected();
@@ -774,17 +774,17 @@ namespace JamBuilder
 
         private void itemList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            moveObj = 2;
-            int oX = int.Parse(level.Items[itemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
-            int oY = int.Parse(level.Items[itemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
-            int offX = int.Parse(level.Items[itemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
-            int offY = int.Parse(level.Items[itemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
-            xCoord.Value = oX;
-            xOffset.Value = offX;
-            yCoord.Value = oY;
-            yOffset.Value = offY;
             if (!a)
             {
+                moveObj = 2;
+                int oX = int.Parse(level.Items[itemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
+                int oY = int.Parse(level.Items[itemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
+                int offX = int.Parse(level.Items[itemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
+                int offY = int.Parse(level.Items[itemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+                xCoord.Value = oX;
+                xOffset.Value = offX;
+                yCoord.Value = oY;
+                yOffset.Value = offY;
                 a = true;
                 objList.ClearSelected();
                 guestItemList.ClearSelected();
@@ -796,17 +796,17 @@ namespace JamBuilder
 
         private void bossList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            moveObj = 3;
-            int oX = int.Parse(level.Bosses[bossList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
-            int oY = int.Parse(level.Bosses[bossList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
-            int offX = int.Parse(level.Bosses[bossList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
-            int offY = int.Parse(level.Bosses[bossList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
-            xCoord.Value = oX;
-            xOffset.Value = offX;
-            yCoord.Value = oY;
-            yOffset.Value = offY;
             if (!a)
             {
+                moveObj = 3;
+                int oX = int.Parse(level.Bosses[bossList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
+                int oY = int.Parse(level.Bosses[bossList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
+                int offX = int.Parse(level.Bosses[bossList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
+                int offY = int.Parse(level.Bosses[bossList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+                xCoord.Value = oX;
+                xOffset.Value = offX;
+                yCoord.Value = oY;
+                yOffset.Value = offY;
                 a = true;
                 objList.ClearSelected();
                 guestItemList.ClearSelected();
@@ -818,17 +818,17 @@ namespace JamBuilder
 
         private void enemyList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            moveObj = 4;
-            int oX = int.Parse(level.Enemies[enemyList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
-            int oY = int.Parse(level.Enemies[enemyList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
-            int offX = int.Parse(level.Enemies[enemyList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
-            int offY = int.Parse(level.Enemies[enemyList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
-            xCoord.Value = oX;
-            xOffset.Value = offX;
-            yCoord.Value = oY;
-            yOffset.Value = offY;
             if (!a)
             {
+                moveObj = 4;
+                int oX = int.Parse(level.Enemies[enemyList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
+                int oY = int.Parse(level.Enemies[enemyList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
+                int offX = int.Parse(level.Enemies[enemyList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
+                int offY = int.Parse(level.Enemies[enemyList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+                xCoord.Value = oX;
+                xOffset.Value = offX;
+                yCoord.Value = oY;
+                yOffset.Value = offY;
                 a = true;
                 objList.ClearSelected();
                 guestItemList.ClearSelected();

@@ -400,7 +400,6 @@ namespace JamBuilder
             {
                 MessageBox.Show("Please open a level first!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
         }
 
         private void objList_MouseDoubleClick(object sender, MouseEventArgs e)

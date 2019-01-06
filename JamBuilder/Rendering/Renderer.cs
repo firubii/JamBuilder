@@ -12,9 +12,9 @@ namespace JamBuilder.Rendering
 {
     public class Renderer
     {
-        public void Draw(int tex, Vector2 pos, Vector2 scale)
+        public void Draw(int tex, Vector2 pos, Vector2 scale, int width, int height)
         {
-            Vector2[] verts = new Vector2[4] { new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1), new Vector2(0, 1), };
+            Vector2[] verts = new Vector2[4] { new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1), new Vector2(0, 1) };
 
             GL.BindTexture(TextureTarget.Texture2D, tex);
 
@@ -24,8 +24,8 @@ namespace JamBuilder.Rendering
             {
                 GL.TexCoord2(verts[i]);
 
-                verts[i].X *= 17;
-                verts[i].Y *= 17;
+                verts[i].X *= width;
+                verts[i].Y *= height;
                 verts[i] *= scale;
                 verts[i] += pos;
 

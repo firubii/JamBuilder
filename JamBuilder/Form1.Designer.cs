@@ -62,6 +62,18 @@
             this.addEnemy = new System.Windows.Forms.Button();
             this.enemyList = new System.Windows.Forms.ListBox();
             this.glControl = new OpenTK.GLControl();
+            this.select = new System.Windows.Forms.Button();
+            this.move = new System.Windows.Forms.Button();
+            this.draw = new System.Windows.Forms.Button();
+            this.resetCamera = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.xCoord = new System.Windows.Forms.NumericUpDown();
+            this.xOffset = new System.Windows.Forms.NumericUpDown();
+            this.yOffset = new System.Windows.Forms.NumericUpDown();
+            this.yCoord = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -70,6 +82,10 @@
             this.itemTab.SuspendLayout();
             this.bossTab.SuspendLayout();
             this.enemyTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xCoord)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xOffset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.yOffset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.yCoord)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -204,6 +220,7 @@
             this.objList.Name = "objList";
             this.objList.Size = new System.Drawing.Size(265, 368);
             this.objList.TabIndex = 0;
+            this.objList.SelectedIndexChanged += new System.EventHandler(this.objList_SelectedIndexChanged);
             this.objList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.objList_MouseDoubleClick);
             // 
             // guestStarItemTab
@@ -260,6 +277,7 @@
             this.guestItemList.Name = "guestItemList";
             this.guestItemList.Size = new System.Drawing.Size(265, 368);
             this.guestItemList.TabIndex = 4;
+            this.guestItemList.SelectedIndexChanged += new System.EventHandler(this.guestItemList_SelectedIndexChanged);
             this.guestItemList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.guestItemList_MouseDoubleClick);
             // 
             // itemTab
@@ -315,6 +333,7 @@
             this.itemList.Name = "itemList";
             this.itemList.Size = new System.Drawing.Size(265, 368);
             this.itemList.TabIndex = 4;
+            this.itemList.SelectedIndexChanged += new System.EventHandler(this.itemList_SelectedIndexChanged);
             this.itemList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.itemList_MouseDoubleClick);
             // 
             // bossTab
@@ -370,6 +389,7 @@
             this.bossList.Name = "bossList";
             this.bossList.Size = new System.Drawing.Size(265, 368);
             this.bossList.TabIndex = 4;
+            this.bossList.SelectedIndexChanged += new System.EventHandler(this.bossList_SelectedIndexChanged);
             this.bossList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.bossList_MouseDoubleClick);
             // 
             // enemyTab
@@ -425,12 +445,13 @@
             this.enemyList.Name = "enemyList";
             this.enemyList.Size = new System.Drawing.Size(265, 368);
             this.enemyList.TabIndex = 4;
+            this.enemyList.SelectedIndexChanged += new System.EventHandler(this.enemyList_SelectedIndexChanged);
             this.enemyList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.enemyList_MouseDoubleClick);
             // 
             // glControl
             // 
             this.glControl.BackColor = System.Drawing.Color.Black;
-            this.glControl.Location = new System.Drawing.Point(310, 27);
+            this.glControl.Location = new System.Drawing.Point(310, 73);
             this.glControl.Name = "glControl";
             this.glControl.Size = new System.Drawing.Size(540, 360);
             this.glControl.TabIndex = 2;
@@ -443,11 +464,145 @@
             this.glControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.glControl_MouseUp);
             this.glControl.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.glControl_MouseWheel);
             // 
+            // select
+            // 
+            this.select.Location = new System.Drawing.Point(310, 32);
+            this.select.Name = "select";
+            this.select.Size = new System.Drawing.Size(33, 33);
+            this.select.TabIndex = 3;
+            this.select.UseVisualStyleBackColor = true;
+            // 
+            // move
+            // 
+            this.move.Location = new System.Drawing.Point(349, 32);
+            this.move.Name = "move";
+            this.move.Size = new System.Drawing.Size(33, 33);
+            this.move.TabIndex = 4;
+            this.move.UseVisualStyleBackColor = true;
+            // 
+            // draw
+            // 
+            this.draw.Location = new System.Drawing.Point(388, 32);
+            this.draw.Name = "draw";
+            this.draw.Size = new System.Drawing.Size(33, 33);
+            this.draw.TabIndex = 5;
+            this.draw.UseVisualStyleBackColor = true;
+            // 
+            // resetCamera
+            // 
+            this.resetCamera.Location = new System.Drawing.Point(427, 32);
+            this.resetCamera.Name = "resetCamera";
+            this.resetCamera.Size = new System.Drawing.Size(82, 33);
+            this.resetCamera.TabIndex = 6;
+            this.resetCamera.Text = "Reset Camera";
+            this.resetCamera.UseVisualStyleBackColor = true;
+            this.resetCamera.Click += new System.EventHandler(this.resetCamera_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(310, 445);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Coordinate";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(310, 473);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Offset";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(370, 458);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(14, 13);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "X";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(516, 458);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(14, 13);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Y";
+            // 
+            // xCoord
+            // 
+            this.xCoord.Location = new System.Drawing.Point(390, 443);
+            this.xCoord.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.xCoord.Name = "xCoord";
+            this.xCoord.Size = new System.Drawing.Size(120, 20);
+            this.xCoord.TabIndex = 23;
+            this.xCoord.ValueChanged += new System.EventHandler(this.xCoord_ValueChanged);
+            // 
+            // xOffset
+            // 
+            this.xOffset.Location = new System.Drawing.Point(390, 471);
+            this.xOffset.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.xOffset.Name = "xOffset";
+            this.xOffset.Size = new System.Drawing.Size(120, 20);
+            this.xOffset.TabIndex = 24;
+            this.xOffset.ValueChanged += new System.EventHandler(this.xOffset_ValueChanged);
+            // 
+            // yOffset
+            // 
+            this.yOffset.Location = new System.Drawing.Point(536, 471);
+            this.yOffset.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.yOffset.Name = "yOffset";
+            this.yOffset.Size = new System.Drawing.Size(120, 20);
+            this.yOffset.TabIndex = 26;
+            this.yOffset.ValueChanged += new System.EventHandler(this.yOffset_ValueChanged);
+            // 
+            // yCoord
+            // 
+            this.yCoord.Location = new System.Drawing.Point(536, 443);
+            this.yCoord.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.yCoord.Name = "yCoord";
+            this.yCoord.Size = new System.Drawing.Size(120, 20);
+            this.yCoord.TabIndex = 25;
+            this.yCoord.ValueChanged += new System.EventHandler(this.yCoord_ValueChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1037, 504);
+            this.Controls.Add(this.yOffset);
+            this.Controls.Add(this.yCoord);
+            this.Controls.Add(this.xOffset);
+            this.Controls.Add(this.xCoord);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.resetCamera);
+            this.Controls.Add(this.draw);
+            this.Controls.Add(this.move);
+            this.Controls.Add(this.select);
             this.Controls.Add(this.glControl);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
@@ -466,6 +621,10 @@
             this.itemTab.ResumeLayout(false);
             this.bossTab.ResumeLayout(false);
             this.enemyTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.xCoord)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xOffset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.yOffset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.yCoord)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -507,6 +666,18 @@
         private System.Windows.Forms.ListBox enemyList;
         private OpenTK.GLControl glControl;
         private System.Windows.Forms.ToolStripMenuItem stageSettingsToolStripMenuItem;
+        private System.Windows.Forms.Button select;
+        private System.Windows.Forms.Button move;
+        private System.Windows.Forms.Button draw;
+        private System.Windows.Forms.Button resetCamera;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown xCoord;
+        private System.Windows.Forms.NumericUpDown xOffset;
+        private System.Windows.Forms.NumericUpDown yOffset;
+        private System.Windows.Forms.NumericUpDown yCoord;
     }
 }
 

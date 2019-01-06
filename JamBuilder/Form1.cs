@@ -22,6 +22,8 @@ namespace JamBuilder
         public string filePath;
 
         List<int> texIds = new List<int>();
+        List<int> modTexIds = new List<int>();
+        List<int> objTexIds = new List<int>();
 
         Renderer renderer;
         Texturing texturing;
@@ -32,6 +34,8 @@ namespace JamBuilder
         bool moveCam = false;
         int mouseX = 0;
         int mouseY = 0;
+
+        int moveObj;
 
         public Form1()
         {
@@ -107,6 +111,7 @@ namespace JamBuilder
                 level = new Level(open.FileName);
 
                 camera.pos = Vector2.Zero;
+                camera.zoom = 1.1;
                 RefreshObjectLists();
 
                 this.Text = $"JamBuilder - {filePath}";
@@ -196,14 +201,30 @@ namespace JamBuilder
         {
             glControl.MakeCurrent();
             GL.Enable(EnableCap.Texture2D);
+            GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
             GL.ClearColor(Color.FromArgb(200, 200, 200));
+
             renderer = new Renderer();
             texturing = new Texturing();
-            camera = new Camera(new Vector2(0, 0), 1.0);
+            camera = new Camera(new Vector2(0, 0), 1.1);
+
             for (int i = 0; i < 52; i++)
             {
                 texIds.Add(texturing.LoadTexture("Resources/tiles/" + i + ".png"));
             }
+
+            modTexIds.Add(texturing.LoadTexture("Resources/modifiers/ladder.png"));
+            modTexIds.Add(texturing.LoadTexture("Resources/modifiers/water.png"));
+            modTexIds.Add(texturing.LoadTexture("Resources/modifiers/damage.png"));
+            objTexIds.Add(texturing.LoadTexture("Resources/obj/object.png"));
+            objTexIds.Add(texturing.LoadTexture("Resources/obj/guestItem.png"));
+
+            objTexIds.Add(texturing.LoadTexture("Resources/obj/item.png"));
+            objTexIds.Add(texturing.LoadTexture("Resources/obj/boss.png"));
+            objTexIds.Add(texturing.LoadTexture("Resources/obj/enemy.png"));
+            objTexIds.Add(texturing.LoadTexture("Resources/obj/select.png"));
+
             t = new System.Timers.Timer(1000.0 / 60.0);
             t.Elapsed += t_Elapsed;
             t.Start();
@@ -234,8 +255,107 @@ namespace JamBuilder
                         y++;
                         x = 0;
                     }
-                    renderer.Draw(texIds[level.TileCollision[i].Shape], new Vector2(x*15f, -y*15f), new Vector2(1f, 1f));
+                    renderer.Draw(texIds[level.TileCollision[i].Shape], new Vector2(x*15f, -y*15f), new Vector2(1f, 1f), 17, 17);
+                    if (level.TileCollision[i].Modifier != 0)
+                    {
+                        if ((level.TileCollision[i].Modifier & (1 << 1)) != 0)
+                        {
+                            renderer.Draw(modTexIds[0], new Vector2(x * 15f, -y * 15f), new Vector2(1f, 1f), 17, 17);
+                        }
+                        if ((level.TileCollision[i].Modifier & (1 << 3)) != 0)
+                        {
+                            renderer.Draw(modTexIds[1], new Vector2(x * 15f, -y * 15f), new Vector2(1f, 1f), 17, 17);
+                        }
+                        if ((level.TileCollision[i].Modifier & (1 << 6)) != 0)
+                        {
+                            renderer.Draw(modTexIds[2], new Vector2(x * 15f, -y * 15f), new Vector2(1f, 1f), 17, 17);
+                        }
+                    }
                     x++;
+                }
+
+                for (int i = 0; i < level.Objects.Count; i++)
+                {
+                    try
+                    {
+                        int oX = int.Parse(level.Objects[i]["int x"].Replace(" ", "").Split('|')[0]);
+                        int oY = int.Parse(level.Objects[i]["int y"].Replace(" ", "").Split('|')[0]);
+                        int offX = int.Parse(level.Objects[i]["int x"].Replace(" ", "").Split('|')[1]);
+                        int offY = int.Parse(level.Objects[i]["int y"].Replace(" ", "").Split('|')[1]);
+                        renderer.Draw(objTexIds[0], new Vector2(((oX * 15f) - 3f) + offX, ((-oY * 15f) + 13f) - offY), new Vector2(1f, 1f), 7, 7);
+                        if (i == objList.SelectedIndex)
+                        {
+                            renderer.Draw(objTexIds[5], new Vector2(((oX * 15f) - 3f) + offX, ((-oY * 15f) + 13f) - offY), new Vector2(1f, 1f), 7, 7);
+                        }
+                    } catch { }
+                }
+
+                for (int i = 0; i < level.GuestStarItems.Count; i++)
+                {
+                    try
+                    {
+                        int oX = int.Parse(level.GuestStarItems[i]["int x"].Replace(" ", "").Split('|')[0]);
+                        int oY = int.Parse(level.GuestStarItems[i]["int y"].Replace(" ", "").Split('|')[0]);
+                        int offX = int.Parse(level.GuestStarItems[i]["int x"].Replace(" ", "").Split('|')[1]);
+                        int offY = int.Parse(level.GuestStarItems[i]["int y"].Replace(" ", "").Split('|')[1]);
+                        renderer.Draw(objTexIds[1], new Vector2(((oX * 15f) - 3f) + offX, ((-oY * 15f) + 13f) - offY), new Vector2(1f, 1f), 7, 7);
+                        if (i == guestItemList.SelectedIndex)
+                        {
+                            renderer.Draw(objTexIds[5], new Vector2(((oX * 15f) - 3f) + offX, ((-oY * 15f) + 13f) - offY), new Vector2(1f, 1f), 7, 7);
+                        }
+                    }
+                    catch { }
+                }
+
+                for (int i = 0; i < level.Items.Count; i++)
+                {
+                    try
+                    {
+                        int oX = int.Parse(level.Items[i]["int x"].Replace(" ", "").Split('|')[0]);
+                        int oY = int.Parse(level.Items[i]["int y"].Replace(" ", "").Split('|')[0]);
+                        int offX = int.Parse(level.Items[i]["int x"].Replace(" ", "").Split('|')[1]);
+                        int offY = int.Parse(level.Items[i]["int y"].Replace(" ", "").Split('|')[1]);
+                        renderer.Draw(objTexIds[2], new Vector2(((oX * 15f) - 3f) + offX, ((-oY * 15f) + 13f) - offY), new Vector2(1f, 1f), 7, 7);
+                        if (i == itemList.SelectedIndex)
+                        {
+                            renderer.Draw(objTexIds[5], new Vector2(((oX * 15f) - 3f) + offX, ((-oY * 15f) + 13f) - offY), new Vector2(1f, 1f), 7, 7);
+                        }
+                    }
+                    catch { }
+                }
+
+                for (int i = 0; i < level.Bosses.Count; i++)
+                {
+                    try
+                    {
+                        int oX = int.Parse(level.Bosses[i]["int x"].Replace(" ", "").Split('|')[0]);
+                        int oY = int.Parse(level.Bosses[i]["int y"].Replace(" ", "").Split('|')[0]);
+                        int offX = int.Parse(level.Bosses[i]["int x"].Replace(" ", "").Split('|')[1]);
+                        int offY = int.Parse(level.Bosses[i]["int y"].Replace(" ", "").Split('|')[1]);
+                        renderer.Draw(objTexIds[3], new Vector2(((oX * 15f) - 3f) + offX, ((-oY * 15f) + 13f) - offY), new Vector2(1f, 1f), 7, 7);
+                        if (i == bossList.SelectedIndex)
+                        {
+                            renderer.Draw(objTexIds[5], new Vector2(((oX * 15f) - 3f) + offX, ((-oY * 15f) + 13f) - offY), new Vector2(1f, 1f), 7, 7);
+                        }
+                    }
+                    catch { }
+                }
+
+                for (int i = 0; i < level.Enemies.Count; i++)
+                {
+                    try
+                    {
+                        int oX = int.Parse(level.Enemies[i]["int x"].Replace(" ", "").Split('|')[0]);
+                        int oY = int.Parse(level.Enemies[i]["int y"].Replace(" ", "").Split('|')[0]);
+                        int offX = int.Parse(level.Enemies[i]["int x"].Replace(" ", "").Split('|')[1]);
+                        int offY = int.Parse(level.Enemies[i]["int y"].Replace(" ", "").Split('|')[1]);
+                        renderer.Draw(objTexIds[4], new Vector2(((oX * 15f) - 3f) + offX, ((-oY * 15f) + 13f) - offY), new Vector2(1f, 1f), 7, 7);
+                        if (i == enemyList.SelectedIndex)
+                        {
+                            renderer.Draw(objTexIds[5], new Vector2(((oX * 15f) - 3f) + offX, ((-oY * 15f) + 13f) - offY), new Vector2(1f, 1f), 7, 7);
+                        }
+                    }
+                    catch { }
                 }
             }
 
@@ -585,19 +705,205 @@ namespace JamBuilder
         {
             if (e.Delta > 0)
             {
-                camera.zoom += SystemInformation.MouseWheelScrollLines / 2;
-                if (camera.zoom > 2.0)
+                camera.zoom += 0.2;
+                if (camera.zoom > 2.9)
                 {
-                    camera.zoom = 2.0;
+                    camera.zoom = 2.9;
                 }
             }
             else if (e.Delta < 0)
             {
-                camera.zoom -= SystemInformation.MouseWheelScrollLines / 2;
+                camera.zoom -= 0.2;
                 if (camera.zoom < 0.5)
                 {
                     camera.zoom = 0.5;
                 }
+            }
+        }
+
+        private void resetCamera_Click(object sender, EventArgs e)
+        {
+            camera.zoom = 1.1;
+        }
+
+        bool a;
+
+        private void objList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            moveObj = 0;
+            int oX = int.Parse(level.Objects[objList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
+            int oY = int.Parse(level.Objects[objList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
+            int offX = int.Parse(level.Objects[objList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
+            int offY = int.Parse(level.Objects[objList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+            xCoord.Value = oX;
+            xOffset.Value = offX;
+            yCoord.Value = oY;
+            yOffset.Value = offY;
+            if (!a)
+            {
+                a = true;
+                guestItemList.ClearSelected();
+                itemList.ClearSelected();
+                bossList.ClearSelected();
+                enemyList.ClearSelected();
+                a = false;
+            }
+        }
+
+        private void guestItemList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            moveObj = 1;
+            int oX = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
+            int oY = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
+            int offX = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
+            int offY = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+            xCoord.Value = oX;
+            xOffset.Value = offX;
+            yCoord.Value = oY;
+            yOffset.Value = offY;
+            if (!a)
+            {
+                a = true;
+                objList.ClearSelected();
+                itemList.ClearSelected();
+                bossList.ClearSelected();
+                enemyList.ClearSelected();
+                a = false;
+            }
+        }
+
+        private void itemList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            moveObj = 2;
+            int oX = int.Parse(level.Items[itemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
+            int oY = int.Parse(level.Items[itemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
+            int offX = int.Parse(level.Items[itemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
+            int offY = int.Parse(level.Items[itemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+            xCoord.Value = oX;
+            xOffset.Value = offX;
+            yCoord.Value = oY;
+            yOffset.Value = offY;
+            if (!a)
+            {
+                a = true;
+                objList.ClearSelected();
+                guestItemList.ClearSelected();
+                bossList.ClearSelected();
+                enemyList.ClearSelected();
+                a = false;
+            }
+        }
+
+        private void bossList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            moveObj = 3;
+            int oX = int.Parse(level.Bosses[bossList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
+            int oY = int.Parse(level.Bosses[bossList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
+            int offX = int.Parse(level.Bosses[bossList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
+            int offY = int.Parse(level.Bosses[bossList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+            xCoord.Value = oX;
+            xOffset.Value = offX;
+            yCoord.Value = oY;
+            yOffset.Value = offY;
+            if (!a)
+            {
+                a = true;
+                objList.ClearSelected();
+                guestItemList.ClearSelected();
+                itemList.ClearSelected();
+                enemyList.ClearSelected();
+                a = false;
+            }
+        }
+
+        private void enemyList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            moveObj = 4;
+            int oX = int.Parse(level.Enemies[enemyList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
+            int oY = int.Parse(level.Enemies[enemyList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
+            int offX = int.Parse(level.Enemies[enemyList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
+            int offY = int.Parse(level.Enemies[enemyList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+            xCoord.Value = oX;
+            xOffset.Value = offX;
+            yCoord.Value = oY;
+            yOffset.Value = offY;
+            if (!a)
+            {
+                a = true;
+                objList.ClearSelected();
+                guestItemList.ClearSelected();
+                itemList.ClearSelected();
+                bossList.ClearSelected();
+                a = false;
+            }
+        }
+
+        void UpdateCoords()
+        {
+            switch (moveObj)
+            {
+                case 0:
+                    {
+                        level.Objects[objList.SelectedIndex]["int x"] = $"{xCoord.Value} | {xOffset.Value}";
+                        level.Objects[objList.SelectedIndex]["int y"] = $"{yCoord.Value} | {yOffset.Value}";
+                        break;
+                    }
+                case 1:
+                    {
+                        level.GuestStarItems[guestItemList.SelectedIndex]["int x"] = $"{xCoord.Value} | {xOffset.Value}";
+                        level.GuestStarItems[guestItemList.SelectedIndex]["int y"] = $"{yCoord.Value} | {yOffset.Value}";
+                        break;
+                    }
+                case 2:
+                    {
+                        level.Items[itemList.SelectedIndex]["int x"] = $"{xCoord.Value} | {xOffset.Value}";
+                        level.Items[itemList.SelectedIndex]["int y"] = $"{yCoord.Value} | {yOffset.Value}";
+                        break;
+                    }
+                case 3:
+                    {
+                        level.Bosses[bossList.SelectedIndex]["int x"] = $"{xCoord.Value} | {xOffset.Value}";
+                        level.Bosses[bossList.SelectedIndex]["int y"] = $"{yCoord.Value} | {yOffset.Value}";
+                        break;
+                    }
+                case 4:
+                    {
+                        level.Enemies[enemyList.SelectedIndex]["int x"] = $"{xCoord.Value} | {xOffset.Value}";
+                        level.Enemies[enemyList.SelectedIndex]["int y"] = $"{yCoord.Value} | {yOffset.Value}";
+                        break;
+                    }
+            }
+        }
+
+        private void xCoord_ValueChanged(object sender, EventArgs e)
+        {
+            if (level != null && moveObj != null)
+            {
+                UpdateCoords();
+            }
+        }
+
+        private void xOffset_ValueChanged(object sender, EventArgs e)
+        {
+            if (level != null && moveObj != null)
+            {
+                UpdateCoords();
+            }
+        }
+
+        private void yCoord_ValueChanged(object sender, EventArgs e)
+        {
+            if (level != null && moveObj != null)
+            {
+                UpdateCoords();
+            }
+        }
+
+        private void yOffset_ValueChanged(object sender, EventArgs e)
+        {
+            if (level != null && moveObj != null)
+            {
+                UpdateCoords();
             }
         }
     }

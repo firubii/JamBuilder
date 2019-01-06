@@ -119,7 +119,7 @@ namespace JamBuilder
 
         private void editObj_Click(object sender, EventArgs e)
         {
-            if (objList.SelectedItem != null)
+            if (objList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
                 editor.obj = level.Objects[objList.SelectedIndex];
@@ -134,7 +134,7 @@ namespace JamBuilder
 
         private void editGuestItem_Click(object sender, EventArgs e)
         {
-            if (guestItemList.SelectedItem != null)
+            if (guestItemList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
                 editor.obj = level.Items[guestItemList.SelectedIndex];
@@ -149,7 +149,7 @@ namespace JamBuilder
 
         private void editItem_Click(object sender, EventArgs e)
         {
-            if (guestItemList.SelectedItem != null)
+            if (guestItemList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
                 editor.obj = level.GuestStarItems[guestItemList.SelectedIndex];
@@ -164,7 +164,7 @@ namespace JamBuilder
 
         private void editBoss_Click(object sender, EventArgs e)
         {
-            if (bossList.SelectedItem != null)
+            if (bossList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
                 editor.obj = level.Bosses[bossList.SelectedIndex];
@@ -179,7 +179,7 @@ namespace JamBuilder
 
         private void editEnemy_Click(object sender, EventArgs e)
         {
-            if (enemyList.SelectedItem != null)
+            if (enemyList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
                 editor.obj = level.Enemies[enemyList.SelectedIndex];
@@ -303,79 +303,100 @@ namespace JamBuilder
 
         private void addObj_Click(object sender, EventArgs e)
         {
-            AddObj addObj = new AddObj();
-            addObj.editorType = 0;
-            if (addObj.ShowDialog() == DialogResult.OK)
+            if (level != null)
             {
-                addObj.obj["int wuid"] = GetUniqueWUID().ToString();
-                level.Objects.Add(addObj.obj);
-                RefreshObjectLists();
+                AddObj addObj = new AddObj();
+                addObj.editorType = 0;
+                if (addObj.ShowDialog() == DialogResult.OK)
+                {
+                    addObj.obj["int wuid"] = GetUniqueWUID().ToString();
+                    level.Objects.Add(addObj.obj);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void addGuestItem_Click(object sender, EventArgs e)
         {
-            AddObj addObj = new AddObj();
-            addObj.editorType = 1;
-            if (addObj.ShowDialog() == DialogResult.OK)
+            if (level != null)
             {
-                addObj.obj["int wuid"] = GetUniqueWUID().ToString();
-                level.GuestStarItems.Add(addObj.obj);
-                RefreshObjectLists();
+                AddObj addObj = new AddObj();
+                addObj.editorType = 1;
+                if (addObj.ShowDialog() == DialogResult.OK)
+                {
+                    addObj.obj["int wuid"] = GetUniqueWUID().ToString();
+                    level.GuestStarItems.Add(addObj.obj);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void addItem_Click(object sender, EventArgs e)
         {
-            AddObj addObj = new AddObj();
-            addObj.editorType = 2;
-            if (addObj.ShowDialog() == DialogResult.OK)
+            if (level != null)
             {
-                addObj.obj["int wuid"] = GetUniqueWUID().ToString();
-                level.Items.Add(addObj.obj);
-                RefreshObjectLists();
+                AddObj addObj = new AddObj();
+                addObj.editorType = 2;
+                if (addObj.ShowDialog() == DialogResult.OK)
+                {
+                    addObj.obj["int wuid"] = GetUniqueWUID().ToString();
+                    level.Items.Add(addObj.obj);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void addBoss_Click(object sender, EventArgs e)
         {
-            AddObj addObj = new AddObj();
-            addObj.editorType = 3;
-            if (addObj.ShowDialog() == DialogResult.OK)
+            if (level != null)
             {
-                addObj.obj["int wuid"] = GetUniqueWUID().ToString();
-                level.Bosses.Add(addObj.obj);
-                RefreshObjectLists();
+                AddObj addObj = new AddObj();
+                addObj.editorType = 3;
+                if (addObj.ShowDialog() == DialogResult.OK)
+                {
+                    addObj.obj["int wuid"] = GetUniqueWUID().ToString();
+                    level.Bosses.Add(addObj.obj);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void addEnemy_Click(object sender, EventArgs e)
         {
-            AddObj addObj = new AddObj();
-            addObj.editorType = 4;
-            if (addObj.ShowDialog() == DialogResult.OK)
+            if (level != null)
             {
-                addObj.obj["int wuid"] = GetUniqueWUID().ToString();
-                level.Enemies.Add(addObj.obj);
-                RefreshObjectLists();
+                AddObj addObj = new AddObj();
+                addObj.editorType = 4;
+                if (addObj.ShowDialog() == DialogResult.OK)
+                {
+                    addObj.obj["int wuid"] = GetUniqueWUID().ToString();
+                    level.Enemies.Add(addObj.obj);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Save();
+            if (level != null)
+            {
+                Save();
+            }
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog save = new SaveFileDialog();
-            save.Filter = "Kirby Star Allies Level Files|*.dat";
-            save.DefaultExt = ".dat";
-            save.Title = "Save Level File";
-            if (save.ShowDialog() == DialogResult.OK)
+            if (level != null)
             {
-                filePath = save.FileName;
-                Save();
+                SaveFileDialog save = new SaveFileDialog();
+                save.Filter = "Kirby Star Allies Level Files|*.dat";
+                save.DefaultExt = ".dat";
+                save.Title = "Save Level File";
+                if (save.ShowDialog() == DialogResult.OK)
+                {
+                    filePath = save.FileName;
+                    Save();
+                }
             }
         }
 
@@ -392,100 +413,133 @@ namespace JamBuilder
 
         private void delObj_Click(object sender, EventArgs e)
         {
-            if (objList.SelectedItem != null)
+            if (level != null)
             {
-                level.Objects.RemoveAt(objList.SelectedIndex);
-                RefreshObjectLists();
+                if (objList.SelectedItem != null)
+                {
+                    level.Objects.RemoveAt(objList.SelectedIndex);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void delGuestItem_Click(object sender, EventArgs e)
         {
-            if (guestItemList.SelectedItem != null)
+            if (level != null)
             {
-                level.GuestStarItems.RemoveAt(guestItemList.SelectedIndex);
-                RefreshObjectLists();
+                if (guestItemList.SelectedItem != null)
+                {
+                    level.GuestStarItems.RemoveAt(guestItemList.SelectedIndex);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void delItem_Click(object sender, EventArgs e)
         {
-            if (itemList.SelectedItem != null)
+            if (level != null)
             {
-                level.Items.RemoveAt(itemList.SelectedIndex);
-                RefreshObjectLists();
+                if (itemList.SelectedItem != null)
+                {
+                    level.Items.RemoveAt(itemList.SelectedIndex);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void delBoss_Click(object sender, EventArgs e)
         {
-            if (bossList.SelectedItem != null)
+            if (level != null)
             {
-                level.Bosses.RemoveAt(bossList.SelectedIndex);
-                RefreshObjectLists();
+                if (bossList.SelectedItem != null)
+                {
+                    level.Bosses.RemoveAt(bossList.SelectedIndex);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void delEnemy_Click(object sender, EventArgs e)
         {
-            if (enemyList.SelectedItem != null)
+            if (level != null)
             {
-                level.Enemies.RemoveAt(enemyList.SelectedIndex);
-                RefreshObjectLists();
+                if (enemyList.SelectedItem != null)
+                {
+                    level.Enemies.RemoveAt(enemyList.SelectedIndex);
+                    RefreshObjectLists();
+                }
             }
         }
 
         private void stageSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StageSettings settings = new StageSettings();
-            settings.stage = level.StageData;
-            settings.bg = level.Background;
-            settings.tileset = level.Tileset;
-            if (settings.ShowDialog() == DialogResult.OK)
+            if (level != null)
             {
-                level.StageData = settings.stage;
-                level.Background = settings.bg;
-                level.Tileset = settings.tileset;
+                StageSettings settings = new StageSettings();
+                settings.stage = level.StageData;
+                settings.bg = level.Background;
+                settings.tileset = level.Tileset;
+                if (settings.ShowDialog() == DialogResult.OK)
+                {
+                    level.StageData = settings.stage;
+                    level.Background = settings.bg;
+                    level.Tileset = settings.tileset;
+                }
             }
         }
 
         private void objList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (objList.SelectedItem != null)
+            if (level != null)
             {
-                editObj_Click(this, new EventArgs());
+                if (objList.SelectedItem != null)
+                {
+                    editObj_Click(this, new EventArgs());
+                }
             }
         }
 
         private void guestItemList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (guestItemList.SelectedItem != null)
+            if (level != null)
             {
-                editGuestItem_Click(this, new EventArgs());
+                if (guestItemList.SelectedItem != null)
+                {
+                    editGuestItem_Click(this, new EventArgs());
+                }
             }
         }
 
         private void itemList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (itemList.SelectedItem != null)
+            if (level != null)
             {
-                editItem_Click(this, new EventArgs());
+                if (itemList.SelectedItem != null)
+                {
+                    editItem_Click(this, new EventArgs());
+                }
             }
         }
 
         private void bossList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (bossList.SelectedItem != null)
+            if (level != null)
             {
-                editBoss_Click(this, new EventArgs());
+                if (bossList.SelectedItem != null)
+                {
+                    editBoss_Click(this, new EventArgs());
+                }
             }
         }
 
         private void enemyList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (enemyList.SelectedItem != null)
+            if (level != null)
             {
-                editEnemy_Click(this, new EventArgs());
+                if (enemyList.SelectedItem != null)
+                {
+                    editEnemy_Click(this, new EventArgs());
+                }
             }
         }
 
@@ -532,7 +586,7 @@ namespace JamBuilder
             if (e.Delta > 0)
             {
                 camera.zoom += SystemInformation.MouseWheelScrollLines / 2;
-                if (camera.zoom < 2.0)
+                if (camera.zoom > 2.0)
                 {
                     camera.zoom = 2.0;
                 }
@@ -545,7 +599,6 @@ namespace JamBuilder
                     camera.zoom = 0.5;
                 }
             }
-            Console.WriteLine(camera.zoom);
         }
     }
 }

@@ -62,8 +62,6 @@
             this.addEnemy = new System.Windows.Forms.Button();
             this.enemyList = new System.Windows.Forms.ListBox();
             this.glControl = new OpenTK.GLControl();
-            this.select = new System.Windows.Forms.Button();
-            this.move = new System.Windows.Forms.Button();
             this.draw = new System.Windows.Forms.Button();
             this.resetCamera = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -74,6 +72,8 @@
             this.xOffset = new System.Windows.Forms.NumericUpDown();
             this.yOffset = new System.Windows.Forms.NumericUpDown();
             this.yCoord = new System.Windows.Forms.NumericUpDown();
+            this.move = new System.Windows.Forms.Button();
+            this.select = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -451,9 +451,9 @@
             // glControl
             // 
             this.glControl.BackColor = System.Drawing.Color.Black;
-            this.glControl.Location = new System.Drawing.Point(310, 73);
+            this.glControl.Location = new System.Drawing.Point(310, 68);
             this.glControl.Name = "glControl";
-            this.glControl.Size = new System.Drawing.Size(540, 360);
+            this.glControl.Size = new System.Drawing.Size(540, 365);
             this.glControl.TabIndex = 2;
             this.glControl.VSync = false;
             this.glControl.Load += new System.EventHandler(this.glControl_Load);
@@ -464,35 +464,20 @@
             this.glControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.glControl_MouseUp);
             this.glControl.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.glControl_MouseWheel);
             // 
-            // select
-            // 
-            this.select.Location = new System.Drawing.Point(310, 32);
-            this.select.Name = "select";
-            this.select.Size = new System.Drawing.Size(33, 33);
-            this.select.TabIndex = 3;
-            this.select.UseVisualStyleBackColor = true;
-            // 
-            // move
-            // 
-            this.move.Location = new System.Drawing.Point(349, 32);
-            this.move.Name = "move";
-            this.move.Size = new System.Drawing.Size(33, 33);
-            this.move.TabIndex = 4;
-            this.move.UseVisualStyleBackColor = true;
-            // 
             // draw
             // 
-            this.draw.Location = new System.Drawing.Point(388, 32);
+            this.draw.Location = new System.Drawing.Point(384, 32);
             this.draw.Name = "draw";
-            this.draw.Size = new System.Drawing.Size(33, 33);
+            this.draw.Size = new System.Drawing.Size(31, 31);
             this.draw.TabIndex = 5;
             this.draw.UseVisualStyleBackColor = true;
+            this.draw.Click += new System.EventHandler(this.draw_Click);
             // 
             // resetCamera
             // 
-            this.resetCamera.Location = new System.Drawing.Point(427, 32);
+            this.resetCamera.Location = new System.Drawing.Point(421, 32);
             this.resetCamera.Name = "resetCamera";
-            this.resetCamera.Size = new System.Drawing.Size(82, 33);
+            this.resetCamera.Size = new System.Drawing.Size(82, 31);
             this.resetCamera.TabIndex = 6;
             this.resetCamera.Text = "Reset Camera";
             this.resetCamera.UseVisualStyleBackColor = true;
@@ -585,6 +570,26 @@
             this.yCoord.Size = new System.Drawing.Size(120, 20);
             this.yCoord.TabIndex = 25;
             this.yCoord.ValueChanged += new System.EventHandler(this.yCoord_ValueChanged);
+            // 
+            // move
+            // 
+            this.move.BackgroundImage = global::JamBuilder.Properties.Resources.move;
+            this.move.Location = new System.Drawing.Point(347, 32);
+            this.move.Name = "move";
+            this.move.Size = new System.Drawing.Size(31, 31);
+            this.move.TabIndex = 4;
+            this.move.UseVisualStyleBackColor = true;
+            this.move.Click += new System.EventHandler(this.move_Click);
+            // 
+            // select
+            // 
+            this.select.BackgroundImage = global::JamBuilder.Properties.Resources.select;
+            this.select.Location = new System.Drawing.Point(310, 32);
+            this.select.Name = "select";
+            this.select.Size = new System.Drawing.Size(31, 31);
+            this.select.TabIndex = 3;
+            this.select.UseVisualStyleBackColor = true;
+            this.select.Click += new System.EventHandler(this.select_Click);
             // 
             // Form1
             // 

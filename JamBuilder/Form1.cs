@@ -37,6 +37,8 @@ namespace JamBuilder
 
         int moveObj;
 
+        int tool;
+
         public Form1()
         {
             InitializeComponent();
@@ -142,11 +144,11 @@ namespace JamBuilder
             if (guestItemList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
-                editor.obj = level.Items[guestItemList.SelectedIndex];
+                editor.obj = level.GuestStarItems[guestItemList.SelectedIndex];
                 editor.editorType = 1;
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
-                    level.Items[guestItemList.SelectedIndex] = editor.obj;
+                    level.GuestStarItems[guestItemList.SelectedIndex] = editor.obj;
                     RefreshObjectLists();
                 }
             }
@@ -154,14 +156,14 @@ namespace JamBuilder
 
         private void editItem_Click(object sender, EventArgs e)
         {
-            if (guestItemList.SelectedItem != null && level != null)
+            if (itemList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
-                editor.obj = level.GuestStarItems[guestItemList.SelectedIndex];
+                editor.obj = level.Items[itemList.SelectedIndex];
                 editor.editorType = 2;
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
-                    level.GuestStarItems[itemList.SelectedIndex] = editor.obj;
+                    level.Items[itemList.SelectedIndex] = editor.obj;
                     RefreshObjectLists();
                 }
             }
@@ -905,6 +907,30 @@ namespace JamBuilder
             {
                 UpdateCoords();
             }
+        }
+
+        private void select_Click(object sender, EventArgs e)
+        {
+            tool = 0;
+            select.Enabled = false;
+            move.Enabled = true;
+            draw.Enabled = true;
+        }
+
+        private void move_Click(object sender, EventArgs e)
+        {
+            tool = 1;
+            select.Enabled = true;
+            move.Enabled = false;
+            draw.Enabled = true;
+        }
+
+        private void draw_Click(object sender, EventArgs e)
+        {
+            tool = 2;
+            select.Enabled = true;
+            move.Enabled = true;
+            draw.Enabled = false;
         }
     }
 }

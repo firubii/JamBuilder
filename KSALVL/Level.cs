@@ -39,8 +39,8 @@ namespace KSALVL
         {
             reader.BaseStream.Seek(0x18, SeekOrigin.Begin);
             reader.BaseStream.Seek(reader.ReadUInt32(), SeekOrigin.Begin);
-            Height = reader.ReadUInt32();
             Width = reader.ReadUInt32();
+            Height = reader.ReadUInt32();
             for (int i = 0; i < Width*Height; i++)
             {
                 Block block = new Block();
@@ -239,8 +239,8 @@ namespace KSALVL
                 0x00, 0x00, 0x00, 0x00, 0x78, 0x56, 0x34, 0x12, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
             });
-            writer.Write(Height);
             writer.Write(Width);
+            writer.Write(Height);
             for (int i = 0; i < TileBlock.Count; i++)
             {
                 writer.Write(TileBlock[i].ID);
@@ -264,8 +264,8 @@ namespace KSALVL
 
             pos = (uint)writer.BaseStream.Position;
             writer.Write(pos + 0x4);
-            writer.Write(Height);
             writer.Write(Width);
+            writer.Write(Height);
             for (int i = 0; i < TileCollision.Count; i++)
             {
                 writer.Write(TileCollision[i].Modifier);
@@ -312,8 +312,8 @@ namespace KSALVL
             writer.BaseStream.Seek(deco1Offset, SeekOrigin.Begin);
             writer.Write(pos);
             writer.BaseStream.Seek(0, SeekOrigin.End);
-            writer.Write(Height);
             writer.Write(Width);
+            writer.Write(Height);
             for (int i = 0; i < BLandDecoration.Count; i++)
             {
                 writer.Write(BLandDecoration[i].Unk_1);
@@ -330,8 +330,8 @@ namespace KSALVL
             writer.BaseStream.Seek(deco2Offset, SeekOrigin.Begin);
             writer.Write(pos);
             writer.BaseStream.Seek(0, SeekOrigin.End);
-            writer.Write(Height);
             writer.Write(Width);
+            writer.Write(Height);
             for (int i = 0; i < MLandDecoration.Count; i++)
             {
                 writer.Write(MLandDecoration[i].Unk_1);
@@ -348,8 +348,8 @@ namespace KSALVL
             writer.BaseStream.Seek(deco3Offset, SeekOrigin.Begin);
             writer.Write(pos);
             writer.BaseStream.Seek(0, SeekOrigin.End);
-            writer.Write(Height);
             writer.Write(Width);
+            writer.Write(Height);
             for (int i = 0; i < FLandDecoration.Count; i++)
             {
                 writer.Write(FLandDecoration[i].Unk_1);
@@ -366,8 +366,8 @@ namespace KSALVL
             writer.BaseStream.Seek(deco4Offset, SeekOrigin.Begin);
             writer.Write(pos);
             writer.BaseStream.Seek(0, SeekOrigin.End);
-            writer.Write(Height);
             writer.Write(Width);
+            writer.Write(Height);
             for (int i = 0; i < Unk_Decoration.Count; i++)
             {
                 writer.Write(Unk_Decoration[i].Unk_1);

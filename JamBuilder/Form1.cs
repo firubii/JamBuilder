@@ -5,11 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using JamBuilder.Rendering;
 using KSALVL;
 
 namespace JamBuilder
@@ -19,9 +21,26 @@ namespace JamBuilder
         public Level level;
         public string filePath;
 
+        List<int> texIds = new List<int>();
+
+        Renderer renderer;
+        Texturing texturing;
+        Camera camera;
+
+        private System.Timers.Timer t;
+
+        bool moveCam = false;
+        int mouseX = 0;
+        int mouseY = 0;
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
         }
 
         public void RefreshObjectLists()
@@ -87,6 +106,7 @@ namespace JamBuilder
                 this.Text = $"JamBuilder - Opening {filePath}...";
                 level = new Level(open.FileName);
 
+                camera.pos = Vector2.Zero;
                 RefreshObjectLists();
 
                 this.Text = $"JamBuilder - {filePath}";
@@ -175,13 +195,49 @@ namespace JamBuilder
         private void glControl_Load(object sender, EventArgs e)
         {
             glControl.MakeCurrent();
+            GL.Enable(EnableCap.Texture2D);
             GL.ClearColor(Color.FromArgb(200, 200, 200));
+            renderer = new Renderer();
+            texturing = new Texturing();
+            camera = new Camera(new Vector2(0, 0), 1.0);
+            for (int i = 0; i < 52; i++)
+            {
+                texIds.Add(texturing.LoadTexture("Resources/tiles/" + i + ".png"));
+            }
+            t = new System.Timers.Timer(1000.0 / 60.0);
+            t.Elapsed += t_Elapsed;
+            t.Start();
+        }
+
+        private void t_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            glControl.Invalidate();
+            t.Start();
         }
 
         private void glControl_Paint(object sender, PaintEventArgs e)
         {
-            GL.Clear(ClearBufferMask.ColorBufferBit);
-            
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            GL.ClearColor(Color.FromArgb(200, 200, 200));
+
+            renderer.Begin(glControl.Width, glControl.Height);
+            camera.Transform();
+
+            if (level != null)
+            {
+                int y = 0;
+                int x = 0;
+                for (int i = 0; i < level.TileCollision.Count; i++)
+                {
+                    if (x >= level.Width)
+                    {
+                        y++;
+                        x = 0;
+                    }
+                    renderer.Draw(texIds[level.TileCollision[i].Shape], new Vector2(x*15f, -y*15f), new Vector2(1f, 1f));
+                    x++;
+                }
+            }
 
             glControl.SwapBuffers();
         }
@@ -431,6 +487,65 @@ namespace JamBuilder
             {
                 editEnemy_Click(this, new EventArgs());
             }
+        }
+
+        private void glControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                moveCam = true;
+                mouseX = e.X;
+                mouseY = e.Y;
+            }
+        }
+
+        private void glControl_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (moveCam)
+            {
+                camera.pos.X += mouseX - e.X;
+                camera.pos.Y += mouseY - e.Y;
+                mouseX = e.X;
+                mouseY = e.Y;
+            }
+        }
+
+        private void glControl_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                moveCam = false;
+                mouseX = 0;
+                mouseY = 0;
+            }
+        }
+
+        private void glControl_MouseLeave(object sender, EventArgs e)
+        {
+            moveCam = false;
+            mouseX = 0;
+            mouseY = 0;
+        }
+
+        private void glControl_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                camera.zoom += SystemInformation.MouseWheelScrollLines / 2;
+                if (camera.zoom < 2.0)
+                {
+                    camera.zoom = 2.0;
+                }
+            }
+            else if (e.Delta < 0)
+            {
+                camera.zoom -= SystemInformation.MouseWheelScrollLines / 2;
+                if (camera.zoom < 0.5)
+                {
+                    camera.zoom = 0.5;
+                }
+            }
+            Console.WriteLine(camera.zoom);
         }
     }
 }

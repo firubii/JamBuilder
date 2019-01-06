@@ -66,6 +66,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rendering\Camera.cs" />
+    <Compile Include="Rendering\Renderer.cs" />
+    <Compile Include="Rendering\Texturing.cs" />
     <Compile Include="StageSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,64 +122,172 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\modifiers\2.png" />
-    <Content Include="Resources\modifiers\64.png" />
-    <Content Include="Resources\modifiers\8.png" />
-    <Content Include="Resources\tiles\0.png" />
-    <Content Include="Resources\tiles\1.png" />
-    <Content Include="Resources\tiles\10.png" />
-    <Content Include="Resources\tiles\11.png" />
-    <Content Include="Resources\tiles\12.png" />
-    <Content Include="Resources\tiles\13.png" />
-    <Content Include="Resources\tiles\14.png" />
-    <Content Include="Resources\tiles\15.png" />
-    <Content Include="Resources\tiles\16.png" />
-    <Content Include="Resources\tiles\17.png" />
-    <Content Include="Resources\tiles\18.png" />
-    <Content Include="Resources\tiles\19.png" />
-    <Content Include="Resources\tiles\2.png" />
-    <Content Include="Resources\tiles\20.png" />
-    <Content Include="Resources\tiles\21.png" />
-    <Content Include="Resources\tiles\22.png" />
-    <Content Include="Resources\tiles\23.png" />
-    <Content Include="Resources\tiles\24.png" />
-    <Content Include="Resources\tiles\25.png" />
-    <Content Include="Resources\tiles\26.png" />
-    <Content Include="Resources\tiles\27.png" />
-    <Content Include="Resources\tiles\28.png" />
-    <Content Include="Resources\tiles\29.png" />
-    <Content Include="Resources\tiles\3.png" />
-    <Content Include="Resources\tiles\30.png" />
-    <Content Include="Resources\tiles\31.png" />
-    <Content Include="Resources\tiles\32.png" />
-    <Content Include="Resources\tiles\33.png" />
-    <Content Include="Resources\tiles\34.png" />
-    <Content Include="Resources\tiles\35.png" />
-    <Content Include="Resources\tiles\36.png" />
-    <Content Include="Resources\tiles\37.png" />
-    <Content Include="Resources\tiles\38.png" />
-    <Content Include="Resources\tiles\39.png" />
-    <Content Include="Resources\tiles\4.png" />
-    <Content Include="Resources\tiles\40.png" />
-    <Content Include="Resources\tiles\41.png" />
-    <Content Include="Resources\tiles\42.png" />
-    <Content Include="Resources\tiles\43.png" />
-    <Content Include="Resources\tiles\44.png" />
-    <Content Include="Resources\tiles\45.png" />
-    <Content Include="Resources\tiles\46.png" />
-    <Content Include="Resources\tiles\47.png" />
-    <Content Include="Resources\tiles\48.png" />
-    <Content Include="Resources\tiles\49.png" />
-    <Content Include="Resources\tiles\5.png" />
-    <Content Include="Resources\tiles\50.png" />
-    <Content Include="Resources\tiles\51.png" />
-    <Content Include="Resources\tiles\6.png" />
-    <Content Include="Resources\tiles\7.png" />
-    <Content Include="Resources\tiles\8.png" />
-    <Content Include="Resources\tiles\9.png" />
+    <None Include="Resources\modifiers\2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\modifiers\64.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\modifiers\8.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\10.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\11.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\12.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\13.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\14.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\15.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\17.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\18.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\19.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\20.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\21.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\22.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\23.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\24.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\25.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\26.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\27.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\28.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\29.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\30.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\31.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\33.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\34.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\35.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\36.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\37.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\38.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\39.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\40.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\41.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\42.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\43.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\44.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\45.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\46.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\47.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\49.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\50.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\51.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\7.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\8.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\tiles\9.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Rendering\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

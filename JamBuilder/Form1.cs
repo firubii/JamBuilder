@@ -39,6 +39,8 @@ namespace JamBuilder
 
         int tool;
 
+        int tile;
+
         public Form1()
         {
             InitializeComponent();
@@ -46,11 +48,19 @@ namespace JamBuilder
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            comboBox1.SelectedIndex = 0;
         }
 
         public void RefreshObjectLists()
         {
+            int selIndex = 0;
+
+            if (tabControl1.SelectedTab == objTab) selIndex = objList.SelectedIndex;
+            if (tabControl1.SelectedTab == guestStarItemTab) selIndex = guestItemList.SelectedIndex;
+            if (tabControl1.SelectedTab == itemTab) selIndex = itemList.SelectedIndex;
+            if (tabControl1.SelectedTab == bossTab) selIndex = bossList.SelectedIndex;
+            if (tabControl1.SelectedTab == enemyTab) selIndex = enemyList.SelectedIndex;
+
             objList.Items.Clear();
             guestItemList.Items.Clear();
             itemList.Items.Clear();
@@ -83,6 +93,12 @@ namespace JamBuilder
             {
                 enemyList.Items.Add(level.Enemies[i]["string kind"]);
             }
+
+            if (tabControl1.SelectedTab == objTab) objList.SelectedIndex = selIndex;
+            if (tabControl1.SelectedTab == guestStarItemTab) guestItemList.SelectedIndex = selIndex;
+            if (tabControl1.SelectedTab == itemTab) itemList.SelectedIndex = selIndex;
+            if (tabControl1.SelectedTab == bossTab) bossList.SelectedIndex = selIndex;
+            if (tabControl1.SelectedTab == enemyTab) enemyList.SelectedIndex = selIndex;
 
             objList.EndUpdate();
             guestItemList.EndUpdate();
@@ -673,6 +689,13 @@ namespace JamBuilder
                 mouseX = e.X;
                 mouseY = e.Y;
             }
+            else if (e.Button == MouseButtons.Left)
+            {
+                if (tool == 2)
+                {
+                    
+                }
+            }
         }
 
         private void glControl_MouseMove(object sender, MouseEventArgs e)
@@ -931,6 +954,340 @@ namespace JamBuilder
             select.Enabled = true;
             move.Enabled = true;
             draw.Enabled = false;
+        }
+
+        private void t0_Click(object sender, EventArgs e)
+        {
+            tile = 0;
+        }
+
+        private void t1_Click(object sender, EventArgs e)
+        {
+            tile = 1;
+        }
+
+        private void t2_Click(object sender, EventArgs e)
+        {
+            tile = 2;
+        }
+
+        private void t3_Click(object sender, EventArgs e)
+        {
+            tile = 3;
+        }
+
+        private void t4_Click(object sender, EventArgs e)
+        {
+            tile = 4;
+        }
+
+        private void t5_Click(object sender, EventArgs e)
+        {
+            tile = 5;
+        }
+
+        private void t6_Click(object sender, EventArgs e)
+        {
+            tile = 6;
+        }
+
+        private void t7_Click(object sender, EventArgs e)
+        {
+            tile = 7;
+        }
+
+        private void t8_Click(object sender, EventArgs e)
+        {
+            tile = 8;
+        }
+
+        private void t9_Click(object sender, EventArgs e)
+        {
+            tile = 9;
+        }
+
+        private void t10_Click(object sender, EventArgs e)
+        {
+            tile = 10;
+        }
+
+        private void t11_Click(object sender, EventArgs e)
+        {
+            tile = 11;
+        }
+
+        private void t12_Click(object sender, EventArgs e)
+        {
+            tile = 12;
+        }
+
+        private void t13_Click(object sender, EventArgs e)
+        {
+            tile = 13;
+        }
+
+        private void t14_Click(object sender, EventArgs e)
+        {
+            tile = 14;
+        }
+
+        private void t15_Click(object sender, EventArgs e)
+        {
+            tile = 15;
+        }
+
+        private void t16_Click(object sender, EventArgs e)
+        {
+            tile = 16;
+        }
+
+        private void t17_Click(object sender, EventArgs e)
+        {
+            tile = 17;
+        }
+
+        private void t18_Click(object sender, EventArgs e)
+        {
+            tile = 18;
+        }
+
+        private void t19_Click(object sender, EventArgs e)
+        {
+            tile = 19;
+        }
+
+        private void t20_Click(object sender, EventArgs e)
+        {
+            tile = 20;
+        }
+
+        private void t21_Click(object sender, EventArgs e)
+        {
+            tile = 21;
+        }
+
+        private void t22_Click(object sender, EventArgs e)
+        {
+            tile = 22;
+        }
+
+        private void t23_Click(object sender, EventArgs e)
+        {
+            tile = 23;
+        }
+
+        private void t24_Click(object sender, EventArgs e)
+        {
+            tile = 24;
+        }
+
+        private void t25_Click(object sender, EventArgs e)
+        {
+            tile = 25;
+        }
+
+        private void t26_Click(object sender, EventArgs e)
+        {
+            tile = 26;
+        }
+
+        private void t27_Click(object sender, EventArgs e)
+        {
+            tile = 27;
+        }
+
+        private void t28_Click(object sender, EventArgs e)
+        {
+            tile = 28;
+        }
+
+        private void t29_Click(object sender, EventArgs e)
+        {
+            tile = 29;
+        }
+
+        private void t30_Click(object sender, EventArgs e)
+        {
+            tile = 30;
+        }
+
+        private void t31_Click(object sender, EventArgs e)
+        {
+            tile = 31;
+        }
+
+        private void t32_Click(object sender, EventArgs e)
+        {
+            tile = 32;
+        }
+
+        private void t33_Click(object sender, EventArgs e)
+        {
+            tile = 33;
+        }
+
+        private void t34_Click(object sender, EventArgs e)
+        {
+            tile = 34;
+        }
+
+        private void t35_Click(object sender, EventArgs e)
+        {
+            tile = 35;
+        }
+
+        private void t36_Click(object sender, EventArgs e)
+        {
+            tile = 36;
+        }
+
+        private void t37_Click(object sender, EventArgs e)
+        {
+            tile = 37;
+        }
+
+        private void t38_Click(object sender, EventArgs e)
+        {
+            tile = 38;
+        }
+
+        private void t39_Click(object sender, EventArgs e)
+        {
+            tile = 39;
+        }
+
+        private void t40_Click(object sender, EventArgs e)
+        {
+            tile = 40;
+        }
+
+        private void t41_Click(object sender, EventArgs e)
+        {
+            tile = 41;
+        }
+
+        private void t42_Click(object sender, EventArgs e)
+        {
+            tile = 42;
+        }
+
+        private void t43_Click(object sender, EventArgs e)
+        {
+            tile = 43;
+        }
+
+        private void t44_Click(object sender, EventArgs e)
+        {
+            tile = 44;
+        }
+
+        private void t45_Click(object sender, EventArgs e)
+        {
+            tile = 45;
+        }
+
+        private void t46_Click(object sender, EventArgs e)
+        {
+            tile = 46;
+        }
+
+        private void t47_Click(object sender, EventArgs e)
+        {
+            tile = 47;
+        }
+
+        private void t48_Click(object sender, EventArgs e)
+        {
+            tile = 48;
+        }
+
+        private void t49_Click(object sender, EventArgs e)
+        {
+            tile = 49;
+        }
+
+        private void t50_Click(object sender, EventArgs e)
+        {
+            tile = 50;
+        }
+
+        private void t51_Click(object sender, EventArgs e)
+        {
+            tile = 51;
+        }
+
+        private void m2_Click(object sender, EventArgs e)
+        {
+            tile = 52;
+        }
+
+        private void m8_Click(object sender, EventArgs e)
+        {
+            tile = 53;
+        }
+
+        private void m64_Click(object sender, EventArgs e)
+        {
+            tile = 54;
+        }
+
+        private void cloneObj_Click(object sender, EventArgs e)
+        {
+            if (level != null)
+            {
+                if (objList.SelectedItem != null)
+                {
+                    level.Objects.Add(level.Objects[objList.SelectedIndex]);
+                }
+            }
+        }
+
+        private void cloneGuestItem_Click(object sender, EventArgs e)
+        {
+            if (level != null)
+            {
+                if (guestItemList.SelectedItem != null)
+                {
+                    level.GuestStarItems.Add(level.GuestStarItems[guestItemList.SelectedIndex]);
+                    RefreshObjectLists();
+                }
+            }
+        }
+
+        private void cloneItem_Click(object sender, EventArgs e)
+        {
+            if (level != null)
+            {
+                if (itemList.SelectedItem != null)
+                {
+                    level.Items.Add(level.Items[itemList.SelectedIndex]);
+                    RefreshObjectLists();
+                }
+            }
+        }
+
+        private void cloneBoss_Click(object sender, EventArgs e)
+        {
+            if (level != null)
+            {
+                if (bossList.SelectedItem != null)
+                {
+                    level.Bosses.Add(level.Bosses[bossList.SelectedIndex]);
+                    RefreshObjectLists();
+                }
+            }
+        }
+
+        private void cloneEnemy_Click(object sender, EventArgs e)
+        {
+            if (level != null)
+            {
+                if (enemyList.SelectedItem != null)
+                {
+                    level.Enemies.Add(level.Enemies[enemyList.SelectedIndex]);
+                    RefreshObjectLists();
+                }
+            }
         }
     }
 }

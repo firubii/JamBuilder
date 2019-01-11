@@ -317,7 +317,7 @@ namespace JamBuilder
                         int offX = int.Parse(level.GuestStarItems[i]["int x"].Replace(" ", "").Split('|')[1]);
                         int offY = int.Parse(level.GuestStarItems[i]["int y"].Replace(" ", "").Split('|')[1]);
                         renderer.Draw(objTexIds[1], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
-                        if (i == objList.SelectedIndex)
+                        if (i == guestItemList.SelectedIndex)
                         {
                             renderer.Draw(objTexIds[5], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                         }
@@ -334,7 +334,7 @@ namespace JamBuilder
                         int offX = int.Parse(level.Items[i]["int x"].Replace(" ", "").Split('|')[1]);
                         int offY = int.Parse(level.Items[i]["int y"].Replace(" ", "").Split('|')[1]);
                         renderer.Draw(objTexIds[2], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
-                        if (i == objList.SelectedIndex)
+                        if (i == itemList.SelectedIndex)
                         {
                             renderer.Draw(objTexIds[5], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                         }
@@ -351,7 +351,7 @@ namespace JamBuilder
                         int offX = int.Parse(level.Bosses[i]["int x"].Replace(" ", "").Split('|')[1]);
                         int offY = int.Parse(level.Bosses[i]["int y"].Replace(" ", "").Split('|')[1]);
                         renderer.Draw(objTexIds[3], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
-                        if (i == objList.SelectedIndex)
+                        if (i == bossList.SelectedIndex)
                         {
                             renderer.Draw(objTexIds[5], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                         }
@@ -368,7 +368,7 @@ namespace JamBuilder
                         int offX = int.Parse(level.Enemies[i]["int x"].Replace(" ", "").Split('|')[1]);
                         int offY = int.Parse(level.Enemies[i]["int y"].Replace(" ", "").Split('|')[1]);
                         renderer.Draw(objTexIds[4], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
-                        if (i == objList.SelectedIndex)
+                        if (i == enemyList.SelectedIndex)
                         {
                             renderer.Draw(objTexIds[5], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                         }

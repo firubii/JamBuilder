@@ -264,32 +264,44 @@ namespace JamBuilder
 
             if (level != null)
             {
-                int y = 0;
-                int x = 0;
-                for (int i = 0; i < level.TileCollision.Count; i++)
+
+                //Crop Tiles outside camera view.
+                int tileStartX = (int)Math.Max(0,Math.Floor(
+                        (camera.pos.X - glControl.Width/camera.zoom*0.5f)/15.0f
+                    ));
+                int tileEndX = (int)Math.Min(level.Width, Math.Ceiling(
+                        (camera.pos.X + glControl.Width / camera.zoom*0.5f) / 15.0f
+                    ));
+                int tileStartY = (int)Math.Max(0, 1+Math.Floor(
+                        -(camera.pos.Y + glControl.Height / camera.zoom*0.5f) / 15.0f
+                    ));
+                int tileEndY = (int)Math.Min(level.Height,1+ Math.Ceiling(
+                        -(camera.pos.Y - glControl.Height / camera.zoom*0.5f) / 15.0f
+                    ));
+
+                Vector2 vec_scale = new Vector2(1.0f, 1.0f);
+
+                for(int ty = tileStartY; ty < tileEndY; ty++)
                 {
-                    if (x >= level.Width)
+                    for (int tx = tileStartX; tx < tileEndX; tx++)
                     {
-                        y++;
-                        x = 0;
-                    }
-                    renderer.Draw(texIds[level.TileCollision[i].Shape], new Vector2(x*15f, -y*15f), new Vector2(1f, 1f), 17, 17);
-                    if (level.TileCollision[i].Modifier != 0)
-                    {
-                        if ((level.TileCollision[i].Modifier & (1 << 1)) != 0)
+                        int ix = ty * (int)level.Width + tx;
+                        Collision c = level.TileCollision[ix];
+                        Vector2 v = new Vector2(tx * 15f, -ty * 15f);
+                        renderer.Draw(texIds[c.Shape], v, vec_scale, 17, 17);
+                        if((c.Modifier & (1 << 1)) != 0)
                         {
-                            renderer.Draw(modTexIds[0], new Vector2(x * 15f, -y * 15f), new Vector2(1f, 1f), 17, 17);
+                            renderer.Draw(modTexIds[0], v, vec_scale, 17, 17);
                         }
-                        if ((level.TileCollision[i].Modifier & (1 << 3)) != 0)
+                        if ((c.Modifier & (1 << 3)) != 0)
                         {
-                            renderer.Draw(modTexIds[1], new Vector2(x * 15f, -y * 15f), new Vector2(1f, 1f), 17, 17);
+                            renderer.Draw(modTexIds[1], v, vec_scale, 17, 17);
                         }
-                        if ((level.TileCollision[i].Modifier & (1 << 6)) != 0)
+                        if ((c.Modifier & (1 << 6)) != 0)
                         {
-                            renderer.Draw(modTexIds[2], new Vector2(x * 15f, -y * 15f), new Vector2(1f, 1f), 17, 17);
+                            renderer.Draw(modTexIds[2], v, vec_scale, 17, 17);
                         }
                     }
-                    x++;
                 }
 
                 for (int i = 0; i < level.Objects.Count; i++)

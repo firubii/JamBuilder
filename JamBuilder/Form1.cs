@@ -702,8 +702,9 @@ namespace JamBuilder
         {
             if (moveCam)
             {
-                camera.pos.X += mouseX - e.X;
-                camera.pos.Y += mouseY - e.Y;
+                float moveSpeed = 1.0f/(float)camera.zoom;
+                camera.pos.X += (mouseX - e.X) * moveSpeed;
+                camera.pos.Y += (mouseY - e.Y) * moveSpeed;
                 mouseX = e.X;
                 mouseY = e.Y;
             }
@@ -730,18 +731,18 @@ namespace JamBuilder
         {
             if (e.Delta > 0)
             {
-                camera.zoom += 0.2;
-                if (camera.zoom > 2.9)
+                camera.zoom += 0.1 * camera.zoom;
+                if (camera.zoom > 4)
                 {
-                    camera.zoom = 2.9;
+                    camera.zoom = 4;
                 }
             }
             else if (e.Delta < 0)
             {
-                camera.zoom -= 0.2;
-                if (camera.zoom < 0.5)
+                camera.zoom -= 0.1 * camera.zoom;
+                if (camera.zoom < 0.25)
                 {
-                    camera.zoom = 0.5;
+                    camera.zoom = 0.25;
                 }
             }
         }
@@ -749,6 +750,9 @@ namespace JamBuilder
         private void resetCamera_Click(object sender, EventArgs e)
         {
             camera.zoom = 1.1;
+            //Move Camera into Level Bounds
+            camera.pos.X = Math.Max(0, Math.Min(level.Width*15 , camera.pos.X));
+            camera.pos.Y = Math.Max(-level.Height*15, Math.Min(0, camera.pos.Y));
         }
 
         bool a;

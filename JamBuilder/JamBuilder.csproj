@@ -124,6 +124,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\bmfonts\a.fnt" />
     <None Include="Resources\modifiers\ladder.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -313,6 +314,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\bmfonts\a.png" />
     <Content Include="Resources\move.png" />
     <Content Include="Resources\select.png" />
   </ItemGroup>

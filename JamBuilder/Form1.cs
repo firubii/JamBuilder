@@ -30,6 +30,8 @@ namespace JamBuilder
         Texturing texturing;
         Camera camera;
 
+        BmFont font;
+
         private System.Timers.Timer t;
 
         bool moveCam = false;
@@ -252,6 +254,8 @@ namespace JamBuilder
             objTexIds.Add(texturing.LoadTexture("Resources/obj/enemy.png"));
             objTexIds.Add(texturing.LoadTexture("Resources/obj/select.png"));
 
+            font = new BmFont(texturing, "a");
+
             t = new System.Timers.Timer(1000.0 / 60.0);
             t.Elapsed += t_Elapsed;
             t.Start();
@@ -268,7 +272,7 @@ namespace JamBuilder
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.ClearColor(Color.FromArgb(200, 200, 200));
 
-            renderer.Begin(glControl.Width, glControl.Height);
+            renderer.Init(glControl.Width, glControl.Height);
             camera.Transform();
 
             if (level != null)
@@ -369,6 +373,8 @@ namespace JamBuilder
                             {
                                 renderer.Draw(objTexIds[5], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                             }
+                            
+                            renderer.DrawString(level.Objects[i]["string kind"], font, new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f / (float)camera.zoom, 1f / (float)camera.zoom), new Vector4(0.2f,0.6f,0.2f,1f));
                         }
                         catch { }
                     }
@@ -389,6 +395,7 @@ namespace JamBuilder
                             {
                                 renderer.Draw(objTexIds[5], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                             }
+                            renderer.DrawString(level.GuestStarItems[i]["string kind"], font, new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f / (float)camera.zoom, 1f / (float)camera.zoom), new Vector4(0.2f, 0.3f, 0.6f, 1f));
                         }
                         catch { }
                     }
@@ -409,6 +416,7 @@ namespace JamBuilder
                             {
                                 renderer.Draw(objTexIds[5], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                             }
+                            renderer.DrawString(level.Items[i]["string kind"], font, new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f / (float)camera.zoom, 1f / (float)camera.zoom), new Vector4(0.6f, 0.6f, 0.2f, 1f));
                         }
                         catch { }
                     }
@@ -429,6 +437,7 @@ namespace JamBuilder
                             {
                                 renderer.Draw(objTexIds[5], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                             }
+                            renderer.DrawString(level.Bosses[i]["string kind"], font, new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f / (float)camera.zoom, 1f / (float)camera.zoom), new Vector4(0.9f, 0.1f, 0.1f, 1f));
                         }
                         catch { }
                     }
@@ -449,6 +458,7 @@ namespace JamBuilder
                             {
                                 renderer.Draw(objTexIds[5], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                             }
+                            renderer.DrawString(level.Enemies[i]["string kind"], font, new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f / (float)camera.zoom, 1f / (float)camera.zoom), new Vector4(0.8f, 0.2f, 0.2f, 1f));
                         }
                         catch { }
                     }

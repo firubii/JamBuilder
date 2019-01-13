@@ -4,4 +4,10 @@
     <ReferencePath>C:\Users\GalladeGuy\Desktop\Switch\StarAllies\JamBuilder-master\</ReferencePath>
     <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartWorkingDirectory>../../</StartWorkingDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <StartWorkingDirectory>../../</StartWorkingDirectory>
+  </PropertyGroup>
 </Project>

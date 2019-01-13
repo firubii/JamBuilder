@@ -24,6 +24,7 @@ namespace JamBuilder
         List<int> texIds = new List<int>();
         List<int> modTexIds = new List<int>();
         List<int> objTexIds = new List<int>();
+        Dictionary<short, int> blockTexIds = new Dictionary<short, int>();
 
         Renderer renderer;
         Texturing texturing;
@@ -237,9 +238,17 @@ namespace JamBuilder
             modTexIds.Add(texturing.LoadTexture("Resources/modifiers/ladder.png"));
             modTexIds.Add(texturing.LoadTexture("Resources/modifiers/water.png"));
             modTexIds.Add(texturing.LoadTexture("Resources/modifiers/damage.png"));
+
+            blockTexIds.Add(0xFF, texturing.LoadTexture("Resources/blocks/unknown.png"));
+            blockTexIds.Add(0, texturing.LoadTexture("Resources/blocks/star.png"));
+            blockTexIds.Add(4, texturing.LoadTexture("Resources/blocks/bomb.png"));
+            blockTexIds.Add(5, texturing.LoadTexture("Resources/blocks/bomb_chain_metal.png"));
+            blockTexIds.Add(6, texturing.LoadTexture("Resources/blocks/bomb_chain_stone.png"));
+            blockTexIds.Add(7, texturing.LoadTexture("Resources/blocks/bomb_chain_invisible.png"));
+            blockTexIds.Add(27, texturing.LoadTexture("Resources/blocks/bomb_chain_create.png"));
+
             objTexIds.Add(texturing.LoadTexture("Resources/obj/object.png"));
             objTexIds.Add(texturing.LoadTexture("Resources/obj/guestItem.png"));
-
             objTexIds.Add(texturing.LoadTexture("Resources/obj/item.png"));
             objTexIds.Add(texturing.LoadTexture("Resources/obj/boss.png"));
             objTexIds.Add(texturing.LoadTexture("Resources/obj/enemy.png"));
@@ -294,6 +303,32 @@ namespace JamBuilder
                         Collision c = level.TileCollision[ix];
                         Vector2 v = new Vector2(tx * 16f, -ty * 16f);
                         renderer.Draw(texIds[c.Shape], v, vec_scale, 17, 17);
+                    }
+                }
+
+                //Blocks
+                if (renderBlocksToolStripMenuItem.Checked)
+                {
+                    for (int ty = tileStartY; ty < tileEndY; ty++)
+                    {
+                        for (int tx = tileStartX; tx < tileEndX; tx++)
+                        {
+                            int ix = ty * (int)level.Width + tx;
+                            Block b = level.TileBlock[ix];
+                            Vector2 v = new Vector2(tx * 16f, -ty * 16f);
+
+                            if (b.ID != -1)
+                            {
+                                if (blockTexIds.ContainsKey(b.ID))
+                                {
+                                    renderer.Draw(blockTexIds[b.ID], v, vec_scale, 17, 17);
+                                }
+                                else
+                                {
+                                    renderer.Draw(blockTexIds[0xFF], v, vec_scale, 17, 17);
+                                }
+                            }
+                        }
                     }
                 }
 

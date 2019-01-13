@@ -267,125 +267,156 @@ namespace JamBuilder
 
                 //Crop Tiles outside camera view.
                 int tileStartX = (int)Math.Max(0,Math.Floor(
-                        (camera.pos.X - glControl.Width/camera.zoom*0.5f)/15.0f
+                        (camera.pos.X - glControl.Width/camera.zoom*0.5f)/16.0f
                     ));
                 int tileEndX = (int)Math.Min(level.Width, Math.Ceiling(
-                        (camera.pos.X + glControl.Width / camera.zoom*0.5f) / 15.0f
+                        (camera.pos.X + glControl.Width / camera.zoom*0.5f) / 16.0f
                     ));
                 int tileStartY = (int)Math.Max(0, 1+Math.Floor(
-                        -(camera.pos.Y + glControl.Height / camera.zoom*0.5f) / 15.0f
+                        -(camera.pos.Y + glControl.Height / camera.zoom*0.5f) / 16.0f
                     ));
                 int tileEndY = (int)Math.Min(level.Height,1+ Math.Ceiling(
-                        -(camera.pos.Y - glControl.Height / camera.zoom*0.5f) / 15.0f
+                        -(camera.pos.Y - glControl.Height / camera.zoom*0.5f) / 16.0f
                     ));
 
                 Vector2 vec_scale = new Vector2(1.0f, 1.0f);
 
+                //Collisions
                 for(int ty = tileStartY; ty < tileEndY; ty++)
                 {
                     for (int tx = tileStartX; tx < tileEndX; tx++)
                     {
                         int ix = ty * (int)level.Width + tx;
                         Collision c = level.TileCollision[ix];
-                        Vector2 v = new Vector2(tx * 15f, -ty * 15f);
+                        Vector2 v = new Vector2(tx * 16f, -ty * 16f);
                         renderer.Draw(texIds[c.Shape], v, vec_scale, 17, 17);
-                        if((c.Modifier & (1 << 1)) != 0)
+                    }
+                }
+
+                //Modifiers
+                if (renderTileModifiersToolStripMenuItem.Checked)
+                {
+                    for (int ty = tileStartY; ty < tileEndY; ty++)
+                    {
+                        for (int tx = tileStartX; tx < tileEndX; tx++)
                         {
-                            renderer.Draw(modTexIds[0], v, vec_scale, 17, 17);
-                        }
-                        if ((c.Modifier & (1 << 3)) != 0)
-                        {
-                            renderer.Draw(modTexIds[1], v, vec_scale, 17, 17);
-                        }
-                        if ((c.Modifier & (1 << 6)) != 0)
-                        {
-                            renderer.Draw(modTexIds[2], v, vec_scale, 17, 17);
+                            int ix = ty * (int)level.Width + tx;
+                            Collision c = level.TileCollision[ix];
+                            Vector2 v = new Vector2(tx * 16f, -ty * 16f);
+                            if ((c.Modifier & (1 << 1)) != 0)
+                            {
+                                renderer.Draw(modTexIds[0], v, vec_scale, 17, 17);
+                            }
+                            if ((c.Modifier & (1 << 3)) != 0)
+                            {
+                                renderer.Draw(modTexIds[1], v, vec_scale, 17, 17);
+                            }
+                            if ((c.Modifier & (1 << 6)) != 0)
+                            {
+                                renderer.Draw(modTexIds[2], v, vec_scale, 17, 17);
+                            }
                         }
                     }
                 }
 
-                for (int i = 0; i < level.Objects.Count; i++)
+                if (renderObjectPointsToolStripMenuItem.Checked)
                 {
-                    try
+                    for (int i = 0; i < level.Objects.Count; i++)
                     {
-                        int oX = int.Parse(level.Objects[i]["int x"].Replace(" ", "").Split('|')[0]);
-                        int oY = int.Parse(level.Objects[i]["int y"].Replace(" ", "").Split('|')[0]);
-                        int offX = int.Parse(level.Objects[i]["int x"].Replace(" ", "").Split('|')[1]);
-                        int offY = int.Parse(level.Objects[i]["int y"].Replace(" ", "").Split('|')[1]);
-                        renderer.Draw(objTexIds[0], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
-                        if (i == objList.SelectedIndex)
+                        try
                         {
-                            renderer.Draw(objTexIds[5], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
+                            int oX = int.Parse(level.Objects[i]["int x"].Replace(" ", "").Split('|')[0]);
+                            int oY = int.Parse(level.Objects[i]["int y"].Replace(" ", "").Split('|')[0]);
+                            int offX = int.Parse(level.Objects[i]["int x"].Replace(" ", "").Split('|')[1]);
+                            int offY = int.Parse(level.Objects[i]["int y"].Replace(" ", "").Split('|')[1]);
+                            renderer.Draw(objTexIds[0], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
+                            if (i == objList.SelectedIndex)
+                            {
+                                renderer.Draw(objTexIds[5], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
+                            }
                         }
-                    } catch { }
+                        catch { }
+                    }
                 }
 
-                for (int i = 0; i < level.GuestStarItems.Count; i++)
+                if (renderGuestStarItemPointsToolStripMenuItem.Checked)
                 {
-                    try
+                    for (int i = 0; i < level.GuestStarItems.Count; i++)
                     {
-                        int oX = int.Parse(level.GuestStarItems[i]["int x"].Replace(" ", "").Split('|')[0]);
-                        int oY = int.Parse(level.GuestStarItems[i]["int y"].Replace(" ", "").Split('|')[0]);
-                        int offX = int.Parse(level.GuestStarItems[i]["int x"].Replace(" ", "").Split('|')[1]);
-                        int offY = int.Parse(level.GuestStarItems[i]["int y"].Replace(" ", "").Split('|')[1]);
-                        renderer.Draw(objTexIds[1], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
-                        if (i == guestItemList.SelectedIndex)
+                        try
                         {
-                            renderer.Draw(objTexIds[5], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
+                            int oX = int.Parse(level.GuestStarItems[i]["int x"].Replace(" ", "").Split('|')[0]);
+                            int oY = int.Parse(level.GuestStarItems[i]["int y"].Replace(" ", "").Split('|')[0]);
+                            int offX = int.Parse(level.GuestStarItems[i]["int x"].Replace(" ", "").Split('|')[1]);
+                            int offY = int.Parse(level.GuestStarItems[i]["int y"].Replace(" ", "").Split('|')[1]);
+                            renderer.Draw(objTexIds[1], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
+                            if (i == guestItemList.SelectedIndex)
+                            {
+                                renderer.Draw(objTexIds[5], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
+                            }
                         }
+                        catch { }
                     }
-                    catch { }
                 }
 
-                for (int i = 0; i < level.Items.Count; i++)
+                if (renderItemPointsToolStripMenuItem.Checked)
                 {
-                    try
+                    for (int i = 0; i < level.Items.Count; i++)
                     {
-                        int oX = int.Parse(level.Items[i]["int x"].Replace(" ", "").Split('|')[0]);
-                        int oY = int.Parse(level.Items[i]["int y"].Replace(" ", "").Split('|')[0]);
-                        int offX = int.Parse(level.Items[i]["int x"].Replace(" ", "").Split('|')[1]);
-                        int offY = int.Parse(level.Items[i]["int y"].Replace(" ", "").Split('|')[1]);
-                        renderer.Draw(objTexIds[2], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
-                        if (i == itemList.SelectedIndex)
+                        try
                         {
-                            renderer.Draw(objTexIds[5], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
+                            int oX = int.Parse(level.Items[i]["int x"].Replace(" ", "").Split('|')[0]);
+                            int oY = int.Parse(level.Items[i]["int y"].Replace(" ", "").Split('|')[0]);
+                            int offX = int.Parse(level.Items[i]["int x"].Replace(" ", "").Split('|')[1]);
+                            int offY = int.Parse(level.Items[i]["int y"].Replace(" ", "").Split('|')[1]);
+                            renderer.Draw(objTexIds[2], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
+                            if (i == itemList.SelectedIndex)
+                            {
+                                renderer.Draw(objTexIds[5], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
+                            }
                         }
+                        catch { }
                     }
-                    catch { }
                 }
 
-                for (int i = 0; i < level.Bosses.Count; i++)
+                if (renderBossPointsToolStripMenuItem.Checked)
                 {
-                    try
+                    for (int i = 0; i < level.Bosses.Count; i++)
                     {
-                        int oX = int.Parse(level.Bosses[i]["int x"].Replace(" ", "").Split('|')[0]);
-                        int oY = int.Parse(level.Bosses[i]["int y"].Replace(" ", "").Split('|')[0]);
-                        int offX = int.Parse(level.Bosses[i]["int x"].Replace(" ", "").Split('|')[1]);
-                        int offY = int.Parse(level.Bosses[i]["int y"].Replace(" ", "").Split('|')[1]);
-                        renderer.Draw(objTexIds[3], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
-                        if (i == bossList.SelectedIndex)
+                        try
                         {
-                            renderer.Draw(objTexIds[5], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
+                            int oX = int.Parse(level.Bosses[i]["int x"].Replace(" ", "").Split('|')[0]);
+                            int oY = int.Parse(level.Bosses[i]["int y"].Replace(" ", "").Split('|')[0]);
+                            int offX = int.Parse(level.Bosses[i]["int x"].Replace(" ", "").Split('|')[1]);
+                            int offY = int.Parse(level.Bosses[i]["int y"].Replace(" ", "").Split('|')[1]);
+                            renderer.Draw(objTexIds[3], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
+                            if (i == bossList.SelectedIndex)
+                            {
+                                renderer.Draw(objTexIds[5], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
+                            }
                         }
+                        catch { }
                     }
-                    catch { }
                 }
 
-                for (int i = 0; i < level.Enemies.Count; i++)
+                if (renderEnemyPointsToolStripMenuItem.Checked)
                 {
-                    try
+                    for (int i = 0; i < level.Enemies.Count; i++)
                     {
-                        int oX = int.Parse(level.Enemies[i]["int x"].Replace(" ", "").Split('|')[0]);
-                        int oY = int.Parse(level.Enemies[i]["int y"].Replace(" ", "").Split('|')[0]);
-                        int offX = int.Parse(level.Enemies[i]["int x"].Replace(" ", "").Split('|')[1]);
-                        int offY = int.Parse(level.Enemies[i]["int y"].Replace(" ", "").Split('|')[1]);
-                        renderer.Draw(objTexIds[4], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
-                        if (i == enemyList.SelectedIndex)
+                        try
                         {
-                            renderer.Draw(objTexIds[5], new Vector2(((oX * 15f) - 3f) + (offX * 0.95f), ((-oY * 15f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
+                            int oX = int.Parse(level.Enemies[i]["int x"].Replace(" ", "").Split('|')[0]);
+                            int oY = int.Parse(level.Enemies[i]["int y"].Replace(" ", "").Split('|')[0]);
+                            int offX = int.Parse(level.Enemies[i]["int x"].Replace(" ", "").Split('|')[1]);
+                            int offY = int.Parse(level.Enemies[i]["int y"].Replace(" ", "").Split('|')[1]);
+                            renderer.Draw(objTexIds[4], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
+                            if (i == enemyList.SelectedIndex)
+                            {
+                                renderer.Draw(objTexIds[5], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
+                            }
                         }
+                        catch { }
                     }
-                    catch { }
                 }
             }
 

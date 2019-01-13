@@ -37,26 +37,31 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.objTab = new System.Windows.Forms.TabPage();
+            this.cloneObj = new System.Windows.Forms.Button();
             this.editObj = new System.Windows.Forms.Button();
             this.delObj = new System.Windows.Forms.Button();
             this.addObj = new System.Windows.Forms.Button();
             this.objList = new System.Windows.Forms.ListBox();
             this.guestStarItemTab = new System.Windows.Forms.TabPage();
+            this.cloneGuestItem = new System.Windows.Forms.Button();
             this.editGuestItem = new System.Windows.Forms.Button();
             this.delGuestItem = new System.Windows.Forms.Button();
             this.addGuestItem = new System.Windows.Forms.Button();
             this.guestItemList = new System.Windows.Forms.ListBox();
             this.itemTab = new System.Windows.Forms.TabPage();
+            this.cloneItem = new System.Windows.Forms.Button();
             this.editItem = new System.Windows.Forms.Button();
             this.delItem = new System.Windows.Forms.Button();
             this.addItem = new System.Windows.Forms.Button();
             this.itemList = new System.Windows.Forms.ListBox();
             this.bossTab = new System.Windows.Forms.TabPage();
+            this.cloneBoss = new System.Windows.Forms.Button();
             this.editBoss = new System.Windows.Forms.Button();
             this.delBoss = new System.Windows.Forms.Button();
             this.addBoss = new System.Windows.Forms.Button();
             this.bossList = new System.Windows.Forms.ListBox();
             this.enemyTab = new System.Windows.Forms.TabPage();
+            this.cloneEnemy = new System.Windows.Forms.Button();
             this.editEnemy = new System.Windows.Forms.Button();
             this.delEnemy = new System.Windows.Forms.Button();
             this.addEnemy = new System.Windows.Forms.Button();
@@ -132,11 +137,14 @@
             this.m2 = new System.Windows.Forms.Button();
             this.move = new System.Windows.Forms.Button();
             this.select = new System.Windows.Forms.Button();
-            this.cloneObj = new System.Windows.Forms.Button();
-            this.cloneGuestItem = new System.Windows.Forms.Button();
-            this.cloneItem = new System.Windows.Forms.Button();
-            this.cloneBoss = new System.Windows.Forms.Button();
-            this.cloneEnemy = new System.Windows.Forms.Button();
+            this.renderSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderBlocksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderTileModifiersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderObjectPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderGuestStarItemPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderItemPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderBossPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderEnemyPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -157,7 +165,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.stageSettingsToolStripMenuItem});
+            this.stageSettingsToolStripMenuItem,
+            this.renderSettingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1138, 24);
@@ -246,6 +255,16 @@
             this.objTab.Text = "Objects";
             this.objTab.UseVisualStyleBackColor = true;
             // 
+            // cloneObj
+            // 
+            this.cloneObj.Location = new System.Drawing.Point(187, 385);
+            this.cloneObj.Name = "cloneObj";
+            this.cloneObj.Size = new System.Drawing.Size(60, 23);
+            this.cloneObj.TabIndex = 4;
+            this.cloneObj.Text = "Duplicate";
+            this.cloneObj.UseVisualStyleBackColor = true;
+            this.cloneObj.Click += new System.EventHandler(this.cloneObj_Click);
+            // 
             // editObj
             // 
             this.editObj.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -304,6 +323,16 @@
             this.guestStarItemTab.Text = "Guest Star Items";
             this.guestStarItemTab.UseVisualStyleBackColor = true;
             // 
+            // cloneGuestItem
+            // 
+            this.cloneGuestItem.Location = new System.Drawing.Point(187, 385);
+            this.cloneGuestItem.Name = "cloneGuestItem";
+            this.cloneGuestItem.Size = new System.Drawing.Size(60, 23);
+            this.cloneGuestItem.TabIndex = 8;
+            this.cloneGuestItem.Text = "Duplicate";
+            this.cloneGuestItem.UseVisualStyleBackColor = true;
+            this.cloneGuestItem.Click += new System.EventHandler(this.cloneGuestItem_Click);
+            // 
             // editGuestItem
             // 
             this.editGuestItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -360,6 +389,17 @@
             this.itemTab.TabIndex = 2;
             this.itemTab.Text = "Items";
             this.itemTab.UseVisualStyleBackColor = true;
+            // 
+            // cloneItem
+            // 
+            this.cloneItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cloneItem.Location = new System.Drawing.Point(187, 385);
+            this.cloneItem.Name = "cloneItem";
+            this.cloneItem.Size = new System.Drawing.Size(60, 23);
+            this.cloneItem.TabIndex = 8;
+            this.cloneItem.Text = "Duplicate";
+            this.cloneItem.UseVisualStyleBackColor = true;
+            this.cloneItem.Click += new System.EventHandler(this.cloneItem_Click);
             // 
             // editItem
             // 
@@ -418,6 +458,17 @@
             this.bossTab.Text = "Bosses";
             this.bossTab.UseVisualStyleBackColor = true;
             // 
+            // cloneBoss
+            // 
+            this.cloneBoss.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cloneBoss.Location = new System.Drawing.Point(187, 385);
+            this.cloneBoss.Name = "cloneBoss";
+            this.cloneBoss.Size = new System.Drawing.Size(60, 23);
+            this.cloneBoss.TabIndex = 8;
+            this.cloneBoss.Text = "Duplicate";
+            this.cloneBoss.UseVisualStyleBackColor = true;
+            this.cloneBoss.Click += new System.EventHandler(this.cloneBoss_Click);
+            // 
             // editBoss
             // 
             this.editBoss.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -474,6 +525,17 @@
             this.enemyTab.TabIndex = 4;
             this.enemyTab.Text = "Enemies";
             this.enemyTab.UseVisualStyleBackColor = true;
+            // 
+            // cloneEnemy
+            // 
+            this.cloneEnemy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cloneEnemy.Location = new System.Drawing.Point(187, 385);
+            this.cloneEnemy.Name = "cloneEnemy";
+            this.cloneEnemy.Size = new System.Drawing.Size(60, 23);
+            this.cloneEnemy.TabIndex = 8;
+            this.cloneEnemy.Text = "Duplicate";
+            this.cloneEnemy.UseVisualStyleBackColor = true;
+            this.cloneEnemy.Click += new System.EventHandler(this.cloneEnemy_Click);
             // 
             // editEnemy
             // 
@@ -1353,58 +1415,82 @@
             this.select.UseVisualStyleBackColor = true;
             this.select.Click += new System.EventHandler(this.select_Click);
             // 
-            // cloneObj
+            // renderSettingsToolStripMenuItem
             // 
-            this.cloneObj.Location = new System.Drawing.Point(187, 385);
-            this.cloneObj.Name = "cloneObj";
-            this.cloneObj.Size = new System.Drawing.Size(60, 23);
-            this.cloneObj.TabIndex = 4;
-            this.cloneObj.Text = "Duplicate";
-            this.cloneObj.UseVisualStyleBackColor = true;
-            this.cloneObj.Click += new System.EventHandler(this.cloneObj_Click);
+            this.renderSettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.renderTileModifiersToolStripMenuItem,
+            this.renderBlocksToolStripMenuItem,
+            this.renderObjectPointsToolStripMenuItem,
+            this.renderGuestStarItemPointsToolStripMenuItem,
+            this.renderItemPointsToolStripMenuItem,
+            this.renderBossPointsToolStripMenuItem,
+            this.renderEnemyPointsToolStripMenuItem});
+            this.renderSettingsToolStripMenuItem.Name = "renderSettingsToolStripMenuItem";
+            this.renderSettingsToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.renderSettingsToolStripMenuItem.Text = "Render Settings";
             // 
-            // cloneGuestItem
+            // renderBlocksToolStripMenuItem
             // 
-            this.cloneGuestItem.Location = new System.Drawing.Point(187, 385);
-            this.cloneGuestItem.Name = "cloneGuestItem";
-            this.cloneGuestItem.Size = new System.Drawing.Size(60, 23);
-            this.cloneGuestItem.TabIndex = 8;
-            this.cloneGuestItem.Text = "Duplicate";
-            this.cloneGuestItem.UseVisualStyleBackColor = true;
-            this.cloneGuestItem.Click += new System.EventHandler(this.cloneGuestItem_Click);
+            this.renderBlocksToolStripMenuItem.Checked = true;
+            this.renderBlocksToolStripMenuItem.CheckOnClick = true;
+            this.renderBlocksToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.renderBlocksToolStripMenuItem.Name = "renderBlocksToolStripMenuItem";
+            this.renderBlocksToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.renderBlocksToolStripMenuItem.Text = "Render Blocks";
             // 
-            // cloneItem
+            // renderTileModifiersToolStripMenuItem
             // 
-            this.cloneItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cloneItem.Location = new System.Drawing.Point(187, 385);
-            this.cloneItem.Name = "cloneItem";
-            this.cloneItem.Size = new System.Drawing.Size(60, 23);
-            this.cloneItem.TabIndex = 8;
-            this.cloneItem.Text = "Duplicate";
-            this.cloneItem.UseVisualStyleBackColor = true;
-            this.cloneItem.Click += new System.EventHandler(this.cloneItem_Click);
+            this.renderTileModifiersToolStripMenuItem.Checked = true;
+            this.renderTileModifiersToolStripMenuItem.CheckOnClick = true;
+            this.renderTileModifiersToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.renderTileModifiersToolStripMenuItem.Name = "renderTileModifiersToolStripMenuItem";
+            this.renderTileModifiersToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.renderTileModifiersToolStripMenuItem.Text = "Render Tile Modifiers";
             // 
-            // cloneBoss
+            // renderObjectPointsToolStripMenuItem
             // 
-            this.cloneBoss.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cloneBoss.Location = new System.Drawing.Point(187, 385);
-            this.cloneBoss.Name = "cloneBoss";
-            this.cloneBoss.Size = new System.Drawing.Size(60, 23);
-            this.cloneBoss.TabIndex = 8;
-            this.cloneBoss.Text = "Duplicate";
-            this.cloneBoss.UseVisualStyleBackColor = true;
-            this.cloneBoss.Click += new System.EventHandler(this.cloneBoss_Click);
+            this.renderObjectPointsToolStripMenuItem.Checked = true;
+            this.renderObjectPointsToolStripMenuItem.CheckOnClick = true;
+            this.renderObjectPointsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.renderObjectPointsToolStripMenuItem.Name = "renderObjectPointsToolStripMenuItem";
+            this.renderObjectPointsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.renderObjectPointsToolStripMenuItem.Text = "Render Object Points";
             // 
-            // cloneEnemy
+            // renderGuestStarItemPointsToolStripMenuItem
             // 
-            this.cloneEnemy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cloneEnemy.Location = new System.Drawing.Point(187, 385);
-            this.cloneEnemy.Name = "cloneEnemy";
-            this.cloneEnemy.Size = new System.Drawing.Size(60, 23);
-            this.cloneEnemy.TabIndex = 8;
-            this.cloneEnemy.Text = "Duplicate";
-            this.cloneEnemy.UseVisualStyleBackColor = true;
-            this.cloneEnemy.Click += new System.EventHandler(this.cloneEnemy_Click);
+            this.renderGuestStarItemPointsToolStripMenuItem.Checked = true;
+            this.renderGuestStarItemPointsToolStripMenuItem.CheckOnClick = true;
+            this.renderGuestStarItemPointsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.renderGuestStarItemPointsToolStripMenuItem.Name = "renderGuestStarItemPointsToolStripMenuItem";
+            this.renderGuestStarItemPointsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.renderGuestStarItemPointsToolStripMenuItem.Text = "Render Guest Star Item Points";
+            // 
+            // renderItemPointsToolStripMenuItem
+            // 
+            this.renderItemPointsToolStripMenuItem.Checked = true;
+            this.renderItemPointsToolStripMenuItem.CheckOnClick = true;
+            this.renderItemPointsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.renderItemPointsToolStripMenuItem.Name = "renderItemPointsToolStripMenuItem";
+            this.renderItemPointsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.renderItemPointsToolStripMenuItem.Text = "Render Item Points";
+            // 
+            // renderBossPointsToolStripMenuItem
+            // 
+            this.renderBossPointsToolStripMenuItem.Checked = true;
+            this.renderBossPointsToolStripMenuItem.CheckOnClick = true;
+            this.renderBossPointsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.renderBossPointsToolStripMenuItem.Name = "renderBossPointsToolStripMenuItem";
+            this.renderBossPointsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.renderBossPointsToolStripMenuItem.Text = "Render Boss Points";
+            // 
+            // renderEnemyPointsToolStripMenuItem
+            // 
+            this.renderEnemyPointsToolStripMenuItem.Checked = true;
+            this.renderEnemyPointsToolStripMenuItem.CheckOnClick = true;
+            this.renderEnemyPointsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.renderEnemyPointsToolStripMenuItem.Name = "renderEnemyPointsToolStripMenuItem";
+            this.renderEnemyPointsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.renderEnemyPointsToolStripMenuItem.Text = "Render Enemy Points";
             // 
             // Form1
             // 
@@ -1565,6 +1651,14 @@
         private System.Windows.Forms.Button cloneItem;
         private System.Windows.Forms.Button cloneBoss;
         private System.Windows.Forms.Button cloneEnemy;
+        private System.Windows.Forms.ToolStripMenuItem renderSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renderTileModifiersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renderBlocksToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renderObjectPointsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renderGuestStarItemPointsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renderItemPointsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renderBossPointsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renderEnemyPointsToolStripMenuItem;
     }
 }
 

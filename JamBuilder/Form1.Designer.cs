@@ -618,7 +618,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(310, 445);
+            this.label1.Location = new System.Drawing.Point(321, 459);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 9;
@@ -627,7 +627,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(310, 473);
+            this.label2.Location = new System.Drawing.Point(527, 459);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 10;
@@ -636,7 +636,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(370, 458);
+            this.label3.Location = new System.Drawing.Point(381, 445);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(14, 13);
             this.label3.TabIndex = 15;
@@ -645,7 +645,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(516, 458);
+            this.label4.Location = new System.Drawing.Point(381, 473);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(14, 13);
             this.label4.TabIndex = 22;
@@ -653,7 +653,7 @@
             // 
             // xCoord
             // 
-            this.xCoord.Location = new System.Drawing.Point(390, 443);
+            this.xCoord.Location = new System.Drawing.Point(401, 443);
             this.xCoord.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -666,33 +666,33 @@
             // 
             // xOffset
             // 
-            this.xOffset.Location = new System.Drawing.Point(390, 471);
+            this.xOffset.Location = new System.Drawing.Point(568, 443);
             this.xOffset.Maximum = new decimal(new int[] {
             15,
             0,
             0,
             0});
             this.xOffset.Name = "xOffset";
-            this.xOffset.Size = new System.Drawing.Size(120, 20);
+            this.xOffset.Size = new System.Drawing.Size(41, 20);
             this.xOffset.TabIndex = 24;
             this.xOffset.ValueChanged += new System.EventHandler(this.xOffset_ValueChanged);
             // 
             // yOffset
             // 
-            this.yOffset.Location = new System.Drawing.Point(536, 471);
+            this.yOffset.Location = new System.Drawing.Point(568, 471);
             this.yOffset.Maximum = new decimal(new int[] {
             15,
             0,
             0,
             0});
             this.yOffset.Name = "yOffset";
-            this.yOffset.Size = new System.Drawing.Size(120, 20);
+            this.yOffset.Size = new System.Drawing.Size(41, 20);
             this.yOffset.TabIndex = 26;
             this.yOffset.ValueChanged += new System.EventHandler(this.yOffset_ValueChanged);
             // 
             // yCoord
             // 
-            this.yCoord.Location = new System.Drawing.Point(536, 443);
+            this.yCoord.Location = new System.Drawing.Point(401, 471);
             this.yCoord.Maximum = new decimal(new int[] {
             2147483647,
             0,

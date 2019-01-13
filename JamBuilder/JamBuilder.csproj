@@ -58,6 +58,7 @@
     <Compile Include="AddObj.Designer.cs">
       <DependentUpon>AddObj.cs</DependentUpon>
     </Compile>
+    <Compile Include="BmFont.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

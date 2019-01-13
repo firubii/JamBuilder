@@ -34,6 +34,14 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stageSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderTileModifiersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderBlocksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderObjectPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderGuestStarItemPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderItemPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderBossPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderEnemyPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.objTab = new System.Windows.Forms.TabPage();
@@ -137,14 +145,6 @@
             this.m2 = new System.Windows.Forms.Button();
             this.move = new System.Windows.Forms.Button();
             this.select = new System.Windows.Forms.Button();
-            this.renderSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.renderBlocksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.renderTileModifiersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.renderObjectPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.renderGuestStarItemPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.renderItemPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.renderBossPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.renderEnemyPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -216,6 +216,83 @@
             this.stageSettingsToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
             this.stageSettingsToolStripMenuItem.Text = "Stage Settings";
             this.stageSettingsToolStripMenuItem.Click += new System.EventHandler(this.stageSettingsToolStripMenuItem_Click);
+            // 
+            // renderSettingsToolStripMenuItem
+            // 
+            this.renderSettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.renderTileModifiersToolStripMenuItem,
+            this.renderBlocksToolStripMenuItem,
+            this.renderObjectPointsToolStripMenuItem,
+            this.renderGuestStarItemPointsToolStripMenuItem,
+            this.renderItemPointsToolStripMenuItem,
+            this.renderBossPointsToolStripMenuItem,
+            this.renderEnemyPointsToolStripMenuItem});
+            this.renderSettingsToolStripMenuItem.Name = "renderSettingsToolStripMenuItem";
+            this.renderSettingsToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.renderSettingsToolStripMenuItem.Text = "Render Settings";
+            // 
+            // renderTileModifiersToolStripMenuItem
+            // 
+            this.renderTileModifiersToolStripMenuItem.Checked = true;
+            this.renderTileModifiersToolStripMenuItem.CheckOnClick = true;
+            this.renderTileModifiersToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.renderTileModifiersToolStripMenuItem.Name = "renderTileModifiersToolStripMenuItem";
+            this.renderTileModifiersToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.renderTileModifiersToolStripMenuItem.Text = "Render Tile Modifiers";
+            // 
+            // renderBlocksToolStripMenuItem
+            // 
+            this.renderBlocksToolStripMenuItem.Checked = true;
+            this.renderBlocksToolStripMenuItem.CheckOnClick = true;
+            this.renderBlocksToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.renderBlocksToolStripMenuItem.Name = "renderBlocksToolStripMenuItem";
+            this.renderBlocksToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.renderBlocksToolStripMenuItem.Text = "Render Blocks";
+            // 
+            // renderObjectPointsToolStripMenuItem
+            // 
+            this.renderObjectPointsToolStripMenuItem.Checked = true;
+            this.renderObjectPointsToolStripMenuItem.CheckOnClick = true;
+            this.renderObjectPointsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.renderObjectPointsToolStripMenuItem.Name = "renderObjectPointsToolStripMenuItem";
+            this.renderObjectPointsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.renderObjectPointsToolStripMenuItem.Text = "Render Object Points";
+            // 
+            // renderGuestStarItemPointsToolStripMenuItem
+            // 
+            this.renderGuestStarItemPointsToolStripMenuItem.Checked = true;
+            this.renderGuestStarItemPointsToolStripMenuItem.CheckOnClick = true;
+            this.renderGuestStarItemPointsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.renderGuestStarItemPointsToolStripMenuItem.Name = "renderGuestStarItemPointsToolStripMenuItem";
+            this.renderGuestStarItemPointsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.renderGuestStarItemPointsToolStripMenuItem.Text = "Render Guest Star Item Points";
+            // 
+            // renderItemPointsToolStripMenuItem
+            // 
+            this.renderItemPointsToolStripMenuItem.Checked = true;
+            this.renderItemPointsToolStripMenuItem.CheckOnClick = true;
+            this.renderItemPointsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.renderItemPointsToolStripMenuItem.Name = "renderItemPointsToolStripMenuItem";
+            this.renderItemPointsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.renderItemPointsToolStripMenuItem.Text = "Render Item Points";
+            // 
+            // renderBossPointsToolStripMenuItem
+            // 
+            this.renderBossPointsToolStripMenuItem.Checked = true;
+            this.renderBossPointsToolStripMenuItem.CheckOnClick = true;
+            this.renderBossPointsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.renderBossPointsToolStripMenuItem.Name = "renderBossPointsToolStripMenuItem";
+            this.renderBossPointsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.renderBossPointsToolStripMenuItem.Text = "Render Boss Points";
+            // 
+            // renderEnemyPointsToolStripMenuItem
+            // 
+            this.renderEnemyPointsToolStripMenuItem.Checked = true;
+            this.renderEnemyPointsToolStripMenuItem.CheckOnClick = true;
+            this.renderEnemyPointsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.renderEnemyPointsToolStripMenuItem.Name = "renderEnemyPointsToolStripMenuItem";
+            this.renderEnemyPointsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.renderEnemyPointsToolStripMenuItem.Text = "Render Enemy Points";
             // 
             // groupBox1
             // 
@@ -1414,83 +1491,6 @@
             this.select.TabIndex = 3;
             this.select.UseVisualStyleBackColor = true;
             this.select.Click += new System.EventHandler(this.select_Click);
-            // 
-            // renderSettingsToolStripMenuItem
-            // 
-            this.renderSettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.renderTileModifiersToolStripMenuItem,
-            this.renderBlocksToolStripMenuItem,
-            this.renderObjectPointsToolStripMenuItem,
-            this.renderGuestStarItemPointsToolStripMenuItem,
-            this.renderItemPointsToolStripMenuItem,
-            this.renderBossPointsToolStripMenuItem,
-            this.renderEnemyPointsToolStripMenuItem});
-            this.renderSettingsToolStripMenuItem.Name = "renderSettingsToolStripMenuItem";
-            this.renderSettingsToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
-            this.renderSettingsToolStripMenuItem.Text = "Render Settings";
-            // 
-            // renderBlocksToolStripMenuItem
-            // 
-            this.renderBlocksToolStripMenuItem.Checked = true;
-            this.renderBlocksToolStripMenuItem.CheckOnClick = true;
-            this.renderBlocksToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.renderBlocksToolStripMenuItem.Name = "renderBlocksToolStripMenuItem";
-            this.renderBlocksToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
-            this.renderBlocksToolStripMenuItem.Text = "Render Blocks";
-            // 
-            // renderTileModifiersToolStripMenuItem
-            // 
-            this.renderTileModifiersToolStripMenuItem.Checked = true;
-            this.renderTileModifiersToolStripMenuItem.CheckOnClick = true;
-            this.renderTileModifiersToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.renderTileModifiersToolStripMenuItem.Name = "renderTileModifiersToolStripMenuItem";
-            this.renderTileModifiersToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
-            this.renderTileModifiersToolStripMenuItem.Text = "Render Tile Modifiers";
-            // 
-            // renderObjectPointsToolStripMenuItem
-            // 
-            this.renderObjectPointsToolStripMenuItem.Checked = true;
-            this.renderObjectPointsToolStripMenuItem.CheckOnClick = true;
-            this.renderObjectPointsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.renderObjectPointsToolStripMenuItem.Name = "renderObjectPointsToolStripMenuItem";
-            this.renderObjectPointsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
-            this.renderObjectPointsToolStripMenuItem.Text = "Render Object Points";
-            // 
-            // renderGuestStarItemPointsToolStripMenuItem
-            // 
-            this.renderGuestStarItemPointsToolStripMenuItem.Checked = true;
-            this.renderGuestStarItemPointsToolStripMenuItem.CheckOnClick = true;
-            this.renderGuestStarItemPointsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.renderGuestStarItemPointsToolStripMenuItem.Name = "renderGuestStarItemPointsToolStripMenuItem";
-            this.renderGuestStarItemPointsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
-            this.renderGuestStarItemPointsToolStripMenuItem.Text = "Render Guest Star Item Points";
-            // 
-            // renderItemPointsToolStripMenuItem
-            // 
-            this.renderItemPointsToolStripMenuItem.Checked = true;
-            this.renderItemPointsToolStripMenuItem.CheckOnClick = true;
-            this.renderItemPointsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.renderItemPointsToolStripMenuItem.Name = "renderItemPointsToolStripMenuItem";
-            this.renderItemPointsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
-            this.renderItemPointsToolStripMenuItem.Text = "Render Item Points";
-            // 
-            // renderBossPointsToolStripMenuItem
-            // 
-            this.renderBossPointsToolStripMenuItem.Checked = true;
-            this.renderBossPointsToolStripMenuItem.CheckOnClick = true;
-            this.renderBossPointsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.renderBossPointsToolStripMenuItem.Name = "renderBossPointsToolStripMenuItem";
-            this.renderBossPointsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
-            this.renderBossPointsToolStripMenuItem.Text = "Render Boss Points";
-            // 
-            // renderEnemyPointsToolStripMenuItem
-            // 
-            this.renderEnemyPointsToolStripMenuItem.Checked = true;
-            this.renderEnemyPointsToolStripMenuItem.CheckOnClick = true;
-            this.renderEnemyPointsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.renderEnemyPointsToolStripMenuItem.Name = "renderEnemyPointsToolStripMenuItem";
-            this.renderEnemyPointsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
-            this.renderEnemyPointsToolStripMenuItem.Text = "Render Enemy Points";
             // 
             // Form1
             // 

@@ -97,11 +97,11 @@ namespace JamBuilder
                 enemyList.Items.Add(level.Enemies[i]["string kind"]);
             }
 
-            if (tabControl1.SelectedTab == objTab) objList.SelectedIndex = selIndex;
-            if (tabControl1.SelectedTab == guestStarItemTab) guestItemList.SelectedIndex = selIndex;
-            if (tabControl1.SelectedTab == itemTab) itemList.SelectedIndex = selIndex;
-            if (tabControl1.SelectedTab == bossTab) bossList.SelectedIndex = selIndex;
-            if (tabControl1.SelectedTab == enemyTab) enemyList.SelectedIndex = selIndex;
+            if (tabControl1.SelectedTab == objTab && objList.Items.Count >= selIndex + 1) objList.SelectedIndex = selIndex;
+            if (tabControl1.SelectedTab == guestStarItemTab && guestItemList.Items.Count >= selIndex + 1) guestItemList.SelectedIndex = selIndex;
+            if (tabControl1.SelectedTab == itemTab && itemList.Items.Count >= selIndex + 1) itemList.SelectedIndex = selIndex;
+            if (tabControl1.SelectedTab == bossTab && bossList.Items.Count >= selIndex + 1) bossList.SelectedIndex = selIndex;
+            if (tabControl1.SelectedTab == enemyTab && enemyList.Items.Count >= selIndex + 1) enemyList.SelectedIndex = selIndex;
 
             objList.EndUpdate();
             guestItemList.EndUpdate();
@@ -839,8 +839,8 @@ namespace JamBuilder
         {
             camera.zoom = 1.1;
             //Move Camera into Level Bounds
-            camera.pos.X = Math.Max(0, Math.Min(level.Width*15 , camera.pos.X));
-            camera.pos.Y = Math.Max(-level.Height*15, Math.Min(0, camera.pos.Y));
+            camera.pos.X = Math.Max(0, Math.Min(level.Width*16 , camera.pos.X));
+            camera.pos.Y = Math.Max(-level.Height*16, Math.Min(0, camera.pos.Y));
         }
 
         bool a;
@@ -849,16 +849,19 @@ namespace JamBuilder
         {
             if (!a)
             {
-                moveObj = 0;
-                int oX = int.Parse(level.Objects[objList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
-                int oY = int.Parse(level.Objects[objList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
-                int offX = int.Parse(level.Objects[objList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
-                int offY = int.Parse(level.Objects[objList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
-                xCoord.Value = oX;
-                xOffset.Value = offX;
-                yCoord.Value = oY;
-                yOffset.Value = offY;
                 a = true;
+                try
+                {
+                    moveObj = 0;
+                    int oX = int.Parse(level.Objects[objList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
+                    int oY = int.Parse(level.Objects[objList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
+                    int offX = int.Parse(level.Objects[objList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
+                    int offY = int.Parse(level.Objects[objList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+                    xCoord.Value = oX;
+                    xOffset.Value = offX;
+                    yCoord.Value = oY;
+                    yOffset.Value = offY;
+                } catch { }
                 guestItemList.ClearSelected();
                 itemList.ClearSelected();
                 bossList.ClearSelected();
@@ -871,16 +874,19 @@ namespace JamBuilder
         {
             if (!a)
             {
-                moveObj = 1;
-                int oX = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
-                int oY = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
-                int offX = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
-                int offY = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
-                xCoord.Value = oX;
-                xOffset.Value = offX;
-                yCoord.Value = oY;
-                yOffset.Value = offY;
                 a = true;
+                try
+                {
+                    moveObj = 1;
+                    int oX = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
+                    int oY = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
+                    int offX = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
+                    int offY = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+                    xCoord.Value = oX;
+                    xOffset.Value = offX;
+                    yCoord.Value = oY;
+                    yOffset.Value = offY;
+                } catch { }
                 objList.ClearSelected();
                 itemList.ClearSelected();
                 bossList.ClearSelected();
@@ -893,38 +899,45 @@ namespace JamBuilder
         {
             if (!a)
             {
-                moveObj = 2;
-                int oX = int.Parse(level.Items[itemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
-                int oY = int.Parse(level.Items[itemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
-                int offX = int.Parse(level.Items[itemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
-                int offY = int.Parse(level.Items[itemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
-                xCoord.Value = oX;
-                xOffset.Value = offX;
-                yCoord.Value = oY;
-                yOffset.Value = offY;
                 a = true;
+                try
+                {
+                    moveObj = 2;
+                    int oX = int.Parse(level.Items[itemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
+                    int oY = int.Parse(level.Items[itemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
+                    int offX = int.Parse(level.Items[itemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
+                    int offY = int.Parse(level.Items[itemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+                    xCoord.Value = oX;
+                    xOffset.Value = offX;
+                    yCoord.Value = oY;
+                    yOffset.Value = offY;
+                } catch { }
                 objList.ClearSelected();
                 guestItemList.ClearSelected();
                 bossList.ClearSelected();
                 enemyList.ClearSelected();
                 a = false;
             }
+            
         }
 
         private void bossList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!a)
             {
-                moveObj = 3;
-                int oX = int.Parse(level.Bosses[bossList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
-                int oY = int.Parse(level.Bosses[bossList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
-                int offX = int.Parse(level.Bosses[bossList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
-                int offY = int.Parse(level.Bosses[bossList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
-                xCoord.Value = oX;
-                xOffset.Value = offX;
-                yCoord.Value = oY;
-                yOffset.Value = offY;
                 a = true;
+                try
+                {
+                    moveObj = 3;
+                    int oX = int.Parse(level.Bosses[bossList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
+                    int oY = int.Parse(level.Bosses[bossList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
+                    int offX = int.Parse(level.Bosses[bossList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
+                    int offY = int.Parse(level.Bosses[bossList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+                    xCoord.Value = oX;
+                    xOffset.Value = offX;
+                    yCoord.Value = oY;
+                    yOffset.Value = offY;
+                } catch { }
                 objList.ClearSelected();
                 guestItemList.ClearSelected();
                 itemList.ClearSelected();
@@ -937,16 +950,19 @@ namespace JamBuilder
         {
             if (!a)
             {
-                moveObj = 4;
-                int oX = int.Parse(level.Enemies[enemyList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
-                int oY = int.Parse(level.Enemies[enemyList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
-                int offX = int.Parse(level.Enemies[enemyList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
-                int offY = int.Parse(level.Enemies[enemyList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
-                xCoord.Value = oX;
-                xOffset.Value = offX;
-                yCoord.Value = oY;
-                yOffset.Value = offY;
                 a = true;
+                try
+                {
+                    moveObj = 4;
+                    int oX = int.Parse(level.Enemies[enemyList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
+                    int oY = int.Parse(level.Enemies[enemyList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
+                    int offX = int.Parse(level.Enemies[enemyList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
+                    int offY = int.Parse(level.Enemies[enemyList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+                    xCoord.Value = oX;
+                    xOffset.Value = offX;
+                    yCoord.Value = oY;
+                    yOffset.Value = offY;
+                } catch { }
                 objList.ClearSelected();
                 guestItemList.ClearSelected();
                 itemList.ClearSelected();

@@ -53,7 +53,7 @@ namespace JamBuilder.Rendering
             GL.Vertex2(v.X * scale.X + pos.X, v.Y * scale.Y + pos.Y);
         }
 
-        public void DrawString(int tex, ArrayList stringData, Vector2 pos, Vector2 scale, Vector4 color)
+        public void DrawString(int tex, List<Vector2> stringData, Vector2 pos, Vector2 scale, Vector4 color)
         {
             GL.BindTexture(TextureTarget.Texture2D, tex);
 
@@ -72,7 +72,7 @@ namespace JamBuilder.Rendering
             GL.End();
         }
 
-        public void DrawString(int tex, ArrayList stringData, Vector2 pos, Vector2 scale)
+        public void DrawString(int tex, List<Vector2> stringData, Vector2 pos, Vector2 scale)
         {
             DrawString(tex, stringData, pos, scale, WHITE);
         }

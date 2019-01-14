@@ -145,6 +145,7 @@
             this.m2 = new System.Windows.Forms.Button();
             this.move = new System.Windows.Forms.Button();
             this.select = new System.Windows.Forms.Button();
+            this.renderObjectNamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -222,6 +223,7 @@
             this.renderSettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.renderTileModifiersToolStripMenuItem,
             this.renderBlocksToolStripMenuItem,
+            this.renderObjectNamesToolStripMenuItem,
             this.renderObjectPointsToolStripMenuItem,
             this.renderGuestStarItemPointsToolStripMenuItem,
             this.renderItemPointsToolStripMenuItem,
@@ -1492,6 +1494,15 @@
             this.select.UseVisualStyleBackColor = true;
             this.select.Click += new System.EventHandler(this.select_Click);
             // 
+            // renderObjectNamesToolStripMenuItem
+            // 
+            this.renderObjectNamesToolStripMenuItem.Checked = true;
+            this.renderObjectNamesToolStripMenuItem.CheckOnClick = true;
+            this.renderObjectNamesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.renderObjectNamesToolStripMenuItem.Name = "renderObjectNamesToolStripMenuItem";
+            this.renderObjectNamesToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.renderObjectNamesToolStripMenuItem.Text = "Render Object Names";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1659,6 +1670,7 @@
         private System.Windows.Forms.ToolStripMenuItem renderItemPointsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem renderBossPointsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem renderEnemyPointsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renderObjectNamesToolStripMenuItem;
     }
 }
 

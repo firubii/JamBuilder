@@ -56,9 +56,9 @@ namespace KSALVL
             {
                 Collision collision = new Collision();
                 collision.Modifier = reader.ReadByte();
-                collision.Unk_1 = reader.ReadByte();
+                collision.Material = reader.ReadByte();
                 collision.Shape = reader.ReadByte();
-                collision.Unk_2 = reader.ReadByte();
+                collision.Unk = reader.ReadByte();
                 TileCollision.Add(collision);
             }
 
@@ -269,9 +269,9 @@ namespace KSALVL
             for (int i = 0; i < TileCollision.Count; i++)
             {
                 writer.Write(TileCollision[i].Modifier);
-                writer.Write(TileCollision[i].Unk_1);
+                writer.Write(TileCollision[i].Material);
                 writer.Write(TileCollision[i].Shape);
-                writer.Write(TileCollision[i].Unk_2);
+                writer.Write(TileCollision[i].Unk);
             }
             while ((writer.BaseStream.Length).ToString("X").Last() != '0' && (writer.BaseStream.Length).ToString("X").Last() != '4' && (writer.BaseStream.Length).ToString("X").Last() != '8' && (writer.BaseStream.Length).ToString("X").Last() != 'C')
             {

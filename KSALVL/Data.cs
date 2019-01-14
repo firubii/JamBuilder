@@ -14,9 +14,9 @@ namespace KSALVL
     public struct Collision
     {
         public byte Modifier;
-        public byte Unk_1;
+        public byte Material;
         public byte Shape;
-        public byte Unk_2;
+        public byte Unk;
     }
 
     public struct Decoration

@@ -316,6 +316,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\tiles\select.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\bmfonts\a.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

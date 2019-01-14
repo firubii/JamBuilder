@@ -119,6 +119,9 @@ namespace JamBuilder
             open.Title = "Open Level File";
             if (open.ShowDialog() == DialogResult.OK)
             {
+                tix.Value = 0;
+                tiy.Value = 0;
+
                 filePath = open.FileName;
                 objList.Items.Clear();
                 guestItemList.Items.Clear();
@@ -130,6 +133,9 @@ namespace JamBuilder
                 this.Cursor = Cursors.WaitCursor;
                 this.Text = $"JamBuilder - Opening {filePath}...";
                 level = new Level(open.FileName);
+
+                tix.Maximum = level.Width - 1;
+                tiy.Maximum = level.Height - 1;
 
                 camera.pos = Vector2.Zero;
                 camera.zoom = 1.1;
@@ -234,6 +240,7 @@ namespace JamBuilder
             {
                 texIds.Add(texturing.LoadTexture("Resources/tiles/" + i + ".png"));
             }
+            texIds.Add(texturing.LoadTexture("Resources/tiles/select.png"));
 
             modTexIds.Add(texturing.LoadTexture("Resources/modifiers/ladder.png"));
             modTexIds.Add(texturing.LoadTexture("Resources/modifiers/water.png"));
@@ -356,6 +363,12 @@ namespace JamBuilder
                             }
                         }
                     }
+                }
+
+                if (true)
+                {
+                    Vector2 v = new Vector2((int)tix.Value * 16f, -(int)tiy.Value * 16f);
+                    renderer.Draw(texIds[52], v, vec_scale, 17, 17);
                 }
 
                 if (renderObjectPointsToolStripMenuItem.Checked)
@@ -1063,281 +1076,6 @@ namespace JamBuilder
             draw.Enabled = false;
         }
 
-        private void t0_Click(object sender, EventArgs e)
-        {
-            tile = 0;
-        }
-
-        private void t1_Click(object sender, EventArgs e)
-        {
-            tile = 1;
-        }
-
-        private void t2_Click(object sender, EventArgs e)
-        {
-            tile = 2;
-        }
-
-        private void t3_Click(object sender, EventArgs e)
-        {
-            tile = 3;
-        }
-
-        private void t4_Click(object sender, EventArgs e)
-        {
-            tile = 4;
-        }
-
-        private void t5_Click(object sender, EventArgs e)
-        {
-            tile = 5;
-        }
-
-        private void t6_Click(object sender, EventArgs e)
-        {
-            tile = 6;
-        }
-
-        private void t7_Click(object sender, EventArgs e)
-        {
-            tile = 7;
-        }
-
-        private void t8_Click(object sender, EventArgs e)
-        {
-            tile = 8;
-        }
-
-        private void t9_Click(object sender, EventArgs e)
-        {
-            tile = 9;
-        }
-
-        private void t10_Click(object sender, EventArgs e)
-        {
-            tile = 10;
-        }
-
-        private void t11_Click(object sender, EventArgs e)
-        {
-            tile = 11;
-        }
-
-        private void t12_Click(object sender, EventArgs e)
-        {
-            tile = 12;
-        }
-
-        private void t13_Click(object sender, EventArgs e)
-        {
-            tile = 13;
-        }
-
-        private void t14_Click(object sender, EventArgs e)
-        {
-            tile = 14;
-        }
-
-        private void t15_Click(object sender, EventArgs e)
-        {
-            tile = 15;
-        }
-
-        private void t16_Click(object sender, EventArgs e)
-        {
-            tile = 16;
-        }
-
-        private void t17_Click(object sender, EventArgs e)
-        {
-            tile = 17;
-        }
-
-        private void t18_Click(object sender, EventArgs e)
-        {
-            tile = 18;
-        }
-
-        private void t19_Click(object sender, EventArgs e)
-        {
-            tile = 19;
-        }
-
-        private void t20_Click(object sender, EventArgs e)
-        {
-            tile = 20;
-        }
-
-        private void t21_Click(object sender, EventArgs e)
-        {
-            tile = 21;
-        }
-
-        private void t22_Click(object sender, EventArgs e)
-        {
-            tile = 22;
-        }
-
-        private void t23_Click(object sender, EventArgs e)
-        {
-            tile = 23;
-        }
-
-        private void t24_Click(object sender, EventArgs e)
-        {
-            tile = 24;
-        }
-
-        private void t25_Click(object sender, EventArgs e)
-        {
-            tile = 25;
-        }
-
-        private void t26_Click(object sender, EventArgs e)
-        {
-            tile = 26;
-        }
-
-        private void t27_Click(object sender, EventArgs e)
-        {
-            tile = 27;
-        }
-
-        private void t28_Click(object sender, EventArgs e)
-        {
-            tile = 28;
-        }
-
-        private void t29_Click(object sender, EventArgs e)
-        {
-            tile = 29;
-        }
-
-        private void t30_Click(object sender, EventArgs e)
-        {
-            tile = 30;
-        }
-
-        private void t31_Click(object sender, EventArgs e)
-        {
-            tile = 31;
-        }
-
-        private void t32_Click(object sender, EventArgs e)
-        {
-            tile = 32;
-        }
-
-        private void t33_Click(object sender, EventArgs e)
-        {
-            tile = 33;
-        }
-
-        private void t34_Click(object sender, EventArgs e)
-        {
-            tile = 34;
-        }
-
-        private void t35_Click(object sender, EventArgs e)
-        {
-            tile = 35;
-        }
-
-        private void t36_Click(object sender, EventArgs e)
-        {
-            tile = 36;
-        }
-
-        private void t37_Click(object sender, EventArgs e)
-        {
-            tile = 37;
-        }
-
-        private void t38_Click(object sender, EventArgs e)
-        {
-            tile = 38;
-        }
-
-        private void t39_Click(object sender, EventArgs e)
-        {
-            tile = 39;
-        }
-
-        private void t40_Click(object sender, EventArgs e)
-        {
-            tile = 40;
-        }
-
-        private void t41_Click(object sender, EventArgs e)
-        {
-            tile = 41;
-        }
-
-        private void t42_Click(object sender, EventArgs e)
-        {
-            tile = 42;
-        }
-
-        private void t43_Click(object sender, EventArgs e)
-        {
-            tile = 43;
-        }
-
-        private void t44_Click(object sender, EventArgs e)
-        {
-            tile = 44;
-        }
-
-        private void t45_Click(object sender, EventArgs e)
-        {
-            tile = 45;
-        }
-
-        private void t46_Click(object sender, EventArgs e)
-        {
-            tile = 46;
-        }
-
-        private void t47_Click(object sender, EventArgs e)
-        {
-            tile = 47;
-        }
-
-        private void t48_Click(object sender, EventArgs e)
-        {
-            tile = 48;
-        }
-
-        private void t49_Click(object sender, EventArgs e)
-        {
-            tile = 49;
-        }
-
-        private void t50_Click(object sender, EventArgs e)
-        {
-            tile = 50;
-        }
-
-        private void t51_Click(object sender, EventArgs e)
-        {
-            tile = 51;
-        }
-
-        private void m2_Click(object sender, EventArgs e)
-        {
-            tile = 52;
-        }
-
-        private void m8_Click(object sender, EventArgs e)
-        {
-            tile = 53;
-        }
-
-        private void m64_Click(object sender, EventArgs e)
-        {
-            tile = 54;
-        }
-
         private void cloneObj_Click(object sender, EventArgs e)
         {
             if (level != null)
@@ -1395,6 +1133,66 @@ namespace JamBuilder
                     RefreshObjectLists();
                 }
             }
+        }
+
+        private void tx_TextChanged(object sender, EventArgs e)
+        {
+            int i = (int)tiy.Value * (int)level.Width + (int)tix.Value;
+            vshape.Value = level.TileCollision[i].Shape;
+
+            if ((level.TileCollision[i].Modifier & (1 << 1)) != 0)
+            {
+                ladder.Checked = true;
+            }
+            else { ladder.Checked = false; }
+
+            if ((level.TileCollision[i].Modifier & (1 << 3)) != 0)
+            {
+                water.Checked = true;
+            }
+            else { water.Checked = false; }
+
+            if ((level.TileCollision[i].Modifier & (1 << 6)) != 0)
+            {
+                lava.Checked = true;
+            }
+            else { lava.Checked = false; }
+
+            vmat.Text = level.TileCollision[i].Material.ToString();
+
+            vunk.Text = level.TileCollision[i].Unk.ToString();
+
+            vblock.Text = level.TileBlock[i].ID.ToString();
+        }
+
+        private void ty_TextChanged(object sender, EventArgs e)
+        {
+            int i = (int)tiy.Value * (int)level.Width + (int)tix.Value;
+            vshape.Value = level.TileCollision[i].Shape;
+
+            if ((level.TileCollision[i].Modifier & (1 << 1)) != 0)
+            {
+                ladder.Checked = true;
+            }
+            else { ladder.Checked = false; }
+
+            if ((level.TileCollision[i].Modifier & (1 << 3)) != 0)
+            {
+                water.Checked = true;
+            }
+            else { water.Checked = false; }
+
+            if ((level.TileCollision[i].Modifier & (1 << 6)) != 0)
+            {
+                lava.Checked = true;
+            }
+            else { lava.Checked = false; }
+
+            vmat.Text = level.TileCollision[i].Material.ToString();
+
+            vunk.Text = level.TileCollision[i].Unk.ToString();
+
+            vblock.Text = level.TileBlock[i].ID.ToString();
         }
     }
 }

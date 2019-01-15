@@ -1137,6 +1137,7 @@ namespace JamBuilder
 
         private void tx_TextChanged(object sender, EventArgs e)
         {
+            a = true;
             int i = (int)tiy.Value * (int)level.Width + (int)tix.Value;
             vshape.Value = level.TileCollision[i].Shape;
 
@@ -1158,41 +1159,84 @@ namespace JamBuilder
             }
             else { lava.Checked = false; }
 
-            vmat.Text = level.TileCollision[i].Material.ToString();
+            vmat.Value = level.TileCollision[i].Material;
 
-            vunk.Text = level.TileCollision[i].Unk.ToString();
+            vunk.Value = level.TileCollision[i].Unk;
 
-            vblock.Text = level.TileBlock[i].ID.ToString();
+            vblock.Value = level.TileBlock[i].ID;
+
+            d1_1.Value = level.MLandDecoration[i].Unk_1;
+            d1_2.Value = level.MLandDecoration[i].Unk_2;
+            d1_3.Value = level.MLandDecoration[i].Unk_3;
+            d1_4.Value = level.MLandDecoration[i].Unk_4;
+
+            d2_1.Value = level.BLandDecoration[i].Unk_1;
+            d2_2.Value = level.BLandDecoration[i].Unk_2;
+            d2_3.Value = level.BLandDecoration[i].Unk_3;
+            d2_4.Value = level.BLandDecoration[i].Unk_4;
+
+            d3_1.Value = level.FLandDecoration[i].Unk_1;
+            d3_2.Value = level.FLandDecoration[i].Unk_2;
+            d3_3.Value = level.FLandDecoration[i].Unk_3;
+            d3_4.Value = level.FLandDecoration[i].Unk_4;
+
+            d4_1.Value = level.Unk_Decoration[i].Unk_1;
+            d4_2.Value = level.Unk_Decoration[i].Unk_2;
+            d4_3.Value = level.Unk_Decoration[i].Unk_3;
+            d4_4.Value = level.Unk_Decoration[i].Unk_4;
+            a = false;
         }
 
-        private void ty_TextChanged(object sender, EventArgs e)
+        private void UpdateTile(object sender, EventArgs e)
         {
-            int i = (int)tiy.Value * (int)level.Width + (int)tix.Value;
-            vshape.Value = level.TileCollision[i].Shape;
-
-            if ((level.TileCollision[i].Modifier & (1 << 1)) != 0)
+            if (!a)
             {
-                ladder.Checked = true;
+                int i = (int)tiy.Value * (int)level.Width + (int)tix.Value;
+                Collision c = level.TileCollision[i];
+                Block b = level.TileBlock[i];
+                Decoration ml = level.MLandDecoration[i];
+                Decoration bl = level.BLandDecoration[i];
+                Decoration fl = level.FLandDecoration[i];
+                Decoration ul = level.Unk_Decoration[i];
+
+                c.Shape = (byte)vshape.Value;
+                c.Modifier = 0;
+                if (ladder.Checked) c.Modifier += 2;
+                if (water.Checked) c.Modifier += 8;
+                if (lava.Checked) c.Modifier += 64;
+                c.Material = (byte)vmat.Value;
+                c.Unk = (byte)vunk.Value;
+
+                b.ID = (short)vblock.Value;
+
+                ml.Unk_1 = (byte)d1_1.Value;
+                ml.Unk_2 = (byte)d1_2.Value;
+                ml.Unk_3 = (byte)d1_3.Value;
+                ml.Unk_4 = (byte)d1_4.Value;
+
+                bl.Unk_1 = (byte)d2_1.Value;
+                bl.Unk_2 = (byte)d2_2.Value;
+                bl.Unk_3 = (byte)d2_3.Value;
+                bl.Unk_4 = (byte)d2_4.Value;
+
+                fl.Unk_1 = (byte)d3_1.Value;
+                fl.Unk_2 = (byte)d3_2.Value;
+                fl.Unk_3 = (byte)d3_3.Value;
+                fl.Unk_4 = (byte)d3_4.Value;
+
+                ul.Unk_1 = (byte)d4_1.Value;
+                ul.Unk_2 = (byte)d4_2.Value;
+                ul.Unk_3 = (byte)d4_3.Value;
+                ul.Unk_4 = (byte)d4_4.Value;
+
+                level.TileCollision[i] = c;
+                level.TileBlock[i] = b;
+                level.MLandDecoration[i] = ml;
+                level.BLandDecoration[i] = bl;
+                level.FLandDecoration[i] = fl;
+                level.Unk_Decoration[i] = ul;
+                level.MLandDecoration[i] = ml;
             }
-            else { ladder.Checked = false; }
-
-            if ((level.TileCollision[i].Modifier & (1 << 3)) != 0)
-            {
-                water.Checked = true;
-            }
-            else { water.Checked = false; }
-
-            if ((level.TileCollision[i].Modifier & (1 << 6)) != 0)
-            {
-                lava.Checked = true;
-            }
-            else { lava.Checked = false; }
-
-            vmat.Text = level.TileCollision[i].Material.ToString();
-
-            vunk.Text = level.TileCollision[i].Unk.ToString();
-
-            vblock.Text = level.TileBlock[i].ID.ToString();
         }
     }
 }

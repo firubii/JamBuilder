@@ -1270,6 +1270,7 @@
             0,
             0,
             -2147483648});
+            this.vblock.ValueChanged += new System.EventHandler(this.UpdateTile);
             // 
             // vunk
             // 
@@ -1282,6 +1283,7 @@
             this.vunk.Name = "vunk";
             this.vunk.Size = new System.Drawing.Size(51, 20);
             this.vunk.TabIndex = 54;
+            this.vunk.ValueChanged += new System.EventHandler(this.UpdateTile);
             // 
             // vmat
             // 
@@ -1294,6 +1296,7 @@
             this.vmat.Name = "vmat";
             this.vmat.Size = new System.Drawing.Size(69, 20);
             this.vmat.TabIndex = 55;
+            this.vmat.ValueChanged += new System.EventHandler(this.UpdateTile);
             // 
             // Form1
             // 

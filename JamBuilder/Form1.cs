@@ -248,10 +248,23 @@ namespace JamBuilder
 
             blockTexIds.Add(0xFF, texturing.LoadTexture("Resources/blocks/unknown.png"));
             blockTexIds.Add(0, texturing.LoadTexture("Resources/blocks/star.png"));
+            blockTexIds.Add(1, texturing.LoadTexture("Resources/blocks/unbreakable.png"));
+            blockTexIds.Add(2, texturing.LoadTexture("Resources/blocks/unbreakable.png"));
+            blockTexIds.Add(3, texturing.LoadTexture("Resources/blocks/unbreakable.png"));
             blockTexIds.Add(4, texturing.LoadTexture("Resources/blocks/bomb.png"));
             blockTexIds.Add(5, texturing.LoadTexture("Resources/blocks/bomb_chain_metal.png"));
             blockTexIds.Add(6, texturing.LoadTexture("Resources/blocks/bomb_chain_stone.png"));
             blockTexIds.Add(7, texturing.LoadTexture("Resources/blocks/bomb_chain_invisible.png"));
+            blockTexIds.Add(8, texturing.LoadTexture("Resources/blocks/breakable.png"));
+            blockTexIds.Add(9, texturing.LoadTexture("Resources/blocks/box.png"));
+            blockTexIds.Add(10, texturing.LoadTexture("Resources/blocks/falling.png"));
+            blockTexIds.Add(11, texturing.LoadTexture("Resources/blocks/ice.png"));
+            blockTexIds.Add(12, texturing.LoadTexture("Resources/blocks/ice.png"));
+            blockTexIds.Add(13, texturing.LoadTexture("Resources/blocks/ice.png"));
+            blockTexIds.Add(14, texturing.LoadTexture("Resources/blocks/barrel.png"));
+            blockTexIds.Add(18, texturing.LoadTexture("Resources/blocks/metal.png"));
+            blockTexIds.Add(19, texturing.LoadTexture("Resources/blocks/metal.png"));
+            blockTexIds.Add(20, texturing.LoadTexture("Resources/blocks/metal.png"));
             blockTexIds.Add(27, texturing.LoadTexture("Resources/blocks/bomb_chain_create.png"));
 
             objTexIds.Add(texturing.LoadTexture("Resources/obj/object.png"));
@@ -326,7 +339,15 @@ namespace JamBuilder
 
                             if (b.ID != -1)
                             {
-                                if (blockTexIds.ContainsKey(b.ID))
+                                if (b.ID == 2 || b.ID == 9 || b.ID == 12 || b.ID == 14 || b.ID == 19) //2x2
+                                {
+                                    renderer.Draw(blockTexIds[b.ID], v - new Vector2(0, 16f), vec_scale, 33, 33);
+                                }
+                                else if (b.ID == 3 || b.ID == 13 || b.ID == 20) //3x3
+                                {
+                                    renderer.Draw(blockTexIds[b.ID], v - new Vector2(0, 32f), vec_scale, 49, 49);
+                                }
+                                else if (blockTexIds.ContainsKey(b.ID))
                                 {
                                     renderer.Draw(blockTexIds[b.ID], v, vec_scale, 17, 17);
                                 }

@@ -77,6 +77,8 @@ namespace JamBuilder
 		private List<Decoration> decosUnk = new List<Decoration>();
 
 		private List<HistoryNode> historyStack = new List<HistoryNode>();
+		private int historyUndoneCount = 0;
+		private bool historyStackGroup = false;
 		private uint historyMaxSize = 100;//TODO: Take affect
 
 		public LevelSession()
@@ -84,10 +86,72 @@ namespace JamBuilder
 			//TODO: Loading/Initializing
 		}
 
-		//TODO: Implement undo/redo functions
-		//TODO: pushHistory function
-		//TODO: HistoryNode-Grouping for mass-edits (eg: deleting multiple objects at the same time)
+		/// <summary>
+		/// Starts putting the next pushed HistoryNodes into a group.
+		/// Group gets finalized by either calling endHHNGroup, pushing a HistoryNode with allowedGrouping set to false or calling doUndo.
+		/// </summary>
+		/// <param name="displayName">Displayed name of the group</param>
+		public void startHNGroup(string displayName)
+		{
+			historyStack.Add(new HNodeGroup(displayName));
+			historyStackGroup = true;
+		}
 
+		public void endHNGroup()
+		{
+			historyStackGroup = false;
+		}
+
+		public void pushHistoryNode(HistoryNode node, bool allowGrouping=false)
+		{
+			if (historyUndoneCount > 0)
+			{
+				//Clear all undone Nodes
+				historyStack.RemoveRange(historyStack.Count - historyUndoneCount, historyUndoneCount);
+				historyUndoneCount = 0;
+			}
+			
+			if (!allowGrouping)
+			{
+				historyStackGroup = false;
+				historyStack.Add(node);
+				return;
+			}
+
+			if (historyStackGroup&&historyStack.Count>0)
+			{
+				HistoryNode g = historyStack[historyStack.Count - 1];
+				if(g is HNodeGroup)
+				{
+					((HNodeGroup)g).pushHistoryNode(node);
+					return;
+				}
+			}
+
+			historyStack.Add(node);
+		}
+
+		public void doUndo()
+		{
+			historyStackGroup = false;//Prevent modifying group
+			int ix = historyStack.Count - historyUndoneCount - 1;
+			if (ix >= 0)
+			{
+				historyStack[ix].undo();
+				historyUndoneCount++;
+			}
+		}
+
+		public void doRedo()
+		{
+			int ix = historyStack.Count - historyUndoneCount;
+			if (ix < historyStack.Count)
+			{
+				historyStack[ix].redo();
+				historyUndoneCount--;
+			}
+		}
+		
 		public int addObj(OBJECT_CATEGORY category, LevelObject obj)
 		{
 			List<LevelObject> l = getObjList(category);
@@ -274,15 +338,12 @@ namespace JamBuilder
 			return "Decoration";
 		}
 
-		private abstract class HistoryNode
+		public abstract class HistoryNode
 		{
-			protected LevelSession parent;
 			private bool undone = false;
 
-			protected HistoryNode(LevelSession parent)
-			{
-				this.parent = parent;
-			}
+			protected HistoryNode() { }
+
 			protected abstract void doUndo();
 			protected abstract void doRedo();
 			public void undo()
@@ -299,7 +360,48 @@ namespace JamBuilder
 			}
 		}
 
-		private class HNodeObjRemoved : HistoryNode
+		private class HNodeGroup : HistoryNode
+		{
+			List<HistoryNode> history = new List<HistoryNode>();
+			private string displayName;
+			public HNodeGroup(string name)
+			{
+				displayName = name;
+			}
+
+			public void pushHistoryNode(HistoryNode node)
+			{
+				history.Add(node);
+			}
+
+			protected override void doUndo()
+			{
+				for (int i = history.Count-1; i >= 0; i--)
+				{
+					history[i].undo();
+				}
+			}
+
+			protected override void doRedo()
+			{
+				for(int i = 0;i < history.Count; i++)
+				{
+					history[i].redo();
+				}
+			}
+		}
+
+		private abstract class InternalHistoryNode : HistoryNode
+		{
+			protected LevelSession parent;
+
+			protected InternalHistoryNode(LevelSession parent)
+			{
+				this.parent = parent;
+			}
+		}
+
+		private class HNodeObjRemoved : InternalHistoryNode
 		{
 
 			protected LevelObject removedObj;
@@ -327,7 +429,7 @@ namespace JamBuilder
 			}
 		}
 
-		private class HNodeObjAdded : HistoryNode
+		private class HNodeObjAdded : InternalHistoryNode
 		{
 
 			protected LevelObject addedObj;
@@ -355,7 +457,7 @@ namespace JamBuilder
 			}
 		}
 
-		private class HNodeObjUpdated : HistoryNode
+		private class HNodeObjUpdated : InternalHistoryNode
 		{
 
 			protected LevelObject oldObj, newObj;
@@ -384,7 +486,7 @@ namespace JamBuilder
 			}
 		}
 
-		private class HNodeCollUpdated : HistoryNode
+		private class HNodeCollUpdated : InternalHistoryNode
 		{
 
 			protected Collision oldColl, newColl;
@@ -409,7 +511,7 @@ namespace JamBuilder
 			}
 		}
 
-		private class HNodeBlockUpdated : HistoryNode
+		private class HNodeBlockUpdated : InternalHistoryNode
 		{
 
 			protected Block oldBlock, newBlock;
@@ -434,7 +536,7 @@ namespace JamBuilder
 			}
 		}
 
-		private class HNodeDecoUpdated : HistoryNode
+		private class HNodeDecoUpdated : InternalHistoryNode
 		{
 
 			protected Decoration oldDeco, newDeco;
@@ -461,7 +563,7 @@ namespace JamBuilder
 			}
 		}
 
-		private class HNodeLevelPropertiesUpdated : HistoryNode
+		private class HNodeLevelPropertiesUpdated : InternalHistoryNode
 		{
 
 			protected LevelProperties oldProperties, newProperties;

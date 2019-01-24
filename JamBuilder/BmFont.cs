@@ -194,9 +194,9 @@ namespace JamBuilder
             return texId;
         }
         
-        public ArrayList buildString(string s)
+        public List<Vector2> buildString(string s)
         {
-            ArrayList v = new ArrayList();
+            List<Vector2> v = new List<Vector2>();
 
             int posX=0, line=0;
             int lastC=-1;

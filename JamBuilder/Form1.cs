@@ -150,6 +150,36 @@ namespace JamBuilder
                 a = false;
             }
         }
+        
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewLevel newlvl = new NewLevel();
+            if (newlvl.ShowDialog() == DialogResult.OK)
+            {
+                a = true;
+
+                objList.Items.Clear();
+                guestItemList.Items.Clear();
+                itemList.Items.Clear();
+                bossList.Items.Clear();
+                enemyList.Items.Clear();
+
+                level = newlvl.level;
+
+                camera.pos = Vector2.Zero;
+                camera.zoom = 1.1;
+                RefreshObjectLists();
+
+                sizeH.Value = level.Height;
+                sizeW.Value = level.Width;
+
+                this.Text = $"JamBuilder - New Level";
+
+                saveAsToolStripMenuItem.Enabled = true;
+
+                a = false;
+            }
+        }
 
         private void editObj_Click(object sender, EventArgs e)
         {
@@ -675,6 +705,8 @@ namespace JamBuilder
             this.Text = $"JamBuilder - {filePath}";
             this.Cursor = Cursors.Arrow;
             this.Enabled = true;
+            saveToolStripMenuItem.Enabled = true;
+            saveAsToolStripMenuItem.Enabled = true;
         }
 
         private void delObj_Click(object sender, EventArgs e)

@@ -27,6 +27,25 @@ namespace KSALVL
         public List<Dictionary<string, string>> Bosses = new List<Dictionary<string, string>>();
         public List<Dictionary<string, string>> Enemies = new List<Dictionary<string, string>>();
 
+        public Level()
+        {
+            Height = 1;
+            Width = 1;
+            Background = "";
+            Tileset = "";
+            StageData = new Stage();
+            TileBlock = new List<Block>();
+            TileCollision = new List<Collision>();
+            BLandDecoration = new List<Decoration>();
+            MLandDecoration = new List<Decoration>();
+            FLandDecoration = new List<Decoration>();
+            Unk_Decoration = new List<Decoration>();
+            Objects = new List<Dictionary<string, string>>();
+            GuestStarItems = new List<Dictionary<string, string>>();
+            Items = Objects = new List<Dictionary<string, string>>();
+            Bosses = Objects = new List<Dictionary<string, string>>();
+            Enemies = Objects = new List<Dictionary<string, string>>();
+        }
         public Level(string filePath)
         {
             using (BinaryReader reader = new BinaryReader(new FileStream(filePath, FileMode.Open)))

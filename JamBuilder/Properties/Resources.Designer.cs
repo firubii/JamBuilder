@@ -593,6 +593,16 @@ namespace JamBuilder.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap draw {
+            get {
+                object obj = ResourceManager.GetObject("draw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ladder {
             get {
                 object obj = ResourceManager.GetObject("ladder", resourceCulture);
@@ -616,6 +626,16 @@ namespace JamBuilder.Properties {
         internal static System.Drawing.Bitmap select {
             get {
                 object obj = ResourceManager.GetObject("select", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap spike {
+            get {
+                object obj = ResourceManager.GetObject("spike", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

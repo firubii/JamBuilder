@@ -42,7 +42,8 @@ namespace JamBuilder
 
         int tool;
 
-        int tile;
+        uint tileX;
+        uint tileY;
 
         public Form1()
         {
@@ -119,8 +120,7 @@ namespace JamBuilder
             open.Title = "Open Level File";
             if (open.ShowDialog() == DialogResult.OK)
             {
-                tix.Value = 0;
-                tiy.Value = 0;
+                a = true;
 
                 filePath = open.FileName;
                 objList.Items.Clear();
@@ -134,8 +134,8 @@ namespace JamBuilder
                 this.Text = $"JamBuilder - Opening {filePath}...";
                 level = new Level(open.FileName);
 
-                tix.Maximum = level.Width - 1;
-                tiy.Maximum = level.Height - 1;
+                sizeW.Value = level.Width;
+                sizeH.Value = level.Height;
 
                 camera.pos = Vector2.Zero;
                 camera.zoom = 1.1;
@@ -146,6 +146,8 @@ namespace JamBuilder
                 this.Enabled = true;
                 saveToolStripMenuItem.Enabled = true;
                 saveAsToolStripMenuItem.Enabled = true;
+
+                a = false;
             }
         }
 
@@ -244,6 +246,7 @@ namespace JamBuilder
 
             modTexIds.Add(texturing.LoadTexture("Resources/modifiers/ladder.png"));
             modTexIds.Add(texturing.LoadTexture("Resources/modifiers/water.png"));
+            modTexIds.Add(texturing.LoadTexture("Resources/modifiers/spike.png"));
             modTexIds.Add(texturing.LoadTexture("Resources/modifiers/damage.png"));
 
             blockTexIds.Add(0xFF, texturing.LoadTexture("Resources/blocks/unknown.png"));
@@ -378,9 +381,13 @@ namespace JamBuilder
                             {
                                 renderer.Draw(modTexIds[1], v, vec_scale, 17, 17);
                             }
-                            if ((c.Modifier & (1 << 6)) != 0)
+                            if ((c.Modifier & (1 << 4)) != 0)
                             {
                                 renderer.Draw(modTexIds[2], v, vec_scale, 17, 17);
+                            }
+                            if ((c.Modifier & (1 << 6)) != 0)
+                            {
+                                renderer.Draw(modTexIds[3], v, vec_scale, 17, 17);
                             }
                         }
                     }
@@ -388,7 +395,7 @@ namespace JamBuilder
 
                 if (true)
                 {
-                    Vector2 v = new Vector2((int)tix.Value * 16f, -(int)tiy.Value * 16f);
+                    Vector2 v = new Vector2(tileX * 16f, -tileY * 16f);
                     renderer.Draw(texIds[52], v, vec_scale, 17, 17);
                 }
 
@@ -812,22 +819,219 @@ namespace JamBuilder
             }
             else if (e.Button == MouseButtons.Left)
             {
-                if (tool == 2)
+                if (tool == 0)
                 {
+
+                }
+                else if (tool == 1)
+                {
+
+                }
+                else if (tool == 2)
+                {
+                    int ix = (int)((tileY * level.Width) + tileX);
+
+                    if (editCol.Checked)
+                    {
+                        Collision c = level.TileCollision[ix];
+                        c.Shape = (byte)vshape.Value;
+                        c.Modifier = 0;
+                        if (ladder.Checked) c.Modifier += 2;
+                        if (water.Checked) c.Modifier += 8;
+                        if (spike.Checked) c.Modifier += 16;
+                        if (lava.Checked) c.Modifier += 64;
+                        c.Material = (byte)vmat.Value;
+                        c.Unk = (byte)vunk.Value;
+                        level.TileCollision[ix] = c;
+                    }
+                    if (editBlock.Checked)
+                    {
+                        Block b = level.TileBlock[ix];
+                        b.ID = (short)vblock.Value;
+                        level.TileBlock[ix] = b;
+                    }
+                    if (editDeco.Checked)
+                    {
+                        Decoration ml = level.MLandDecoration[ix];
+                        Decoration bl = level.BLandDecoration[ix];
+                        Decoration fl = level.FLandDecoration[ix];
+                        Decoration ul = level.Unk_Decoration[ix];
+
+                        bl.Unk_1 = (byte)d1_1.Value;
+                        bl.Unk_2 = (byte)d1_2.Value;
+                        bl.Unk_3 = (byte)d1_3.Value;
+                        bl.Unk_4 = (byte)d1_4.Value;
+
+                        ml.Unk_1 = (byte)d2_1.Value;
+                        ml.Unk_2 = (byte)d2_2.Value;
+                        ml.Unk_3 = (byte)d2_3.Value;
+                        ml.Unk_4 = (byte)d2_4.Value;
+
+                        fl.Unk_1 = (byte)d3_1.Value;
+                        fl.Unk_2 = (byte)d3_2.Value;
+                        fl.Unk_3 = (byte)d3_3.Value;
+                        fl.Unk_4 = (byte)d3_4.Value;
+
+                        ul.Unk_1 = (byte)d4_1.Value;
+                        ul.Unk_2 = (byte)d4_2.Value;
+                        ul.Unk_3 = (byte)d4_3.Value;
+                        ul.Unk_4 = (byte)d4_4.Value;
+
+                        level.MLandDecoration[ix] = bl;
+                        level.BLandDecoration[ix] = ml;
+                        level.FLandDecoration[ix] = fl;
+                        level.Unk_Decoration[ix] = ul;
+                    }
+                }
+                else if (tool == 3)
+                {
+                    int ix = (int)((tileY * level.Width) + tileX);
                     
+                    vshape.Value = level.TileCollision[ix].Shape;
+
+                    if ((level.TileCollision[ix].Modifier & (1 << 1)) != 0)
+                    {
+                        ladder.Checked = true;
+                    }
+                    else { ladder.Checked = false; }
+
+                    if ((level.TileCollision[ix].Modifier & (1 << 3)) != 0)
+                    {
+                        water.Checked = true;
+                    }
+                    else { water.Checked = false; }
+
+                    if ((level.TileCollision[ix].Modifier & (1 << 4)) != 0)
+                    {
+                        spike.Checked = true;
+                    }
+                    else { spike.Checked = false; }
+
+                    if ((level.TileCollision[ix].Modifier & (1 << 6)) != 0)
+                    {
+                        lava.Checked = true;
+                    }
+                    else { lava.Checked = false; }
+
+                    vmat.Value = level.TileCollision[ix].Material;
+
+                    vunk.Value = level.TileCollision[ix].Unk;
+
+                    vblock.Value = level.TileBlock[ix].ID;
+
+                    d1_1.Value = level.MLandDecoration[ix].Unk_1;
+                    d1_2.Value = level.MLandDecoration[ix].Unk_2;
+                    d1_3.Value = level.MLandDecoration[ix].Unk_3;
+                    d1_4.Value = level.MLandDecoration[ix].Unk_4;
+
+                    d2_1.Value = level.BLandDecoration[ix].Unk_1;
+                    d2_2.Value = level.BLandDecoration[ix].Unk_2;
+                    d2_3.Value = level.BLandDecoration[ix].Unk_3;
+                    d2_4.Value = level.BLandDecoration[ix].Unk_4;
+
+                    d3_1.Value = level.FLandDecoration[ix].Unk_1;
+                    d3_2.Value = level.FLandDecoration[ix].Unk_2;
+                    d3_3.Value = level.FLandDecoration[ix].Unk_3;
+                    d3_4.Value = level.FLandDecoration[ix].Unk_4;
+
+                    d4_1.Value = level.Unk_Decoration[ix].Unk_1;
+                    d4_2.Value = level.Unk_Decoration[ix].Unk_2;
+                    d4_3.Value = level.Unk_Decoration[ix].Unk_3;
+                    d4_4.Value = level.Unk_Decoration[ix].Unk_4;
                 }
             }
         }
 
         private void glControl_MouseMove(object sender, MouseEventArgs e)
         {
-            if (moveCam)
+            if (level != null)
+            {
+                Vector2 p = ConvertMouseCoords(new Vector2(e.X, e.Y));
+                if (p.X > level.Width - 1)
+                {
+                    tileX = level.Width - 1;
+                }
+                else if (p.X > 0)
+                {
+                    tileX = (uint)p.X;
+                }
+                else { tileX = 0; }
+                if (p.Y < -(level.Height - 1))
+                {
+                    tileY = level.Height - 1;
+                }
+                else if (p.Y < 0)
+                {
+                    tileY = (uint)-p.Y + 1;
+                }
+                else { tileY = 0; }
+            }
+            if (e.Button == MouseButtons.Right)
             {
                 float moveSpeed = 1.0f/(float)camera.zoom;
                 camera.pos.X += (mouseX - e.X) * moveSpeed;
                 camera.pos.Y += (mouseY - e.Y) * moveSpeed;
                 mouseX = e.X;
                 mouseY = e.Y;
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
+                if (tool == 2)
+                {
+                    int ix = (int)((tileY * level.Width) + tileX);
+
+                    if (editCol.Checked)
+                    {
+                        Collision c = level.TileCollision[ix];
+                        c.Shape = (byte)vshape.Value;
+                        c.Modifier = 0;
+                        if (ladder.Checked) c.Modifier += 2;
+                        if (water.Checked) c.Modifier += 8;
+                        if (spike.Checked) c.Modifier += 16;
+                        if (lava.Checked) c.Modifier += 64;
+                        c.Material = (byte)vmat.Value;
+                        c.Unk = (byte)vunk.Value;
+                        level.TileCollision[ix] = c;
+                    }
+                    if (editBlock.Checked)
+                    {
+                        Block b = level.TileBlock[ix];
+                        b.ID = (short)vblock.Value;
+                        level.TileBlock[ix] = b;
+                    }
+                    if (editDeco.Checked)
+                    {
+                        Decoration ml = level.MLandDecoration[ix];
+                        Decoration bl = level.BLandDecoration[ix];
+                        Decoration fl = level.FLandDecoration[ix];
+                        Decoration ul = level.Unk_Decoration[ix];
+
+                        bl.Unk_1 = (byte)d1_1.Value;
+                        bl.Unk_2 = (byte)d1_2.Value;
+                        bl.Unk_3 = (byte)d1_3.Value;
+                        bl.Unk_4 = (byte)d1_4.Value;
+
+                        ml.Unk_1 = (byte)d2_1.Value;
+                        ml.Unk_2 = (byte)d2_2.Value;
+                        ml.Unk_3 = (byte)d2_3.Value;
+                        ml.Unk_4 = (byte)d2_4.Value;
+
+                        fl.Unk_1 = (byte)d3_1.Value;
+                        fl.Unk_2 = (byte)d3_2.Value;
+                        fl.Unk_3 = (byte)d3_3.Value;
+                        fl.Unk_4 = (byte)d3_4.Value;
+
+                        ul.Unk_1 = (byte)d4_1.Value;
+                        ul.Unk_2 = (byte)d4_2.Value;
+                        ul.Unk_3 = (byte)d4_3.Value;
+                        ul.Unk_4 = (byte)d4_4.Value;
+
+                        level.MLandDecoration[ix] = bl;
+                        level.BLandDecoration[ix] = ml;
+                        level.FLandDecoration[ix] = fl;
+                        level.Unk_Decoration[ix] = ul;
+                    }
+                }
             }
         }
 
@@ -874,6 +1078,78 @@ namespace JamBuilder
             //Move Camera into Level Bounds
             camera.pos.X = Math.Max(0, Math.Min(level.Width*16 , camera.pos.X));
             camera.pos.Y = Math.Max(-level.Height*16, Math.Min(0, camera.pos.Y));
+        }
+
+        private void UpdateLevelSize(object sender, EventArgs e)
+        {
+            if (!a)
+            {
+                Collision c = new Collision();
+                Block b = new Block();
+                Decoration d = new Decoration();
+                b.ID = -1;
+                d.Unk_1 = 255;
+                d.Unk_2 = 255;
+                d.Unk_3 = 0;
+                d.Unk_4 = 255;
+
+                if (sizeW.Value > level.Width)
+                {
+                    for (int h = 0; h < sizeH.Value; h++)
+                    {
+                        level.TileCollision.Insert(((h * (int)level.Width) + (int)level.Width) + h, c);
+                        level.TileBlock.Insert(((h * (int)level.Width) + (int)level.Width) + h, b);
+                        level.BLandDecoration.Insert(((h * (int)level.Width) + (int)level.Width) + h, d);
+                        level.MLandDecoration.Insert(((h * (int)level.Width) + (int)level.Width) + h, d);
+                        level.FLandDecoration.Insert(((h * (int)level.Width) + (int)level.Width) + h, d);
+                        level.Unk_Decoration.Insert(((h * (int)level.Width) + (int)level.Width) + h, d);
+                    }
+                    level.Width = (uint)sizeW.Value;
+                }
+                else if (sizeW.Value < level.Width)
+                {
+                    for (int h = 0; h < sizeH.Value - 1; h++)
+                    {
+                        level.TileCollision.RemoveAt(((h * (int)level.Width) + (int)level.Width) - h);
+                        level.TileBlock.RemoveAt(((h * (int)level.Width) + (int)level.Width) - h);
+                        level.BLandDecoration.RemoveAt(((h * (int)level.Width) + (int)level.Width) - h);
+                        level.MLandDecoration.RemoveAt(((h * (int)level.Width) + (int)level.Width) - h);
+                        level.FLandDecoration.RemoveAt(((h * (int)level.Width) + (int)level.Width) - h);
+                        level.Unk_Decoration.RemoveAt(((h * (int)level.Width) + (int)level.Width) - h);
+                    }
+                    level.Width = (uint)sizeW.Value;
+                }
+                else if (sizeH.Value > level.Height)
+                {
+                    for (int w = 0; w < level.Width; w++)
+                    {
+                        level.TileCollision.Add(c);
+                        level.TileBlock.Add(b);
+                        level.BLandDecoration.Add(d);
+                        level.MLandDecoration.Add(d);
+                        level.FLandDecoration.Add(d);
+                        level.Unk_Decoration.Add(d);
+                    }
+                    level.Height = (uint)sizeH.Value;
+                }
+                else if (sizeH.Value < level.Height)
+                {
+                    level.TileCollision.RemoveRange((int)((level.Height - 1) * (int)level.Width), (int)level.Width);
+                    level.TileBlock.RemoveRange((int)((level.Height - 1) * (int)level.Width), (int)level.Width);
+                    level.BLandDecoration.RemoveRange((int)((level.Height - 1) * (int)level.Width), (int)level.Width);
+                    level.MLandDecoration.RemoveRange((int)((level.Height - 1) * (int)level.Width), (int)level.Width);
+                    level.FLandDecoration.RemoveRange((int)((level.Height - 1) * (int)level.Width), (int)level.Width);
+                    level.Unk_Decoration.RemoveRange((int)((level.Height - 1) * (int)level.Width), (int)level.Width);
+                    level.Height = (uint)sizeH.Value;
+                }
+            }
+        }
+
+        private Vector2 ConvertMouseCoords(Vector2 i)
+        {
+            i -= new Vector2(glControl.Width, glControl.Height) / 2f;
+            i /= (float)camera.zoom;
+            return (camera.pos + i) / 16f;
         }
 
         bool a;
@@ -1079,6 +1355,7 @@ namespace JamBuilder
             select.Enabled = false;
             move.Enabled = true;
             draw.Enabled = true;
+            pick.Enabled = true;
         }
 
         private void move_Click(object sender, EventArgs e)
@@ -1087,6 +1364,7 @@ namespace JamBuilder
             select.Enabled = true;
             move.Enabled = false;
             draw.Enabled = true;
+            pick.Enabled = true;
         }
 
         private void draw_Click(object sender, EventArgs e)
@@ -1095,6 +1373,16 @@ namespace JamBuilder
             select.Enabled = true;
             move.Enabled = true;
             draw.Enabled = false;
+            pick.Enabled = true;
+        }
+
+        private void pick_Click(object sender, EventArgs e)
+        {
+            tool = 3;
+            select.Enabled = true;
+            move.Enabled = true;
+            draw.Enabled = true;
+            pick.Enabled = false;
         }
 
         private void cloneObj_Click(object sender, EventArgs e)
@@ -1153,110 +1441,6 @@ namespace JamBuilder
                     level.Enemies.Add(level.Enemies[enemyList.SelectedIndex]);
                     RefreshObjectLists();
                 }
-            }
-        }
-
-        private void tx_TextChanged(object sender, EventArgs e)
-        {
-            a = true;
-            int i = (int)tiy.Value * (int)level.Width + (int)tix.Value;
-            vshape.Value = level.TileCollision[i].Shape;
-
-            if ((level.TileCollision[i].Modifier & (1 << 1)) != 0)
-            {
-                ladder.Checked = true;
-            }
-            else { ladder.Checked = false; }
-
-            if ((level.TileCollision[i].Modifier & (1 << 3)) != 0)
-            {
-                water.Checked = true;
-            }
-            else { water.Checked = false; }
-
-            if ((level.TileCollision[i].Modifier & (1 << 6)) != 0)
-            {
-                lava.Checked = true;
-            }
-            else { lava.Checked = false; }
-
-            vmat.Value = level.TileCollision[i].Material;
-
-            vunk.Value = level.TileCollision[i].Unk;
-
-            vblock.Value = level.TileBlock[i].ID;
-
-            d1_1.Value = level.MLandDecoration[i].Unk_1;
-            d1_2.Value = level.MLandDecoration[i].Unk_2;
-            d1_3.Value = level.MLandDecoration[i].Unk_3;
-            d1_4.Value = level.MLandDecoration[i].Unk_4;
-
-            d2_1.Value = level.BLandDecoration[i].Unk_1;
-            d2_2.Value = level.BLandDecoration[i].Unk_2;
-            d2_3.Value = level.BLandDecoration[i].Unk_3;
-            d2_4.Value = level.BLandDecoration[i].Unk_4;
-
-            d3_1.Value = level.FLandDecoration[i].Unk_1;
-            d3_2.Value = level.FLandDecoration[i].Unk_2;
-            d3_3.Value = level.FLandDecoration[i].Unk_3;
-            d3_4.Value = level.FLandDecoration[i].Unk_4;
-
-            d4_1.Value = level.Unk_Decoration[i].Unk_1;
-            d4_2.Value = level.Unk_Decoration[i].Unk_2;
-            d4_3.Value = level.Unk_Decoration[i].Unk_3;
-            d4_4.Value = level.Unk_Decoration[i].Unk_4;
-            a = false;
-        }
-
-        private void UpdateTile(object sender, EventArgs e)
-        {
-            if (!a)
-            {
-                int i = (int)tiy.Value * (int)level.Width + (int)tix.Value;
-                Collision c = level.TileCollision[i];
-                Block b = level.TileBlock[i];
-                Decoration ml = level.MLandDecoration[i];
-                Decoration bl = level.BLandDecoration[i];
-                Decoration fl = level.FLandDecoration[i];
-                Decoration ul = level.Unk_Decoration[i];
-
-                c.Shape = (byte)vshape.Value;
-                c.Modifier = 0;
-                if (ladder.Checked) c.Modifier += 2;
-                if (water.Checked) c.Modifier += 8;
-                if (lava.Checked) c.Modifier += 64;
-                c.Material = (byte)vmat.Value;
-                c.Unk = (byte)vunk.Value;
-
-                b.ID = (short)vblock.Value;
-
-                ml.Unk_1 = (byte)d1_1.Value;
-                ml.Unk_2 = (byte)d1_2.Value;
-                ml.Unk_3 = (byte)d1_3.Value;
-                ml.Unk_4 = (byte)d1_4.Value;
-
-                bl.Unk_1 = (byte)d2_1.Value;
-                bl.Unk_2 = (byte)d2_2.Value;
-                bl.Unk_3 = (byte)d2_3.Value;
-                bl.Unk_4 = (byte)d2_4.Value;
-
-                fl.Unk_1 = (byte)d3_1.Value;
-                fl.Unk_2 = (byte)d3_2.Value;
-                fl.Unk_3 = (byte)d3_3.Value;
-                fl.Unk_4 = (byte)d3_4.Value;
-
-                ul.Unk_1 = (byte)d4_1.Value;
-                ul.Unk_2 = (byte)d4_2.Value;
-                ul.Unk_3 = (byte)d4_3.Value;
-                ul.Unk_4 = (byte)d4_4.Value;
-
-                level.TileCollision[i] = c;
-                level.TileBlock[i] = b;
-                level.MLandDecoration[i] = ml;
-                level.BLandDecoration[i] = bl;
-                level.FLandDecoration[i] = fl;
-                level.Unk_Decoration[i] = ul;
-                level.MLandDecoration[i] = ml;
             }
         }
     }

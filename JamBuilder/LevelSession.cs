@@ -43,6 +43,18 @@ namespace JamBuilder
 	{
 		public string background, tileset;
 		public Stage stageData;
+		public LevelProperties(string background, string tileset)
+		{
+			this.background = background;
+			this.tileset = tileset;
+			this.stageData = new Stage();
+		}
+		public LevelProperties(string background, string tileset, Stage stageData)
+		{
+			this.background = background;
+			this.tileset = tileset;
+			this.stageData = stageData;
+		}
 	}
 
 	public class LevelSession
@@ -79,11 +91,34 @@ namespace JamBuilder
 		private List<HistoryNode> historyStack = new List<HistoryNode>();
 		private int historyUndoneCount = 0;
 		private bool historyStackGroup = false;
-		private uint historyMaxSize = 100;//TODO: Take affect
+		private uint historyMaxSize = 500;
 
-		public LevelSession()
+		private static Collision defaultCollision = new Collision();
+		private static Block defaultBlock = new Block(-1);
+		private static Decoration defaultDecoration = new Decoration(255,255,0,255);
+
+		///<summary>Sets up a new LevelSession</summary>
+		public LevelSession(uint width, uint height, LevelProperties properties)
 		{
-			//TODO: Loading/Initializing
+			this.width = width;
+			this.height = height;
+			this.levelProperties = properties;
+
+			for(uint i = 0; i < width * height; i++)
+			{
+				collisions.Add(defaultCollision);
+				blocks.Add(defaultBlock);
+				decos.Add(defaultDecoration);
+				decosBack.Add(defaultDecoration);
+				decosFront.Add(defaultDecoration);
+				decosUnk.Add(defaultDecoration);
+			}
+		}
+
+		///<summary>(NOT IMPLEMENTED) Initializes LevelSession using Data from a Level object</summary>
+		public LevelSession(Level lvl)
+		{
+			throw new NotImplementedException();
 		}
 
 		/// <summary>
@@ -110,25 +145,28 @@ namespace JamBuilder
 				historyStack.RemoveRange(historyStack.Count - historyUndoneCount, historyUndoneCount);
 				historyUndoneCount = 0;
 			}
-			
-			if (!allowGrouping)
+
+			HistoryNode lastNode = null;
+			if (historyStack.Count > 0)
+			{
+				lastNode = historyStack[historyStack.Count - 1];
+			}
+
+			if (allowGrouping && historyStackGroup && lastNode is HNodeGroup)
+			{
+				//Add to group node
+				((HNodeGroup)lastNode).pushHistoryNode(node);
+			}
+			else
 			{
 				historyStackGroup = false;
-				historyStack.Add(node);
-				return;
-			}
-
-			if (historyStackGroup&&historyStack.Count>0)
-			{
-				HistoryNode g = historyStack[historyStack.Count - 1];
-				if(g is HNodeGroup)
+				if (historyStack.Count >= historyMaxSize)
 				{
-					((HNodeGroup)g).pushHistoryNode(node);
-					return;
+					historyStack.RemoveAt(0);
 				}
+				historyStack.Add(node);
 			}
-
-			historyStack.Add(node);
+			
 		}
 
 		public void doUndo()
@@ -193,6 +231,16 @@ namespace JamBuilder
 		public int getObjCount(OBJECT_CATEGORY category)
 		{
 			return getObjList(category).Count;
+		}
+
+		/// <summary>
+		/// Converts coordinates to a tileIndex. Clamped to Level-Boundaries.
+		/// </summary>
+		public int tileIndex(int x, int y)
+		{
+			int _x = (int)Math.Min(Math.Max(x, 0), width - 1);
+			int _y = (int)Math.Min(Math.Max(y, 0), height - 1);
+			return _y * (int)width + _x;
 		}
 
 		/// <summary>

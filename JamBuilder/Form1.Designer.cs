@@ -30,6 +30,7 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -115,26 +116,25 @@
             this.vblock = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.spike = new System.Windows.Forms.CheckBox();
             this.vshape = new System.Windows.Forms.NumericUpDown();
             this.vmat = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.vunk = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.ladder = new System.Windows.Forms.CheckBox();
-            this.water = new System.Windows.Forms.CheckBox();
-            this.lava = new System.Windows.Forms.CheckBox();
             this.pick = new System.Windows.Forms.Button();
-            this.draw = new System.Windows.Forms.Button();
-            this.move = new System.Windows.Forms.Button();
-            this.select = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.sizeW = new System.Windows.Forms.NumericUpDown();
             this.label16 = new System.Windows.Forms.Label();
             this.sizeH = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spike = new System.Windows.Forms.CheckBox();
+            this.ladder = new System.Windows.Forms.CheckBox();
+            this.water = new System.Windows.Forms.CheckBox();
+            this.lava = new System.Windows.Forms.CheckBox();
+            this.draw = new System.Windows.Forms.Button();
+            this.move = new System.Windows.Forms.Button();
+            this.select = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -198,6 +198,14 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
@@ -701,9 +709,9 @@
             // 
             // resetCamera
             // 
-            this.resetCamera.Location = new System.Drawing.Point(458, 32);
+            this.resetCamera.Location = new System.Drawing.Point(458, 33);
             this.resetCamera.Name = "resetCamera";
-            this.resetCamera.Size = new System.Drawing.Size(82, 31);
+            this.resetCamera.Size = new System.Drawing.Size(82, 32);
             this.resetCamera.TabIndex = 6;
             this.resetCamera.Text = "Reset Camera";
             this.resetCamera.UseVisualStyleBackColor = true;
@@ -804,7 +812,7 @@
             this.comboBox1.Items.AddRange(new object[] {
             "Collision",
             "Decoration"});
-            this.comboBox1.Location = new System.Drawing.Point(546, 41);
+            this.comboBox1.Location = new System.Drawing.Point(546, 44);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 27;
@@ -827,6 +835,8 @@
             // editDeco
             // 
             this.editDeco.AutoSize = true;
+            this.editDeco.Checked = true;
+            this.editDeco.CheckState = System.Windows.Forms.CheckState.Checked;
             this.editDeco.Location = new System.Drawing.Point(6, 392);
             this.editDeco.Name = "editDeco";
             this.editDeco.Size = new System.Drawing.Size(104, 17);
@@ -847,6 +857,8 @@
             // editCol
             // 
             this.editCol.AutoSize = true;
+            this.editCol.Checked = true;
+            this.editCol.CheckState = System.Windows.Forms.CheckState.Checked;
             this.editCol.Location = new System.Drawing.Point(6, 346);
             this.editCol.Name = "editCol";
             this.editCol.Size = new System.Drawing.Size(90, 17);
@@ -1172,18 +1184,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Collision Data";
             // 
-            // spike
-            // 
-            this.spike.AutoSize = true;
-            this.spike.Image = global::JamBuilder.Properties.Resources.spike;
-            this.spike.Location = new System.Drawing.Point(84, 91);
-            this.spike.Name = "spike";
-            this.spike.Size = new System.Drawing.Size(70, 17);
-            this.spike.TabIndex = 56;
-            this.spike.Text = "Spike";
-            this.spike.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.spike.UseVisualStyleBackColor = true;
-            // 
             // vshape
             // 
             this.vshape.Location = new System.Drawing.Point(6, 19);
@@ -1247,80 +1247,16 @@
             this.label8.TabIndex = 7;
             this.label8.Text = "Unknown Value";
             // 
-            // ladder
-            // 
-            this.ladder.AutoSize = true;
-            this.ladder.Image = global::JamBuilder.Properties.Resources.ladder;
-            this.ladder.Location = new System.Drawing.Point(6, 45);
-            this.ladder.Name = "ladder";
-            this.ladder.Size = new System.Drawing.Size(76, 17);
-            this.ladder.TabIndex = 9;
-            this.ladder.Text = "Ladder";
-            this.ladder.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.ladder.UseVisualStyleBackColor = true;
-            // 
-            // water
-            // 
-            this.water.AutoSize = true;
-            this.water.Image = global::JamBuilder.Properties.Resources.water;
-            this.water.Location = new System.Drawing.Point(6, 68);
-            this.water.Name = "water";
-            this.water.Size = new System.Drawing.Size(72, 17);
-            this.water.TabIndex = 10;
-            this.water.Text = "Water";
-            this.water.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.water.UseVisualStyleBackColor = true;
-            // 
-            // lava
-            // 
-            this.lava.AutoSize = true;
-            this.lava.Image = global::JamBuilder.Properties.Resources.damage;
-            this.lava.Location = new System.Drawing.Point(6, 91);
-            this.lava.Name = "lava";
-            this.lava.Size = new System.Drawing.Size(67, 17);
-            this.lava.TabIndex = 11;
-            this.lava.Text = "Lava";
-            this.lava.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.lava.UseVisualStyleBackColor = true;
-            // 
             // pick
             // 
+            this.pick.BackgroundImage = global::JamBuilder.Properties.Resources.pick;
+            this.pick.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pick.Location = new System.Drawing.Point(421, 32);
             this.pick.Name = "pick";
-            this.pick.Size = new System.Drawing.Size(31, 31);
+            this.pick.Size = new System.Drawing.Size(33, 33);
             this.pick.TabIndex = 29;
             this.pick.UseVisualStyleBackColor = true;
             this.pick.Click += new System.EventHandler(this.pick_Click);
-            // 
-            // draw
-            // 
-            this.draw.Image = global::JamBuilder.Properties.Resources.draw;
-            this.draw.Location = new System.Drawing.Point(384, 32);
-            this.draw.Name = "draw";
-            this.draw.Size = new System.Drawing.Size(31, 31);
-            this.draw.TabIndex = 5;
-            this.draw.UseVisualStyleBackColor = true;
-            this.draw.Click += new System.EventHandler(this.draw_Click);
-            // 
-            // move
-            // 
-            this.move.BackgroundImage = global::JamBuilder.Properties.Resources.move;
-            this.move.Location = new System.Drawing.Point(347, 32);
-            this.move.Name = "move";
-            this.move.Size = new System.Drawing.Size(31, 31);
-            this.move.TabIndex = 4;
-            this.move.UseVisualStyleBackColor = true;
-            this.move.Click += new System.EventHandler(this.move_Click);
-            // 
-            // select
-            // 
-            this.select.BackgroundImage = global::JamBuilder.Properties.Resources.select;
-            this.select.Location = new System.Drawing.Point(310, 32);
-            this.select.Name = "select";
-            this.select.Size = new System.Drawing.Size(31, 31);
-            this.select.TabIndex = 3;
-            this.select.UseVisualStyleBackColor = true;
-            this.select.Click += new System.EventHandler(this.select_Click);
             // 
             // groupBox6
             // 
@@ -1379,13 +1315,87 @@
             this.label15.TabIndex = 0;
             this.label15.Text = "Height";
             // 
-            // newToolStripMenuItem
+            // spike
             // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.newToolStripMenuItem.Text = "New";
-            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            this.spike.AutoSize = true;
+            this.spike.Image = global::JamBuilder.Properties.Resources.spike;
+            this.spike.Location = new System.Drawing.Point(84, 91);
+            this.spike.Name = "spike";
+            this.spike.Size = new System.Drawing.Size(70, 17);
+            this.spike.TabIndex = 56;
+            this.spike.Text = "Spike";
+            this.spike.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.spike.UseVisualStyleBackColor = true;
+            // 
+            // ladder
+            // 
+            this.ladder.AutoSize = true;
+            this.ladder.Image = global::JamBuilder.Properties.Resources.ladder;
+            this.ladder.Location = new System.Drawing.Point(6, 45);
+            this.ladder.Name = "ladder";
+            this.ladder.Size = new System.Drawing.Size(76, 17);
+            this.ladder.TabIndex = 9;
+            this.ladder.Text = "Ladder";
+            this.ladder.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.ladder.UseVisualStyleBackColor = true;
+            // 
+            // water
+            // 
+            this.water.AutoSize = true;
+            this.water.Image = global::JamBuilder.Properties.Resources.water;
+            this.water.Location = new System.Drawing.Point(6, 68);
+            this.water.Name = "water";
+            this.water.Size = new System.Drawing.Size(72, 17);
+            this.water.TabIndex = 10;
+            this.water.Text = "Water";
+            this.water.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.water.UseVisualStyleBackColor = true;
+            // 
+            // lava
+            // 
+            this.lava.AutoSize = true;
+            this.lava.Image = global::JamBuilder.Properties.Resources.damage;
+            this.lava.Location = new System.Drawing.Point(6, 91);
+            this.lava.Name = "lava";
+            this.lava.Size = new System.Drawing.Size(67, 17);
+            this.lava.TabIndex = 11;
+            this.lava.Text = "Lava";
+            this.lava.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.lava.UseVisualStyleBackColor = true;
+            // 
+            // draw
+            // 
+            this.draw.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.draw.Image = global::JamBuilder.Properties.Resources.draw;
+            this.draw.Location = new System.Drawing.Point(384, 32);
+            this.draw.Name = "draw";
+            this.draw.Size = new System.Drawing.Size(33, 33);
+            this.draw.TabIndex = 5;
+            this.draw.UseVisualStyleBackColor = true;
+            this.draw.Click += new System.EventHandler(this.draw_Click);
+            // 
+            // move
+            // 
+            this.move.BackgroundImage = global::JamBuilder.Properties.Resources.move;
+            this.move.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.move.Location = new System.Drawing.Point(347, 32);
+            this.move.Name = "move";
+            this.move.Size = new System.Drawing.Size(33, 33);
+            this.move.TabIndex = 4;
+            this.move.UseVisualStyleBackColor = true;
+            this.move.Click += new System.EventHandler(this.move_Click);
+            // 
+            // select
+            // 
+            this.select.BackgroundImage = global::JamBuilder.Properties.Resources.select;
+            this.select.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.select.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.select.Location = new System.Drawing.Point(310, 32);
+            this.select.Name = "select";
+            this.select.Size = new System.Drawing.Size(33, 33);
+            this.select.TabIndex = 3;
+            this.select.UseVisualStyleBackColor = true;
+            this.select.Click += new System.EventHandler(this.select_Click);
             // 
             // Form1
             // 

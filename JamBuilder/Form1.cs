@@ -40,10 +40,14 @@ namespace JamBuilder
 
         int moveObj;
 
-        int tool;
+        int tool = -1;
 
         uint tileX;
         uint tileY;
+        uint selTileX1;
+        uint selTileY1;
+        uint selTileX2;
+        uint selTileY2;
 
         public Form1()
         {
@@ -272,7 +276,7 @@ namespace JamBuilder
             {
                 texIds.Add(texturing.LoadTexture("Resources/tiles/" + i + ".png"));
             }
-            texIds.Add(texturing.LoadTexture("Resources/tiles/select.png"));
+            texIds.Add(texturing.LoadTexture("Resources/tiles/hover.png"));
 
             modTexIds.Add(texturing.LoadTexture("Resources/modifiers/ladder.png"));
             modTexIds.Add(texturing.LoadTexture("Resources/modifiers/water.png"));
@@ -427,6 +431,53 @@ namespace JamBuilder
                 {
                     Vector2 v = new Vector2(tileX * 16f, -tileY * 16f);
                     renderer.Draw(texIds[52], v, vec_scale, 17, 17);
+                }
+
+                if (selTileX1 != selTileX2 && selTileY1 != selTileY2)
+                {
+                    uint x1 = selTileX1;
+                    uint x2 = selTileX2;
+                    uint y1 = selTileY1;
+                    uint y2 = selTileY2;
+                    if (x2 > x1)
+                    {
+                        x2++;
+                    }
+                    else if (x2 < x1)
+                    {
+                        x1++;
+                    }
+                    if (y2 < y1 && y2 != 0)
+                    {
+                        y2--;
+                    }
+                    if (y2 > y1 && y1 != 0)
+                    {
+                        y1--;
+                    }
+                    GL.Begin(PrimitiveType.Quads);
+                    GL.Color4(Color.FromArgb(50, 200, 255, 255));
+                    GL.Vertex2(x1 * 16, -y1 * 16);
+                    GL.Vertex2(x2 * 16, -y1 * 16);
+                    GL.Vertex2(x2 * 16, -y2 * 16);
+                    GL.Vertex2(x1 * 16, -y2 * 16);
+                    GL.End();
+
+                    GL.Begin(PrimitiveType.Lines);
+                    GL.Color4(Color.FromArgb(255, 0, 0, 255));
+
+                    GL.Vertex2(x1 * 16, -y1 * 16);
+                    GL.Vertex2(x2 * 16, -y1 * 16);
+                    
+                    GL.Vertex2(x2 * 16, -y2 * 16);
+                    GL.Vertex2(x2 * 16, -y1 * 16);
+                    
+                    GL.Vertex2(x2 * 16, -y2 * 16);
+                    GL.Vertex2(x1 * 16, -y2 * 16);
+                    
+                    GL.Vertex2(x1 * 16, -y2 * 16);
+                    GL.Vertex2(x1 * 16, -y1 * 16);
+                    GL.End();
                 }
 
                 if (renderObjectPointsToolStripMenuItem.Checked)
@@ -853,7 +904,10 @@ namespace JamBuilder
             {
                 if (tool == 0)
                 {
-
+                    selTileX1 = tileX;
+                    selTileY1 = tileY;
+                    selTileX2 = tileX;
+                    selTileY2 = tileY;
                 }
                 else if (tool == 1)
                 {
@@ -1008,7 +1062,12 @@ namespace JamBuilder
             }
             else if (e.Button == MouseButtons.Left)
             {
-                if (tool == 2)
+                if (tool == 0)
+                {
+                    selTileX2 = tileX;
+                    selTileY2 = tileY;
+                }
+                else if (tool == 2)
                 {
                     int ix = (int)((tileY * level.Width) + tileX);
 
@@ -1074,6 +1133,13 @@ namespace JamBuilder
                 moveCam = false;
                 mouseX = 0;
                 mouseY = 0;
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
+                if (tool == 0)
+                {
+                    
+                }
             }
         }
 
@@ -1383,11 +1449,104 @@ namespace JamBuilder
 
         private void select_Click(object sender, EventArgs e)
         {
-            tool = 0;
-            select.Enabled = false;
-            move.Enabled = true;
-            draw.Enabled = true;
-            pick.Enabled = true;
+            if (tool != 0 && tool != 3)
+            {
+                tool = 0;
+                move.Enabled = true;
+                draw.Enabled = true;
+                pick.Enabled = true;
+                select.BackgroundImage = null;
+                select.Text = "FILL";
+            }
+            else
+            {
+                uint x1 = selTileX1;
+                uint x2 = selTileX2;
+                uint y1 = selTileY1;
+                uint y2 = selTileY2;
+                if (x2 < x1)
+                {
+                    x1 = selTileX2;
+                    x2 = selTileX1;
+                }
+                if (y2 < y1)
+                {
+                    y2 = selTileY1;
+                    y1 = selTileY2;
+                }
+                for (int y = 0; y < level.Height; y++)
+                {
+                    for (int x = 0; x < level.Width; x++)
+                    {
+                        if (x >= x1 && x <= x2 && y >= y1 && y <= y2)
+                        {
+                            int ix = (int)((y * level.Width) + x);
+
+                            if (editCol.Checked)
+                            {
+                                Collision c = level.TileCollision[ix];
+                                c.Shape = (byte)vshape.Value;
+                                c.Modifier = 0;
+                                if (ladder.Checked) c.Modifier += 2;
+                                if (water.Checked) c.Modifier += 8;
+                                if (spike.Checked) c.Modifier += 16;
+                                if (lava.Checked) c.Modifier += 64;
+                                c.Material = (byte)vmat.Value;
+                                c.Unk = (byte)vunk.Value;
+                                level.TileCollision[ix] = c;
+                            }
+                            if (editBlock.Checked)
+                            {
+                                Block b = level.TileBlock[ix];
+                                b.ID = (short)vblock.Value;
+                                level.TileBlock[ix] = b;
+                            }
+                            if (editDeco.Checked)
+                            {
+                                Decoration ml = level.MLandDecoration[ix];
+                                Decoration bl = level.BLandDecoration[ix];
+                                Decoration fl = level.FLandDecoration[ix];
+                                Decoration ul = level.Unk_Decoration[ix];
+
+                                bl.Unk_1 = (byte)d1_1.Value;
+                                bl.Unk_2 = (byte)d1_2.Value;
+                                bl.Unk_3 = (byte)d1_3.Value;
+                                bl.Unk_4 = (byte)d1_4.Value;
+
+                                ml.Unk_1 = (byte)d2_1.Value;
+                                ml.Unk_2 = (byte)d2_2.Value;
+                                ml.Unk_3 = (byte)d2_3.Value;
+                                ml.Unk_4 = (byte)d2_4.Value;
+
+                                fl.Unk_1 = (byte)d3_1.Value;
+                                fl.Unk_2 = (byte)d3_2.Value;
+                                fl.Unk_3 = (byte)d3_3.Value;
+                                fl.Unk_4 = (byte)d3_4.Value;
+
+                                ul.Unk_1 = (byte)d4_1.Value;
+                                ul.Unk_2 = (byte)d4_2.Value;
+                                ul.Unk_3 = (byte)d4_3.Value;
+                                ul.Unk_4 = (byte)d4_4.Value;
+
+                                level.MLandDecoration[ix] = bl;
+                                level.BLandDecoration[ix] = ml;
+                                level.FLandDecoration[ix] = fl;
+                                level.Unk_Decoration[ix] = ul;
+                            }
+                        }
+                    }
+                }
+                selTileX1 = 0;
+                selTileY1 = 0;
+                selTileX2 = 0;
+                selTileY2 = 0;
+                move.Enabled = true;
+                draw.Enabled = true;
+                pick.Enabled = true;
+                select.BackgroundImage = global::JamBuilder.Properties.Resources.select;
+                select.Text = "";
+                tool = -1;
+            }
         }
 
         private void move_Click(object sender, EventArgs e)
@@ -1397,6 +1556,12 @@ namespace JamBuilder
             move.Enabled = false;
             draw.Enabled = true;
             pick.Enabled = true;
+            selTileX1 = 0;
+            selTileY1 = 0;
+            selTileX2 = 0;
+            selTileY2 = 0;
+            select.BackgroundImage = global::JamBuilder.Properties.Resources.select;
+            select.Text = "";
         }
 
         private void draw_Click(object sender, EventArgs e)
@@ -1406,6 +1571,12 @@ namespace JamBuilder
             move.Enabled = true;
             draw.Enabled = false;
             pick.Enabled = true;
+            selTileX1 = 0;
+            selTileY1 = 0;
+            selTileX2 = 0;
+            selTileY2 = 0;
+            select.BackgroundImage = global::JamBuilder.Properties.Resources.select;
+            select.Text = "";
         }
 
         private void pick_Click(object sender, EventArgs e)

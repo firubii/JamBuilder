@@ -326,7 +326,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\tiles\select.png">
+    <None Include="Resources\tiles\hover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\bmfonts\a.png">
@@ -379,6 +379,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="Resources\move.png" />
+    <None Include="Resources\pick.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\select.png" />
   </ItemGroup>
   <ItemGroup />

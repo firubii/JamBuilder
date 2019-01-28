@@ -8,6 +8,7 @@ namespace KSALVL
 {
     public struct Block
     {
+		public Block(short ID) { this.ID = ID; }
         public short ID;
     }
 

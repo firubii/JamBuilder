@@ -34,6 +34,7 @@ namespace KSALVL
             Background = "";
             Tileset = "";
             StageData = new Stage();
+            StageData.Unk_String = "";
             TileBlock = new List<Block>();
             TileCollision = new List<Collision>();
             BLandDecoration = new List<Decoration>();
@@ -42,9 +43,9 @@ namespace KSALVL
             Unk_Decoration = new List<Decoration>();
             Objects = new List<Dictionary<string, string>>();
             GuestStarItems = new List<Dictionary<string, string>>();
-            Items = Objects = new List<Dictionary<string, string>>();
-            Bosses = Objects = new List<Dictionary<string, string>>();
-            Enemies = Objects = new List<Dictionary<string, string>>();
+            Items = new List<Dictionary<string, string>>();
+            Bosses = new List<Dictionary<string, string>>();
+            Enemies = new List<Dictionary<string, string>>();
         }
         public Level(string filePath)
         {

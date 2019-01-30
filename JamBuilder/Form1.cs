@@ -59,7 +59,12 @@ namespace JamBuilder
             comboBox1.SelectedIndex = 0;
         }
 
-        public void RefreshObjectLists()
+		public void listFormatChanged(object sender, EventArgs e)
+		{
+			RefreshObjectLists();
+		}
+
+		public void RefreshObjectLists()
         {
             int selIndex = 0;
 
@@ -75,32 +80,62 @@ namespace JamBuilder
             bossList.Items.Clear();
             enemyList.Items.Clear();
 
+			if (this.level == null)
+			{
+				return;
+			}
+
             objList.BeginUpdate();
             guestItemList.BeginUpdate();
             itemList.BeginUpdate();
             bossList.BeginUpdate();
             enemyList.BeginUpdate();
 
-            for (int i = 0; i < level.Objects.Count; i++)
+			string formatting = "";
+			string spacer = "";
+			if (formatShowIndex.Checked)
+			{
+				formatting += spacer+"[{0}]";
+				spacer = " ";
+			}
+			if (formatShowKind.Checked)
+			{
+				formatting += spacer+"{1}";
+				spacer = " ";
+			}
+			if (formatShowWuid.Checked)
+			{
+				formatting += spacer+"({2})";
+				spacer = " ";
+			}
+
+			if (formatting.Length == 0)
+			{
+				//When no formatting option is checked.
+				formatting = "View > Object List Format     OwO";
+				//Uuuhm. Consider it an easteregg.
+			}
+
+			for (int i = 0; i < level.Objects.Count; i++)
             {
-                objList.Items.Add(level.Objects[i]["string kind"]);
-            }
+				objList.Items.Add(String.Format(formatting, i , level.Objects[i]["string kind"], level.Objects[i]["int wuid"]));
+			}
             for (int i = 0; i < level.GuestStarItems.Count; i++)
             {
-                guestItemList.Items.Add(level.GuestStarItems[i]["string kind"]);
-            }
+                guestItemList.Items.Add(String.Format(formatting, i, level.GuestStarItems[i]["string kind"], level.GuestStarItems[i]["int wuid"]));
+			}
             for (int i = 0; i < level.Items.Count; i++)
             {
-                itemList.Items.Add(level.Items[i]["string kind"]);
-            }
+				itemList.Items.Add(String.Format(formatting, i, level.Items[i]["string kind"], level.Items[i]["int wuid"]));
+			}
             for (int i = 0; i < level.Bosses.Count; i++)
             {
-                bossList.Items.Add(level.Bosses[i]["string kind"]);
+				bossList.Items.Add(String.Format(formatting, i, level.Bosses[i]["string kind"], level.Bosses[i]["int wuid"]));
             }
             for (int i = 0; i < level.Enemies.Count; i++)
             {
-                enemyList.Items.Add(level.Enemies[i]["string kind"]);
-            }
+				enemyList.Items.Add(String.Format(formatting, i, level.Enemies[i]["string kind"], level.Enemies[i]["int wuid"]));
+			}
 
             if (tabControl1.SelectedTab == objTab && objList.Items.Count >= selIndex + 1) objList.SelectedIndex = selIndex;
             if (tabControl1.SelectedTab == guestStarItemTab && guestItemList.Items.Count >= selIndex + 1) guestItemList.SelectedIndex = selIndex;
@@ -142,7 +177,7 @@ namespace JamBuilder
                 sizeH.Value = level.Height;
 
                 camera.pos = Vector2.Zero;
-                camera.zoom = 1.1;
+                camera.zoom = 1.0;
                 RefreshObjectLists();
 
                 this.Text = $"JamBuilder - {filePath}";
@@ -171,7 +206,7 @@ namespace JamBuilder
                 level = newlvl.level;
 
                 camera.pos = Vector2.Zero;
-                camera.zoom = 1.1;
+                camera.zoom = 1.0;
                 RefreshObjectLists();
 
                 sizeH.Value = level.Height;
@@ -185,7 +220,27 @@ namespace JamBuilder
             }
         }
 
-        private void editObj_Click(object sender, EventArgs e)
+		private void editObj_Click(object sender, EventArgs e)
+		{
+			int index = tabControl1.SelectedIndex;
+
+			switch (index)
+			{
+				default:
+				case 0:
+					editObject(); break;
+				case 1:
+					editGuestItem(); break;
+				case 2:
+					editItem(); break;
+				case 3:
+					editBoss(); break;
+				case 4:
+					editEnemy(); break;
+			}
+		}
+
+		private void editObject()
         {
             if (objList.SelectedItem != null && level != null)
             {
@@ -200,7 +255,7 @@ namespace JamBuilder
             }
         }
 
-        private void editGuestItem_Click(object sender, EventArgs e)
+        private void editGuestItem()
         {
             if (guestItemList.SelectedItem != null && level != null)
             {
@@ -215,7 +270,7 @@ namespace JamBuilder
             }
         }
 
-        private void editItem_Click(object sender, EventArgs e)
+        private void editItem()
         {
             if (itemList.SelectedItem != null && level != null)
             {
@@ -230,7 +285,7 @@ namespace JamBuilder
             }
         }
 
-        private void editBoss_Click(object sender, EventArgs e)
+        private void editBoss()
         {
             if (bossList.SelectedItem != null && level != null)
             {
@@ -245,7 +300,7 @@ namespace JamBuilder
             }
         }
 
-        private void editEnemy_Click(object sender, EventArgs e)
+        private void editEnemy()
         {
             if (enemyList.SelectedItem != null && level != null)
             {
@@ -270,7 +325,7 @@ namespace JamBuilder
 
             renderer = new Renderer();
             texturing = new Texturing();
-            camera = new Camera(new Vector2(0, 0), 1.1);
+            camera = new Camera(new Vector2(0, 0), 1.0);
 
             for (int i = 0; i < 52; i++)
             {
@@ -324,9 +379,15 @@ namespace JamBuilder
             t.Start();
         }
 
+		private void glControl_Resize(object sender, EventArgs e)
+		{
+			glControl.ClientSize = new Size(Math.Max(glControl.Width, 1), Math.Max(glControl.Height, 1));
+			GL.Viewport(0, 0, Math.Max(glControl.Width, 1), Math.Max(glControl.Height, 1));
+		}
+
         private void glControl_Paint(object sender, PaintEventArgs e)
         {
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+			GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.ClearColor(Color.FromArgb(200, 200, 200));
 
             renderer.Init(glControl.Width, glControl.Height);
@@ -648,7 +709,28 @@ namespace JamBuilder
             return wuid;
         }
 
-        private void addObj_Click(object sender, EventArgs e)
+		private void addObj_Click(object sender, EventArgs e)
+		{
+			int index = tabControl1.SelectedIndex;
+
+			switch (index)
+			{
+				default:
+				case 0:
+					addObject();break;
+				case 1:
+					addGuestItem(); break;
+				case 2:
+					addItem(); break;
+				case 3:
+					addBoss(); break;
+				case 4:
+					addEnemy(); break;
+			}
+		}
+
+
+		private void addObject()
         {
             if (level != null)
             {
@@ -663,7 +745,7 @@ namespace JamBuilder
             }
         }
 
-        private void addGuestItem_Click(object sender, EventArgs e)
+        private void addGuestItem()
         {
             if (level != null)
             {
@@ -678,7 +760,7 @@ namespace JamBuilder
             }
         }
 
-        private void addItem_Click(object sender, EventArgs e)
+        private void addItem()
         {
             if (level != null)
             {
@@ -693,7 +775,7 @@ namespace JamBuilder
             }
         }
 
-        private void addBoss_Click(object sender, EventArgs e)
+        private void addBoss()
         {
             if (level != null)
             {
@@ -708,7 +790,7 @@ namespace JamBuilder
             }
         }
 
-        private void addEnemy_Click(object sender, EventArgs e)
+        private void addEnemy()
         {
             if (level != null)
             {
@@ -760,7 +842,27 @@ namespace JamBuilder
             saveAsToolStripMenuItem.Enabled = true;
         }
 
-        private void delObj_Click(object sender, EventArgs e)
+		private void delObj_Click(object sender, EventArgs e)
+		{
+			int index = tabControl1.SelectedIndex;
+
+			switch (index)
+			{
+				default:
+				case 0:
+					delObject(); break;
+				case 1:
+					delGuestItem(); break;
+				case 2:
+					delItem(); break;
+				case 3:
+					delBoss(); break;
+				case 4:
+					delEnemy(); break;
+			}
+		}
+
+		private void delObject()
         {
             if (level != null)
             {
@@ -772,7 +874,7 @@ namespace JamBuilder
             }
         }
 
-        private void delGuestItem_Click(object sender, EventArgs e)
+        private void delGuestItem()
         {
             if (level != null)
             {
@@ -784,7 +886,7 @@ namespace JamBuilder
             }
         }
 
-        private void delItem_Click(object sender, EventArgs e)
+        private void delItem()
         {
             if (level != null)
             {
@@ -796,7 +898,7 @@ namespace JamBuilder
             }
         }
 
-        private void delBoss_Click(object sender, EventArgs e)
+        private void delBoss()
         {
             if (level != null)
             {
@@ -808,7 +910,7 @@ namespace JamBuilder
             }
         }
 
-        private void delEnemy_Click(object sender, EventArgs e)
+        private void delEnemy()
         {
             if (level != null)
             {
@@ -843,7 +945,7 @@ namespace JamBuilder
             {
                 if (objList.SelectedItem != null)
                 {
-                    editObj_Click(this, new EventArgs());
+                    editObject();
                 }
             }
         }
@@ -854,7 +956,7 @@ namespace JamBuilder
             {
                 if (guestItemList.SelectedItem != null)
                 {
-                    editGuestItem_Click(this, new EventArgs());
+                    editGuestItem();
                 }
             }
         }
@@ -865,7 +967,7 @@ namespace JamBuilder
             {
                 if (itemList.SelectedItem != null)
                 {
-                    editItem_Click(this, new EventArgs());
+                    editItem();
                 }
             }
         }
@@ -876,7 +978,7 @@ namespace JamBuilder
             {
                 if (bossList.SelectedItem != null)
                 {
-                    editBoss_Click(this, new EventArgs());
+                    editBoss();
                 }
             }
         }
@@ -887,7 +989,7 @@ namespace JamBuilder
             {
                 if (enemyList.SelectedItem != null)
                 {
-                    editEnemy_Click(this, new EventArgs());
+                    editEnemy();
                 }
             }
         }
@@ -1172,7 +1274,7 @@ namespace JamBuilder
 
         private void resetCamera_Click(object sender, EventArgs e)
         {
-            camera.zoom = 1.1;
+            camera.zoom = 1.0;
             //Move Camera into Level Bounds
             camera.pos.X = Math.Max(0, Math.Min(level.Width*16 , camera.pos.X));
             camera.pos.Y = Math.Max(-level.Height*16, Math.Min(0, camera.pos.Y));
@@ -1588,18 +1690,39 @@ namespace JamBuilder
             pick.Enabled = false;
         }
 
-        private void cloneObj_Click(object sender, EventArgs e)
+		private void cloneObj_Click(object sender, EventArgs e)
+		{
+			int index = tabControl1.SelectedIndex;
+
+			switch (index)
+			{
+				default:
+				case 0:
+					cloneObject(); break;
+				case 1:
+					cloneGuestItem(); break;
+				case 2:
+					cloneItem(); break;
+				case 3:
+					cloneBoss(); break;
+				case 4:
+					cloneEnemy(); break;
+			}
+		}
+
+		private void cloneObject()
         {
             if (level != null)
             {
                 if (objList.SelectedItem != null)
                 {
                     level.Objects.Add(level.Objects[objList.SelectedIndex]);
+					RefreshObjectLists();
                 }
             }
         }
 
-        private void cloneGuestItem_Click(object sender, EventArgs e)
+        private void cloneGuestItem()
         {
             if (level != null)
             {
@@ -1611,7 +1734,7 @@ namespace JamBuilder
             }
         }
 
-        private void cloneItem_Click(object sender, EventArgs e)
+        private void cloneItem()
         {
             if (level != null)
             {
@@ -1623,7 +1746,7 @@ namespace JamBuilder
             }
         }
 
-        private void cloneBoss_Click(object sender, EventArgs e)
+        private void cloneBoss()
         {
             if (level != null)
             {
@@ -1635,7 +1758,7 @@ namespace JamBuilder
             }
         }
 
-        private void cloneEnemy_Click(object sender, EventArgs e)
+        private void cloneEnemy()
         {
             if (level != null)
             {
@@ -1646,5 +1769,20 @@ namespace JamBuilder
                 }
             }
         }
-    }
+
+		private void groupBox7_Enter(object sender, EventArgs e)
+		{
+
+		}
+
+		private void toolStripComboBox1_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void renderBlocksToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
+	}
 }

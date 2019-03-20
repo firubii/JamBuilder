@@ -114,6 +114,9 @@
     <EmbeddedResource Include="YAMLEditor.resx">
       <DependentUpon>YAMLEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="object.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -386,4 +389,5 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions />
 </Project>

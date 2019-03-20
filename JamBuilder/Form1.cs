@@ -26,6 +26,8 @@ namespace JamBuilder
         List<int> objTexIds = new List<int>();
         Dictionary<short, int> blockTexIds = new Dictionary<short, int>();
 
+        ObjectDatabase objectDB;
+
         Renderer renderer;
         Texturing texturing;
         Camera camera;
@@ -51,6 +53,7 @@ namespace JamBuilder
 
         public Form1()
         {
+            objectDB = new ObjectDatabase(File.ReadAllLines(Directory.GetCurrentDirectory() + @"\object.json"));
             InitializeComponent();
         }
 
@@ -1784,5 +1787,10 @@ namespace JamBuilder
 		{
 
 		}
-	}
+
+        private void reloadObjectDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            objectDB = new ObjectDatabase(File.ReadAllLines(Directory.GetCurrentDirectory() + @"\object.json"));
+        }
+    }
 }

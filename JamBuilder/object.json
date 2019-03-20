@@ -1,0 +1,2236 @@
+{
+  "object": [
+    {
+      "name": "Door",
+      "properties": [
+        {
+          "name": "appearFrame",
+          "type": "int",
+          "default": 0
+        },
+        {
+          "name": "decorationKind",
+          "type": "string",
+          "default": "OneWayBlack",
+          "options": [
+            "OneWayBlack",
+            "OneWayWhite",
+            "RoundTripBlack",
+            "RoundTripWhite",
+            "Transparent",
+            "OneWay2x2",
+            "RoundTrip2x2"
+          ]
+        },
+        {
+          "name": "doorID",
+          "type": "int",
+          "default": 0
+        },
+        {
+          "name": "isHelperGoOnly",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "isHideFirst",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "isMoveLandConstraint",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "isSaveBetweenStep",
+          "type": "bool",
+          "default": false
+        },
+        {
+          "name": "portalNo",
+          "type": "int",
+          "default": 0
+        },
+        {
+          "name": "signalNo",
+          "type": "int",
+          "default": 0
+        },
+        {
+          "name": "stepShift",
+          "type": "int",
+          "default": 0
+        }
+      ]
+    }
+  ],
+  "item": [
+    {
+      "name": "PointStarYellow",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PointStarGreen",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PointStarRed",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PointStarBlue",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "OneUp",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MTomato",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Food",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "subKind",
+          "type": "string",
+          "default": "DinnerBread",
+          "options": [
+            "DinnerBread",
+            "DinnerMeat",
+            "DinnerOmelet",
+            "DinnerOnigiri",
+            "DinnerSandwich",
+            "DinnerSushi",
+            "DrinkMelonSoda",
+            "DrinkMilk",
+            "DrinkBabyBottle",
+            "DrinkCoffee",
+            "FruitBanana",
+            "FruitCherry",
+            "FruitWatermelon",
+            "FruitOrange",
+            "FruitMelon",
+            "JunkHotdog",
+            "JunkHumburger",
+            "JunkTakoyaki",
+            "JunkRoastChicken",
+            "LightFriedEgg",
+            "SweetsDoughnut",
+            "SweetsPudding",
+            "SweetsShortCake",
+            "SweetsSoftCream",
+            "SweetsIceCandy",
+            "SweetsMacaron",
+            "SweetsDaroachCake",
+            "SweetsSusieAppleSherbet",
+            "VegetableCarrot",
+            "VegetablePumpkin",
+            "VegetableTomato",
+            "VegetableCorn",
+            "VegetableGreenPepper"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "IllustPiece",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "IllustPieceRare",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "IllustPieceRareGray",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "InvincibleCandy",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GenkiDrink",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DreamRod",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FriendPower",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FriendDefense",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FriendSpeed",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AllUp",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AdcHeart",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AdcHeartGray",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "None",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CopySource",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AbilitySeatItem",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ArtistPainterFood",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "subKind",
+          "type": "string",
+          "default": "DinnerBread",
+          "options": [
+            "DinnerBread",
+            "DinnerMeat",
+            "DinnerOmelet",
+            "DinnerOnigiri",
+            "DinnerSandwich",
+            "DinnerSushi",
+            "DrinkMelonSoda",
+            "DrinkMilk",
+            "DrinkBabyBottle",
+            "DrinkCoffee",
+            "FruitBanana",
+            "FruitCherry",
+            "FruitWatermelon",
+            "FruitOrange",
+            "FruitMelon",
+            "JunkHotdog",
+            "JunkHumburger",
+            "JunkTakoyaki",
+            "JunkRoastChicken",
+            "LightFriedEgg",
+            "SweetsDoughnut",
+            "SweetsPudding",
+            "SweetsShortCake",
+            "SweetsSoftCream",
+            "SweetsIceCandy",
+            "SweetsMacaron",
+            "SweetsDaroachCake",
+            "SweetsSusieAppleSherbet",
+            "VegetableCarrot",
+            "VegetablePumpkin",
+            "VegetableTomato",
+            "VegetableCorn",
+            "VegetableGreenPepper"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CookFood",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CherryMadeInArena",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TomatoMadeInArena",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "IllustPieceNfp",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FoodHQ",
+      "properties": [
+        {
+          "name": "constraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "itemCategory",
+          "type": "string",
+          "default": "Item",
+          "options": [
+            "Item",
+            "HelperGoItem"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Fixed",
+          "options": [
+            "Fixed",
+            "Fall",
+            "FallNoCulling",
+            "Bound",
+            "AssistThrow",
+            "ItemBoxAppear",
+            "ItemBoxAppear2Left",
+            "ItemBoxAppear2Right",
+            "ItemBoxAppear3Left",
+            "ItemBoxAppear3Center",
+            "ItemBoxAppear3Right",
+            "ItemBoxAppearHigh",
+            "ItemBoxAppear2LeftHigh",
+            "ItemBoxAppear2RightHigh",
+            "ItemBoxAppear3LeftHigh",
+            "ItemBoxAppear3CenterHigh",
+            "ItemBoxAppear3RightHigh",
+            "ItemBoxAppearFixed",
+            "Resume",
+            "ResumeAssistThrow",
+            "EnemyDead",
+            "FixedScrewRotationLand",
+            "HeavySnowmanAppear",
+            "GimmickDead",
+            "PushIronPoleAppear",
+            "RiseNoCulling",
+            "RisePopWhenFullNoCulling",
+            "RiseLowNoCulling",
+            "Discard",
+            "DiscardTwinkleStar",
+            "FixedTwinkleStar",
+            "FallSlowNoCulling",
+            "FallVerySlowNoCulling",
+            "FallLite",
+            "FixedAbilitySeat",
+            "InertiaWaft",
+            "WhiteBoardBoundLeft",
+            "WhiteBoardBoundCenter",
+            "WhiteBoardBoundRight",
+            "FromCookPot",
+            "FromCookPotNoInstancing",
+            "Credit"
+          ]
+        }
+      ]
+    }
+  ],
+  "boss": [
+    {
+      "name": "BKnight",
+      "properties": [
+        {
+          "name": "contraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "dirType",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Counter",
+            "L",
+            "R",
+            "U",
+            "D",
+            "UL",
+            "UR",
+            "DL",
+            "DR"
+          ]
+        },
+        {
+          "name": "enemyCategory",
+          "type": "string",
+          "default": "Boss",
+          "options": [
+            "Boss",
+            "MBoss",
+            "Enemy"
+          ]
+        },
+        {
+          "name": "group",
+          "type": "int",
+          "default": 0
+        },
+        {
+          "name": "level",
+          "type": "string",
+          "default": "Lv1",
+          "options": [
+            "Lv1",
+            "Lv2",
+            "Lv3",
+            "Lv4",
+            "Lv5",
+            "Lv6"
+          ]
+        },
+        {
+          "name": "modelKind",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Ex2"
+          ]
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Big",
+            "Small",
+            "BigForHelperGo",
+            "SmallForHelperGo"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "GalaDemo",
+            "Ultimate",
+            "UltimateGalaDemo"
+          ]
+        }
+      ]
+    }
+  ],
+  "enemy": [
+    {
+      "name": "Waddledee",
+      "properties": [
+        {
+          "name": "contraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "dirType",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Counter",
+            "L",
+            "R",
+            "U",
+            "D",
+            "UL",
+            "UR",
+            "DL",
+            "DR"
+          ]
+        },
+        {
+          "name": "enemyCategory",
+          "type": "string",
+          "default": "Enemy",
+          "options": [
+            "Boss",
+            "MBoss",
+            "Enemy"
+          ]
+        },
+        {
+          "name": "group",
+          "type": "int",
+          "default": 0
+        },
+        {
+          "name": "level",
+          "type": "string",
+          "default": "Lv1",
+          "options": [
+            "Lv1",
+            "Lv2",
+            "Lv3",
+            "Lv4",
+            "Lv5",
+            "Lv6"
+          ]
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Big",
+            "Small",
+            "BigForHelperGo",
+            "SmallForHelperGo"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Wait",
+          "options": [
+            "Wait",
+            "WalkAround",
+            "WalkTurnCliff",
+            "WalkStraight",
+            "BuraburadeeFront",
+            "BuraburadeeBack",
+            "Parasol",
+            "Parasol3D",
+            "ParasolWait",
+            "Rolling",
+            "Sleep",
+            "SleepAndGetUp",
+            "SummonedWhispy",
+            "SmashedFromPuppet",
+            "SmashedFireFromPuppet",
+            "Jump3D_Wait",
+            "Jump3D_Walk"
+          ]
+        }
+      ]
+    }
+  ]
+}

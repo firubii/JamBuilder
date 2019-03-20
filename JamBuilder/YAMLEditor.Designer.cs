@@ -32,8 +32,8 @@
             this.save = new System.Windows.Forms.Button();
             this.value = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.delAttribute = new System.Windows.Forms.Button();
             this.valueSelect = new System.Windows.Forms.ComboBox();
+            this.boolSelect = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // yamlDataList
@@ -47,7 +47,7 @@
             // 
             // save
             // 
-            this.save.Location = new System.Drawing.Point(178, 326);
+            this.save.Location = new System.Drawing.Point(178, 302);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(75, 23);
             this.save.TabIndex = 1;
@@ -72,17 +72,6 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Value";
             // 
-            // delAttribute
-            // 
-            this.delAttribute.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.delAttribute.Location = new System.Drawing.Point(13, 296);
-            this.delAttribute.Name = "delAttribute";
-            this.delAttribute.Size = new System.Drawing.Size(23, 23);
-            this.delAttribute.TabIndex = 5;
-            this.delAttribute.Text = "-";
-            this.delAttribute.UseVisualStyleBackColor = true;
-            this.delAttribute.Click += new System.EventHandler(this.delAttribute_Click);
-            // 
             // valueSelect
             // 
             this.valueSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -91,17 +80,27 @@
             this.valueSelect.Location = new System.Drawing.Point(216, 55);
             this.valueSelect.Name = "valueSelect";
             this.valueSelect.Size = new System.Drawing.Size(201, 21);
-            this.valueSelect.Sorted = true;
             this.valueSelect.TabIndex = 6;
             this.valueSelect.SelectedIndexChanged += new System.EventHandler(this.valueSelect_SelectedIndexChanged);
+            // 
+            // boolSelect
+            // 
+            this.boolSelect.AutoSize = true;
+            this.boolSelect.Location = new System.Drawing.Point(216, 83);
+            this.boolSelect.Name = "boolSelect";
+            this.boolSelect.Size = new System.Drawing.Size(53, 17);
+            this.boolSelect.TabIndex = 7;
+            this.boolSelect.Text = "Value";
+            this.boolSelect.UseVisualStyleBackColor = true;
+            this.boolSelect.CheckedChanged += new System.EventHandler(this.boolSelect_CheckedChanged);
             // 
             // YAMLEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(430, 356);
+            this.ClientSize = new System.Drawing.Size(430, 338);
+            this.Controls.Add(this.boolSelect);
             this.Controls.Add(this.valueSelect);
-            this.Controls.Add(this.delAttribute);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.value);
             this.Controls.Add(this.save);
@@ -124,7 +123,7 @@
         private System.Windows.Forms.Button save;
         private System.Windows.Forms.TextBox value;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button delAttribute;
         private System.Windows.Forms.ComboBox valueSelect;
+        private System.Windows.Forms.CheckBox boolSelect;
     }
 }

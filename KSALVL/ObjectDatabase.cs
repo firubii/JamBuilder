@@ -121,9 +121,7 @@ namespace KSALVL
                                 EnemyList.Add((string)((JObject)objArray[i])["name"], properties.ToArray());
                                 break;
                             }
-
                     }
-                    ObjectList.Add((string)((JObject)objArray[i])["name"], properties.ToArray());
                 }
             }
         }

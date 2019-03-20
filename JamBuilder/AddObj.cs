@@ -16,7 +16,7 @@ namespace JamBuilder
         public int editorType;
         public Dictionary<string, string> obj = new Dictionary<string, string>();
 
-        Objects objs = new Objects();
+        public ObjectDatabase database;
 
         public AddObj()
         {
@@ -28,319 +28,155 @@ namespace JamBuilder
             List<string> list = new List<string>();
             if (editorType == 0)
             {
-                list = objs.ObjectList.Keys.ToList();
-                list.Sort();
+                list = database.ObjectList.Keys.ToList();
                 objectDropDown.Items.AddRange(list.ToArray());
             }
             else if (editorType == 1 || editorType == 2)
             {
-                list = objs.ItemList.Keys.ToList();
-                list.Sort();
+                list = database.ItemList.Keys.ToList();
                 objectDropDown.Items.AddRange(list.ToArray());
             }
             else if (editorType == 3)
             {
-                list = objs.BossList.Keys.ToList();
-                list.Sort();
+                list = database.BossList.Keys.ToList();
                 objectDropDown.Items.AddRange(list.ToArray());
             }
             else if (editorType == 4)
             {
-                objectDropDown.Items.AddRange(new string[] { "Enemy", "MBoss" });
-                enemyDropDown.Visible = true;
+                list = database.EnemyList.Keys.ToList();
+                objectDropDown.Items.AddRange(list.ToArray());
             }
             objectDropDown.SelectedIndex = 0;
         }
 
         private void save_Click(object sender, EventArgs e)
         {
+            obj.Add("int wuid", "0");
+            obj.Add("int x", "0 | 0");
+            obj.Add("int y", "0 | 0");
+            obj.Add("string kind", objectDropDown.Text);
             if (editorType == 0)
             {
-                for (int i = 0; i < objs.ObjectList[objectDropDown.Text].Length; i++)
+                for (int i = 0; i < database.ObjectList[objectDropDown.Text].Length; i++)
                 {
-                    string value = "";
-                    string valType = objs.ObjectList[objectDropDown.Text][i].Split(' ')[0];
-                    switch (valType)
+                    string pname = "";
+                    switch (database.ObjectList[objectDropDown.Text][i].Type)
                     {
-                        case "int":
-                        case "float":
+                        case ObjectDatabase.PropertyType.Int:
                             {
-                                value = "0";
-                                if (objs.ObjectList[objectDropDown.Text][i] == "int x" || objs.ObjectList[objectDropDown.Text][i] == "int y")
-                                {
-                                    value = "0 | 0";
-                                }
+                                pname = $"int {database.ObjectList[objectDropDown.Text][i].Name}";
                                 break;
                             }
-                        case "bool":
+                        case ObjectDatabase.PropertyType.Float:
                             {
-                                value = "False";
+                                pname = $"float {database.ObjectList[objectDropDown.Text][i].Name}";
                                 break;
                             }
-                        case "string":
+                        case ObjectDatabase.PropertyType.Bool:
                             {
-                                if (objs.ObjectList[objectDropDown.Text][i] == "string constraintMoveGroup")
-                                {
-                                    value = "-1";
-                                }
-                                else if (objs.ObjectList[objectDropDown.Text][i] == "string kind")
-                                {
-                                    value = objectDropDown.Text;
-                                }
+                                pname = $"bool {database.ObjectList[objectDropDown.Text][i].Name}";
+                                break;
+                            }
+                        case ObjectDatabase.PropertyType.String:
+                            {
+                                pname = $"string {database.ObjectList[objectDropDown.Text][i].Name}";
                                 break;
                             }
                     }
-                    obj.Add(objs.ObjectList[objectDropDown.Text][i], value);
+                    obj.Add(pname, (string)database.ObjectList[objectDropDown.Text][i].Default);
                 }
             }
             if (editorType == 1 || editorType == 2)
             {
-                for (int i = 0; i < objs.ItemList[objectDropDown.Text].Length; i++)
+                for (int i = 0; i < database.ItemList[objectDropDown.Text].Length; i++)
                 {
-                    string value = "";
-                    string valType = objs.ItemList[objectDropDown.Text][i].Split(' ')[0];
-                    switch (valType)
+                    string pname = "";
+                    switch (database.ItemList[objectDropDown.Text][i].Type)
                     {
-                        case "int":
-                        case "float":
+                        case ObjectDatabase.PropertyType.Int:
                             {
-                                value = "0";
-                                if (objs.ItemList[objectDropDown.Text][i] == "int x" || objs.ItemList[objectDropDown.Text][i] == "int y")
-                                {
-                                    value = "0 | 0";
-                                }
+                                pname = $"int {database.ItemList[objectDropDown.Text][i].Name}";
                                 break;
                             }
-                        case "bool":
+                        case ObjectDatabase.PropertyType.Float:
                             {
-                                value = "False";
+                                pname = $"float {database.ItemList[objectDropDown.Text][i].Name}";
                                 break;
                             }
-                        case "string":
+                        case ObjectDatabase.PropertyType.Bool:
                             {
-                                if (objs.ItemList[objectDropDown.Text][i] == "string constraintMoveGroup")
-                                {
-                                    value = "-1";
-                                }
-                                else if (objs.ItemList[objectDropDown.Text][i] == "string itemCategory")
-                                {
-                                    if (editorType == 1)
-                                    {
-                                        value = "HelperGoItem";
-                                    }
-                                    else if (editorType == 1)
-                                    {
-                                        value = "Item";
-                                    }
-                                }
-                                else if (objs.ItemList[objectDropDown.Text][i] == "string kind")
-                                {
-                                    value = objectDropDown.Text;
-                                }
-                                else if (objs.ItemList[objectDropDown.Text][i] == "string subKind")
-                                {
-                                    value = "FruitWatermelon";
-                                }
-                                else if (objs.ItemList[objectDropDown.Text][i] == "string variation")
-                                {
-                                    value = "Fixed";
-                                }
+                                pname = $"bool {database.ItemList[objectDropDown.Text][i].Name}";
+                                break;
+                            }
+                        case ObjectDatabase.PropertyType.String:
+                            {
+                                pname = $"string {database.ItemList[objectDropDown.Text][i].Name}";
                                 break;
                             }
                     }
-                    obj.Add(objs.ItemList[objectDropDown.Text][i], value);
+                    obj.Add(pname, (string)database.ItemList[objectDropDown.Text][i].Default);
                 }
             }
             else if (editorType == 3)
             {
-                for (int i = 0; i < objs.BossList[objectDropDown.Text].Length; i++)
+                for (int i = 0; i < database.BossList[objectDropDown.Text].Length; i++)
                 {
-                    string value = "";
-                    string valType = objs.BossList[objectDropDown.Text][i].Split(' ')[0];
-                    switch (valType)
+                    string pname = "";
+                    switch (database.BossList[objectDropDown.Text][i].Type)
                     {
-                        case "int":
-                        case "float":
+                        case ObjectDatabase.PropertyType.Int:
                             {
-                                value = "0";
-                                if (objs.BossList[objectDropDown.Text][i] == "int x" || objs.BossList[objectDropDown.Text][i] == "int y")
-                                {
-                                    value = "0 | 0";
-                                }
+                                pname = $"int {database.BossList[objectDropDown.Text][i].Name}";
                                 break;
                             }
-                        case "bool":
+                        case ObjectDatabase.PropertyType.Float:
                             {
-                                value = "False";
+                                pname = $"float {database.BossList[objectDropDown.Text][i].Name}";
                                 break;
                             }
-                        case "string":
+                        case ObjectDatabase.PropertyType.Bool:
                             {
-                                if (objs.BossList[objectDropDown.Text][i] == "string constraintMoveGroup")
-                                {
-                                    value = "-1";
-                                }
-                                else if (objs.BossList[objectDropDown.Text][i] == "string dirType")
-                                {
-                                    value = "Normal";
-                                }
-                                else if (objs.BossList[objectDropDown.Text][i] == "string enemyCategory")
-                                {
-                                    value = "Boss";
-                                }
-                                else if (objs.BossList[objectDropDown.Text][i] == "string kind")
-                                {
-                                    value = objectDropDown.Text;
-                                }
-                                else if (objs.BossList[objectDropDown.Text][i] == "string level")
-                                {
-                                    value = "Lvl1";
-                                }
-                                else if (objs.BossList[objectDropDown.Text][i] == "string modelKind")
-                                {
-                                    value = "Normal";
-                                }
-                                else if (objs.BossList[objectDropDown.Text][i] == "string size")
-                                {
-                                    value = "Normal";
-                                }
-                                else if (objs.BossList[objectDropDown.Text][i] == "string variation")
-                                {
-                                    value = "Normal";
-                                }
+                                pname = $"bool {database.BossList[objectDropDown.Text][i].Name}";
+                                break;
+                            }
+                        case ObjectDatabase.PropertyType.String:
+                            {
+                                pname = $"string {database.BossList[objectDropDown.Text][i].Name}";
                                 break;
                             }
                     }
-                    obj.Add(objs.BossList[objectDropDown.Text][i], value);
+                    obj.Add(pname, (string)database.BossList[objectDropDown.Text][i].Default);
                 }
             }
             else if (editorType == 4)
             {
-                if (objectDropDown.Text == "Enemy")
+                for (int i = 0; i < database.EnemyList[objectDropDown.Text].Length; i++)
                 {
-                    for (int i = 0; i < objs.EnemyList[enemyDropDown.Text].Length; i++)
+                    string pname = "";
+                    switch (database.EnemyList[objectDropDown.Text][i].Type)
                     {
-                        string value = "";
-                        string valType = objs.EnemyList[enemyDropDown.Text][i].Split(' ')[0];
-                        switch (valType)
-                        {
-                            case "int":
-                            case "float":
-                                {
-                                    value = "0";
-                                    if (objs.EnemyList[enemyDropDown.Text][i] == "int x" || objs.EnemyList[enemyDropDown.Text][i] == "int y")
-                                    {
-                                        value = "0 | 0";
-                                    }
-                                    break;
-                                }
-                            case "bool":
-                                {
-                                    value = "False";
-                                    break;
-                                }
-                            case "string":
-                                {
-                                    if (objs.EnemyList[enemyDropDown.Text][i] == "string constraintMoveGroup")
-                                    {
-                                        value = "-1";
-                                    }
-                                    else if (objs.EnemyList[enemyDropDown.Text][i] == "string dirType")
-                                    {
-                                        value = "Normal";
-                                    }
-                                    else if (objs.EnemyList[enemyDropDown.Text][i] == "string enemyCategory")
-                                    {
-                                        value = "Enemy";
-                                    }
-                                    else if (objs.EnemyList[enemyDropDown.Text][i] == "string kind")
-                                    {
-                                        value = enemyDropDown.Text;
-                                    }
-                                    else if (objs.EnemyList[enemyDropDown.Text][i] == "string level")
-                                    {
-                                        value = "Lvl1";
-                                    }
-                                    else if (objs.EnemyList[enemyDropDown.Text][i] == "string size")
-                                    {
-                                        value = "Normal";
-                                    }
-                                    else if (objs.EnemyList[enemyDropDown.Text][i] == "string variation")
-                                    {
-                                        value = "Normal";
-                                    }
-                                    break;
-                                }
-                        }
-                        obj.Add(objs.EnemyList[enemyDropDown.Text][i], value);
+                        case ObjectDatabase.PropertyType.Int:
+                            {
+                                pname = $"int {database.EnemyList[objectDropDown.Text][i].Name}";
+                                break;
+                            }
+                        case ObjectDatabase.PropertyType.Float:
+                            {
+                                pname = $"float {database.EnemyList[objectDropDown.Text][i].Name}";
+                                break;
+                            }
+                        case ObjectDatabase.PropertyType.Bool:
+                            {
+                                pname = $"bool {database.EnemyList[objectDropDown.Text][i].Name}";
+                                break;
+                            }
+                        case ObjectDatabase.PropertyType.String:
+                            {
+                                pname = $"string {database.EnemyList[objectDropDown.Text][i].Name}";
+                                break;
+                            }
                     }
-                }
-                else if (objectDropDown.Text == "MBoss")
-                {
-                    for (int i = 0; i < objs.MBossList[enemyDropDown.Text].Length; i++)
-                    {
-                        string value = "";
-                        string valType = objs.MBossList[enemyDropDown.Text][i].Split(' ')[0];
-                        switch (valType)
-                        {
-                            case "int":
-                            case "float":
-                                {
-                                    value = "0";
-                                    if (objs.MBossList[enemyDropDown.Text][i] == "int x" || objs.MBossList[enemyDropDown.Text][i] == "int y")
-                                    {
-                                        value = "0 | 0";
-                                    }
-                                    break;
-                                }
-                            case "bool":
-                                {
-                                    value = "False";
-                                    break;
-                                }
-                            case "string":
-                                {
-                                    if (objs.MBossList[enemyDropDown.Text][i] == "string constraintMoveGroup")
-                                    {
-                                        value = "-1";
-                                    }
-                                    else if (objs.MBossList[enemyDropDown.Text][i] == "string dirType")
-                                    {
-                                        value = "Normal";
-                                    }
-                                    else if (objs.MBossList[enemyDropDown.Text][i] == "string enemyCategory")
-                                    {
-                                        value = "MBoss";
-                                    }
-                                    else if (objs.MBossList[enemyDropDown.Text][i] == "string kind")
-                                    {
-                                        value = enemyDropDown.Text;
-                                    }
-                                    else if (objs.MBossList[enemyDropDown.Text][i] == "string level")
-                                    {
-                                        value = "Lvl1";
-                                    }
-                                    else if (objs.MBossList[enemyDropDown.Text][i] == "string mapDBKind")
-                                    {
-                                        value = enemyDropDown.Text;
-                                    }
-                                    else if (objs.MBossList[enemyDropDown.Text][i] == "string modelKind")
-                                    {
-                                        value = "Normal";
-                                    }
-                                    else if (objs.MBossList[enemyDropDown.Text][i] == "string size")
-                                    {
-                                        value = "Normal";
-                                    }
-                                    else if (objs.MBossList[enemyDropDown.Text][i] == "string variation")
-                                    {
-                                        value = "Normal";
-                                    }
-                                    break;
-                                }
-                        }
-                        obj.Add(objs.MBossList[enemyDropDown.Text][i], value);
-                    }
+                    obj.Add(pname, (string)database.EnemyList[objectDropDown.Text][i].Default);
                 }
             }
             DialogResult = DialogResult.OK;
@@ -348,22 +184,7 @@ namespace JamBuilder
 
         private void objectDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (editorType == 4)
-            {
-                enemyDropDown.Items.Clear();
-                if (objectDropDown.Text == "Enemy")
-                {
-                    List<string> list = objs.EnemyList.Keys.ToList();
-                    list.Sort();
-                    enemyDropDown.Items.AddRange(list.ToArray());
-                }
-                else if (objectDropDown.Text == "MBoss")
-                {
-                    List<string> list = objs.MBossList.Keys.ToList();
-                    list.Sort();
-                    enemyDropDown.Items.AddRange(list.ToArray());
-                }
-            }
+            
         }
     }
 }

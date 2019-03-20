@@ -248,6 +248,7 @@ namespace JamBuilder
             if (objList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
+                editor.database = objectDB;
                 editor.obj = level.Objects[objList.SelectedIndex];
                 editor.editorType = 0;
                 if (editor.ShowDialog() == DialogResult.OK)
@@ -263,6 +264,7 @@ namespace JamBuilder
             if (guestItemList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
+                editor.database = objectDB;
                 editor.obj = level.GuestStarItems[guestItemList.SelectedIndex];
                 editor.editorType = 1;
                 if (editor.ShowDialog() == DialogResult.OK)
@@ -278,6 +280,7 @@ namespace JamBuilder
             if (itemList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
+                editor.database = objectDB;
                 editor.obj = level.Items[itemList.SelectedIndex];
                 editor.editorType = 2;
                 if (editor.ShowDialog() == DialogResult.OK)
@@ -293,6 +296,7 @@ namespace JamBuilder
             if (bossList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
+                editor.database = objectDB;
                 editor.obj = level.Bosses[bossList.SelectedIndex];
                 editor.editorType = 3;
                 if (editor.ShowDialog() == DialogResult.OK)
@@ -308,6 +312,7 @@ namespace JamBuilder
             if (enemyList.SelectedItem != null && level != null)
             {
                 YAMLEditor editor = new YAMLEditor();
+                editor.database = objectDB;
                 editor.obj = level.Enemies[enemyList.SelectedIndex];
                 editor.editorType = 4;
                 if (editor.ShowDialog() == DialogResult.OK)
@@ -738,6 +743,7 @@ namespace JamBuilder
             if (level != null)
             {
                 AddObj addObj = new AddObj();
+                addObj.database = objectDB;
                 addObj.editorType = 0;
                 if (addObj.ShowDialog() == DialogResult.OK)
                 {
@@ -753,6 +759,7 @@ namespace JamBuilder
             if (level != null)
             {
                 AddObj addObj = new AddObj();
+                addObj.database = objectDB;
                 addObj.editorType = 1;
                 if (addObj.ShowDialog() == DialogResult.OK)
                 {
@@ -768,6 +775,7 @@ namespace JamBuilder
             if (level != null)
             {
                 AddObj addObj = new AddObj();
+                addObj.database = objectDB;
                 addObj.editorType = 2;
                 if (addObj.ShowDialog() == DialogResult.OK)
                 {
@@ -783,6 +791,7 @@ namespace JamBuilder
             if (level != null)
             {
                 AddObj addObj = new AddObj();
+                addObj.database = objectDB;
                 addObj.editorType = 3;
                 if (addObj.ShowDialog() == DialogResult.OK)
                 {
@@ -798,6 +807,7 @@ namespace JamBuilder
             if (level != null)
             {
                 AddObj addObj = new AddObj();
+                addObj.database = objectDB;
                 addObj.editorType = 4;
                 if (addObj.ShowDialog() == DialogResult.OK)
                 {

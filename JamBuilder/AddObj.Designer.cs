@@ -30,7 +30,6 @@
         {
             this.objectDropDown = new System.Windows.Forms.ComboBox();
             this.save = new System.Windows.Forms.Button();
-            this.enemyDropDown = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // objectDropDown
@@ -45,7 +44,7 @@
             // 
             // save
             // 
-            this.save.Location = new System.Drawing.Point(97, 68);
+            this.save.Location = new System.Drawing.Point(97, 44);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(75, 23);
             this.save.TabIndex = 1;
@@ -53,22 +52,11 @@
             this.save.UseVisualStyleBackColor = true;
             this.save.Click += new System.EventHandler(this.save_Click);
             // 
-            // enemyDropDown
-            // 
-            this.enemyDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.enemyDropDown.FormattingEnabled = true;
-            this.enemyDropDown.Location = new System.Drawing.Point(12, 39);
-            this.enemyDropDown.Name = "enemyDropDown";
-            this.enemyDropDown.Size = new System.Drawing.Size(256, 21);
-            this.enemyDropDown.TabIndex = 2;
-            this.enemyDropDown.Visible = false;
-            // 
             // AddObj
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(280, 99);
-            this.Controls.Add(this.enemyDropDown);
+            this.ClientSize = new System.Drawing.Size(280, 75);
             this.Controls.Add(this.save);
             this.Controls.Add(this.objectDropDown);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -84,6 +72,5 @@
 
         private System.Windows.Forms.ComboBox objectDropDown;
         private System.Windows.Forms.Button save;
-        private System.Windows.Forms.ComboBox enemyDropDown;
     }
 }

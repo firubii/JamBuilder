@@ -2106,15 +2106,6 @@
           ]
         },
         {
-          "name": "modelKind",
-          "type": "string",
-          "default": "Normal",
-          "options": [
-            "Normal",
-            "Ex"
-          ]
-        },
-        {
           "name": "size",
           "type": "string",
           "default": "Normal",
@@ -2135,6 +2126,671 @@
             "GalaDemo",
             "Ultimate",
             "UltimateGalaDemo"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ExecutiveFire",
+      "properties": [
+        {
+          "name": "contraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "dirType",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Counter",
+            "L",
+            "R",
+            "U",
+            "D",
+            "UL",
+            "UR",
+            "DL",
+            "DR"
+          ]
+        },
+        {
+          "name": "enemyCategory",
+          "type": "string",
+          "default": "Boss",
+          "options": [
+            "Boss",
+            "MBoss",
+            "Enemy"
+          ]
+        },
+        {
+          "name": "group",
+          "type": "int",
+          "default": 0
+        },
+        {
+          "name": "level",
+          "type": "string",
+          "default": "Lv1",
+          "options": [
+            "Lv1",
+            "Lv2",
+            "Lv3",
+            "Lv4",
+            "Lv5",
+            "Lv6"
+          ]
+        },
+        {
+          "name": "modelKind",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Ex2"
+          ]
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Big",
+            "Small",
+            "BigForHelperGo",
+            "SmallForHelperGo"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Ex",
+            "Ex2",
+            "Ultimate",
+            "UltimateAppearDemo"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ExecutiveIce",
+      "properties": [
+        {
+          "name": "contraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "dirType",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Counter",
+            "L",
+            "R",
+            "U",
+            "D",
+            "UL",
+            "UR",
+            "DL",
+            "DR"
+          ]
+        },
+        {
+          "name": "enemyCategory",
+          "type": "string",
+          "default": "Boss",
+          "options": [
+            "Boss",
+            "MBoss",
+            "Enemy"
+          ]
+        },
+        {
+          "name": "group",
+          "type": "int",
+          "default": 0
+        },
+        {
+          "name": "level",
+          "type": "string",
+          "default": "Lv1",
+          "options": [
+            "Lv1",
+            "Lv2",
+            "Lv3",
+            "Lv4",
+            "Lv5",
+            "Lv6"
+          ]
+        },
+        {
+          "name": "modelKind",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Ex2"
+          ]
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Big",
+            "Small",
+            "BigForHelperGo",
+            "SmallForHelperGo"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Ex",
+            "Ex2",
+            "Ultimate",
+            "UltimateAppearDemo"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ExecutiveThunder",
+      "properties": [
+        {
+          "name": "contraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "dirType",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Counter",
+            "L",
+            "R",
+            "U",
+            "D",
+            "UL",
+            "UR",
+            "DL",
+            "DR"
+          ]
+        },
+        {
+          "name": "enemyCategory",
+          "type": "string",
+          "default": "Boss",
+          "options": [
+            "Boss",
+            "MBoss",
+            "Enemy"
+          ]
+        },
+        {
+          "name": "group",
+          "type": "int",
+          "default": 0
+        },
+        {
+          "name": "level",
+          "type": "string",
+          "default": "Lv1",
+          "options": [
+            "Lv1",
+            "Lv2",
+            "Lv3",
+            "Lv4",
+            "Lv5",
+            "Lv6"
+          ]
+        },
+        {
+          "name": "modelKind",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Ex2"
+          ]
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Big",
+            "Small",
+            "BigForHelperGo",
+            "SmallForHelperGo"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Ex",
+            "Ex2",
+            "Ultimate",
+            "UltimateAppearDemo"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Giantironmom",
+      "properties": [
+        {
+          "name": "contraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "dirType",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Counter",
+            "L",
+            "R",
+            "U",
+            "D",
+            "UL",
+            "UR",
+            "DL",
+            "DR"
+          ]
+        },
+        {
+          "name": "enemyCategory",
+          "type": "string",
+          "default": "Boss",
+          "options": [
+            "Boss",
+            "MBoss",
+            "Enemy"
+          ]
+        },
+        {
+          "name": "group",
+          "type": "int",
+          "default": 0
+        },
+        {
+          "name": "level",
+          "type": "string",
+          "default": "Lv1",
+          "options": [
+            "Lv1",
+            "Lv2",
+            "Lv3",
+            "Lv4",
+            "Lv5",
+            "Lv6"
+          ]
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Big",
+            "Small",
+            "BigForHelperGo",
+            "SmallForHelperGo"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Ex"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Hiness",
+      "properties": [
+        {
+          "name": "contraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "dirType",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Counter",
+            "L",
+            "R",
+            "U",
+            "D",
+            "UL",
+            "UR",
+            "DL",
+            "DR"
+          ]
+        },
+        {
+          "name": "enemyCategory",
+          "type": "string",
+          "default": "Boss",
+          "options": [
+            "Boss",
+            "MBoss",
+            "Enemy"
+          ]
+        },
+        {
+          "name": "group",
+          "type": "int",
+          "default": 0
+        },
+        {
+          "name": "level",
+          "type": "string",
+          "default": "Lv1",
+          "options": [
+            "Lv1",
+            "Lv2",
+            "Lv3",
+            "Lv4",
+            "Lv5",
+            "Lv6"
+          ]
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Big",
+            "Small",
+            "BigForHelperGo",
+            "SmallForHelperGo"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "NormalCrazy",
+            "Ex",
+            "ExCrazy",
+            "PrayFar",
+            "Ultimate",
+            "UltimateCrazy",
+            "UltimateDead"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Kingdedede",
+      "properties": [
+        {
+          "name": "contraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "dirType",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Counter",
+            "L",
+            "R",
+            "U",
+            "D",
+            "UL",
+            "UR",
+            "DL",
+            "DR"
+          ]
+        },
+        {
+          "name": "enemyCategory",
+          "type": "string",
+          "default": "Boss",
+          "options": [
+            "Boss",
+            "MBoss",
+            "Enemy"
+          ]
+        },
+        {
+          "name": "group",
+          "type": "int",
+          "default": 0
+        },
+        {
+          "name": "level",
+          "type": "string",
+          "default": "Lv1",
+          "options": [
+            "Lv1",
+            "Lv2",
+            "Lv3",
+            "Lv4",
+            "Lv5",
+            "Lv6"
+          ]
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Big",
+            "Small",
+            "BigForHelperGo",
+            "SmallForHelperGo"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Credit",
+            "Ultimate"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "LastBoss",
+      "properties": [
+        {
+          "name": "contraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "dirType",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Counter",
+            "L",
+            "R",
+            "U",
+            "D",
+            "UL",
+            "UR",
+            "DL",
+            "DR"
+          ]
+        },
+        {
+          "name": "enemyCategory",
+          "type": "string",
+          "default": "Boss",
+          "options": [
+            "Boss",
+            "MBoss",
+            "Enemy"
+          ]
+        },
+        {
+          "name": "group",
+          "type": "int",
+          "default": 0
+        },
+        {
+          "name": "level",
+          "type": "string",
+          "default": "Lv1",
+          "options": [
+            "Lv1",
+            "Lv2",
+            "Lv3",
+            "Lv4",
+            "Lv5",
+            "Lv6"
+          ]
+        },
+        {
+          "name": "modelKind",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Ex",
+            "Ex2"
+          ]
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Big",
+            "Small",
+            "BigForHelperGo",
+            "SmallForHelperGo"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Ex",
+            "Ultimate"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Metaknight",
+      "properties": [
+        {
+          "name": "contraintMoveGroup",
+          "type": "string",
+          "default": "-1"
+        },
+        {
+          "name": "dirType",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Counter",
+            "L",
+            "R",
+            "U",
+            "D",
+            "UL",
+            "UR",
+            "DL",
+            "DR"
+          ]
+        },
+        {
+          "name": "enemyCategory",
+          "type": "string",
+          "default": "Boss",
+          "options": [
+            "Boss",
+            "MBoss",
+            "Enemy"
+          ]
+        },
+        {
+          "name": "group",
+          "type": "int",
+          "default": 0
+        },
+        {
+          "name": "level",
+          "type": "string",
+          "default": "Lv1",
+          "options": [
+            "Lv1",
+            "Lv2",
+            "Lv3",
+            "Lv4",
+            "Lv5",
+            "Lv6"
+          ]
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Big",
+            "Small",
+            "BigForHelperGo",
+            "SmallForHelperGo"
+          ]
+        },
+        {
+          "name": "variation",
+          "type": "string",
+          "default": "Normal",
+          "options": [
+            "Normal",
+            "Clone",
+            "Credit",
+            "Ultimate",
+            "UltimateClone"
           ]
         }
       ]
@@ -5995,84 +6651,6 @@
             "WideLeft",
             "WallMoveL",
             "WallMoveR"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Puppetdee",
-      "properties": [
-        {
-          "name": "contraintMoveGroup",
-          "type": "string",
-          "default": "-1"
-        },
-        {
-          "name": "dirType",
-          "type": "string",
-          "default": "Normal",
-          "options": [
-            "Normal",
-            "Counter",
-            "L",
-            "R",
-            "U",
-            "D",
-            "UL",
-            "UR",
-            "DL",
-            "DR"
-          ]
-        },
-        {
-          "name": "enemyCategory",
-          "type": "string",
-          "default": "Enemy",
-          "options": [
-            "Boss",
-            "MBoss",
-            "Enemy"
-          ]
-        },
-        {
-          "name": "group",
-          "type": "int",
-          "default": 0
-        },
-        {
-          "name": "level",
-          "type": "string",
-          "default": "Lv1",
-          "options": [
-            "Lv1",
-            "Lv2",
-            "Lv3",
-            "Lv4",
-            "Lv5",
-            "Lv6"
-          ]
-        },
-        {
-          "name": "size",
-          "type": "string",
-          "default": "Normal",
-          "options": [
-            "Normal",
-            "Big",
-            "Small",
-            "BigForHelperGo",
-            "SmallForHelperGo"
-          ]
-        },
-        {
-          "name": "variation",
-          "type": "string",
-          "default": "Wait",
-          "options": [
-            "Wait",
-            "WalkAround",
-            "WalkStraight",
-            "WalkTurnCliff"
           ]
         }
       ]

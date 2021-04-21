@@ -25,6 +25,8 @@ namespace JamBuilder
         List<int> modTexIds = new List<int>();
         List<int> objTexIds = new List<int>();
         Dictionary<short, int> blockTexIds = new Dictionary<short, int>();
+        Dictionary<byte, int> tileTexIds = new Dictionary<byte, int>();
+        int unkTileTex;
 
         ObjectDatabase objectDB;
 
@@ -374,6 +376,16 @@ namespace JamBuilder
             objTexIds.Add(texturing.LoadTexture("Resources/obj/enemy.png"));
             objTexIds.Add(texturing.LoadTexture("Resources/obj/select.png"));
 
+            string[] tileset = Directory.GetFiles("Resources/tileset", "*.png");
+            for (int i = 0; i < tileset.Length; i++)
+            {
+                if (byte.TryParse(Path.GetFileNameWithoutExtension(tileset[i]), out byte b))
+                {
+                    tileTexIds.Add(b, texturing.LoadTexture(tileset[i]));
+                }
+            }
+            unkTileTex = texturing.LoadTexture("Resources/tileset/unknown.png");
+
             font = new BmFont(texturing, "a");
 
             t = new System.Timers.Timer(1000.0 / 60.0);
@@ -421,14 +433,107 @@ namespace JamBuilder
                 Vector2 vec_scale = new Vector2(1.0f, 1.0f);
 
                 //Collisions
-                for (int ty = tileStartY; ty < tileEndY; ty++)
+                if (comboBox1.SelectedIndex == 0)
                 {
-                    for (int tx = tileStartX; tx < tileEndX; tx++)
+                    for (int ty = tileStartY; ty < tileEndY; ty++)
                     {
-                        int ix = ty * (int)level.Width + tx;
-                        Collision c = level.TileCollision[ix];
-                        Vector2 v = new Vector2(tx * 16f, -ty * 16f);
-                        renderer.Draw(texIds[c.Shape], v, vec_scale, 17, 17);
+                        for (int tx = tileStartX; tx < tileEndX; tx++)
+                        {
+                            int ix = ty * (int)level.Width + tx;
+                            Collision c = level.TileCollision[ix];
+                            Vector2 v = new Vector2(tx * 16f, -ty * 16f);
+                            renderer.Draw(texIds[c.Shape], v, vec_scale, 17, 17);
+                        }
+                    }
+                }
+                //Deco Layers
+                if (comboBox1.SelectedIndex >= 1)
+                {
+                    //Invisible tiles
+                    for (int ty = tileStartY; ty < tileEndY; ty++)
+                    {
+                        for (int tx = tileStartX; tx < tileEndX; tx++)
+                        {
+                            Vector2 v = new Vector2(tx * 16f, -ty * 16f);
+                            renderer.Draw(tileTexIds[0xFF], v, vec_scale, 16, 16);
+                        }
+                    }
+
+                    //Deco Layer 1
+                    if (comboBox1.SelectedIndex == 1 || comboBox1.SelectedIndex == 2)
+                    {
+                        for (int ty = tileStartY; ty < tileEndY; ty++)
+                        {
+                            for (int tx = tileStartX; tx < tileEndX; tx++)
+                            {
+                                int ix = ty * (int)level.Width + tx;
+                                Decoration d = level.DecorationLayer1[ix];
+                                if (d.Tile == 0xFF) continue;
+
+                                Vector2 v = new Vector2(tx * 16f, -ty * 16f);
+                                if (tileTexIds.ContainsKey(d.Tile))
+                                    renderer.Draw(tileTexIds[d.Tile], v, vec_scale, 16, 16);
+                                else
+                                    renderer.Draw(unkTileTex, v, vec_scale, 16, 16);
+                            }
+                        }
+                    }
+                    //Deco Layer 2
+                    if (comboBox1.SelectedIndex == 1 || comboBox1.SelectedIndex == 3)
+                    {
+                        for (int ty = tileStartY; ty < tileEndY; ty++)
+                        {
+                            for (int tx = tileStartX; tx < tileEndX; tx++)
+                            {
+                                int ix = ty * (int)level.Width + tx;
+                                Decoration d = level.DecorationLayer2[ix];
+                                if (d.Tile == 0xFF) continue;
+
+                                Vector2 v = new Vector2(tx * 16f, -ty * 16f);
+                                if (tileTexIds.ContainsKey(d.Tile))
+                                    renderer.Draw(tileTexIds[d.Tile], v, vec_scale, 16, 16);
+                                else
+                                    renderer.Draw(unkTileTex, v, vec_scale, 16, 16);
+                            }
+                        }
+                    }
+                    //Deco Layer 3
+                    if (comboBox1.SelectedIndex == 1 || comboBox1.SelectedIndex == 4)
+                    {
+                        for (int ty = tileStartY; ty < tileEndY; ty++)
+                        {
+                            for (int tx = tileStartX; tx < tileEndX; tx++)
+                            {
+                                int ix = ty * (int)level.Width + tx;
+                                Decoration d = level.DecorationLayer3[ix];
+                                if (d.Tile == 0xFF) continue;
+
+                                Vector2 v = new Vector2(tx * 16f, -ty * 16f);
+                                if (tileTexIds.ContainsKey(d.Tile))
+                                    renderer.Draw(tileTexIds[d.Tile], v, vec_scale, 16, 16);
+                                else
+                                    renderer.Draw(unkTileTex, v, vec_scale, 16, 16);
+                            }
+                        }
+                    }
+                    //Deco Layer 4
+                    if (comboBox1.SelectedIndex == 1 || comboBox1.SelectedIndex == 5)
+                    {
+                        for (int ty = tileStartY; ty < tileEndY; ty++)
+                        {
+                            for (int tx = tileStartX; tx < tileEndX; tx++)
+                            {
+                                int ix = ty * (int)level.Width + tx;
+                                Decoration d = level.DecorationLayer4[ix];
+                                if (d.Tile == 0xFF) continue;
+
+                                Vector2 v = new Vector2(tx * 16f, -ty * 16f);
+                                if (tileTexIds.ContainsKey(d.Tile))
+                                    renderer.Draw(tileTexIds[d.Tile], v, vec_scale, 16, 16);
+                                else
+                                    renderer.Draw(unkTileTex, v, vec_scale, 16, 16);
+                            }
+                        }
                     }
                 }
 
@@ -1053,35 +1158,35 @@ namespace JamBuilder
                     }
                     if (editDeco.Checked)
                     {
-                        Decoration ml = level.MLandDecoration[ix];
-                        Decoration bl = level.BLandDecoration[ix];
-                        Decoration fl = level.FLandDecoration[ix];
-                        Decoration ul = level.Unk_Decoration[ix];
+                        Decoration ml = level.DecorationLayer1[ix];
+                        Decoration bl = level.DecorationLayer2[ix];
+                        Decoration fl = level.DecorationLayer3[ix];
+                        Decoration ul = level.DecorationLayer4[ix];
 
-                        bl.Unk_1 = (byte)d1_1.Value;
+                        bl.Tile = (byte)d1_1.Value;
                         bl.Unk_2 = (byte)d1_2.Value;
                         bl.Unk_3 = (byte)d1_3.Value;
-                        bl.Unk_4 = (byte)d1_4.Value;
+                        bl.Group = (byte)d1_4.Value;
 
-                        ml.Unk_1 = (byte)d2_1.Value;
+                        ml.Tile = (byte)d2_1.Value;
                         ml.Unk_2 = (byte)d2_2.Value;
                         ml.Unk_3 = (byte)d2_3.Value;
-                        ml.Unk_4 = (byte)d2_4.Value;
+                        ml.Group = (byte)d2_4.Value;
 
-                        fl.Unk_1 = (byte)d3_1.Value;
+                        fl.Tile = (byte)d3_1.Value;
                         fl.Unk_2 = (byte)d3_2.Value;
                         fl.Unk_3 = (byte)d3_3.Value;
-                        fl.Unk_4 = (byte)d3_4.Value;
+                        fl.Group = (byte)d3_4.Value;
 
-                        ul.Unk_1 = (byte)d4_1.Value;
+                        ul.Tile = (byte)d4_1.Value;
                         ul.Unk_2 = (byte)d4_2.Value;
                         ul.Unk_3 = (byte)d4_3.Value;
-                        ul.Unk_4 = (byte)d4_4.Value;
+                        ul.Group = (byte)d4_4.Value;
 
-                        level.MLandDecoration[ix] = bl;
-                        level.BLandDecoration[ix] = ml;
-                        level.FLandDecoration[ix] = fl;
-                        level.Unk_Decoration[ix] = ul;
+                        level.DecorationLayer1[ix] = bl;
+                        level.DecorationLayer2[ix] = ml;
+                        level.DecorationLayer3[ix] = fl;
+                        level.DecorationLayer4[ix] = ul;
                     }
                 }
                 else if (tool == 3)
@@ -1120,25 +1225,25 @@ namespace JamBuilder
 
                     vblock.Value = level.TileBlock[ix].ID;
 
-                    d1_1.Value = level.MLandDecoration[ix].Unk_1;
-                    d1_2.Value = level.MLandDecoration[ix].Unk_2;
-                    d1_3.Value = level.MLandDecoration[ix].Unk_3;
-                    d1_4.Value = level.MLandDecoration[ix].Unk_4;
+                    d1_1.Value = level.DecorationLayer1[ix].Tile;
+                    d1_2.Value = level.DecorationLayer1[ix].Unk_2;
+                    d1_3.Value = level.DecorationLayer1[ix].Unk_3;
+                    d1_4.Value = level.DecorationLayer1[ix].Group;
 
-                    d2_1.Value = level.BLandDecoration[ix].Unk_1;
-                    d2_2.Value = level.BLandDecoration[ix].Unk_2;
-                    d2_3.Value = level.BLandDecoration[ix].Unk_3;
-                    d2_4.Value = level.BLandDecoration[ix].Unk_4;
+                    d2_1.Value = level.DecorationLayer2[ix].Tile;
+                    d2_2.Value = level.DecorationLayer2[ix].Unk_2;
+                    d2_3.Value = level.DecorationLayer2[ix].Unk_3;
+                    d2_4.Value = level.DecorationLayer2[ix].Group;
 
-                    d3_1.Value = level.FLandDecoration[ix].Unk_1;
-                    d3_2.Value = level.FLandDecoration[ix].Unk_2;
-                    d3_3.Value = level.FLandDecoration[ix].Unk_3;
-                    d3_4.Value = level.FLandDecoration[ix].Unk_4;
+                    d3_1.Value = level.DecorationLayer3[ix].Tile;
+                    d3_2.Value = level.DecorationLayer3[ix].Unk_2;
+                    d3_3.Value = level.DecorationLayer3[ix].Unk_3;
+                    d3_4.Value = level.DecorationLayer3[ix].Group;
 
-                    d4_1.Value = level.Unk_Decoration[ix].Unk_1;
-                    d4_2.Value = level.Unk_Decoration[ix].Unk_2;
-                    d4_3.Value = level.Unk_Decoration[ix].Unk_3;
-                    d4_4.Value = level.Unk_Decoration[ix].Unk_4;
+                    d4_1.Value = level.DecorationLayer4[ix].Tile;
+                    d4_2.Value = level.DecorationLayer4[ix].Unk_2;
+                    d4_3.Value = level.DecorationLayer4[ix].Unk_3;
+                    d4_4.Value = level.DecorationLayer4[ix].Group;
                 }
             }
         }
@@ -1207,35 +1312,35 @@ namespace JamBuilder
                     }
                     if (editDeco.Checked)
                     {
-                        Decoration ml = level.MLandDecoration[ix];
-                        Decoration bl = level.BLandDecoration[ix];
-                        Decoration fl = level.FLandDecoration[ix];
-                        Decoration ul = level.Unk_Decoration[ix];
+                        Decoration ml = level.DecorationLayer1[ix];
+                        Decoration bl = level.DecorationLayer2[ix];
+                        Decoration fl = level.DecorationLayer3[ix];
+                        Decoration ul = level.DecorationLayer4[ix];
 
-                        bl.Unk_1 = (byte)d1_1.Value;
+                        bl.Tile = (byte)d1_1.Value;
                         bl.Unk_2 = (byte)d1_2.Value;
                         bl.Unk_3 = (byte)d1_3.Value;
-                        bl.Unk_4 = (byte)d1_4.Value;
+                        bl.Group = (byte)d1_4.Value;
 
-                        ml.Unk_1 = (byte)d2_1.Value;
+                        ml.Tile = (byte)d2_1.Value;
                         ml.Unk_2 = (byte)d2_2.Value;
                         ml.Unk_3 = (byte)d2_3.Value;
-                        ml.Unk_4 = (byte)d2_4.Value;
+                        ml.Group = (byte)d2_4.Value;
 
-                        fl.Unk_1 = (byte)d3_1.Value;
+                        fl.Tile = (byte)d3_1.Value;
                         fl.Unk_2 = (byte)d3_2.Value;
                         fl.Unk_3 = (byte)d3_3.Value;
-                        fl.Unk_4 = (byte)d3_4.Value;
+                        fl.Group = (byte)d3_4.Value;
 
-                        ul.Unk_1 = (byte)d4_1.Value;
+                        ul.Tile = (byte)d4_1.Value;
                         ul.Unk_2 = (byte)d4_2.Value;
                         ul.Unk_3 = (byte)d4_3.Value;
-                        ul.Unk_4 = (byte)d4_4.Value;
+                        ul.Group = (byte)d4_4.Value;
 
-                        level.MLandDecoration[ix] = bl;
-                        level.BLandDecoration[ix] = ml;
-                        level.FLandDecoration[ix] = fl;
-                        level.Unk_Decoration[ix] = ul;
+                        level.DecorationLayer1[ix] = bl;
+                        level.DecorationLayer2[ix] = ml;
+                        level.DecorationLayer3[ix] = fl;
+                        level.DecorationLayer4[ix] = ul;
                     }
                 }
             }
@@ -1301,10 +1406,10 @@ namespace JamBuilder
                 Block b = new Block();
                 Decoration d = new Decoration();
                 b.ID = -1;
-                d.Unk_1 = 255;
+                d.Tile = 255;
                 d.Unk_2 = 255;
                 d.Unk_3 = 0;
-                d.Unk_4 = 255;
+                d.Group = 255;
 
                 if (sizeW.Value > level.Width)
                 {
@@ -1312,10 +1417,10 @@ namespace JamBuilder
                     {
                         level.TileCollision.Insert(((h * (int)level.Width) + (int)level.Width) + h, c);
                         level.TileBlock.Insert(((h * (int)level.Width) + (int)level.Width) + h, b);
-                        level.BLandDecoration.Insert(((h * (int)level.Width) + (int)level.Width) + h, d);
-                        level.MLandDecoration.Insert(((h * (int)level.Width) + (int)level.Width) + h, d);
-                        level.FLandDecoration.Insert(((h * (int)level.Width) + (int)level.Width) + h, d);
-                        level.Unk_Decoration.Insert(((h * (int)level.Width) + (int)level.Width) + h, d);
+                        level.DecorationLayer2.Insert(((h * (int)level.Width) + (int)level.Width) + h, d);
+                        level.DecorationLayer1.Insert(((h * (int)level.Width) + (int)level.Width) + h, d);
+                        level.DecorationLayer3.Insert(((h * (int)level.Width) + (int)level.Width) + h, d);
+                        level.DecorationLayer4.Insert(((h * (int)level.Width) + (int)level.Width) + h, d);
                     }
                     level.Width = (uint)sizeW.Value;
                 }
@@ -1325,10 +1430,10 @@ namespace JamBuilder
                     {
                         level.TileCollision.RemoveAt(((h * (int)level.Width) + (int)level.Width) - h);
                         level.TileBlock.RemoveAt(((h * (int)level.Width) + (int)level.Width) - h);
-                        level.BLandDecoration.RemoveAt(((h * (int)level.Width) + (int)level.Width) - h);
-                        level.MLandDecoration.RemoveAt(((h * (int)level.Width) + (int)level.Width) - h);
-                        level.FLandDecoration.RemoveAt(((h * (int)level.Width) + (int)level.Width) - h);
-                        level.Unk_Decoration.RemoveAt(((h * (int)level.Width) + (int)level.Width) - h);
+                        level.DecorationLayer2.RemoveAt(((h * (int)level.Width) + (int)level.Width) - h);
+                        level.DecorationLayer1.RemoveAt(((h * (int)level.Width) + (int)level.Width) - h);
+                        level.DecorationLayer3.RemoveAt(((h * (int)level.Width) + (int)level.Width) - h);
+                        level.DecorationLayer4.RemoveAt(((h * (int)level.Width) + (int)level.Width) - h);
                     }
                     level.Width = (uint)sizeW.Value;
                 }
@@ -1338,10 +1443,10 @@ namespace JamBuilder
                     {
                         level.TileCollision.Add(c);
                         level.TileBlock.Add(b);
-                        level.BLandDecoration.Add(d);
-                        level.MLandDecoration.Add(d);
-                        level.FLandDecoration.Add(d);
-                        level.Unk_Decoration.Add(d);
+                        level.DecorationLayer2.Add(d);
+                        level.DecorationLayer1.Add(d);
+                        level.DecorationLayer3.Add(d);
+                        level.DecorationLayer4.Add(d);
                     }
                     level.Height = (uint)sizeH.Value;
                 }
@@ -1349,10 +1454,10 @@ namespace JamBuilder
                 {
                     level.TileCollision.RemoveRange((int)((level.Height - 1) * (int)level.Width), (int)level.Width);
                     level.TileBlock.RemoveRange((int)((level.Height - 1) * (int)level.Width), (int)level.Width);
-                    level.BLandDecoration.RemoveRange((int)((level.Height - 1) * (int)level.Width), (int)level.Width);
-                    level.MLandDecoration.RemoveRange((int)((level.Height - 1) * (int)level.Width), (int)level.Width);
-                    level.FLandDecoration.RemoveRange((int)((level.Height - 1) * (int)level.Width), (int)level.Width);
-                    level.Unk_Decoration.RemoveRange((int)((level.Height - 1) * (int)level.Width), (int)level.Width);
+                    level.DecorationLayer2.RemoveRange((int)((level.Height - 1) * (int)level.Width), (int)level.Width);
+                    level.DecorationLayer1.RemoveRange((int)((level.Height - 1) * (int)level.Width), (int)level.Width);
+                    level.DecorationLayer3.RemoveRange((int)((level.Height - 1) * (int)level.Width), (int)level.Width);
+                    level.DecorationLayer4.RemoveRange((int)((level.Height - 1) * (int)level.Width), (int)level.Width);
                     level.Height = (uint)sizeH.Value;
                 }
             }
@@ -1618,35 +1723,35 @@ namespace JamBuilder
                             }
                             if (editDeco.Checked)
                             {
-                                Decoration ml = level.MLandDecoration[ix];
-                                Decoration bl = level.BLandDecoration[ix];
-                                Decoration fl = level.FLandDecoration[ix];
-                                Decoration ul = level.Unk_Decoration[ix];
+                                Decoration ml = level.DecorationLayer1[ix];
+                                Decoration bl = level.DecorationLayer2[ix];
+                                Decoration fl = level.DecorationLayer3[ix];
+                                Decoration ul = level.DecorationLayer4[ix];
 
-                                bl.Unk_1 = (byte)d1_1.Value;
+                                bl.Tile = (byte)d1_1.Value;
                                 bl.Unk_2 = (byte)d1_2.Value;
                                 bl.Unk_3 = (byte)d1_3.Value;
-                                bl.Unk_4 = (byte)d1_4.Value;
+                                bl.Group = (byte)d1_4.Value;
 
-                                ml.Unk_1 = (byte)d2_1.Value;
+                                ml.Tile = (byte)d2_1.Value;
                                 ml.Unk_2 = (byte)d2_2.Value;
                                 ml.Unk_3 = (byte)d2_3.Value;
-                                ml.Unk_4 = (byte)d2_4.Value;
+                                ml.Group = (byte)d2_4.Value;
 
-                                fl.Unk_1 = (byte)d3_1.Value;
+                                fl.Tile = (byte)d3_1.Value;
                                 fl.Unk_2 = (byte)d3_2.Value;
                                 fl.Unk_3 = (byte)d3_3.Value;
-                                fl.Unk_4 = (byte)d3_4.Value;
+                                fl.Group = (byte)d3_4.Value;
 
-                                ul.Unk_1 = (byte)d4_1.Value;
+                                ul.Tile = (byte)d4_1.Value;
                                 ul.Unk_2 = (byte)d4_2.Value;
                                 ul.Unk_3 = (byte)d4_3.Value;
-                                ul.Unk_4 = (byte)d4_4.Value;
+                                ul.Group = (byte)d4_4.Value;
 
-                                level.MLandDecoration[ix] = bl;
-                                level.BLandDecoration[ix] = ml;
-                                level.FLandDecoration[ix] = fl;
-                                level.Unk_Decoration[ix] = ul;
+                                level.DecorationLayer1[ix] = bl;
+                                level.DecorationLayer2[ix] = ml;
+                                level.DecorationLayer3[ix] = fl;
+                                level.DecorationLayer4[ix] = ul;
                             }
                         }
                     }

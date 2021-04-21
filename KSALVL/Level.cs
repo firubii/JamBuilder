@@ -17,10 +17,10 @@ namespace KSALVL
         public Stage StageData;
         public List<Block> TileBlock = new List<Block>();
         public List<Collision> TileCollision = new List<Collision>();
-        public List<Decoration> MLandDecoration = new List<Decoration>();
-        public List<Decoration> BLandDecoration = new List<Decoration>();
-        public List<Decoration> FLandDecoration = new List<Decoration>();
-        public List<Decoration> Unk_Decoration = new List<Decoration>();
+        public List<Decoration> DecorationLayer1 = new List<Decoration>();
+        public List<Decoration> DecorationLayer2 = new List<Decoration>();
+        public List<Decoration> DecorationLayer3 = new List<Decoration>();
+        public List<Decoration> DecorationLayer4 = new List<Decoration>();
         public List<Dictionary<string, string>> Objects = new List<Dictionary<string, string>>();
         public List<Dictionary<string, string>> GuestStarItems = new List<Dictionary<string, string>>();
         public List<Dictionary<string, string>> Items = new List<Dictionary<string, string>>();
@@ -37,10 +37,10 @@ namespace KSALVL
             StageData.Unk_String = "";
             TileBlock = new List<Block>();
             TileCollision = new List<Collision>();
-            BLandDecoration = new List<Decoration>();
-            MLandDecoration = new List<Decoration>();
-            FLandDecoration = new List<Decoration>();
-            Unk_Decoration = new List<Decoration>();
+            DecorationLayer1 = new List<Decoration>();
+            DecorationLayer2 = new List<Decoration>();
+            DecorationLayer3 = new List<Decoration>();
+            DecorationLayer4 = new List<Decoration>();
             Objects = new List<Dictionary<string, string>>();
             GuestStarItems = new List<Dictionary<string, string>>();
             Items = new List<Dictionary<string, string>>();
@@ -98,11 +98,11 @@ namespace KSALVL
             for (int i = 0; i < Width * Height; i++)
             {
                 Decoration decoration = new Decoration();
-                decoration.Unk_1 = reader.ReadByte();
+                decoration.Tile = reader.ReadByte();
                 decoration.Unk_2 = reader.ReadByte();
                 decoration.Unk_3 = reader.ReadByte();
-                decoration.Unk_4 = reader.ReadByte();
-                MLandDecoration.Add(decoration);
+                decoration.Group = reader.ReadByte();
+                DecorationLayer1.Add(decoration);
             }
 
             reader.BaseStream.Seek(decoAddress + 0xC, SeekOrigin.Begin);
@@ -110,11 +110,11 @@ namespace KSALVL
             for (int i = 0; i < Width * Height; i++)
             {
                 Decoration decoration = new Decoration();
-                decoration.Unk_1 = reader.ReadByte();
+                decoration.Tile = reader.ReadByte();
                 decoration.Unk_2 = reader.ReadByte();
                 decoration.Unk_3 = reader.ReadByte();
-                decoration.Unk_4 = reader.ReadByte();
-                BLandDecoration.Add(decoration);
+                decoration.Group = reader.ReadByte();
+                DecorationLayer2.Add(decoration);
             }
 
             reader.BaseStream.Seek(decoAddress + 0x10, SeekOrigin.Begin);
@@ -122,11 +122,11 @@ namespace KSALVL
             for (int i = 0; i < Width * Height; i++)
             {
                 Decoration decoration = new Decoration();
-                decoration.Unk_1 = reader.ReadByte();
+                decoration.Tile = reader.ReadByte();
                 decoration.Unk_2 = reader.ReadByte();
                 decoration.Unk_3 = reader.ReadByte();
-                decoration.Unk_4 = reader.ReadByte();
-                FLandDecoration.Add(decoration);
+                decoration.Group = reader.ReadByte();
+                DecorationLayer3.Add(decoration);
             }
 
             reader.BaseStream.Seek(decoAddress + 0x14, SeekOrigin.Begin);
@@ -134,11 +134,11 @@ namespace KSALVL
             for (int i = 0; i < Width * Height; i++)
             {
                 Decoration decoration = new Decoration();
-                decoration.Unk_1 = reader.ReadByte();
+                decoration.Tile = reader.ReadByte();
                 decoration.Unk_2 = reader.ReadByte();
                 decoration.Unk_3 = reader.ReadByte();
-                decoration.Unk_4 = reader.ReadByte();
-                Unk_Decoration.Add(decoration);
+                decoration.Group = reader.ReadByte();
+                DecorationLayer4.Add(decoration);
             }
 
             reader.BaseStream.Seek(0x2C, SeekOrigin.Begin);
@@ -334,12 +334,12 @@ namespace KSALVL
             writer.BaseStream.Seek(0, SeekOrigin.End);
             writer.Write(Width);
             writer.Write(Height);
-            for (int i = 0; i < MLandDecoration.Count; i++)
+            for (int i = 0; i < DecorationLayer1.Count; i++)
             {
-                writer.Write(MLandDecoration[i].Unk_1);
-                writer.Write(MLandDecoration[i].Unk_2);
-                writer.Write(MLandDecoration[i].Unk_3);
-                writer.Write(MLandDecoration[i].Unk_4);
+                writer.Write(DecorationLayer1[i].Tile);
+                writer.Write(DecorationLayer1[i].Unk_2);
+                writer.Write(DecorationLayer1[i].Unk_3);
+                writer.Write(DecorationLayer1[i].Group);
             }
             while ((writer.BaseStream.Length).ToString("X").Last() != '0' && (writer.BaseStream.Length).ToString("X").Last() != '4' && (writer.BaseStream.Length).ToString("X").Last() != '8' && (writer.BaseStream.Length).ToString("X").Last() != 'C')
             {
@@ -352,12 +352,12 @@ namespace KSALVL
             writer.BaseStream.Seek(0, SeekOrigin.End);
             writer.Write(Width);
             writer.Write(Height);
-            for (int i = 0; i < BLandDecoration.Count; i++)
+            for (int i = 0; i < DecorationLayer2.Count; i++)
             {
-                writer.Write(BLandDecoration[i].Unk_1);
-                writer.Write(BLandDecoration[i].Unk_2);
-                writer.Write(BLandDecoration[i].Unk_3);
-                writer.Write(BLandDecoration[i].Unk_4);
+                writer.Write(DecorationLayer2[i].Tile);
+                writer.Write(DecorationLayer2[i].Unk_2);
+                writer.Write(DecorationLayer2[i].Unk_3);
+                writer.Write(DecorationLayer2[i].Group);
             }
             while ((writer.BaseStream.Length).ToString("X").Last() != '0' && (writer.BaseStream.Length).ToString("X").Last() != '4' && (writer.BaseStream.Length).ToString("X").Last() != '8' && (writer.BaseStream.Length).ToString("X").Last() != 'C')
             {
@@ -370,12 +370,12 @@ namespace KSALVL
             writer.BaseStream.Seek(0, SeekOrigin.End);
             writer.Write(Width);
             writer.Write(Height);
-            for (int i = 0; i < FLandDecoration.Count; i++)
+            for (int i = 0; i < DecorationLayer3.Count; i++)
             {
-                writer.Write(FLandDecoration[i].Unk_1);
-                writer.Write(FLandDecoration[i].Unk_2);
-                writer.Write(FLandDecoration[i].Unk_3);
-                writer.Write(FLandDecoration[i].Unk_4);
+                writer.Write(DecorationLayer3[i].Tile);
+                writer.Write(DecorationLayer3[i].Unk_2);
+                writer.Write(DecorationLayer3[i].Unk_3);
+                writer.Write(DecorationLayer3[i].Group);
             }
             while ((writer.BaseStream.Length).ToString("X").Last() != '0' && (writer.BaseStream.Length).ToString("X").Last() != '4' && (writer.BaseStream.Length).ToString("X").Last() != '8' && (writer.BaseStream.Length).ToString("X").Last() != 'C')
             {
@@ -388,12 +388,12 @@ namespace KSALVL
             writer.BaseStream.Seek(0, SeekOrigin.End);
             writer.Write(Width);
             writer.Write(Height);
-            for (int i = 0; i < Unk_Decoration.Count; i++)
+            for (int i = 0; i < DecorationLayer4.Count; i++)
             {
-                writer.Write(Unk_Decoration[i].Unk_1);
-                writer.Write(Unk_Decoration[i].Unk_2);
-                writer.Write(Unk_Decoration[i].Unk_3);
-                writer.Write(Unk_Decoration[i].Unk_4);
+                writer.Write(DecorationLayer4[i].Tile);
+                writer.Write(DecorationLayer4[i].Unk_2);
+                writer.Write(DecorationLayer4[i].Unk_3);
+                writer.Write(DecorationLayer4[i].Group);
             }
             while ((writer.BaseStream.Length).ToString("X").Last() != '0' && (writer.BaseStream.Length).ToString("X").Last() != '4' && (writer.BaseStream.Length).ToString("X").Last() != '8' && (writer.BaseStream.Length).ToString("X").Last() != 'C')
             {

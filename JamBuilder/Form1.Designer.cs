@@ -48,6 +48,8 @@
             this.formatShowIndex = new System.Windows.Forms.ToolStripMenuItem();
             this.formatShowKind = new System.Windows.Forms.ToolStripMenuItem();
             this.formatShowWuid = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadObjectDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.objTab = new System.Windows.Forms.TabPage();
@@ -129,8 +131,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reloadObjectDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -346,7 +346,7 @@
             // 
             this.formatShowIndex.CheckOnClick = true;
             this.formatShowIndex.Name = "formatShowIndex";
-            this.formatShowIndex.Size = new System.Drawing.Size(102, 22);
+            this.formatShowIndex.Size = new System.Drawing.Size(103, 22);
             this.formatShowIndex.Text = "index";
             this.formatShowIndex.CheckedChanged += new System.EventHandler(this.listFormatChanged);
             // 
@@ -356,7 +356,7 @@
             this.formatShowKind.CheckOnClick = true;
             this.formatShowKind.CheckState = System.Windows.Forms.CheckState.Checked;
             this.formatShowKind.Name = "formatShowKind";
-            this.formatShowKind.Size = new System.Drawing.Size(102, 22);
+            this.formatShowKind.Size = new System.Drawing.Size(103, 22);
             this.formatShowKind.Text = "kind";
             this.formatShowKind.CheckedChanged += new System.EventHandler(this.listFormatChanged);
             // 
@@ -364,9 +364,24 @@
             // 
             this.formatShowWuid.CheckOnClick = true;
             this.formatShowWuid.Name = "formatShowWuid";
-            this.formatShowWuid.Size = new System.Drawing.Size(102, 22);
+            this.formatShowWuid.Size = new System.Drawing.Size(103, 22);
             this.formatShowWuid.Text = "wuid";
             this.formatShowWuid.CheckedChanged += new System.EventHandler(this.listFormatChanged);
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reloadObjectDatabaseToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // reloadObjectDatabaseToolStripMenuItem
+            // 
+            this.reloadObjectDatabaseToolStripMenuItem.Name = "reloadObjectDatabaseToolStripMenuItem";
+            this.reloadObjectDatabaseToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.reloadObjectDatabaseToolStripMenuItem.Text = "Reload Object Database";
+            this.reloadObjectDatabaseToolStripMenuItem.Click += new System.EventHandler(this.reloadObjectDatabaseToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
@@ -691,7 +706,11 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Collision",
-            "Decoration"});
+            "All Layers",
+            "Layer 1",
+            "Layer 2",
+            "Layer 3",
+            "Layer 4"});
             this.comboBox1.Location = new System.Drawing.Point(247, 3);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
@@ -773,34 +792,34 @@
             this.groupBox5.Size = new System.Drawing.Size(258, 118);
             this.groupBox5.TabIndex = 58;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Decoration Data";
+            this.groupBox5.Text = "Tileset Data";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(6, 16);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(40, 13);
+            this.label11.Size = new System.Drawing.Size(42, 13);
             this.label11.TabIndex = 21;
-            this.label11.Text = "MLand";
+            this.label11.Text = "Layer 1";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(6, 42);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(39, 13);
+            this.label12.Size = new System.Drawing.Size(42, 13);
             this.label12.TabIndex = 26;
-            this.label12.Text = "Deco2";
+            this.label12.Text = "Layer 2";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(6, 68);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(39, 13);
+            this.label13.Size = new System.Drawing.Size(42, 13);
             this.label13.TabIndex = 31;
-            this.label13.Text = "Deco3";
+            this.label13.Text = "Layer 3";
             // 
             // d4_4
             // 
@@ -819,9 +838,9 @@
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(6, 94);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(39, 13);
+            this.label14.Size = new System.Drawing.Size(42, 13);
             this.label14.TabIndex = 36;
-            this.label14.Text = "Deco4";
+            this.label14.Text = "Layer 4";
             // 
             // d4_3
             // 
@@ -1326,22 +1345,7 @@
             this.groupBox8.Size = new System.Drawing.Size(300, 72);
             this.groupBox8.TabIndex = 31;
             this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "groupBox8";
-            // 
-            // toolsToolStripMenuItem
-            // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.reloadObjectDatabaseToolStripMenuItem});
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.toolsToolStripMenuItem.Text = "Tools";
-            // 
-            // reloadObjectDatabaseToolStripMenuItem
-            // 
-            this.reloadObjectDatabaseToolStripMenuItem.Name = "reloadObjectDatabaseToolStripMenuItem";
-            this.reloadObjectDatabaseToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.reloadObjectDatabaseToolStripMenuItem.Text = "Reload Object Database";
-            this.reloadObjectDatabaseToolStripMenuItem.Click += new System.EventHandler(this.reloadObjectDatabaseToolStripMenuItem_Click);
+            this.groupBox8.Text = "Coordinates";
             // 
             // Form1
             // 

@@ -37,19 +37,19 @@ namespace JamBuilder
             Block b = new Block();
             Decoration d = new Decoration();
             b.ID = -1;
-            d.Unk_1 = 255;
+            d.Tile = 255;
             d.Unk_2 = 255;
             d.Unk_3 = 0;
-            d.Unk_4 = 255;
+            d.Group = 254;
 
             for (int i = 0; i < level.Height * level.Width; i++)
             {
                 level.TileCollision.Add(c);
                 level.TileBlock.Add(b);
-                level.BLandDecoration.Add(d);
-                level.MLandDecoration.Add(d);
-                level.FLandDecoration.Add(d);
-                level.Unk_Decoration.Add(d);
+                level.DecorationLayer2.Add(d);
+                level.DecorationLayer1.Add(d);
+                level.DecorationLayer3.Add(d);
+                level.DecorationLayer4.Add(d);
             }
 
             level.Background = bg.Text;

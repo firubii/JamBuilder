@@ -362,7 +362,7 @@
     <None Include="Resources\tileset\131.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\tileset\255.png">
+    <None Include="Resources\tileset\-1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\tileset\0.png">

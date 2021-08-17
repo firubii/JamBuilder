@@ -37,10 +37,9 @@ namespace JamBuilder
             Block b = new Block();
             Decoration d = new Decoration();
             b.ID = -1;
-            d.Tile = 255;
-            d.Unk_2 = 255;
-            d.Unk_3 = 0;
-            d.Group = 254;
+            d.Tile = -1;
+            d.Unk = 0;
+            d.Group = -1;
 
             for (int i = 0; i < level.Height * level.Width; i++)
             {

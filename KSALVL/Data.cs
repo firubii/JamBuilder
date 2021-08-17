@@ -29,17 +29,15 @@ namespace KSALVL
 
     public struct Decoration
     {
-		public Decoration(byte Tile, byte Unk_2, byte Unk_3, byte Group)
+		public Decoration(short Tile, byte Unk, sbyte Group)
 		{
 			this.Tile = Tile;
-			this.Unk_2 = Unk_2;
-			this.Unk_3 = Unk_3;
+			this.Unk = Unk;
 			this.Group = Group;
 		}
-		public byte Tile;
-        public byte Unk_2;
-        public byte Unk_3;
-        public byte Group;
+		public short Tile;
+        public byte Unk;
+        public sbyte Group;
     }
 
     public struct Stage

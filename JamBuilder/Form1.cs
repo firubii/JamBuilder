@@ -25,7 +25,7 @@ namespace JamBuilder
         List<int> modTexIds = new List<int>();
         List<int> objTexIds = new List<int>();
         Dictionary<short, int> blockTexIds = new Dictionary<short, int>();
-        Dictionary<byte, int> tileTexIds = new Dictionary<byte, int>();
+        Dictionary<short, int> tileTexIds = new Dictionary<short, int>();
         int unkTileTex;
 
         ObjectDatabase objectDB;
@@ -379,7 +379,7 @@ namespace JamBuilder
             string[] tileset = Directory.GetFiles("Resources/tileset", "*.png");
             for (int i = 0; i < tileset.Length; i++)
             {
-                if (byte.TryParse(Path.GetFileNameWithoutExtension(tileset[i]), out byte b))
+                if (short.TryParse(Path.GetFileNameWithoutExtension(tileset[i]), out short b))
                 {
                     tileTexIds.Add(b, texturing.LoadTexture(tileset[i]));
                 }
@@ -455,7 +455,7 @@ namespace JamBuilder
                         for (int tx = tileStartX; tx < tileEndX; tx++)
                         {
                             Vector2 v = new Vector2(tx * 16f, -ty * 16f);
-                            renderer.Draw(tileTexIds[0xFF], v, vec_scale, 16, 16);
+                            renderer.Draw(tileTexIds[-1], v, vec_scale, 16, 16);
                         }
                     }
 
@@ -468,7 +468,7 @@ namespace JamBuilder
                             {
                                 int ix = ty * (int)level.Width + tx;
                                 Decoration d = level.DecorationLayer1[ix];
-                                if (d.Tile == 0xFF) continue;
+                                if (d.Tile == -1) continue;
 
                                 Vector2 v = new Vector2(tx * 16f, -ty * 16f);
                                 if (tileTexIds.ContainsKey(d.Tile))
@@ -487,7 +487,7 @@ namespace JamBuilder
                             {
                                 int ix = ty * (int)level.Width + tx;
                                 Decoration d = level.DecorationLayer2[ix];
-                                if (d.Tile == 0xFF) continue;
+                                if (d.Tile == -1) continue;
 
                                 Vector2 v = new Vector2(tx * 16f, -ty * 16f);
                                 if (tileTexIds.ContainsKey(d.Tile))
@@ -506,7 +506,7 @@ namespace JamBuilder
                             {
                                 int ix = ty * (int)level.Width + tx;
                                 Decoration d = level.DecorationLayer3[ix];
-                                if (d.Tile == 0xFF) continue;
+                                if (d.Tile == -1) continue;
 
                                 Vector2 v = new Vector2(tx * 16f, -ty * 16f);
                                 if (tileTexIds.ContainsKey(d.Tile))
@@ -525,7 +525,7 @@ namespace JamBuilder
                             {
                                 int ix = ty * (int)level.Width + tx;
                                 Decoration d = level.DecorationLayer4[ix];
-                                if (d.Tile == 0xFF) continue;
+                                if (d.Tile == -1) continue;
 
                                 Vector2 v = new Vector2(tx * 16f, -ty * 16f);
                                 if (tileTexIds.ContainsKey(d.Tile))
@@ -1163,25 +1163,21 @@ namespace JamBuilder
                         Decoration fl = level.DecorationLayer3[ix];
                         Decoration ul = level.DecorationLayer4[ix];
 
-                        bl.Tile = (byte)d1_1.Value;
-                        bl.Unk_2 = (byte)d1_2.Value;
-                        bl.Unk_3 = (byte)d1_3.Value;
-                        bl.Group = (byte)d1_4.Value;
+                        bl.Tile = (short)d1_1.Value;
+                        bl.Unk = (byte)d1_3.Value;
+                        bl.Group = (sbyte)d1_4.Value;
 
-                        ml.Tile = (byte)d2_1.Value;
-                        ml.Unk_2 = (byte)d2_2.Value;
-                        ml.Unk_3 = (byte)d2_3.Value;
-                        ml.Group = (byte)d2_4.Value;
+                        ml.Tile = (short)d2_1.Value;
+                        ml.Unk = (byte)d2_3.Value;
+                        ml.Group = (sbyte)d2_4.Value;
 
-                        fl.Tile = (byte)d3_1.Value;
-                        fl.Unk_2 = (byte)d3_2.Value;
-                        fl.Unk_3 = (byte)d3_3.Value;
-                        fl.Group = (byte)d3_4.Value;
+                        fl.Tile = (short)d3_1.Value;
+                        fl.Unk = (byte)d3_3.Value;
+                        fl.Group = (sbyte)d3_4.Value;
 
-                        ul.Tile = (byte)d4_1.Value;
-                        ul.Unk_2 = (byte)d4_2.Value;
-                        ul.Unk_3 = (byte)d4_3.Value;
-                        ul.Group = (byte)d4_4.Value;
+                        ul.Tile = (short)d4_1.Value;
+                        ul.Unk = (byte)d4_3.Value;
+                        ul.Group = (sbyte)d4_4.Value;
 
                         level.DecorationLayer1[ix] = bl;
                         level.DecorationLayer2[ix] = ml;
@@ -1226,23 +1222,19 @@ namespace JamBuilder
                     vblock.Value = level.TileBlock[ix].ID;
 
                     d1_1.Value = level.DecorationLayer1[ix].Tile;
-                    d1_2.Value = level.DecorationLayer1[ix].Unk_2;
-                    d1_3.Value = level.DecorationLayer1[ix].Unk_3;
+                    d1_3.Value = level.DecorationLayer1[ix].Unk;
                     d1_4.Value = level.DecorationLayer1[ix].Group;
 
                     d2_1.Value = level.DecorationLayer2[ix].Tile;
-                    d2_2.Value = level.DecorationLayer2[ix].Unk_2;
-                    d2_3.Value = level.DecorationLayer2[ix].Unk_3;
+                    d2_3.Value = level.DecorationLayer2[ix].Unk;
                     d2_4.Value = level.DecorationLayer2[ix].Group;
 
                     d3_1.Value = level.DecorationLayer3[ix].Tile;
-                    d3_2.Value = level.DecorationLayer3[ix].Unk_2;
-                    d3_3.Value = level.DecorationLayer3[ix].Unk_3;
+                    d3_3.Value = level.DecorationLayer3[ix].Unk;
                     d3_4.Value = level.DecorationLayer3[ix].Group;
 
                     d4_1.Value = level.DecorationLayer4[ix].Tile;
-                    d4_2.Value = level.DecorationLayer4[ix].Unk_2;
-                    d4_3.Value = level.DecorationLayer4[ix].Unk_3;
+                    d4_3.Value = level.DecorationLayer4[ix].Unk;
                     d4_4.Value = level.DecorationLayer4[ix].Group;
                 }
             }
@@ -1317,25 +1309,21 @@ namespace JamBuilder
                         Decoration fl = level.DecorationLayer3[ix];
                         Decoration ul = level.DecorationLayer4[ix];
 
-                        bl.Tile = (byte)d1_1.Value;
-                        bl.Unk_2 = (byte)d1_2.Value;
-                        bl.Unk_3 = (byte)d1_3.Value;
-                        bl.Group = (byte)d1_4.Value;
+                        bl.Tile = (short)d1_1.Value;
+                        bl.Unk = (byte)d1_3.Value;
+                        bl.Group = (sbyte)d1_4.Value;
 
-                        ml.Tile = (byte)d2_1.Value;
-                        ml.Unk_2 = (byte)d2_2.Value;
-                        ml.Unk_3 = (byte)d2_3.Value;
-                        ml.Group = (byte)d2_4.Value;
+                        ml.Tile = (short)d2_1.Value;
+                        ml.Unk = (byte)d2_3.Value;
+                        ml.Group = (sbyte)d2_4.Value;
 
-                        fl.Tile = (byte)d3_1.Value;
-                        fl.Unk_2 = (byte)d3_2.Value;
-                        fl.Unk_3 = (byte)d3_3.Value;
-                        fl.Group = (byte)d3_4.Value;
+                        fl.Tile = (short)d3_1.Value;
+                        fl.Unk = (byte)d3_3.Value;
+                        fl.Group = (sbyte)d3_4.Value;
 
-                        ul.Tile = (byte)d4_1.Value;
-                        ul.Unk_2 = (byte)d4_2.Value;
-                        ul.Unk_3 = (byte)d4_3.Value;
-                        ul.Group = (byte)d4_4.Value;
+                        ul.Tile = (short)d4_1.Value;
+                        ul.Unk = (byte)d4_3.Value;
+                        ul.Group = (sbyte)d4_4.Value;
 
                         level.DecorationLayer1[ix] = bl;
                         level.DecorationLayer2[ix] = ml;
@@ -1406,10 +1394,9 @@ namespace JamBuilder
                 Block b = new Block();
                 Decoration d = new Decoration();
                 b.ID = -1;
-                d.Tile = 255;
-                d.Unk_2 = 255;
-                d.Unk_3 = 0;
-                d.Group = 255;
+                d.Tile = -1;
+                d.Unk = 0;
+                d.Group = -1;
 
                 if (sizeW.Value > level.Width)
                 {
@@ -1728,25 +1715,21 @@ namespace JamBuilder
                                 Decoration fl = level.DecorationLayer3[ix];
                                 Decoration ul = level.DecorationLayer4[ix];
 
-                                bl.Tile = (byte)d1_1.Value;
-                                bl.Unk_2 = (byte)d1_2.Value;
-                                bl.Unk_3 = (byte)d1_3.Value;
-                                bl.Group = (byte)d1_4.Value;
+                                bl.Tile = (short)d1_1.Value;
+                                bl.Unk = (byte)d1_3.Value;
+                                bl.Group = (sbyte)d1_4.Value;
 
-                                ml.Tile = (byte)d2_1.Value;
-                                ml.Unk_2 = (byte)d2_2.Value;
-                                ml.Unk_3 = (byte)d2_3.Value;
-                                ml.Group = (byte)d2_4.Value;
+                                ml.Tile = (short)d2_1.Value;
+                                ml.Unk = (byte)d2_3.Value;
+                                ml.Group = (sbyte)d2_4.Value;
 
-                                fl.Tile = (byte)d3_1.Value;
-                                fl.Unk_2 = (byte)d3_2.Value;
-                                fl.Unk_3 = (byte)d3_3.Value;
-                                fl.Group = (byte)d3_4.Value;
+                                fl.Tile = (short)d3_1.Value;
+                                fl.Unk = (byte)d3_3.Value;
+                                fl.Group = (sbyte)d3_4.Value;
 
-                                ul.Tile = (byte)d4_1.Value;
-                                ul.Unk_2 = (byte)d4_2.Value;
-                                ul.Unk_3 = (byte)d4_3.Value;
-                                ul.Group = (byte)d4_4.Value;
+                                ul.Tile = (short)d4_1.Value;
+                                ul.Unk = (byte)d4_3.Value;
+                                ul.Group = (sbyte)d4_4.Value;
 
                                 level.DecorationLayer1[ix] = bl;
                                 level.DecorationLayer2[ix] = ml;

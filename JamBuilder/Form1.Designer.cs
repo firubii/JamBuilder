@@ -91,16 +91,12 @@
             this.label14 = new System.Windows.Forms.Label();
             this.d4_3 = new System.Windows.Forms.NumericUpDown();
             this.d1_1 = new System.Windows.Forms.NumericUpDown();
-            this.d4_2 = new System.Windows.Forms.NumericUpDown();
-            this.d1_2 = new System.Windows.Forms.NumericUpDown();
             this.d4_1 = new System.Windows.Forms.NumericUpDown();
             this.d1_3 = new System.Windows.Forms.NumericUpDown();
             this.d3_4 = new System.Windows.Forms.NumericUpDown();
             this.d1_4 = new System.Windows.Forms.NumericUpDown();
             this.d3_3 = new System.Windows.Forms.NumericUpDown();
             this.d2_1 = new System.Windows.Forms.NumericUpDown();
-            this.d3_2 = new System.Windows.Forms.NumericUpDown();
-            this.d2_2 = new System.Windows.Forms.NumericUpDown();
             this.d3_1 = new System.Windows.Forms.NumericUpDown();
             this.d2_3 = new System.Windows.Forms.NumericUpDown();
             this.d2_4 = new System.Windows.Forms.NumericUpDown();
@@ -149,16 +145,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.d4_4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d4_3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d1_1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.d4_2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.d1_2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d4_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d1_3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d3_4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d1_4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d3_3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d2_1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.d3_2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.d2_2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d3_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d2_3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.d2_4)).BeginInit();
@@ -774,16 +766,12 @@
             this.groupBox5.Controls.Add(this.label14);
             this.groupBox5.Controls.Add(this.d4_3);
             this.groupBox5.Controls.Add(this.d1_1);
-            this.groupBox5.Controls.Add(this.d4_2);
-            this.groupBox5.Controls.Add(this.d1_2);
             this.groupBox5.Controls.Add(this.d4_1);
             this.groupBox5.Controls.Add(this.d1_3);
             this.groupBox5.Controls.Add(this.d3_4);
             this.groupBox5.Controls.Add(this.d1_4);
             this.groupBox5.Controls.Add(this.d3_3);
             this.groupBox5.Controls.Add(this.d2_1);
-            this.groupBox5.Controls.Add(this.d3_2);
-            this.groupBox5.Controls.Add(this.d2_2);
             this.groupBox5.Controls.Add(this.d3_1);
             this.groupBox5.Controls.Add(this.d2_3);
             this.groupBox5.Controls.Add(this.d2_4);
@@ -825,10 +813,15 @@
             // 
             this.d4_4.Location = new System.Drawing.Point(187, 92);
             this.d4_4.Maximum = new decimal(new int[] {
-            255,
+            127,
             0,
             0,
             0});
+            this.d4_4.Minimum = new decimal(new int[] {
+            128,
+            0,
+            0,
+            -2147483648});
             this.d4_4.Name = "d4_4";
             this.d4_4.Size = new System.Drawing.Size(39, 20);
             this.d4_4.TabIndex = 52;
@@ -858,48 +851,34 @@
             // 
             this.d1_1.Location = new System.Drawing.Point(52, 14);
             this.d1_1.Maximum = new decimal(new int[] {
-            255,
+            32767,
             0,
             0,
             0});
+            this.d1_1.Minimum = new decimal(new int[] {
+            32768,
+            0,
+            0,
+            -2147483648});
             this.d1_1.Name = "d1_1";
-            this.d1_1.Size = new System.Drawing.Size(39, 20);
+            this.d1_1.Size = new System.Drawing.Size(84, 20);
             this.d1_1.TabIndex = 37;
-            // 
-            // d4_2
-            // 
-            this.d4_2.Location = new System.Drawing.Point(97, 92);
-            this.d4_2.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.d4_2.Name = "d4_2";
-            this.d4_2.Size = new System.Drawing.Size(39, 20);
-            this.d4_2.TabIndex = 50;
-            // 
-            // d1_2
-            // 
-            this.d1_2.Location = new System.Drawing.Point(97, 14);
-            this.d1_2.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.d1_2.Name = "d1_2";
-            this.d1_2.Size = new System.Drawing.Size(39, 20);
-            this.d1_2.TabIndex = 38;
             // 
             // d4_1
             // 
             this.d4_1.Location = new System.Drawing.Point(52, 92);
             this.d4_1.Maximum = new decimal(new int[] {
-            255,
+            32767,
             0,
             0,
             0});
+            this.d4_1.Minimum = new decimal(new int[] {
+            32768,
+            0,
+            0,
+            -2147483648});
             this.d4_1.Name = "d4_1";
-            this.d4_1.Size = new System.Drawing.Size(39, 20);
+            this.d4_1.Size = new System.Drawing.Size(84, 20);
             this.d4_1.TabIndex = 49;
             // 
             // d1_3
@@ -918,10 +897,15 @@
             // 
             this.d3_4.Location = new System.Drawing.Point(187, 66);
             this.d3_4.Maximum = new decimal(new int[] {
-            255,
+            127,
             0,
             0,
             0});
+            this.d3_4.Minimum = new decimal(new int[] {
+            128,
+            0,
+            0,
+            -2147483648});
             this.d3_4.Name = "d3_4";
             this.d3_4.Size = new System.Drawing.Size(39, 20);
             this.d3_4.TabIndex = 48;
@@ -930,10 +914,15 @@
             // 
             this.d1_4.Location = new System.Drawing.Point(187, 14);
             this.d1_4.Maximum = new decimal(new int[] {
-            255,
+            127,
             0,
             0,
             0});
+            this.d1_4.Minimum = new decimal(new int[] {
+            128,
+            0,
+            0,
+            -2147483648});
             this.d1_4.Name = "d1_4";
             this.d1_4.Size = new System.Drawing.Size(39, 20);
             this.d1_4.TabIndex = 40;
@@ -954,48 +943,34 @@
             // 
             this.d2_1.Location = new System.Drawing.Point(52, 40);
             this.d2_1.Maximum = new decimal(new int[] {
-            255,
+            32767,
             0,
             0,
             0});
+            this.d2_1.Minimum = new decimal(new int[] {
+            32768,
+            0,
+            0,
+            -2147483648});
             this.d2_1.Name = "d2_1";
-            this.d2_1.Size = new System.Drawing.Size(39, 20);
+            this.d2_1.Size = new System.Drawing.Size(84, 20);
             this.d2_1.TabIndex = 41;
-            // 
-            // d3_2
-            // 
-            this.d3_2.Location = new System.Drawing.Point(97, 66);
-            this.d3_2.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.d3_2.Name = "d3_2";
-            this.d3_2.Size = new System.Drawing.Size(39, 20);
-            this.d3_2.TabIndex = 46;
-            // 
-            // d2_2
-            // 
-            this.d2_2.Location = new System.Drawing.Point(97, 40);
-            this.d2_2.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.d2_2.Name = "d2_2";
-            this.d2_2.Size = new System.Drawing.Size(39, 20);
-            this.d2_2.TabIndex = 42;
             // 
             // d3_1
             // 
             this.d3_1.Location = new System.Drawing.Point(52, 66);
             this.d3_1.Maximum = new decimal(new int[] {
-            255,
+            32767,
             0,
             0,
             0});
+            this.d3_1.Minimum = new decimal(new int[] {
+            32768,
+            0,
+            0,
+            -2147483648});
             this.d3_1.Name = "d3_1";
-            this.d3_1.Size = new System.Drawing.Size(39, 20);
+            this.d3_1.Size = new System.Drawing.Size(84, 20);
             this.d3_1.TabIndex = 45;
             // 
             // d2_3
@@ -1014,10 +989,15 @@
             // 
             this.d2_4.Location = new System.Drawing.Point(187, 40);
             this.d2_4.Maximum = new decimal(new int[] {
-            255,
+            127,
             0,
             0,
             0});
+            this.d2_4.Minimum = new decimal(new int[] {
+            128,
+            0,
+            0,
+            -2147483648});
             this.d2_4.Name = "d2_4";
             this.d2_4.Size = new System.Drawing.Size(39, 20);
             this.d2_4.TabIndex = 44;
@@ -1384,16 +1364,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.d4_4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.d4_3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.d1_1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.d4_2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.d1_2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.d4_1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.d1_3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.d3_4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.d1_4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.d3_3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.d2_1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.d3_2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.d2_2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.d3_1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.d2_3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.d2_4)).EndInit();
@@ -1480,19 +1456,15 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown d4_4;
         private System.Windows.Forms.NumericUpDown d4_3;
-        private System.Windows.Forms.NumericUpDown d4_2;
         private System.Windows.Forms.NumericUpDown d4_1;
         private System.Windows.Forms.NumericUpDown d3_4;
         private System.Windows.Forms.NumericUpDown d3_3;
-        private System.Windows.Forms.NumericUpDown d3_2;
         private System.Windows.Forms.NumericUpDown d3_1;
         private System.Windows.Forms.NumericUpDown d2_4;
         private System.Windows.Forms.NumericUpDown d2_3;
-        private System.Windows.Forms.NumericUpDown d2_2;
         private System.Windows.Forms.NumericUpDown d2_1;
         private System.Windows.Forms.NumericUpDown d1_4;
         private System.Windows.Forms.NumericUpDown d1_3;
-        private System.Windows.Forms.NumericUpDown d1_2;
         private System.Windows.Forms.NumericUpDown d1_1;
         private System.Windows.Forms.NumericUpDown vmat;
         private System.Windows.Forms.NumericUpDown vunk;

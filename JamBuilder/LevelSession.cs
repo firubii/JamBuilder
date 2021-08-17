@@ -95,7 +95,7 @@ namespace JamBuilder
 
 		private static Collision defaultCollision = new Collision();
 		private static Block defaultBlock = new Block(-1);
-		private static Decoration defaultDecoration = new Decoration(255,255,0,255);
+		private static Decoration defaultDecoration = new Decoration(-1,0,-1);
 
 		///<summary>Sets up a new LevelSession</summary>
 		public LevelSession(uint width, uint height, LevelProperties properties)

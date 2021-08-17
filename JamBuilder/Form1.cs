@@ -164,7 +164,7 @@ namespace JamBuilder
             open.Title = "Open Level File";
             if (open.ShowDialog() == DialogResult.OK)
             {
-                a = true;
+                loading = true;
 
                 filePath = open.FileName;
                 objList.Items.Clear();
@@ -191,7 +191,7 @@ namespace JamBuilder
                 saveToolStripMenuItem.Enabled = true;
                 saveAsToolStripMenuItem.Enabled = true;
 
-                a = false;
+                loading = false;
             }
         }
         
@@ -200,7 +200,7 @@ namespace JamBuilder
             NewLevel newlvl = new NewLevel();
             if (newlvl.ShowDialog() == DialogResult.OK)
             {
-                a = true;
+                loading = true;
 
                 objList.Items.Clear();
                 guestItemList.Items.Clear();
@@ -221,7 +221,7 @@ namespace JamBuilder
 
                 saveAsToolStripMenuItem.Enabled = true;
 
-                a = false;
+                loading = false;
             }
         }
 
@@ -1388,7 +1388,7 @@ namespace JamBuilder
 
         private void UpdateLevelSize(object sender, EventArgs e)
         {
-            if (!a)
+            if (!loading)
             {
                 Collision c = new Collision();
                 Block b = new Block();
@@ -1457,13 +1457,13 @@ namespace JamBuilder
             return (camera.pos + i) / 16f;
         }
 
-        bool a;
+        bool loading;
 
         private void objList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!a)
+            if (!loading)
             {
-                a = true;
+                loading = true;
                 try
                 {
                     moveObj = 0;
@@ -1480,15 +1480,15 @@ namespace JamBuilder
                 itemList.ClearSelected();
                 bossList.ClearSelected();
                 enemyList.ClearSelected();
-                a = false;
+                loading = false;
             }
         }
 
         private void guestItemList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!a)
+            if (!loading)
             {
-                a = true;
+                loading = true;
                 try
                 {
                     moveObj = 1;
@@ -1505,15 +1505,15 @@ namespace JamBuilder
                 itemList.ClearSelected();
                 bossList.ClearSelected();
                 enemyList.ClearSelected();
-                a = false;
+                loading = false;
             }
         }
 
         private void itemList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!a)
+            if (!loading)
             {
-                a = true;
+                loading = true;
                 try
                 {
                     moveObj = 2;
@@ -1530,16 +1530,16 @@ namespace JamBuilder
                 guestItemList.ClearSelected();
                 bossList.ClearSelected();
                 enemyList.ClearSelected();
-                a = false;
+                loading = false;
             }
             
         }
 
         private void bossList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!a)
+            if (!loading)
             {
-                a = true;
+                loading = true;
                 try
                 {
                     moveObj = 3;
@@ -1556,15 +1556,15 @@ namespace JamBuilder
                 guestItemList.ClearSelected();
                 itemList.ClearSelected();
                 enemyList.ClearSelected();
-                a = false;
+                loading = false;
             }
         }
 
         private void enemyList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!a)
+            if (!loading)
             {
-                a = true;
+                loading = true;
                 try
                 {
                     moveObj = 4;
@@ -1581,7 +1581,7 @@ namespace JamBuilder
                 guestItemList.ClearSelected();
                 itemList.ClearSelected();
                 bossList.ClearSelected();
-                a = false;
+                loading = false;
             }
         }
 
@@ -1817,7 +1817,11 @@ namespace JamBuilder
             {
                 if (objList.SelectedItem != null)
                 {
-                    level.Objects.Add(level.Objects[objList.SelectedIndex]);
+                    Dictionary<string, string> obj = new Dictionary<string, string>();
+                    foreach (KeyValuePair<string,string> pair in level.Objects[objList.SelectedIndex])
+                        obj.Add(pair.Key, pair.Value);
+
+                    level.Objects.Add(obj);
 					RefreshObjectLists();
                 }
             }
@@ -1829,7 +1833,11 @@ namespace JamBuilder
             {
                 if (guestItemList.SelectedItem != null)
                 {
-                    level.GuestStarItems.Add(level.GuestStarItems[guestItemList.SelectedIndex]);
+                    Dictionary<string, string> obj = new Dictionary<string, string>();
+                    foreach (KeyValuePair<string, string> pair in level.GuestStarItems[guestItemList.SelectedIndex])
+                        obj.Add(pair.Key, pair.Value);
+
+                    level.GuestStarItems.Add(obj);
                     RefreshObjectLists();
                 }
             }
@@ -1841,7 +1849,11 @@ namespace JamBuilder
             {
                 if (itemList.SelectedItem != null)
                 {
-                    level.Items.Add(level.Items[itemList.SelectedIndex]);
+                    Dictionary<string, string> obj = new Dictionary<string, string>();
+                    foreach (KeyValuePair<string, string> pair in level.Items[itemList.SelectedIndex])
+                        obj.Add(pair.Key, pair.Value);
+
+                    level.Items.Add(obj);
                     RefreshObjectLists();
                 }
             }
@@ -1853,7 +1865,11 @@ namespace JamBuilder
             {
                 if (bossList.SelectedItem != null)
                 {
-                    level.Bosses.Add(level.Bosses[bossList.SelectedIndex]);
+                    Dictionary<string, string> obj = new Dictionary<string, string>();
+                    foreach (KeyValuePair<string, string> pair in level.Bosses[bossList.SelectedIndex])
+                        obj.Add(pair.Key, pair.Value);
+
+                    level.Bosses.Add(obj);
                     RefreshObjectLists();
                 }
             }
@@ -1865,7 +1881,11 @@ namespace JamBuilder
             {
                 if (enemyList.SelectedItem != null)
                 {
-                    level.Enemies.Add(level.Enemies[enemyList.SelectedIndex]);
+                    Dictionary<string, string> obj = new Dictionary<string, string>();
+                    foreach (KeyValuePair<string, string> pair in level.Enemies[enemyList.SelectedIndex])
+                        obj.Add(pair.Key, pair.Value);
+
+                    level.Enemies.Add(obj);
                     RefreshObjectLists();
                 }
             }

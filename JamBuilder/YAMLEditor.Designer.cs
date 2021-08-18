@@ -87,9 +87,9 @@
             this.valueBool.AutoSize = true;
             this.valueBool.Location = new System.Drawing.Point(3, 82);
             this.valueBool.Name = "valueBool";
-            this.valueBool.Size = new System.Drawing.Size(53, 17);
+            this.valueBool.Size = new System.Drawing.Size(65, 17);
             this.valueBool.TabIndex = 7;
-            this.valueBool.Text = "Value";
+            this.valueBool.Text = "Boolean";
             this.valueBool.UseVisualStyleBackColor = true;
             this.valueBool.Visible = false;
             this.valueBool.CheckedChanged += new System.EventHandler(this.boolSelect_CheckedChanged);

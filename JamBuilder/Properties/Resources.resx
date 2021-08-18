@@ -298,4 +298,25 @@
   <data name="pick" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\pick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="yamlArray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\yaml\array.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="yamlBool" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\yaml\bool.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="yamlFloat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\yaml\float.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="yamlHash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\yaml\hash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="yamlInt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\yaml\int.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="yamlInvalid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\yaml\invalid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="yamlString" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\yaml\string.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.yamlDataList = new System.Windows.Forms.ListBox();
             this.save = new System.Windows.Forms.Button();
             this.valueString = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,19 +36,11 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.valueNum = new System.Windows.Forms.NumericUpDown();
             this.valueOffset = new System.Windows.Forms.NumericUpDown();
+            this.yamlDataList = new System.Windows.Forms.TreeView();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.valueNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valueOffset)).BeginInit();
             this.SuspendLayout();
-            // 
-            // yamlDataList
-            // 
-            this.yamlDataList.FormattingEnabled = true;
-            this.yamlDataList.Location = new System.Drawing.Point(13, 13);
-            this.yamlDataList.Name = "yamlDataList";
-            this.yamlDataList.Size = new System.Drawing.Size(197, 277);
-            this.yamlDataList.TabIndex = 0;
-            this.yamlDataList.SelectedIndexChanged += new System.EventHandler(this.yamlDataList_SelectedIndexChanged);
             // 
             // save
             // 
@@ -67,6 +58,7 @@
             this.valueString.Name = "valueString";
             this.valueString.Size = new System.Drawing.Size(200, 20);
             this.valueString.TabIndex = 2;
+            this.valueString.Visible = false;
             this.valueString.TextChanged += new System.EventHandler(this.valueString_TextChanged);
             // 
             // label1
@@ -87,6 +79,7 @@
             this.valueEnum.Name = "valueEnum";
             this.valueEnum.Size = new System.Drawing.Size(200, 21);
             this.valueEnum.TabIndex = 6;
+            this.valueEnum.Visible = false;
             this.valueEnum.SelectedIndexChanged += new System.EventHandler(this.valueSelect_SelectedIndexChanged);
             // 
             // valueBool
@@ -98,6 +91,7 @@
             this.valueBool.TabIndex = 7;
             this.valueBool.Text = "Value";
             this.valueBool.UseVisualStyleBackColor = true;
+            this.valueBool.Visible = false;
             this.valueBool.CheckedChanged += new System.EventHandler(this.boolSelect_CheckedChanged);
             // 
             // flowLayoutPanel1
@@ -118,6 +112,7 @@
             this.valueNum.Name = "valueNum";
             this.valueNum.Size = new System.Drawing.Size(150, 20);
             this.valueNum.TabIndex = 8;
+            this.valueNum.Visible = false;
             this.valueNum.ValueChanged += new System.EventHandler(this.valueNum_ValueChanged);
             // 
             // valueOffset
@@ -126,23 +121,33 @@
             this.valueOffset.Name = "valueOffset";
             this.valueOffset.Size = new System.Drawing.Size(44, 20);
             this.valueOffset.TabIndex = 9;
+            this.valueOffset.Visible = false;
             this.valueOffset.ValueChanged += new System.EventHandler(this.valueNum_ValueChanged);
+            // 
+            // yamlDataList
+            // 
+            this.yamlDataList.Location = new System.Drawing.Point(13, 13);
+            this.yamlDataList.Name = "yamlDataList";
+            this.yamlDataList.PathSeparator = "/";
+            this.yamlDataList.Size = new System.Drawing.Size(197, 277);
+            this.yamlDataList.TabIndex = 9;
+            this.yamlDataList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.yamlDataList_AfterSelect);
             // 
             // YAMLEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(430, 338);
+            this.Controls.Add(this.yamlDataList);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.save);
-            this.Controls.Add(this.yamlDataList);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "YAMLEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "YAMLEditor";
+            this.Text = "Yaml Editor";
             this.Load += new System.EventHandler(this.YAMLEditor_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
@@ -154,8 +159,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox yamlDataList;
         private System.Windows.Forms.Button save;
         private System.Windows.Forms.TextBox valueString;
         private System.Windows.Forms.Label label1;
@@ -164,5 +167,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.NumericUpDown valueNum;
         private System.Windows.Forms.NumericUpDown valueOffset;
+        private System.Windows.Forms.TreeView yamlDataList;
     }
 }

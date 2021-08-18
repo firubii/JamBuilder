@@ -329,6 +329,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\yaml\string.png" />
+    <None Include="Resources\yaml\invalid.png" />
+    <None Include="Resources\yaml\int.png" />
+    <None Include="Resources\yaml\hash.png" />
+    <None Include="Resources\yaml\float.png" />
+    <None Include="Resources\yaml\bool.png" />
+    <None Include="Resources\yaml\array.png" />
     <None Include="Resources\tileset\unknown.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

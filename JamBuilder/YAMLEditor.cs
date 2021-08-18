@@ -25,22 +25,67 @@ namespace JamBuilder
         public YAMLEditor()
         {
             InitializeComponent();
+            ImageList img = new ImageList();
+            img.Images.Add(Properties.Resources.yamlInvalid);
+            img.Images.Add(Properties.Resources.yamlInt);
+            img.Images.Add(Properties.Resources.yamlFloat);
+            img.Images.Add(Properties.Resources.yamlBool);
+            img.Images.Add(Properties.Resources.yamlString);
+            img.Images.Add(Properties.Resources.yamlHash);
+            img.Images.Add(Properties.Resources.yamlArray);
+            yamlDataList.ImageList = img;
         }
 
         private void RefreshList()
         {
             loading = true;
 
-            yamlDataList.Items.Clear();
             yamlDataList.BeginUpdate();
+            yamlDataList.Nodes.Clear();
             for (int i = 0; i < obj.Root.Length; i++)
             {
                 string key = obj.Root.Key(i);
-                yamlDataList.Items.Add($"{obj.Root[key].Type} {key}");
+                Yaml.Data data = obj.Root[key];
+                TreeNode node = new TreeNode(key, (int)data.Type, (int)data.Type);
+                if (data.Type == Yaml.Type.Hash)
+                {
+                    for (int d = 0; d < data.Length; d++)
+                    {
+                        AddYamlNode(node, data.Key(d), data[data.Key(d)]);
+                    }
+                }
+                else if (data.Type == Yaml.Type.Array)
+                {
+                    for (int d = 0; d < data.Length; d++)
+                    {
+                        AddYamlNode(node, d.ToString(), data[d]);
+                    }
+                }
+                yamlDataList.Nodes.Add(node);
             }
             yamlDataList.EndUpdate();
 
             loading = false;
+        }
+
+        private void AddYamlNode(TreeNode node, string name, Yaml.Data data)
+        {
+            TreeNode n = new TreeNode(name, (int)data.Type, (int)data.Type);
+            if (data.Type == Yaml.Type.Hash)
+            {
+                for (int d = 0; d < data.Length; d++)
+                {
+                    AddYamlNode(n, data.Key(d), data[data.Key(d)]);
+                }
+            }
+            else if (data.Type == Yaml.Type.Array)
+            {
+                for (int d = 0; d < data.Length; d++)
+                {
+                    AddYamlNode(n, d.ToString(), data[d]);
+                }
+            }
+            node.Nodes.Add(n);
         }
 
         private void YAMLEditor_Load(object sender, EventArgs e)
@@ -72,23 +117,33 @@ namespace JamBuilder
             RefreshList();
         }
 
-        private void yamlDataList_SelectedIndexChanged(object sender, EventArgs e)
+        private void yamlDataList_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (yamlDataList.SelectedItem != null)
+            if (yamlDataList.SelectedNode != null)
             {
                 loading = true;
                 valueEnum.Items.Clear();
 
-                string key = obj.Root.Key(yamlDataList.SelectedIndex);
-                Yaml.Data selectedData = obj.Root[key];
+                string[] yamlPath = yamlDataList.SelectedNode.FullPath.Split('/');
+                string key = yamlDataList.SelectedNode.Text;
+
+                Yaml.Data selectedData = obj.Root;
+                for (int i = 0; i < yamlPath.Length; i++)
+                {
+                    if (selectedData.Type == Yaml.Type.Hash)
+                        selectedData = selectedData[yamlPath[i]];
+                    else if (selectedData.Type == Yaml.Type.Array)
+                        selectedData = selectedData[int.Parse(yamlPath[i])];
+                }
+
                 switch (selectedData.Type)
                 {
                     case Yaml.Type.Int:
                         {
                             valueOffset.Visible = false;
-                            valueBool.Visible = false;
                             valueString.Visible = false;
                             valueEnum.Visible = false;
+                            valueBool.Visible = false;
 
                             valueNum.Visible = true;
                             valueNum.Width = 200;
@@ -98,7 +153,7 @@ namespace JamBuilder
                             valueNum.DecimalPlaces = 0;
 
                             valueNum.Value = selectedData.ToInt();
-                            if (key == "x" || key == "y")
+                            if (key == "x" || key == "y" || key == "width" || key == "height")
                             {
                                 valueOffset.Visible = true;
                                 valueNum.Width = 150;
@@ -110,9 +165,9 @@ namespace JamBuilder
                     case Yaml.Type.Float:
                         {
                             valueOffset.Visible = false;
-                            valueBool.Visible = false;
                             valueString.Visible = false;
                             valueEnum.Visible = false;
+                            valueBool.Visible = false;
 
                             valueNum.Visible = true;
                             valueNum.Value = 0;
@@ -125,8 +180,8 @@ namespace JamBuilder
                         }
                     case Yaml.Type.Bool:
                         {
-                            valueOffset.Visible = false;
                             valueNum.Visible = false;
+                            valueOffset.Visible = false;
                             valueString.Visible = false;
                             valueEnum.Visible = false;
 
@@ -136,13 +191,22 @@ namespace JamBuilder
                         }
                     case Yaml.Type.String:
                         {
-                            valueOffset.Visible = false;
                             valueNum.Visible = false;
-                            valueBool.Visible = false;
+                            valueOffset.Visible = false;
                             valueEnum.Visible = false;
+                            valueBool.Visible = false;
 
                             valueString.Visible = true;
                             valueString.Text = selectedData.ToString();
+                            break;
+                        }
+                    default:
+                        {
+                            valueNum.Visible = false;
+                            valueOffset.Visible = false;
+                            valueString.Visible = false;
+                            valueEnum.Visible = false;
+                            valueBool.Visible = false;
                             break;
                         }
                 }
@@ -157,8 +221,17 @@ namespace JamBuilder
             if (loading)
                 return;
 
-            string key = obj.Root.Key(yamlDataList.SelectedIndex);
-            obj.Root[key].Set(valueString.Text);
+            string[] yamlPath = yamlDataList.SelectedNode.FullPath.Split('/');
+            Yaml.Data selectedData = obj.Root;
+            for (int i = 0; i < yamlPath.Length; i++)
+            {
+                if (selectedData.Type == Yaml.Type.Hash)
+                    selectedData = selectedData[yamlPath[i]];
+                else if (selectedData.Type == Yaml.Type.Array)
+                    selectedData = selectedData[int.Parse(yamlPath[i])];
+            }
+
+            selectedData.Set(valueString.Text);
         }
 
         private void delAttribute_Click(object sender, EventArgs e)
@@ -176,8 +249,17 @@ namespace JamBuilder
             if (loading)
                 return;
 
-            string key = obj.Root.Key(yamlDataList.SelectedIndex);
-            obj.Root[key].Set(valueBool.Checked);
+            string[] yamlPath = yamlDataList.SelectedNode.FullPath.Split('/');
+            Yaml.Data selectedData = obj.Root;
+            for (int i = 0; i < yamlPath.Length; i++)
+            {
+                if (selectedData.Type == Yaml.Type.Hash)
+                    selectedData = selectedData[yamlPath[i]];
+                else if (selectedData.Type == Yaml.Type.Array)
+                    selectedData = selectedData[int.Parse(yamlPath[i])];
+            }
+
+            selectedData.Set(valueBool.Checked);
         }
 
         private void valueNum_ValueChanged(object sender, EventArgs e)
@@ -185,14 +267,23 @@ namespace JamBuilder
             if (loading)
                 return;
 
-            string key = obj.Root.Key(yamlDataList.SelectedIndex);
-            if (key == "x" || key == "y")
+            string[] yamlPath = yamlDataList.SelectedNode.FullPath.Split('/');
+            string key = yamlDataList.SelectedNode.Text;
+            Yaml.Data selectedData = obj.Root;
+            for (int i = 0; i < yamlPath.Length; i++)
             {
-                obj.Root[key].Set(((int)valueNum.Value << 4) | ((int)valueOffset.Value));
+                if (selectedData.Type == Yaml.Type.Hash)
+                    selectedData = selectedData[yamlPath[i]];
+                else if (selectedData.Type == Yaml.Type.Array)
+                    selectedData = selectedData[int.Parse(yamlPath[i])];
+            }
+            if (key == "x" || key == "y" || key == "width" || key == "height")
+            {
+                selectedData.Set(((int)valueNum.Value << 4) | ((int)valueOffset.Value));
             }
             else
             {
-                obj.Root[key].Set((int)valueNum.Value);
+                selectedData.Set((int)valueNum.Value);
             }
         }
 

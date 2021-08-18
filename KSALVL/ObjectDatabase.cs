@@ -68,21 +68,25 @@ namespace KSALVL
                             case "int":
                                 {
                                     prop.Type = PropertyType.Int;
+                                    prop.Default = (int)propObj["default"];
                                     break;
                                 }
                             case "float":
                                 {
                                     prop.Type = PropertyType.Float;
+                                    prop.Default = (float)propObj["default"];
                                     break;
                                 }
                             case "bool":
                                 {
                                     prop.Type = PropertyType.Bool;
+                                    prop.Default = (bool)propObj["default"];
                                     break;
                                 }
                             case "string":
                                 {
                                     prop.Type = PropertyType.String;
+                                    prop.Default = (string)propObj["default"];
                                     break;
                                 }
                         }

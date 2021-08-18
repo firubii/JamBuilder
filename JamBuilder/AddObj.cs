@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using KSALVL;
 using KSALVL.Hel;
+using KSALVL.Util;
 
 namespace JamBuilder
 {
@@ -21,6 +22,7 @@ namespace JamBuilder
 
         public AddObj()
         {
+            obj = new Yaml(new Yaml.Data(Yaml.Type.Hash), Endianness.Little);
             InitializeComponent();
         }
 

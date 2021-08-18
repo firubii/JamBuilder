@@ -45,10 +45,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data.cs" />
+    <Compile Include="Hel\XData.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="ObjectDatabase.cs" />
     <Compile Include="Objects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Hel\Yaml.cs" />
+    <Compile Include="Util\EndianBinaryReader.cs" />
+    <Compile Include="Util\EndianBinaryWriter.cs" />
+    <Compile Include="Util\Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

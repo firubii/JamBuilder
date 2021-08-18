@@ -8,15 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KSALVL;
+using KSALVL.Hel;
 
 namespace JamBuilder
 {
     public partial class YAMLEditor : Form
     {
-        public Dictionary<string, string> obj;
+        public Yaml obj;
         public int editorType;
 
         public ObjectDatabase database;
+        bool loading;
 
         Dictionary<string, ObjectDatabase.ObjectProperty[]> objList;
 
@@ -27,13 +29,18 @@ namespace JamBuilder
 
         private void RefreshList()
         {
+            loading = true;
+
             yamlDataList.Items.Clear();
             yamlDataList.BeginUpdate();
-            foreach(KeyValuePair<string, string> pair in obj)
+            for (int i = 0; i < obj.Root.Length; i++)
             {
-                yamlDataList.Items.Add(pair.Key);
+                string key = obj.Root.Key(i);
+                yamlDataList.Items.Add($"{obj.Root[key].Type} {key}");
             }
             yamlDataList.EndUpdate();
+
+            loading = false;
         }
 
         private void YAMLEditor_Load(object sender, EventArgs e)
@@ -62,80 +69,136 @@ namespace JamBuilder
                         break;
                     }
             }
-            foreach (KeyValuePair<string, string> pair in obj)
-            {
-                yamlDataList.Items.Add(pair.Key);
-            }
+            RefreshList();
         }
 
         private void yamlDataList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (yamlDataList.SelectedItem != null)
             {
-                valueSelect.Items.Clear();
-                valueSelect.Enabled = false;
-                boolSelect.Checked = false;
-                boolSelect.Enabled = false;
-                value.Text = obj[yamlDataList.SelectedItem.ToString()];
-                value.Enabled = true;
-                if (yamlDataList.SelectedItem.ToString() == "string kind")
+                loading = true;
+                valueEnum.Items.Clear();
+
+                string key = obj.Root.Key(yamlDataList.SelectedIndex);
+                Yaml.Data selectedData = obj.Root[key];
+                switch (selectedData.Type)
                 {
-                    valueSelect.Enabled = false;
-                    value.Enabled = false;
-                    boolSelect.Enabled = false;
-                }
-                if (objList.ContainsKey(obj["string kind"]))
-                {
-                    for (int i = 0; i < objList[obj["string kind"]].Length; i++)
-                    {
-                        if (yamlDataList.SelectedItem.ToString().Split(' ')[1] == objList[obj["string kind"]][i].Name)
+                    case Yaml.Type.Int:
                         {
-                            if (objList[obj["string kind"]][i].Type == ObjectDatabase.PropertyType.Bool)
+                            valueOffset.Visible = false;
+                            valueBool.Visible = false;
+                            valueString.Visible = false;
+                            valueEnum.Visible = false;
+
+                            valueNum.Visible = true;
+                            valueNum.Width = 200;
+                            valueNum.Value = 0;
+                            valueNum.Minimum = int.MinValue;
+                            valueNum.Maximum = int.MaxValue;
+                            valueNum.DecimalPlaces = 0;
+
+                            valueNum.Value = selectedData.ToInt();
+                            if (key == "x" || key == "y")
                             {
-                                boolSelect.Checked = Convert.ToBoolean(obj[yamlDataList.SelectedItem.ToString()].ToLower());
-                                boolSelect.Enabled = true;
-                                value.Enabled = false;
-                            }
-                            else if (objList[obj["string kind"]][i].Options.Length > 0)
-                            {
-                                valueSelect.Items.AddRange(objList[obj["string kind"]][i].Options);
-                                valueSelect.Enabled = true;
-                                valueSelect.Text = value.Text;
+                                valueOffset.Visible = true;
+                                valueNum.Width = 150;
+                                valueNum.Value = selectedData.ToInt() >> 4;
+                                valueOffset.Value = selectedData.ToInt() & 0xF;
                             }
                             break;
                         }
-                    }
+                    case Yaml.Type.Float:
+                        {
+                            valueOffset.Visible = false;
+                            valueBool.Visible = false;
+                            valueString.Visible = false;
+                            valueEnum.Visible = false;
+
+                            valueNum.Visible = true;
+                            valueNum.Value = 0;
+                            valueNum.Minimum = decimal.MinValue;
+                            valueNum.Maximum = decimal.MaxValue;
+                            valueNum.DecimalPlaces = 3;
+
+                            valueNum.Value = (decimal)selectedData.ToFloat();
+                            break;
+                        }
+                    case Yaml.Type.Bool:
+                        {
+                            valueOffset.Visible = false;
+                            valueNum.Visible = false;
+                            valueString.Visible = false;
+                            valueEnum.Visible = false;
+
+                            valueBool.Visible = true;
+                            valueBool.Checked = selectedData.ToBool();
+                            break;
+                        }
+                    case Yaml.Type.String:
+                        {
+                            valueOffset.Visible = false;
+                            valueNum.Visible = false;
+                            valueBool.Visible = false;
+                            valueEnum.Visible = false;
+
+                            valueString.Visible = true;
+                            valueString.Text = selectedData.ToString();
+                            break;
+                        }
                 }
+
+
+                loading = false;
             }
         }
 
-        private void value_TextChanged(object sender, EventArgs e)
+        private void valueString_TextChanged(object sender, EventArgs e)
         {
-            obj[yamlDataList.SelectedItem.ToString()] = value.Text;
+            if (loading)
+                return;
+
+            string key = obj.Root.Key(yamlDataList.SelectedIndex);
+            obj.Root[key].Set(valueString.Text);
+        }
+
+        private void delAttribute_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void valueSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            valueString.Text = valueEnum.Text;
+        }
+
+        private void boolSelect_CheckedChanged(object sender, EventArgs e)
+        {
+            if (loading)
+                return;
+
+            string key = obj.Root.Key(yamlDataList.SelectedIndex);
+            obj.Root[key].Set(valueBool.Checked);
+        }
+
+        private void valueNum_ValueChanged(object sender, EventArgs e)
+        {
+            if (loading)
+                return;
+
+            string key = obj.Root.Key(yamlDataList.SelectedIndex);
+            if (key == "x" || key == "y")
+            {
+                obj.Root[key].Set(((int)valueNum.Value << 4) | ((int)valueOffset.Value));
+            }
+            else
+            {
+                obj.Root[key].Set((int)valueNum.Value);
+            }
         }
 
         private void save_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
-        }
-
-        private void delAttribute_Click(object sender, EventArgs e)
-        {
-            if (yamlDataList.SelectedItem != null)
-            {
-                obj.Remove(yamlDataList.SelectedItem.ToString());
-                RefreshList();
-            }
-        }
-
-        private void valueSelect_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            value.Text = valueSelect.Text;
-        }
-
-        private void boolSelect_CheckedChanged(object sender, EventArgs e)
-        {
-            obj[yamlDataList.SelectedItem.ToString()] = boolSelect.Checked.ToString();
         }
     }
 }

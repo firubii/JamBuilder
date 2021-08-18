@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using KSALVL;
+using KSALVL.Hel;
 
 namespace KSALVL
 {
@@ -21,11 +22,11 @@ namespace KSALVL
         public List<Decoration> DecorationLayer2 = new List<Decoration>();
         public List<Decoration> DecorationLayer3 = new List<Decoration>();
         public List<Decoration> DecorationLayer4 = new List<Decoration>();
-        public List<Dictionary<string, string>> Objects = new List<Dictionary<string, string>>();
-        public List<Dictionary<string, string>> GuestStarItems = new List<Dictionary<string, string>>();
-        public List<Dictionary<string, string>> Items = new List<Dictionary<string, string>>();
-        public List<Dictionary<string, string>> Bosses = new List<Dictionary<string, string>>();
-        public List<Dictionary<string, string>> Enemies = new List<Dictionary<string, string>>();
+        public List<Yaml> Objects = new List<Yaml>();
+        public List<Yaml> GuestStarItems = new List<Yaml>();
+        public List<Yaml> Items = new List<Yaml>();
+        public List<Yaml> Bosses = new List<Yaml>();
+        public List<Yaml> Enemies = new List<Yaml>();
 
         public Level()
         {
@@ -41,11 +42,11 @@ namespace KSALVL
             DecorationLayer2 = new List<Decoration>();
             DecorationLayer3 = new List<Decoration>();
             DecorationLayer4 = new List<Decoration>();
-            Objects = new List<Dictionary<string, string>>();
-            GuestStarItems = new List<Dictionary<string, string>>();
-            Items = new List<Dictionary<string, string>>();
-            Bosses = new List<Dictionary<string, string>>();
-            Enemies = new List<Dictionary<string, string>>();
+            Objects = new List<Yaml>();
+            GuestStarItems = new List<Yaml>();
+            Items = new List<Yaml>();
+            Bosses = new List<Yaml>();
+            Enemies = new List<Yaml>();
         }
         public Level(string filePath)
         {
@@ -168,7 +169,7 @@ namespace KSALVL
                 reader.BaseStream.Seek(offsets[i] + 0x8, SeekOrigin.Begin);
                 int length = reader.ReadInt32() + 0xC;
                 reader.BaseStream.Seek(offsets[i], SeekOrigin.Begin);
-                Objects.Add(ReadYAML(reader.ReadBytes(length)));
+                Objects.Add(new Yaml(reader.ReadBytes(length)));
             }
             offsets.Clear();
 
@@ -185,7 +186,7 @@ namespace KSALVL
                 reader.BaseStream.Seek(offsets[i] + 0x8, SeekOrigin.Begin);
                 int length = reader.ReadInt32() + 0xC;
                 reader.BaseStream.Seek(offsets[i], SeekOrigin.Begin);
-                GuestStarItems.Add(ReadYAML(reader.ReadBytes(length)));
+                GuestStarItems.Add(new Yaml(reader.ReadBytes(length)));
             }
             offsets.Clear();
 
@@ -202,7 +203,7 @@ namespace KSALVL
                 reader.BaseStream.Seek(offsets[i] + 0x8, SeekOrigin.Begin);
                 int length = reader.ReadInt32() + 0xC;
                 reader.BaseStream.Seek(offsets[i], SeekOrigin.Begin);
-                Items.Add(ReadYAML(reader.ReadBytes(length)));
+                Items.Add(new Yaml(reader.ReadBytes(length)));
             }
             offsets.Clear();
 
@@ -219,7 +220,7 @@ namespace KSALVL
                 reader.BaseStream.Seek(offsets[i] + 0x8, SeekOrigin.Begin);
                 int length = reader.ReadInt32() + 0xC;
                 reader.BaseStream.Seek(offsets[i], SeekOrigin.Begin);
-                Bosses.Add(ReadYAML(reader.ReadBytes(length)));
+                Bosses.Add(new Yaml(reader.ReadBytes(length)));
             }
             offsets.Clear();
 
@@ -236,7 +237,7 @@ namespace KSALVL
                 reader.BaseStream.Seek(offsets[i] + 0x8, SeekOrigin.Begin);
                 int length = reader.ReadInt32() + 0xC;
                 reader.BaseStream.Seek(offsets[i], SeekOrigin.Begin);
-                Enemies.Add(ReadYAML(reader.ReadBytes(length)));
+                Enemies.Add(new Yaml(reader.ReadBytes(length)));
             }
         }
 
@@ -431,7 +432,7 @@ namespace KSALVL
                 writer.BaseStream.Seek(yamlOffsets[i], SeekOrigin.Begin);
                 writer.Write(pos);
                 writer.BaseStream.Seek(0, SeekOrigin.End);
-                writer.Write(WriteYAML(Objects[i]));
+                writer.Write(Objects[i].Write());
             }
             writer.Write(0);
             writer.Write(0);
@@ -459,7 +460,7 @@ namespace KSALVL
                 writer.BaseStream.Seek(yamlOffsets[i], SeekOrigin.Begin);
                 writer.Write(pos);
                 writer.BaseStream.Seek(0, SeekOrigin.End);
-                writer.Write(WriteYAML(GuestStarItems[i]));
+                writer.Write(GuestStarItems[i].Write());
             }
             writer.Write(0);
             writer.Write(0);
@@ -487,7 +488,7 @@ namespace KSALVL
                 writer.BaseStream.Seek(yamlOffsets[i], SeekOrigin.Begin);
                 writer.Write(pos);
                 writer.BaseStream.Seek(0, SeekOrigin.End);
-                writer.Write(WriteYAML(Items[i]));
+                writer.Write(Items[i].Write());
             }
             writer.Write(0);
             writer.Write(0);
@@ -515,7 +516,7 @@ namespace KSALVL
                 writer.BaseStream.Seek(yamlOffsets[i], SeekOrigin.Begin);
                 writer.Write(pos);
                 writer.BaseStream.Seek(0, SeekOrigin.End);
-                writer.Write(WriteYAML(Bosses[i]));
+                writer.Write(Bosses[i].Write());
             }
             writer.Write(0);
             writer.Write(0);
@@ -543,7 +544,7 @@ namespace KSALVL
                 writer.BaseStream.Seek(yamlOffsets[i], SeekOrigin.Begin);
                 writer.Write(pos);
                 writer.BaseStream.Seek(0, SeekOrigin.End);
-                writer.Write(WriteYAML(Enemies[i]));
+                writer.Write(Enemies[i].Write());
             }
             writer.Write(0);
             writer.Write(0);

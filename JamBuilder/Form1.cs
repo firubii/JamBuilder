@@ -13,6 +13,8 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using JamBuilder.Rendering;
 using KSALVL;
+using KSALVL.Hel;
+using KSALVL.Util;
 
 namespace JamBuilder
 {
@@ -123,23 +125,23 @@ namespace JamBuilder
 
 			for (int i = 0; i < level.Objects.Count; i++)
             {
-				objList.Items.Add(String.Format(formatting, i , level.Objects[i]["string kind"], level.Objects[i]["int wuid"]));
+				objList.Items.Add(String.Format(formatting, i, level.Objects[i].Root["kind"].ToString(), level.Objects[i].Root["wuid"].ToInt()));
 			}
             for (int i = 0; i < level.GuestStarItems.Count; i++)
             {
-                guestItemList.Items.Add(String.Format(formatting, i, level.GuestStarItems[i]["string kind"], level.GuestStarItems[i]["int wuid"]));
-			}
+                guestItemList.Items.Add(String.Format(formatting, i, level.GuestStarItems[i].Root["kind"].ToString(), level.GuestStarItems[i].Root["wuid"].ToInt()));
+            }
             for (int i = 0; i < level.Items.Count; i++)
             {
-				itemList.Items.Add(String.Format(formatting, i, level.Items[i]["string kind"], level.Items[i]["int wuid"]));
+				itemList.Items.Add(String.Format(formatting, i, level.Items[i].Root["kind"].ToString(), level.Items[i].Root["wuid"].ToInt()));
 			}
             for (int i = 0; i < level.Bosses.Count; i++)
             {
-				bossList.Items.Add(String.Format(formatting, i, level.Bosses[i]["string kind"], level.Bosses[i]["int wuid"]));
+				bossList.Items.Add(String.Format(formatting, i, level.Bosses[i].Root["kind"].ToString(), level.Bosses[i].Root["wuid"].ToInt()));
             }
             for (int i = 0; i < level.Enemies.Count; i++)
             {
-				enemyList.Items.Add(String.Format(formatting, i, level.Enemies[i]["string kind"], level.Enemies[i]["int wuid"]));
+				enemyList.Items.Add(String.Format(formatting, i, level.Enemies[i].Root["kind"].ToString(), level.Enemies[i].Root["wuid"].ToInt()));
 			}
 
             if (tabControl1.SelectedTab == objTab && objList.Items.Count >= selIndex + 1) objList.SelectedIndex = selIndex;
@@ -660,16 +662,16 @@ namespace JamBuilder
                     {
                         try
                         {
-                            int oX = int.Parse(level.Objects[i]["int x"].Replace(" ", "").Split('|')[0]);
-                            int oY = int.Parse(level.Objects[i]["int y"].Replace(" ", "").Split('|')[0]);
-                            int offX = int.Parse(level.Objects[i]["int x"].Replace(" ", "").Split('|')[1]);
-                            int offY = int.Parse(level.Objects[i]["int y"].Replace(" ", "").Split('|')[1]);
+                            int oX = level.Objects[i].Root["x"].ToInt() >> 4;
+                            int oY = level.Objects[i].Root["y"].ToInt() >> 4;
+                            int offX = level.Objects[i].Root["x"].ToInt() & 0xF;
+                            int offY = level.Objects[i].Root["y"].ToInt() & 0xF;
                             renderer.Draw(objTexIds[0], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                             if (i == objList.SelectedIndex)
                             {
                                 renderer.Draw(objTexIds[5], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                             }
-                            if (renderObjectNamesToolStripMenuItem.Checked) renderer.DrawString(level.Objects[i]["string kind"], font, new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f / (float)camera.zoom, 1f / (float)camera.zoom), new Vector4(0.2f,0.6f,0.2f,1f));
+                            if (renderObjectNamesToolStripMenuItem.Checked) renderer.DrawString(level.Objects[i].Root["kind"].ToString(), font, new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f / (float)camera.zoom, 1f / (float)camera.zoom), new Vector4(0.2f,0.6f,0.2f,1f));
                         }
                         catch { }
                     }
@@ -681,16 +683,16 @@ namespace JamBuilder
                     {
                         try
                         {
-                            int oX = int.Parse(level.GuestStarItems[i]["int x"].Replace(" ", "").Split('|')[0]);
-                            int oY = int.Parse(level.GuestStarItems[i]["int y"].Replace(" ", "").Split('|')[0]);
-                            int offX = int.Parse(level.GuestStarItems[i]["int x"].Replace(" ", "").Split('|')[1]);
-                            int offY = int.Parse(level.GuestStarItems[i]["int y"].Replace(" ", "").Split('|')[1]);
+                            int oX = level.GuestStarItems[i].Root["x"].ToInt() >> 4;
+                            int oY = level.GuestStarItems[i].Root["y"].ToInt() >> 4;
+                            int offX = level.GuestStarItems[i].Root["x"].ToInt() & 0xF;
+                            int offY = level.GuestStarItems[i].Root["y"].ToInt() & 0xF;
                             renderer.Draw(objTexIds[1], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                             if (i == guestItemList.SelectedIndex)
                             {
                                 renderer.Draw(objTexIds[5], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                             }
-                            if (renderObjectNamesToolStripMenuItem.Checked) renderer.DrawString(level.GuestStarItems[i]["string kind"], font, new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f / (float)camera.zoom, 1f / (float)camera.zoom), new Vector4(0.2f, 0.3f, 0.6f, 1f));
+                            if (renderObjectNamesToolStripMenuItem.Checked) renderer.DrawString(level.GuestStarItems[i].Root["kind"].ToString(), font, new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f / (float)camera.zoom, 1f / (float)camera.zoom), new Vector4(0.2f, 0.3f, 0.6f, 1f));
                         }
                         catch { }
                     }
@@ -702,16 +704,16 @@ namespace JamBuilder
                     {
                         try
                         {
-                            int oX = int.Parse(level.Items[i]["int x"].Replace(" ", "").Split('|')[0]);
-                            int oY = int.Parse(level.Items[i]["int y"].Replace(" ", "").Split('|')[0]);
-                            int offX = int.Parse(level.Items[i]["int x"].Replace(" ", "").Split('|')[1]);
-                            int offY = int.Parse(level.Items[i]["int y"].Replace(" ", "").Split('|')[1]);
+                            int oX = level.Items[i].Root["x"].ToInt() >> 4;
+                            int oY = level.Items[i].Root["y"].ToInt() >> 4;
+                            int offX = level.Items[i].Root["x"].ToInt() & 0xF;
+                            int offY = level.Items[i].Root["y"].ToInt() & 0xF;
                             renderer.Draw(objTexIds[2], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                             if (i == itemList.SelectedIndex)
                             {
                                 renderer.Draw(objTexIds[5], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                             }
-                            if (renderObjectNamesToolStripMenuItem.Checked) renderer.DrawString(level.Items[i]["string kind"], font, new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f / (float)camera.zoom, 1f / (float)camera.zoom), new Vector4(0.6f, 0.6f, 0.2f, 1f));
+                            if (renderObjectNamesToolStripMenuItem.Checked) renderer.DrawString(level.Items[i].Root["kind"].ToString(), font, new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f / (float)camera.zoom, 1f / (float)camera.zoom), new Vector4(0.6f, 0.6f, 0.2f, 1f));
                         }
                         catch { }
                     }
@@ -723,16 +725,16 @@ namespace JamBuilder
                     {
                         try
                         {
-                            int oX = int.Parse(level.Bosses[i]["int x"].Replace(" ", "").Split('|')[0]);
-                            int oY = int.Parse(level.Bosses[i]["int y"].Replace(" ", "").Split('|')[0]);
-                            int offX = int.Parse(level.Bosses[i]["int x"].Replace(" ", "").Split('|')[1]);
-                            int offY = int.Parse(level.Bosses[i]["int y"].Replace(" ", "").Split('|')[1]);
+                            int oX = level.Bosses[i].Root["x"].ToInt() >> 4;
+                            int oY = level.Bosses[i].Root["y"].ToInt() >> 4;
+                            int offX = level.Bosses[i].Root["x"].ToInt() & 0xF;
+                            int offY = level.Bosses[i].Root["y"].ToInt() & 0xF;
                             renderer.Draw(objTexIds[3], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                             if (i == bossList.SelectedIndex)
                             {
                                 renderer.Draw(objTexIds[5], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                             }
-                            if (renderObjectNamesToolStripMenuItem.Checked) renderer.DrawString(level.Bosses[i]["string kind"], font, new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f / (float)camera.zoom, 1f / (float)camera.zoom), new Vector4(0.9f, 0.1f, 0.1f, 1f));
+                            if (renderObjectNamesToolStripMenuItem.Checked) renderer.DrawString(level.Bosses[i].Root["kind"].ToString(), font, new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f / (float)camera.zoom, 1f / (float)camera.zoom), new Vector4(0.9f, 0.1f, 0.1f, 1f));
                         }
                         catch { }
                     }
@@ -744,16 +746,16 @@ namespace JamBuilder
                     {
                         try
                         {
-                            int oX = int.Parse(level.Enemies[i]["int x"].Replace(" ", "").Split('|')[0]);
-                            int oY = int.Parse(level.Enemies[i]["int y"].Replace(" ", "").Split('|')[0]);
-                            int offX = int.Parse(level.Enemies[i]["int x"].Replace(" ", "").Split('|')[1]);
-                            int offY = int.Parse(level.Enemies[i]["int y"].Replace(" ", "").Split('|')[1]);
+                            int oX = level.Enemies[i].Root["x"].ToInt() >> 4;
+                            int oY = level.Enemies[i].Root["y"].ToInt() >> 4;
+                            int offX = level.Enemies[i].Root["x"].ToInt() & 0xF;
+                            int offY = level.Enemies[i].Root["y"].ToInt() & 0xF;
                             renderer.Draw(objTexIds[4], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                             if (i == enemyList.SelectedIndex)
                             {
                                 renderer.Draw(objTexIds[5], new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f, 1f), 7, 7);
                             }
-                            if (renderObjectNamesToolStripMenuItem.Checked) renderer.DrawString(level.Enemies[i]["string kind"], font, new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f / (float)camera.zoom, 1f / (float)camera.zoom), new Vector4(0.8f, 0.2f, 0.2f, 1f));
+                            if (renderObjectNamesToolStripMenuItem.Checked) renderer.DrawString(level.Enemies[i].Root["kind"].ToString(), font, new Vector2(((oX * 16f) - 3f) + (offX * 0.95f), ((-oY * 16f) + 13f) - (offY * 0.95f)), new Vector2(1f / (float)camera.zoom, 1f / (float)camera.zoom), new Vector4(0.8f, 0.2f, 0.2f, 1f));
                         }
                         catch { }
                     }
@@ -766,60 +768,48 @@ namespace JamBuilder
         public int GetUniqueWUID()
         {
             int wuid = 0;
-            Random random = new Random();
-            wuid = random.Next();
 
             for (int i = 0; i < level.Objects.Count; i++)
             {
-                if (int.Parse(level.Objects[i]["int wuid"]) == wuid)
+                if (level.Objects[i].Root["wuid"].ToInt() > wuid)
                 {
-                    random = new Random();
-                    wuid = random.Next();
-                    i = -1;
+                    wuid = level.Objects[i].Root["wuid"].ToInt();
                 }
             }
 
             for (int i = 0; i < level.GuestStarItems.Count; i++)
             {
-                if (int.Parse(level.GuestStarItems[i]["int wuid"]) == wuid)
+                if (level.GuestStarItems[i].Root["wuid"].ToInt() > wuid)
                 {
-                    random = new Random();
-                    wuid = random.Next();
-                    i = -1;
+                    wuid = level.GuestStarItems[i].Root["wuid"].ToInt();
                 }
             }
 
             for (int i = 0; i < level.Items.Count; i++)
             {
-                if (int.Parse(level.Items[i]["int wuid"]) == wuid)
+                if (level.Items[i].Root["wuid"].ToInt() > wuid)
                 {
-                    random = new Random();
-                    wuid = random.Next();
-                    i = -1;
+                    wuid = level.Items[i].Root["wuid"].ToInt();
                 }
             }
 
             for (int i = 0; i < level.Bosses.Count; i++)
             {
-                if (int.Parse(level.Bosses[i]["int wuid"]) == wuid)
+                if (level.Bosses[i].Root["wuid"].ToInt() > wuid)
                 {
-                    random = new Random();
-                    wuid = random.Next();
-                    i = -1;
+                    wuid = level.Bosses[i].Root["wuid"].ToInt();
                 }
             }
 
             for (int i = 0; i < level.Enemies.Count; i++)
             {
-                if (int.Parse(level.Enemies[i]["int wuid"]) == wuid)
+                if (level.Enemies[i].Root["wuid"].ToInt() > wuid)
                 {
-                    random = new Random();
-                    wuid = random.Next();
-                    i = -1;
+                    wuid = level.Enemies[i].Root["wuid"].ToInt();
                 }
             }
 
-            return wuid;
+            return wuid + 1;
         }
 
 		private void addObj_Click(object sender, EventArgs e)
@@ -852,7 +842,7 @@ namespace JamBuilder
                 addObj.editorType = 0;
                 if (addObj.ShowDialog() == DialogResult.OK)
                 {
-                    addObj.obj["int wuid"] = GetUniqueWUID().ToString();
+                    addObj.obj.Root["wuid"].Set(GetUniqueWUID());
                     level.Objects.Add(addObj.obj);
                     RefreshObjectLists();
                 }
@@ -868,7 +858,7 @@ namespace JamBuilder
                 addObj.editorType = 1;
                 if (addObj.ShowDialog() == DialogResult.OK)
                 {
-                    addObj.obj["int wuid"] = GetUniqueWUID().ToString();
+                    addObj.obj.Root["wuid"].Set(GetUniqueWUID());
                     level.GuestStarItems.Add(addObj.obj);
                     RefreshObjectLists();
                 }
@@ -884,7 +874,7 @@ namespace JamBuilder
                 addObj.editorType = 2;
                 if (addObj.ShowDialog() == DialogResult.OK)
                 {
-                    addObj.obj["int wuid"] = GetUniqueWUID().ToString();
+                    addObj.obj.Root["wuid"].Set(GetUniqueWUID());
                     level.Items.Add(addObj.obj);
                     RefreshObjectLists();
                 }
@@ -900,7 +890,7 @@ namespace JamBuilder
                 addObj.editorType = 3;
                 if (addObj.ShowDialog() == DialogResult.OK)
                 {
-                    addObj.obj["int wuid"] = GetUniqueWUID().ToString();
+                    addObj.obj.Root["wuid"].Set(GetUniqueWUID());
                     level.Bosses.Add(addObj.obj);
                     RefreshObjectLists();
                 }
@@ -916,7 +906,7 @@ namespace JamBuilder
                 addObj.editorType = 4;
                 if (addObj.ShowDialog() == DialogResult.OK)
                 {
-                    addObj.obj["int wuid"] = GetUniqueWUID().ToString();
+                    addObj.obj.Root["wuid"].Set(GetUniqueWUID());
                     level.Enemies.Add(addObj.obj);
                     RefreshObjectLists();
                 }
@@ -1467,10 +1457,10 @@ namespace JamBuilder
                 try
                 {
                     moveObj = 0;
-                    int oX = int.Parse(level.Objects[objList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
-                    int oY = int.Parse(level.Objects[objList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
-                    int offX = int.Parse(level.Objects[objList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
-                    int offY = int.Parse(level.Objects[objList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+                    int oX = level.Objects[objList.SelectedIndex].Root["x"].ToInt() >> 4;
+                    int oY = level.Objects[objList.SelectedIndex].Root["y"].ToInt() >> 4;
+                    int offX = level.Objects[objList.SelectedIndex].Root["x"].ToInt() & 0xF;
+                    int offY = level.Objects[objList.SelectedIndex].Root["y"].ToInt() & 0xF;
                     xCoord.Value = oX;
                     xOffset.Value = offX;
                     yCoord.Value = oY;
@@ -1492,10 +1482,10 @@ namespace JamBuilder
                 try
                 {
                     moveObj = 1;
-                    int oX = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
-                    int oY = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
-                    int offX = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
-                    int offY = int.Parse(level.GuestStarItems[guestItemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+                    int oX = level.GuestStarItems[guestItemList.SelectedIndex].Root["x"].ToInt() >> 4;
+                    int oY = level.GuestStarItems[guestItemList.SelectedIndex].Root["y"].ToInt() >> 4;
+                    int offX = level.GuestStarItems[guestItemList.SelectedIndex].Root["x"].ToInt() & 0xF;
+                    int offY = level.GuestStarItems[guestItemList.SelectedIndex].Root["y"].ToInt() & 0xF;
                     xCoord.Value = oX;
                     xOffset.Value = offX;
                     yCoord.Value = oY;
@@ -1517,10 +1507,10 @@ namespace JamBuilder
                 try
                 {
                     moveObj = 2;
-                    int oX = int.Parse(level.Items[itemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
-                    int oY = int.Parse(level.Items[itemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
-                    int offX = int.Parse(level.Items[itemList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
-                    int offY = int.Parse(level.Items[itemList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+                    int oX = level.Items[itemList.SelectedIndex].Root["x"].ToInt() >> 4;
+                    int oY = level.Items[itemList.SelectedIndex].Root["y"].ToInt() >> 4;
+                    int offX = level.Items[itemList.SelectedIndex].Root["x"].ToInt() & 0xF;
+                    int offY = level.Items[itemList.SelectedIndex].Root["y"].ToInt() & 0xF;
                     xCoord.Value = oX;
                     xOffset.Value = offX;
                     yCoord.Value = oY;
@@ -1543,10 +1533,10 @@ namespace JamBuilder
                 try
                 {
                     moveObj = 3;
-                    int oX = int.Parse(level.Bosses[bossList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
-                    int oY = int.Parse(level.Bosses[bossList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
-                    int offX = int.Parse(level.Bosses[bossList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
-                    int offY = int.Parse(level.Bosses[bossList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+                    int oX = level.Bosses[bossList.SelectedIndex].Root["x"].ToInt() >> 4;
+                    int oY = level.Bosses[bossList.SelectedIndex].Root["y"].ToInt() >> 4;
+                    int offX = level.Bosses[bossList.SelectedIndex].Root["x"].ToInt() & 0xF;
+                    int offY = level.Bosses[bossList.SelectedIndex].Root["y"].ToInt() & 0xF;
                     xCoord.Value = oX;
                     xOffset.Value = offX;
                     yCoord.Value = oY;
@@ -1568,10 +1558,10 @@ namespace JamBuilder
                 try
                 {
                     moveObj = 4;
-                    int oX = int.Parse(level.Enemies[enemyList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[0]);
-                    int oY = int.Parse(level.Enemies[enemyList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[0]);
-                    int offX = int.Parse(level.Enemies[enemyList.SelectedIndex]["int x"].Replace(" ", "").Split('|')[1]);
-                    int offY = int.Parse(level.Enemies[enemyList.SelectedIndex]["int y"].Replace(" ", "").Split('|')[1]);
+                    int oX = level.Enemies[enemyList.SelectedIndex].Root["x"].ToInt() >> 4;
+                    int oY = level.Enemies[enemyList.SelectedIndex].Root["y"].ToInt() >> 4;
+                    int offX = level.Enemies[enemyList.SelectedIndex].Root["x"].ToInt() & 0xF;
+                    int offY = level.Enemies[enemyList.SelectedIndex].Root["y"].ToInt() & 0xF;
                     xCoord.Value = oX;
                     xOffset.Value = offX;
                     yCoord.Value = oY;
@@ -1587,36 +1577,36 @@ namespace JamBuilder
 
         void UpdateCoords()
         {
-            switch (moveObj)
+            switch (tabControl1.SelectedIndex)
             {
                 case 0:
                     {
-                        level.Objects[objList.SelectedIndex]["int x"] = $"{xCoord.Value} | {xOffset.Value}";
-                        level.Objects[objList.SelectedIndex]["int y"] = $"{yCoord.Value} | {yOffset.Value}";
+                        level.Objects[objList.SelectedIndex].Root["x"].Set(((int)xCoord.Value << 4) | ((int)xOffset.Value));
+                        level.Objects[objList.SelectedIndex].Root["y"].Set(((int)yCoord.Value << 4) | ((int)yOffset.Value));
                         break;
                     }
                 case 1:
                     {
-                        level.GuestStarItems[guestItemList.SelectedIndex]["int x"] = $"{xCoord.Value} | {xOffset.Value}";
-                        level.GuestStarItems[guestItemList.SelectedIndex]["int y"] = $"{yCoord.Value} | {yOffset.Value}";
+                        level.GuestStarItems[guestItemList.SelectedIndex].Root["x"].Set(((int)xCoord.Value << 4) | ((int)xOffset.Value));
+                        level.GuestStarItems[guestItemList.SelectedIndex].Root["y"].Set(((int)yCoord.Value << 4) | ((int)yOffset.Value));
                         break;
                     }
                 case 2:
                     {
-                        level.Items[itemList.SelectedIndex]["int x"] = $"{xCoord.Value} | {xOffset.Value}";
-                        level.Items[itemList.SelectedIndex]["int y"] = $"{yCoord.Value} | {yOffset.Value}";
+                        level.Items[itemList.SelectedIndex].Root["x"].Set(((int)xCoord.Value << 4) | ((int)xOffset.Value));
+                        level.Items[itemList.SelectedIndex].Root["y"].Set(((int)yCoord.Value << 4) | ((int)yOffset.Value));
                         break;
                     }
                 case 3:
                     {
-                        level.Bosses[bossList.SelectedIndex]["int x"] = $"{xCoord.Value} | {xOffset.Value}";
-                        level.Bosses[bossList.SelectedIndex]["int y"] = $"{yCoord.Value} | {yOffset.Value}";
+                        level.Bosses[bossList.SelectedIndex].Root["x"].Set(((int)xCoord.Value << 4) | ((int)xOffset.Value));
+                        level.Bosses[bossList.SelectedIndex].Root["y"].Set(((int)yCoord.Value << 4) | ((int)yOffset.Value));
                         break;
                     }
                 case 4:
                     {
-                        level.Enemies[enemyList.SelectedIndex]["int x"] = $"{xCoord.Value} | {xOffset.Value}";
-                        level.Enemies[enemyList.SelectedIndex]["int y"] = $"{yCoord.Value} | {yOffset.Value}";
+                        level.Enemies[enemyList.SelectedIndex].Root["x"].Set(((int)xCoord.Value << 4) | ((int)xOffset.Value));
+                        level.Enemies[enemyList.SelectedIndex].Root["y"].Set(((int)yCoord.Value << 4) | ((int)yOffset.Value));
                         break;
                     }
             }
@@ -1624,7 +1614,7 @@ namespace JamBuilder
 
         private void xCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (level != null && moveObj != null)
+            if (level != null && tabControl1.SelectedTab != null)
             {
                 UpdateCoords();
             }
@@ -1632,7 +1622,7 @@ namespace JamBuilder
 
         private void xOffset_ValueChanged(object sender, EventArgs e)
         {
-            if (level != null && moveObj != null)
+            if (level != null && tabControl1.SelectedTab != null)
             {
                 UpdateCoords();
             }
@@ -1640,7 +1630,7 @@ namespace JamBuilder
 
         private void yCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (level != null && moveObj != null)
+            if (level != null && tabControl1.SelectedTab != null)
             {
                 UpdateCoords();
             }
@@ -1648,7 +1638,7 @@ namespace JamBuilder
 
         private void yOffset_ValueChanged(object sender, EventArgs e)
         {
-            if (level != null && moveObj != null)
+            if (level != null && tabControl1.SelectedTab != null)
             {
                 UpdateCoords();
             }
@@ -1817,9 +1807,14 @@ namespace JamBuilder
             {
                 if (objList.SelectedItem != null)
                 {
-                    Dictionary<string, string> obj = new Dictionary<string, string>();
-                    foreach (KeyValuePair<string,string> pair in level.Objects[objList.SelectedIndex])
-                        obj.Add(pair.Key, pair.Value);
+                    Yaml obj = new Yaml(new Yaml.Data(Yaml.Type.Hash, new Dictionary<string, Yaml.Data>()), Endianness.Little);
+                    Yaml src = level.Objects[objList.SelectedIndex];
+                    for (int i = 0; i < src.Root.Length; i++)
+                    {
+                        string key = src.Root.Key(i);
+                        Yaml.Data d = src.Root[key];
+                        obj.Root.Add(key, new Yaml.Data(d.Type, d.ToGeneric()));
+                    }
 
                     level.Objects.Add(obj);
 					RefreshObjectLists();
@@ -1833,9 +1828,14 @@ namespace JamBuilder
             {
                 if (guestItemList.SelectedItem != null)
                 {
-                    Dictionary<string, string> obj = new Dictionary<string, string>();
-                    foreach (KeyValuePair<string, string> pair in level.GuestStarItems[guestItemList.SelectedIndex])
-                        obj.Add(pair.Key, pair.Value);
+                    Yaml obj = new Yaml(new Yaml.Data(Yaml.Type.Hash, new Dictionary<string, Yaml.Data>()), Endianness.Little);
+                    Yaml src = level.GuestStarItems[guestItemList.SelectedIndex];
+                    for (int i = 0; i < src.Root.Length; i++)
+                    {
+                        string key = src.Root.Key(i);
+                        Yaml.Data d = src.Root[key];
+                        obj.Root.Add(key, new Yaml.Data(d.Type, d.ToGeneric()));
+                    }
 
                     level.GuestStarItems.Add(obj);
                     RefreshObjectLists();
@@ -1849,9 +1849,14 @@ namespace JamBuilder
             {
                 if (itemList.SelectedItem != null)
                 {
-                    Dictionary<string, string> obj = new Dictionary<string, string>();
-                    foreach (KeyValuePair<string, string> pair in level.Items[itemList.SelectedIndex])
-                        obj.Add(pair.Key, pair.Value);
+                    Yaml obj = new Yaml(new Yaml.Data(Yaml.Type.Hash, new Dictionary<string, Yaml.Data>()), Endianness.Little);
+                    Yaml src = level.Items[itemList.SelectedIndex];
+                    for (int i = 0; i < src.Root.Length; i++)
+                    {
+                        string key = src.Root.Key(i);
+                        Yaml.Data d = src.Root[key];
+                        obj.Root.Add(key, new Yaml.Data(d.Type, d.ToGeneric()));
+                    }
 
                     level.Items.Add(obj);
                     RefreshObjectLists();
@@ -1865,9 +1870,14 @@ namespace JamBuilder
             {
                 if (bossList.SelectedItem != null)
                 {
-                    Dictionary<string, string> obj = new Dictionary<string, string>();
-                    foreach (KeyValuePair<string, string> pair in level.Bosses[bossList.SelectedIndex])
-                        obj.Add(pair.Key, pair.Value);
+                    Yaml obj = new Yaml(new Yaml.Data(Yaml.Type.Hash, new Dictionary<string, Yaml.Data>()), Endianness.Little);
+                    Yaml src = level.Bosses[bossList.SelectedIndex];
+                    for (int i = 0; i < src.Root.Length; i++)
+                    {
+                        string key = src.Root.Key(i);
+                        Yaml.Data d = src.Root[key];
+                        obj.Root.Add(key, new Yaml.Data(d.Type, d.ToGeneric()));
+                    }
 
                     level.Bosses.Add(obj);
                     RefreshObjectLists();
@@ -1881,9 +1891,14 @@ namespace JamBuilder
             {
                 if (enemyList.SelectedItem != null)
                 {
-                    Dictionary<string, string> obj = new Dictionary<string, string>();
-                    foreach (KeyValuePair<string, string> pair in level.Enemies[enemyList.SelectedIndex])
-                        obj.Add(pair.Key, pair.Value);
+                    Yaml obj = new Yaml(new Yaml.Data(Yaml.Type.Hash, new Dictionary<string, Yaml.Data>()), Endianness.Little);
+                    Yaml src = level.Enemies[enemyList.SelectedIndex];
+                    for (int i = 0; i < src.Root.Length; i++)
+                    {
+                        string key = src.Root.Key(i);
+                        Yaml.Data d = src.Root[key];
+                        obj.Root.Add(key, new Yaml.Data(d.Type, d.ToGeneric()));
+                    }
 
                     level.Enemies.Add(obj);
                     RefreshObjectLists();
